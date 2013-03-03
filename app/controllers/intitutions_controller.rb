@@ -1,0 +1,2 @@
+class IntitutionsController < ApplicationController
+end

@@ -1,0 +1,11 @@
+development:
+  bucket: 'vzgojiteljica-dev'
+  access_key_id: ''
+  secret_access_key: ''
+
+test: development  
+  
+production: 
+  bucket: 'vzgojiteljica'
+  access_key_id: ''
+  secret_access_key: ''

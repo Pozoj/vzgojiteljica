@@ -1,0 +1,11 @@
+development:
+  bucket: 'vzgojiteljica-dev'
+  access_key_id: 'AKIAJH237ZG7CDV3YRNA'
+  secret_access_key: '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'
+
+test: development  
+  
+production: 
+  bucket: 'vzgojiteljica'
+  access_key_id: 'AKIAJH237ZG7CDV3YRNA'
+  secret_access_key: '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'

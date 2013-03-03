@@ -1,7 +1,7 @@
 Web3::Application.routes.draw do
-  devise_for :users
+  resources :institutions
 
-  resources :intitutions
+  devise_for :users
   resources :inquiries
   resources :articles
   resources :sections

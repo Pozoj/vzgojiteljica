@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130302234758) do
+ActiveRecord::Schema.define(version: 20130303052731) do
 
   create_table "articles", force: true do |t|
     t.integer  "author_id"
@@ -26,6 +26,10 @@ ActiveRecord::Schema.define(version: 20130302234758) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "articles", ["author_id"], name: "index_articles_on_author_id"
+  add_index "articles", ["issue_id"], name: "index_articles_on_issue_id"
+  add_index "articles", ["section_id"], name: "index_articles_on_section_id"
 
   create_table "authors", force: true do |t|
     t.string   "first_name"
@@ -42,6 +46,9 @@ ActiveRecord::Schema.define(version: 20130302234758) do
     t.datetime "updated_at"
   end
 
+  add_index "authors", ["institution_id"], name: "index_authors_on_institution_id"
+  add_index "authors", ["post_id"], name: "index_authors_on_post_id"
+
   create_table "copies", force: true do |t|
     t.string   "page_code"
     t.text     "copy"
@@ -49,6 +56,8 @@ ActiveRecord::Schema.define(version: 20130302234758) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "copies", ["page_code"], name: "index_copies_on_page_code"
 
   create_table "inquiries", force: true do |t|
     t.string   "name"
@@ -63,7 +72,7 @@ ActiveRecord::Schema.define(version: 20130302234758) do
     t.datetime "updated_at"
   end
 
-  create_table "intitutions", force: true do |t|
+  create_table "institutions", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -85,6 +94,9 @@ ActiveRecord::Schema.define(version: 20130302234758) do
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
   end
+
+  add_index "issues", ["issue"], name: "index_issues_on_issue"
+  add_index "issues", ["year"], name: "index_issues_on_year"
 
   create_table "orders", force: true do |t|
     t.string   "title"

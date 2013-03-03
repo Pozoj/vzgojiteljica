@@ -5,4 +5,16 @@
   = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
   = javascript_include_tag "application", "data-turbolinks-track" => true
   = csrf_meta_tags
-%body= yield
+%body
+  %header
+    %h1 Vzgojiteljica
+    %nav
+      %ul
+        %li= link_to "Predstavitev"
+        %li= link_to "Anekdote"
+        %li= link_to "Številke"
+        %li= link_to "Naročilo"
+        %li= link_to "Vprašanja"
+        %li= link_to "Članki"
+        %li= link_to "Društvo"
+  = yield

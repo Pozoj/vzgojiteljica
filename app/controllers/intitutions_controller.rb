@@ -1,2 +1,0 @@
-class IntitutionsController < ApplicationController
-end

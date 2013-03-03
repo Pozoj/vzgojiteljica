@@ -16,6 +16,11 @@ class Issue < ActiveRecord::Base
                     :path => "/assets/issues/:id/document/:style_:basename.:extension"
 
   has_attached_file :cover,
+                    :styles => { 
+                      :medium => ["180x180>", :jpg], 
+                      :original => ["960x720>", :jpg]
+                    },
+                    :convert_options => { :all => "-strip -quality 75"},
                     :whiny => false,
                     :storage => :s3,
                     :bucket => AWS_S3['bucket'],

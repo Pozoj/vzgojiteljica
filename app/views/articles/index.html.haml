@@ -15,5 +15,5 @@
     - collection.each do |article|
       %tr
         %td= article.title
-        %td= article.author
-        %td= link_to "#{article.issue.year}/#{article.issue.issue}", article.issue
+        %td= article.authors.join(", ")
+        %td= link_to article.issue, article.issue

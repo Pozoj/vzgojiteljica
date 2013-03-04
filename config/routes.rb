@@ -25,7 +25,7 @@ Web3::Application.routes.draw do
   resources :news
 
   # You can have the root of your site routed with "root"
-  root to: 'pages#index'
+  root to: 'copies#show', id: 'pages#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

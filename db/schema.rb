@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130303235040) do
+ActiveRecord::Schema.define(version: 20130304042347) do
 
   create_table "articles", force: true do |t|
     t.integer  "section_id"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20130303235040) do
     t.text     "abstract_html"
     t.text     "abstract_english"
     t.text     "abstract_english_html"
-    t.text     "keywords",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "keywords_string"
   end
 
   add_index "articles", ["issue_id"], name: "index_articles_on_issue_id"
@@ -93,7 +93,6 @@ ActiveRecord::Schema.define(version: 20130303235040) do
     t.integer  "year"
     t.integer  "issue"
     t.date     "published_at"
-    t.string   "keywords"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cover_file_name"
@@ -108,6 +107,26 @@ ActiveRecord::Schema.define(version: 20130303235040) do
 
   add_index "issues", ["issue"], name: "index_issues_on_issue"
   add_index "issues", ["year"], name: "index_issues_on_year"
+
+  create_table "keywordables", force: true do |t|
+    t.string   "keyword_id"
+    t.string   "article_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "keywordables", ["article_id", "keyword_id"], name: "index_keywordables_on_article_id_and_keyword_id", unique: true
+  add_index "keywordables", ["article_id"], name: "index_keywordables_on_article_id"
+  add_index "keywordables", ["keyword_id", "article_id"], name: "index_keywordables_on_keyword_id_and_article_id", unique: true
+  add_index "keywordables", ["keyword_id"], name: "index_keywordables_on_keyword_id"
+
+  create_table "keywords", force: true do |t|
+    t.string   "keyword"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "keywords", ["keyword"], name: "index_keywords_on_keyword", unique: true
 
   create_table "news", force: true do |t|
     t.string   "title"

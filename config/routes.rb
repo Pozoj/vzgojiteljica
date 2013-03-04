@@ -1,5 +1,7 @@
 Web3::Application.routes.draw do
 
+  resources :keywords
+
   resources :posts
 
   resources :institutions

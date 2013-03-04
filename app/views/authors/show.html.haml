@@ -1,3 +1,10 @@
 = title resource
 
-= debug resource.articles
+= admin_section do
+  = link_to "Uredi", edit_author_path(resource)
+  = link_to "Odstrani", resource, method: :delete
+
+- generate_fields resource
+
+%h2 Članki
+= render resource.articles

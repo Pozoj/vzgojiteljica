@@ -33,11 +33,16 @@ sl:
     fax: Faks
     vat_id: ID št. za DDV
     quantity: Količina
+    institution_id: Institucija
+    institution: Institucija
+    question: Vprašanje
+    answer: Odgovor
+    subject: Zadeva
 
   forms:
     submit:
       send: "Pošlji"
-        
+
   date:
     formats:
       # Use the strftime parameters for formats.
@@ -112,9 +117,9 @@ sl:
         place_and_date: Kraj in datum
       author:
         title: Naziv
-        institution_id: Institucija
-        institution: Institucija
         education: Izobrazba
+      inquiry:
+        ins
         
     errors:
       messages:

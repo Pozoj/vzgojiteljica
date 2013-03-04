@@ -5,7 +5,13 @@ Web3::Application.routes.draw do
   resources :institutions
 
   devise_for :users
-  resources :inquiries
+  resources :inquiries do
+    get :all, on: :collection
+    member do
+      get :answer_question
+      post :answer
+    end
+  end
   resources :articles do
     get :all, on: :collection
   end

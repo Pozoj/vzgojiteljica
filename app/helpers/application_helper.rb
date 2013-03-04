@@ -13,7 +13,7 @@ module ApplicationHelper
     field = field.to_s
 
     # Relations.
-    if field =~ /_id/
+    if field =~ /_id/ and record.respond_to?(field.gsub('_id', ''))
       data = record.send field.gsub('_id', '')
       return link_to data, polymorphic_url(data)
     end
@@ -73,6 +73,18 @@ module ApplicationHelper
             end
           end
         end
+      end
+    end
+  end
+
+  def generate_fields(resource, columns = nil)
+    klass = resource.class
+    columns ||= klass.column_names if klass
+
+    haml_tag :dl, :class => klass.to_s do
+      columns.each do |column|
+        haml_tag :dt, klass.human_attribute_name(column)
+        haml_tag :dd, format_field(resource, column)
       end
     end
   end

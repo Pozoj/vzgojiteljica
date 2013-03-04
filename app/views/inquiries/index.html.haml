@@ -1,0 +1,16 @@
+= title "Vprašanja"
+= admin_section do
+  = link_to "Pregled"
+
+= link_to "Vas kaj zanima? Vprašajte nas", new_inquiry_path
+
+%table
+  %thead
+    %tr
+      %th Vprašanje
+      %th Datum
+  %tbody
+    - collection.each do |inquiry|
+      %tr
+        %td= inquiry.question
+        %td= l inquiry.created_at, format: :simple

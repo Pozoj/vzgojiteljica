@@ -1,0 +1,11 @@
+= title "Vzgojiteljica št. #{resource.issue}, letnik #{resource.year}"
+.cover= image_tag resource.cover.url
+
+- resource.articles_grouped_by_sections.each do |section, articles|
+  .section
+    %h2= section
+    %ol.articles
+      - articles.each do |article|
+        %li
+          = article.title
+          %em (#{article.author})

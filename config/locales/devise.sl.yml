@@ -1,0 +1,18 @@
+sl:
+  devise:
+    failure:
+      already_authenticated: "Ste že prijavljeni."
+      invalid: "Nepravilen e-mail ali geslo."
+      invalid_token: "Nepravilen token."
+      not_found_in_database: "Nepravilen e-mail ali geslo."
+      timeout: "Vaša seja je potekla. Prosimo prijavite se znova."
+      unauthenticated: "Za nadaljevanje se je potrebno prijaviti."
+    sessions:
+      signed_in: "Uspešno ste prijavljeni."
+      signed_out: "Uspešno ste odjavljeni."
+  errors:
+    messages:
+      not_found: "ni najdeno"
+      not_saved:
+        one: "1 napaka preprečuje, da bi shranili vaš račun:"
+        other: "%{count} napak preprečuje, da bi shranili vaš račun:"

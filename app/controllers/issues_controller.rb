@@ -1,2 +1,2 @@
-class IssuesController < ApplicationController
+class IssuesController < InheritedResources::Base
 end

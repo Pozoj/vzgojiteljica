@@ -15,15 +15,24 @@ sl:
     other: "%{count} dni"
   
   attributes:
-    password: "Geslo"
-    name: "Naziv"
-    description: "Opis"
-    created_at: "Objavljeno"
-    updated_at: "Posodobljeno"
-    title: "Naslov"
-    email: "E-pošta"
+    password: Geslo
+    name: Naziv
+    first_name: Ime
+    last_name: Priimek
+    description: Opis
+    created_at: Objavljeno
+    updated_at: Posodobljeno
+    title: Naslov
+    email: E-pošta
     category: Kategorija
     category_name: Kategorija
+    address: Naslov
+    post: Pošta
+    post_id: Poštna št.
+    phone: Telefon
+    fax: Faks
+    vat_id: ID št. za DDV
+    quantity: Količina
 
   forms:
     submit:
@@ -78,20 +87,35 @@ sl:
 
   activerecord:
     models:
-      event: "Dogodek"
+      issue: Revija
+      order: Naročilo
+      author: Avtor
+      section: Rubrika
+      inquiry: Vprašanje
+      institution: Institucija
+      post: Pošta
+      user: Uporabnik
+      copy: Besedilo
+      article: Članek
       
     attributes:
-      event:
-        happening_at: "Pričetek"
-        abstract: "Povzetek"
-        fee: Vstopnina
-        sponsored_fee: "Vstop. za člane"
-        reserved_fee: Vstop. z rezervacijo
-      album:
-        title: "Naziv albuma"
-        category: "Podstran"
-        position: "Pozicija"
- 
+      issue:
+        issue: Številka
+        year: Leto
+        published_at: Datum izdaje
+        cover: Naslovnica
+        document: Revija
+      order:
+        title: 'Naziv podjetja / ustanove'
+        name: 'Priimek in ime naročnika / kontaktne osebe'
+        comments: Opombe
+        place_and_date: Kraj in datum
+      author:
+        title: Naziv
+        institution_id: Institucija
+        institution: Institucija
+        education: Izobrazba
+        
     errors:
       messages:
         record_invalid: "Vpis ni možen zaradi napak!"

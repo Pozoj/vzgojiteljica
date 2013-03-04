@@ -1,0 +1,4 @@
+%li
+  = link_to issue do
+    .cover= image_tag issue.cover.url(:medium)
+    %p Vzgojiteljica št. #{issue.issue}, letnik #{issue.year}

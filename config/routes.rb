@@ -1,14 +1,22 @@
 Web3::Application.routes.draw do
+
+  resources :posts
+
   resources :institutions
 
   devise_for :users
   resources :inquiries
-  resources :articles
+  resources :articles do
+    get :all, on: :collection
+  end
   resources :sections
-  resources :issues
+  resources :issues do
+    get :all, on: :collection
+  end
   resources :orders
   resources :copies
   resources :authors
+  resources :news
 
   # You can have the root of your site routed with "root"
   root to: 'pages#index'

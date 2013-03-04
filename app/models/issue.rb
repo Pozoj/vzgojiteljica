@@ -34,4 +34,12 @@ class Issue < ActiveRecord::Base
                     },
                     :s3_storage_class => :reduced_redundancy,
                     :path => "/assets/issues/:id/cover/:style_:basename.:extension"
+
+  def articles_grouped_by_sections
+    articles.joins(:section).order('sections.position').group_by { |a| a.section }
+  end
+
+  def to_s
+    "#{year} / #{issue}."
+  end
 end

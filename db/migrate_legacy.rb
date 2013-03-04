@@ -35,40 +35,40 @@ LegacyAvtorji.all.each do |avtor|
   end
 end
 
-# Indeks to Copy
-class LegacyIndeks < LegacyDb; self.table_name = "indeks"; end
-puts
-puts
-puts '##### INDEKS -> COPY'
-index_copy = LegacyIndeks.first
-unless LegacyIndeks.any?
-  copy = Copy.new page_code: 'pages#index', copy_html: index_copy.vsebina
-  if copy.save
-    print '*'
-  else
-    print "IND[#{index_copy.id}]"
-  end
-end
+# # Indeks to Copy
+# class LegacyIndeks < LegacyDb; self.table_name = "indeks"; end
+# puts
+# puts
+# puts '##### INDEKS -> COPY'
+# index_copy = LegacyIndeks.first
+# unless LegacyIndeks.any?
+#   copy = Copy.new page_code: 'pages#index', copy_html: index_copy.vsebina
+#   if copy.save
+#     print '*'
+#   else
+#     print "IND[#{index_copy.id}]"
+#   end
+# end
 
-# Rubrike to Sections
-class LegacyRubrike < LegacyDb; self.table_name = "rubrike"; end
-puts
-puts
-puts '##### RUBRIKE -> SECTIONS ' + LegacyRubrike.count.to_s
-LegacyRubrike.all.each do |rubrika|
-  next if Section.exists?(rubrika.id)
-  section = Section.new(
-    id: rubrika.id,
-    name: rubrika.naziv,
-    position: rubrika.vrstni_red
-  )
+# # Rubrike to Sections
+# class LegacyRubrike < LegacyDb; self.table_name = "rubrike"; end
+# puts
+# puts
+# puts '##### RUBRIKE -> SECTIONS ' + LegacyRubrike.count.to_s
+# LegacyRubrike.all.each do |rubrika|
+#   next if Section.exists?(rubrika.id)
+#   section = Section.new(
+#     id: rubrika.id,
+#     name: rubrika.naziv,
+#     position: rubrika.vrstni_red
+#   )
 
-  if section.save
-    print '*'
-  else
-    print "RUB[#{rubrika.id}]"
-  end
-end
+#   if section.save
+#     print '*'
+#   else
+#     print "RUB[#{rubrika.id}]"
+#   end
+# end
 
 # Vsebina to Articles
 class LegacyVsebina < LegacyDb; self.table_name = "vsebina"; end
@@ -95,54 +95,54 @@ LegacyVsebina.all.each do |vsebina|
   end
 end
 
-# Revije to Issues
-class LegacyRevije < LegacyDb; self.table_name = "revije"; end
-puts
-puts
-puts '##### REVIJE -> ISSUES ' + LegacyRevije.count.to_s
-LegacyRevije.all.each do |revija|
-  next if Issue.exists?(revija.id)
-  issue = Issue.new(
-    id: revija.id,
-    year: revija.letnik,
-    issue: revija.stevilka,
-    published_at: revija.datum_i,
-    keywords: revija.kljucne
-  )
+# # Revije to Issues
+# class LegacyRevije < LegacyDb; self.table_name = "revije"; end
+# puts
+# puts
+# puts '##### REVIJE -> ISSUES ' + LegacyRevije.count.to_s
+# LegacyRevije.all.each do |revija|
+#   next if Issue.exists?(revija.id)
+#   issue = Issue.new(
+#     id: revija.id,
+#     year: revija.letnik,
+#     issue: revija.stevilka,
+#     published_at: revija.datum_i,
+#     keywords: revija.kljucne
+#   )
 
-  # Download files.
-  if revija.slika.present?
-    begin
-      url = URI.escape "#{vzgojiteljica_upload_root}/naslovnice/#{revija.slika}"
-      if slika = open(url)
-        print "S"
-        issue.cover = slika
-        issue.cover_file_name = revija.slika
-      end
-    rescue Error => e
-      puts "REV[#{revija.id}][IMG]"
-      puts e.inspect
-      puts url
-    end
-  end
-  if revija.pdf_link.present?
-    begin
-      url = URI.escape "#{vzgojiteljica_upload_root}/pdf/#{revija.pdf_link}"
-      if pdf_link = open(url)
-        print "P"
-        issue.document = pdf_link
-        issue.document_file_name = revija.pdf_link
-      end
-    rescue Error => e
-      puts "REV[#{revija.id}][PDF]"
-      puts e.inspect
-      puts url
-    end
-  end
+#   # Download files.
+#   if revija.slika.present?
+#     begin
+#       url = URI.escape "#{vzgojiteljica_upload_root}/naslovnice/#{revija.slika}"
+#       if slika = open(url)
+#         print "S"
+#         issue.cover = slika
+#         issue.cover_file_name = revija.slika
+#       end
+#     rescue Error => e
+#       puts "REV[#{revija.id}][IMG]"
+#       puts e.inspect
+#       puts url
+#     end
+#   end
+#   if revija.pdf_link.present?
+#     begin
+#       url = URI.escape "#{vzgojiteljica_upload_root}/pdf/#{revija.pdf_link}"
+#       if pdf_link = open(url)
+#         print "P"
+#         issue.document = pdf_link
+#         issue.document_file_name = revija.pdf_link
+#       end
+#     rescue Error => e
+#       puts "REV[#{revija.id}][PDF]"
+#       puts e.inspect
+#       puts url
+#     end
+#   end
 
-  if issue.save
-    print '*'
-  else
-    print "REV[#{revija.id}]"
-  end
-end
+#   if issue.save
+#     print '*'
+#   else
+#     print "REV[#{revija.id}]"
+#   end
+# end

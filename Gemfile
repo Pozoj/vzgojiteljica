@@ -28,6 +28,7 @@ gem 'simple_form', '3.0.0.beta1'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'haml'
+gem 'will_paginate', '~> 3.0'
 
 group :development, :test do
   gem 'sqlite3'

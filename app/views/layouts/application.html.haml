@@ -1,20 +1,34 @@
 !!! 5
-%html
+%html{lang: :sl}
 %head
-  %title Vzgojiteljica
+  %title 
+    - if @page_title
+      #{@page_title} -
+    Revija Vzgojiteljica
+  / %link{:rel => "shortcut icon", :href => image_path("favicon.png"), :type => "image/png"}
+  %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=UTF-8"}
   = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
   = javascript_include_tag "application", "data-turbolinks-track" => true
   = csrf_meta_tags
 %body
   %header
-    %h1 Vzgojiteljica
+    %h1
+      = link_to "Vzgojiteljica", root_path
+    - if signed_in?
+      %section#auth
+        Prijavljeni kot #{current_user}
+        = link_to "Odjava", destroy_user_session_path, method: :delete
     %nav
       %ul
-        %li= link_to "Predstavitev"
-        %li= link_to "Anekdote"
-        %li= link_to "Številke"
-        %li= link_to "Naročilo"
-        %li= link_to "Vprašanja"
-        %li= link_to "Članki"
-        %li= link_to "Društvo"
-  = yield
+        %li= link_to "Predstavitev", copy_path('pages#index')
+        %li= link_to "Številke", issues_path
+        %li= link_to "Naročilo", new_order_path
+        %li= link_to "Vprašanja", inquiries_path
+        %li= link_to "Članki", articles_path
+        %li= link_to "Društvo", news_index_path
+    - unless flash.empty?
+      #flash
+        - flash.each do |key, value|
+          %p.flash{:id => key}= value
+          
+  #container= yield

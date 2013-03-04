@@ -1,2 +1,3 @@
-class AuthorsController < ApplicationController
+class AuthorsController < InheritedResources::Base
+  before_filter :authenticate
 end

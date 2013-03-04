@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130303060951) do
+ActiveRecord::Schema.define(version: 20130303235040) do
 
   create_table "articles", force: true do |t|
-    t.integer  "author_id"
     t.integer  "section_id"
     t.integer  "issue_id"
     t.text     "title",                 limit: 255
@@ -27,7 +26,6 @@ ActiveRecord::Schema.define(version: 20130303060951) do
     t.datetime "updated_at"
   end
 
-  add_index "articles", ["author_id"], name: "index_articles_on_author_id"
   add_index "articles", ["issue_id"], name: "index_articles_on_issue_id"
   add_index "articles", ["section_id"], name: "index_articles_on_section_id"
 
@@ -49,12 +47,25 @@ ActiveRecord::Schema.define(version: 20130303060951) do
   add_index "authors", ["institution_id"], name: "index_authors_on_institution_id"
   add_index "authors", ["post_id"], name: "index_authors_on_post_id"
 
+  create_table "authorships", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "author_id"
+    t.integer  "position",   default: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "authorships", ["article_id"], name: "index_authorships_on_article_id"
+  add_index "authorships", ["author_id", "article_id"], name: "index_authorships_on_author_id_and_article_id", unique: true
+  add_index "authorships", ["author_id"], name: "index_authorships_on_author_id"
+
   create_table "copies", force: true do |t|
     t.string   "page_code"
     t.text     "copy"
     t.text     "copy_html"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   add_index "copies", ["page_code"], name: "index_copies_on_page_code"
@@ -98,6 +109,15 @@ ActiveRecord::Schema.define(version: 20130303060951) do
   add_index "issues", ["issue"], name: "index_issues_on_issue"
   add_index "issues", ["year"], name: "index_issues_on_year"
 
+  create_table "news", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.text     "body_html"
+    t.string   "author"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "orders", force: true do |t|
     t.string   "title"
     t.string   "name"
@@ -114,6 +134,15 @@ ActiveRecord::Schema.define(version: 20130303060951) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "posts", id: false, force: true do |t|
+    t.integer  "id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["id"], name: "index_posts_on_id"
 
   create_table "sections", force: true do |t|
     t.string   "name"

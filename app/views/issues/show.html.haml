@@ -8,4 +8,4 @@
       - articles.each do |article|
         %li
           = article.title
-          %em (#{article.author})
+          %em (#{article.authors.join(", ")})

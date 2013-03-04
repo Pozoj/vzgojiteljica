@@ -1,5 +1,5 @@
 class AuthorsController < InheritedResources::Base
-  before_filter :authenticate
+  before_filter :authenticate, :except => :show
 
   private
 

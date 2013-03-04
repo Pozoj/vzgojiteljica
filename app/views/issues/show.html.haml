@@ -1,4 +1,10 @@
 = title "Vzgojiteljica št. #{resource.issue}, letnik #{resource.year}"
+= admin_section do
+  = link_to "Uredi", edit_issue_path(resource)
+  = link_to "Uredi naslovnico", edit_cover_issue_path(resource)
+  = link_to "Uredi dokument", edit_document_issue_path(resource)
+  = link_to "Odstrani", resource, method: :delete
+
 .cover= image_tag resource.cover.url
 
 - resource.articles_grouped_by_sections.each do |section, articles|

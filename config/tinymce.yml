@@ -1,0 +1,4 @@
+plugins:
+  - paste
+paste_text_sticky: true
+

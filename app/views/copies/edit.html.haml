@@ -1,6 +1,9 @@
+= tinymce_assets
+
 = title "Uredi vsebino"
 = simple_form_for resource do |f|
   = f.input :title
-  = f.input :copy
-  = f.input :copy_html
+  = f.input :copy_html, input_html: {class: :tinymce, rows: 40, cols: 120}
   .submit= f.submit
+
+= render "shared/tinymce"

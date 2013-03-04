@@ -38,6 +38,10 @@ sl:
     question: Vprašanje
     answer: Odgovor
     subject: Zadeva
+    section: Rubrika
+    section_id: Rubrika
+    issue: Številka
+    issue_id: Številka
 
   forms:
     submit:
@@ -118,9 +122,11 @@ sl:
       author:
         title: Naziv
         education: Izobrazba
-      inquiry:
-        ins
-        
+      article:
+        abstract: Povzetek
+        abstract_html: Povzetek
+        abstract_english: Povzetek (ENG)
+        abstract_english_html: Povzetek (ENG)
     errors:
       messages:
         record_invalid: "Vpis ni možen zaradi napak!"

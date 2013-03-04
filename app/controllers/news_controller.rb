@@ -4,6 +4,6 @@ class NewsController < InheritedResources::Base
 
     def resource_params
       return [] if request.get?
-      [params.require(:news).permit(:title, :body)]
+      [params.require(:news).permit(:title, :body_html)]
     end
 end

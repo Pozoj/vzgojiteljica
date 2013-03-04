@@ -1,10 +1,11 @@
+= tinymce_assets
+
 = simple_form_for resource do |f|
-  = f.input :section
-  = f.input :issue
-  = f.input :title
-  = f.input :abstract
-  = f.input :abstract_html
-  = f.input :abstract_english
-  = f.input :abstract_english_html
-  = f.input :keywords
+  = f.association :section
+  = f.association :issue
+  = f.input :title, as: :string
+  = f.input :abstract_html, input_html: {class: :tinymce, rows: 40, cols: 120}
+  = f.input :abstract_english_html, input_html: {class: :tinymce, rows: 40, cols: 120}
   .submit= f.submit
+
+= render "shared/tinymce"

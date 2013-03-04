@@ -1,0 +1,18 @@
+:javascript
+  $(function() {
+    $(FileUploadDOMId).fileupload({
+      dataType: 'json',
+      done: function(e, data) {
+        FileUploadVzgojiteljica(e, data);
+        $('.submit input').attr('disabled', false).val('Končaj');
+      },
+      progressall: function(e, data) {
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        $('#progress .bar').css(
+          'width',
+          progress + '%'
+        )
+        $('#progress .percent').text(progress + '%')
+      }
+    })
+  })

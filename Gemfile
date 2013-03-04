@@ -28,6 +28,7 @@ gem 'simple_form', '3.0.0.beta1'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'haml'
+gem 'tinymce-rails'
 
 group :development, :test do
   gem 'sqlite3'

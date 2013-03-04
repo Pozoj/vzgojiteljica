@@ -1,0 +1,22 @@
+= render "shared/fileupload_assets"
+
+= title "Uredi dokument"
+= simple_form_for resource do |f|
+  = f.input :document, input_html: {:"data-url" => "document"}
+  #document
+    = link_to resource.document_file_name, resource.document.file? ? resource.document.url : ""
+  #progress
+    .bar 
+    .percent 0%
+
+.submit= button_to "Prosimo počakajte ...", resource, :id => :finish, :disabled => true, :method => :get
+
+:javascript
+  var FileUploadDOMId = '#issue_document'
+  function FileUploadVzgojiteljica(e, data) {
+    if ( data && data.result && data.result.url ) {
+      $('#document a').attr('href', data.result.url).text(data.result.file_name);
+    }
+  }
+
+= render "shared/fileupload_init"

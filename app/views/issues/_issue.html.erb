@@ -1,0 +1,6 @@
+<li>
+  <%= link_to issue do %>
+    <p class='cover'><%= image_tag issue.cover.url(:medium) %></p>
+    <p>Vzgojiteljica št. <%= issue.issue %>, letnik <%= issue.year %></p>
+  <% end %>
+</li>

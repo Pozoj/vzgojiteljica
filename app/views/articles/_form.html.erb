@@ -1,0 +1,14 @@
+<%= tinymce_assets %>
+
+<%= simple_form_for resource do |f| %>
+  <%= f.association :section %>
+  <%= f.association :issue %>
+  <%= f.input :title, as: :string %>
+  <%= f.input :abstract_html, input_html: {class: :tinymce, rows: 40, cols: 120} %>
+  <%= f.input :abstract_english_html, input_html: {class: :tinymce, rows: 40, cols: 120} %>
+  <div class='submit'>
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= render "shared/tinymce" %>

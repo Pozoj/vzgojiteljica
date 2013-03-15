@@ -1,0 +1,14 @@
+<%= simple_form_for resource do |f| %>
+  <div class='input'>
+    <label>Leto</label>
+    <%= f.collection_select :year, 2004..2013, :to_s, :to_s %>
+  </div>
+  <div class='input'>
+    <label>Številka</label>
+    <%= f.collection_radio_buttons :issue, 1..6, :to_s, :to_s %>
+  </div>
+  <%= f.input :published_at %>
+  <div class='submit'>
+    <%= f.submit %>
+  </div>
+<% end %>

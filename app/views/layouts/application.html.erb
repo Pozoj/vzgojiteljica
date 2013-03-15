@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link href='http://fonts.googleapis.com/css?family=Oxygen:400,700|Pontano+Sans|Comfortaa' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Trocchi|Pacifico|Merriweather:400,300,700|Open+Sans:300italic,400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <title>
+      <% if @page_title %>
+        <%= @page_title %> (Revija Vzgojiteljica)
+      <% else %>
+        Vzgojiteljica - Revija za dobro prakso v vrtcih
+      <% end %>
+    </title>
+  </head>
+  
+  <body>
+    <header>
+      <div class="inner">
+        <%= image_tag 'Untitled-4.png' %>
+        <div id="logo">
+          <h1>vzgojiteljica</h1>
+        </div>
+        <nav id="menu">
+          <ul>
+            <li>
+              <%= link_to 'Predstavitev', root_path %>
+            </li>
+            <li>
+              <%= link_to 'Številke', issues_path %>
+            </li>
+            <li>
+              <%= link_to 'Članki', articles_path %>
+            </li>
+            <li>
+              <%= link_to 'Vprašanja', inquiries_path %>
+            </li>
+            <li>
+              <%= link_to 'Naročila', new_order_path %>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+    <div id="container">
+      <%= yield %>
+    </div>
+    
+    <footer>
+      <p>Pozoj, d.o.o. 03/ 897 01 22 info@pozoj.si www.pozoj.si</p>
+      <ul>
+        <li>
+          <%= link_to 'Predstavitev', root_path %>
+        </li>
+        <li>
+          <%= link_to 'Številke', issues_path %>
+        </li>
+        <li>
+          <%= link_to 'Članki', articles_path %>
+        </li>
+        <li>
+          <%= link_to 'Vprašanja', inquiries_path %>
+        </li>
+        <li>
+          <%= link_to 'Naročila', new_order_path %>
+        </li>
+        <li>
+          <% if signed_in? %>
+            <%= current_user %>
+            (<%= link_to 'Odjava', destroy_user_session_path, method: :delete, confirm: 'Ste prepričani da se želite odjaviti?' %>)
+          <% else %>
+            <%= link_to 'Prijava', new_user_session_path %>
+          <% end %>
+        </li>
+      </ul>
+    </footer>
+  </body>
+</html>

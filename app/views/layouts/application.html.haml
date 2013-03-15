@@ -14,10 +14,12 @@
   %header
     %h1
       = link_to "Vzgojiteljica", root_path
-    - if signed_in?
-      %section#auth
+    %section#auth
+      - if signed_in?
         Prijavljeni kot #{current_user}
         = link_to "Odjava", destroy_user_session_path, method: :delete
+      - else
+        = link_to "Prijava", new_user_session_path
     %nav
       %ul
         %li= link_to "Predstavitev", copy_path('pages#index')

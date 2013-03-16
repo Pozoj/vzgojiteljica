@@ -1,6 +1,10 @@
 class IssuesController < InheritedResources::Base
   respond_to :json, :only => [:cover, :document]
 
+  def index
+    @issues_by_years = Issue.all.order(:year, :issue).group_by { |issue| issue.year }
+  end
+
   def cover
     resource.cover = params[:issue][:cover]
     resource.save

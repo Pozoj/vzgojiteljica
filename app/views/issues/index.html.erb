@@ -5,4 +5,9 @@
   <%= link_to "Dodaj številko", new_issue_path %>
 <% end %>
 
-<%= render Issue.all %>
+<% @issues_by_years.each do |year, issues| %>
+  <div class='yeear'>
+    <%= year %>
+    <%= render issues %>
+  </div>
+<% end %>

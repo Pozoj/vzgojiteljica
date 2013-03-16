@@ -6,8 +6,8 @@
 <% end %>
 
 <% @issues_by_years.each do |year, issues| %>
-  <div class='yeear'>
-    <%= year %>
+  <div class='year'>
+  	<h3>Letnik <%= year %></h3>
     <%= render issues %>
   </div>
 <% end %>

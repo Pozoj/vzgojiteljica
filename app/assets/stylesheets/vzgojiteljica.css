@@ -10,6 +10,21 @@ body {
   background: url(/assets/ricepaper2.png) repeat;
 }
 
+h1 {
+  font-family: Georgia;
+  font-size: 20px;
+  font-weight: 100;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+h2 {
+  font-family: Georgia;
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
 header .inner, #container {
   margin: 0 auto; 
 }
@@ -30,13 +45,12 @@ header {
   border-bottom: 2px solid white;
 }
 
-
-h1 {
+.inner h1 {
   font-size: 40px;
   font-family: Pacifico;
   color: #292646;
   line-height: 85px;
-  margin-left: 0px;
+  margin: 0;
   text-shadow: 0px 1px 0px rgba(255,255,255,0.12);
   float: left; 
 }
@@ -72,6 +86,7 @@ h1 {
   position: relative;
   padding: 30px 40px;
 }
+
 #content {
   float: left;
   width: 530px;
@@ -87,13 +102,9 @@ h1 {
   padding-bottom: 10px;
 }
 
-#editorial h2, #lastissue h2{
+#editorial h2, #lastissue h2 {
   margin-left: 15px;
   margin-top: 15px;
-  font-family: Georgia;
-  font-weight: 400;
-  font-size: 20px;
-  padding-bottom: 10px;
 }
 
 #editorial p, #lastissue p {
@@ -118,7 +129,6 @@ h1 {
   font-family: Georgia;
   font-weight: 400;
   font-size: 20px;
-  padding-bottom: 10px; 
 }
 
 #publisher img{
@@ -190,18 +200,6 @@ h3 {
   padding-bottom: 15px;
 }
 
-#test {
-  margin-right: 500px;
-  margin-left: 20px;  
-}
-
-#test img {
-  width: 120px;
-  float: left;
-  margin: 0;
-  border: 1px solid white;
-}
-
 .inner {
   position: relative;
 }
@@ -242,7 +240,6 @@ footer ul li {
   padding: 10px;  
   padding-top: 0; 
 }
-
 
 br.clear {
   clear: both;
@@ -367,18 +364,15 @@ div #read {
   clear: both;
 }
 
-#container #issues {
-  margin-left: 10px;
+#container li#issues {
+  list-style: none;
+  float: left;
 }
 
-#container #issues img {
+#container li#issues img {
   width: 115px;
   border: 3px solid white;
+  margin: 0;
 }
 
-#container #issues h3 {
-  padding: 0;
-  margin-left: 10px;
-  margin-top: 30px;
-}
 

@@ -2,7 +2,7 @@ class IssuesController < InheritedResources::Base
   respond_to :json, :only => [:cover, :document]
 
   def index
-    @issues_by_years = Issue.all.order(:year, :issue).group_by { |issue| issue.year }
+    @issues_by_years = Issue.all.order(year: :desc, issue: :asc).group_by { |issue| issue.year }
   end
 
   def cover

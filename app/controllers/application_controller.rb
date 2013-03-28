@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_section, :body_attrs, :admin?
+  helper_method :current_section, :body_attrs, :body_id, :admin?
   before_filter :authenticate, :except => [:index, :show]
 
   # Current section accessor.
@@ -11,8 +11,12 @@ class ApplicationController < ActionController::Base
     @section
   end
   
+  def body_id
+    "#{controller_name}-#{action_name}"
+  end
+  
   def body_attrs
-    { :class => controller_name, :id => "#{controller_name}-#{action_name}" }
+    { :class => controller_name, :id => body_id }
   end
   
   def get_recent_shouts

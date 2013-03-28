@@ -5,7 +5,7 @@
   <%= link_to "Dodaj članek", new_article_path %>
 <% end %>
 
-<table>
+<table id="articles">
   <thead>
     <tr>
       <th>Naziv</th>
@@ -16,9 +16,9 @@
   <tbody>
     <% collection.each do |article| %>
       <tr>
-        <td><%= article.title %></td>
-        <td><%= article.authors.join(", ") %></td>
-        <td><%= link_to article.issue, article.issue %></td>
+        <td class="article_title"><%= article.title %></td>
+        <td class="article_author"><%= article.authors.join(", ") %></td>
+        <td class="article_issue"><%= link_to article.issue, article.issue %></td>
       </tr>
     <% end %>
   </tbody>

@@ -2,8 +2,11 @@
 = admin_section do
   = link_to "Pregled"
 
-= link_to "Vas kaj zanima? Vprašajte nas", new_inquiry_path
+#inquiry
+  %p#gotquestion Vas kaj zanima? Vprašajte nas!
+  = render "form", :resource => Inquiry.new
 
+#content
 %table
   %thead
     %tr
@@ -14,3 +17,5 @@
       %tr
         %td= inquiry.question
         %td= l inquiry.created_at, format: :simple
+
+%br.clear

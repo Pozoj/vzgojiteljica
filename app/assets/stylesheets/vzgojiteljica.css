@@ -92,7 +92,7 @@ header {
   width: 530px;
 }
 
-#editorial {
+#editorial, #inquiry {
   background: rgba(210,208,202,0.3);
   width: 300px;
   border-radius: 3px;
@@ -100,6 +100,13 @@ header {
   box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
   margin-bottom: 30px;
   padding-bottom: 10px;
+}
+
+#inquiry {
+  float: right;
+  position: absolute;
+  top: 50px;
+  right: 40px;
 }
 
 #editorial h2, #lastissue h2 {
@@ -224,13 +231,13 @@ footer p {
   font-weight: 800;
   color: #dddad8;  
   text-shadow: 1px 1px 0px white;  
-  text-align: center;  
+  text-align: center;
 }
 
 footer ul {
   margin: 0 auto;
   list-style: none;
-  width: 430px;
+  width: 450px;
 }
 
 footer ul li {
@@ -309,38 +316,6 @@ aside.contact {
   margin-top: 270px;
 }
 
-
-#filter {
-  margin-top: 20px;
-  width: 860px;
-  background: rgba(210,208,202,0.3);
-  border-collapse: collapse; /* IE7 and lower */
-  border-spacing: 0; 
-}
-
-#filter thead {
-  background: rgb(51,49,77); /* Old browsers */
-  background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,49,77,1)), color-stop(30%,rgba(60,58,91,1)), color-stop(70%,rgba(60,58,91,1)), color-stop(100%,rgba(51,49,77,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* IE10+ */
-  background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33314d', endColorstr='#33314d',GradientType=1 ); /* IE6-9 */
-  color: white;
-  text-align: left;
-  font-family: Helvetica;
-}
-
-#filter th, #filter td {
-  padding: 10px 10px;
-}
-
-#articlesfilter {
-  padding-top: 80px;
-  clear: both;
-}
-
 div.issue {
   width: 146px;
   float: left;
@@ -360,3 +335,89 @@ p.title {
   border: 4px solid rgba(255,255,255,0.68);
   box-shadow: 0px 1px 4px 0px rgba(127,127,127,0.4);
 }
+
+.input, .submit input {
+  margin: 10px;
+}
+
+.input input, .input submit, .input textarea {
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #3a3a3a;
+}
+
+.input input, .input textarea {
+  width: 278px;
+  height: 30px;
+}
+
+.submit input {
+  width: 160px;
+  background: #efefef;
+  height: 40px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: Helvetica Neue;
+}
+
+form#new_inquiry.simple_form.new_inquiry textarea {
+  height: 100px;
+}
+
+table {
+  margin-top: 20px;
+  width: 500px;
+  background: rgba(210,208,202,0.3);
+  border-collapse: collapse; /* IE7 and lower */
+  border-spacing: 0; 
+}
+
+table thead {
+  background: rgb(51,49,77); /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,49,77,1)), color-stop(30%,rgba(60,58,91,1)), color-stop(70%,rgba(60,58,91,1)), color-stop(100%,rgba(51,49,77,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* IE10+ */
+  background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33314d', endColorstr='#33314d',GradientType=1 ); /* IE6-9 */
+  color: white;
+  text-align: left;
+  font-family: Helvetica;
+}
+
+table th, table td {
+  padding: 10px 10px;
+}
+
+td.article_title {
+  width: 550px;
+}
+
+td.article_author {
+  width: 150px;
+}
+
+td.article_issue {
+  width: 80px;
+}
+tbody tr:nth-child(even) {
+  background: rgba(210,208,202,0.3);
+}
+
+tbody tr:nth-child(odd) {
+  background: #fff;
+}
+
+#gotquestion {
+  margin: 20px 10px;
+}
+
+body #inquiries-index #container 
+
+

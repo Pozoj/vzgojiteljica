@@ -363,12 +363,24 @@ p.title {
 
 #new_inquiry .input input, #new_inquiry .input textarea {
   width: 250px;
+}
+
+#new_inquiry .input input {
   height: 30px;
 }
 
-#new_order .input input, #new_order .input textarea {
+#new_inquiry .input textarea {
+  height: 100px;
+}
+
+#new_order .input input {
   width: 400px;
   height: 30px;
+}
+
+#new_order .input textarea {
+  width: 400px;
+  height: 100px;
 }
 
 #new_inquiry .submit input {
@@ -385,8 +397,52 @@ p.title {
   height: 120px;
 }
 
+/*#new_order {
+  margin-top: 50px;
+}
+*/
+#new_order div {
+  float: left;
+  margin-right: 20px;
+}
+
+#new_order div.submit {
+  clear: both;
+}
+
+#new_order .order_title input {
+  width: 500px;
+}
+
+#new_order .order_name input, #new_order .order_place_and_date input, #new_order .order_email input {
+  width: 320px;
+}
+
+#new_order .order_address input {
+  width: 360px;
+}
+
+#new_order .order_post_id input {
+  width: 116px;
+}
+
+#new_order .order_phone input, #new_order .order_fax input, #new_order .order_vat_id input {
+  width: 236px;
+}
+
+#new_order .order_vat_id {
+  margin-top: 30px;
+}
+
+#new_order .order_quantity, #new_order .order_comments {
+  clear: both;
+}
+
+#new_order .order_quantity input {
+  width: 60px;
+}
+
 table {
-  margin-top: 20px;
   width: 540px;
   background: rgba(210,208,202,0.3);
   border-collapse: collapse; /* IE7 and lower */
@@ -396,7 +452,6 @@ table {
 table#articles {
   width: 880px; 
 }
-
 
 table thead {
   background: rgb(51,49,77); /* Old browsers */

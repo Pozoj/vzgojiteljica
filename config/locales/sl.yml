@@ -118,7 +118,7 @@ sl:
         title: 'Naziv podjetja / ustanove'
         name: 'Priimek in ime naročnika / kontaktne osebe'
         comments: Opombe
-        place_and_date: Kraj in datum
+        place_and_date: Kraj
       author:
         title: Naziv
         education: Izobrazba

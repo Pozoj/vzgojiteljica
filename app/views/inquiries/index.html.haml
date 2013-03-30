@@ -7,15 +7,15 @@
   = render "form", :resource => Inquiry.new
 
 #content
-%table
-  %thead
-    %tr
-      %th Vprašanje
-      %th Datum
-  %tbody
-    - collection.each do |inquiry|
+  %table
+    %thead
       %tr
-        %td= inquiry.question
-        %td= l inquiry.created_at, format: :simple
+        %th Vprašanje
+        %th 
+    %tbody
+      - collection.each do |inquiry|
+        %tr
+          %td= inquiry.question
+          %td= l inquiry.created_at, format: :simple
 
 %br.clear

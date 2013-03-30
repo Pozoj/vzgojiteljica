@@ -17,9 +17,9 @@
       <% articles.each do |article| %>
         <li>
           <%= article.title %>
-          <em>
+          <span class="author">
             (<%= article.authors.join(", ") %>)
-          </em>
+          </span>
         </li>
       <% end %>
     </ol>

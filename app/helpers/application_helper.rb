@@ -12,10 +12,15 @@ module ApplicationHelper
 
     field = field.to_s
 
-    # Relations.
+    # Belongs to relations.
     if field =~ /_id/ and record.respond_to?(field.gsub('_id', ''))
       data = record.send field.gsub('_id', '')
       return link_to data, polymorphic_url(data)
+    end
+
+    # Has many relations.
+    if field =~ /s$/ and record.send(field).respond_to?(:all)
+      return record.send(field).map { |r| link_to r, r }.join(', ').html_safe
     end
 
     # Paperclip files.
@@ -60,7 +65,7 @@ module ApplicationHelper
             columns.each do |column|
               haml_tag :td, format_field(record, column)
             end
-            haml_tag :td, :class => :crud do
+            haml_tag :td, :class => :admin do
               if crud_fields and crud_fields.include?(:show)
                 concat link_to "Odpri", polymorphic_url(record)
               end

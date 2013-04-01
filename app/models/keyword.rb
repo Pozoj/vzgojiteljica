@@ -4,4 +4,8 @@ class Keyword < ActiveRecord::Base
 
   validates_presence_of :keyword
   validates_uniqueness_of :keyword
+
+  def to_s
+  	keyword
+  end
 end

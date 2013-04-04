@@ -21,7 +21,9 @@
       <div class="inner">
         <%= image_tag 'Untitled-4.png' %>
         <div id="logo">
-          <h1>vzgojiteljica</h1>
+          <%= link_to root_path do %>
+            <h1>vzgojiteljica</h1>
+          <% end %>
         </div>
         <nav id="menu">
           <ul>
@@ -50,7 +52,11 @@
     </div>
     
     <footer>
-      <p>Pozoj, d.o.o. 03 897 01 22 info@pozoj.si www.pozoj.si</p>
+      <div id="pozoj">
+        <p class="contact_data">Pozoj, d.o.o.</p> 
+        <p class="contact_data">03 897 01 22</p> 
+        <p class="contact_data">info@pozoj.si</p>
+        <p class="contact_data">www.pozoj.si</p>
       <ul>
         <li>
           <%= link_to 'Predstavitev', root_path %>

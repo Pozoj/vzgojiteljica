@@ -57,6 +57,7 @@ module ApplicationHelper
             column = klass.human_attribute_name(column) if klass
             haml_tag :th, column.to_s
           end
+          haml_tag :th
         end
       end
       haml_tag :tbody do
@@ -66,14 +67,14 @@ module ApplicationHelper
               haml_tag :td, format_field(record, column)
             end
             haml_tag :td, :class => :admin do
-              if crud_fields and crud_fields.include?(:show)
-                concat link_to "Odpri", polymorphic_url(record)
+              if crud_fields and crud_fields.include?(:destroy)
+                concat link_to "Odstrani", polymorphic_url(record), method: :delete, confirm: 'Ste prepričani?'
               end
               if crud_fields and crud_fields.include?(:edit)
                 concat link_to "Uredi", polymorphic_url(record, action: :edit)
               end
-              if crud_fields and crud_fields.include?(:destroy)
-                concat link_to "Odstrani", polymorphic_url(record), method: :delete, confirm: 'Ste prepričani?'
+              if crud_fields and crud_fields.include?(:show)
+                concat link_to "Odpri", polymorphic_url(record)
               end
             end
           end

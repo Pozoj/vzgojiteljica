@@ -1,15 +1,23 @@
 <%= simple_form_for resource do |f| %>
-  <%= f.input :title %>
-  <%= f.input :name %>
-  <%= f.input :address %>
-  <%= f.input :post_id %>
-  <%= f.input :place_and_date %>
-  <%= f.input :phone %>
-  <%= f.input :fax %>
-  <%= f.input :email %>
-  <%= f.input :vat_id %>
-  <%= f.input :quantity %>
-  <%= f.input :comments %>
+  <fieldset>
+    <legend>Kontaktni podatki</legend>
+      <%= f.input :name %>
+      <%= f.input :address %>
+      <%= f.input :post_id %>
+      <%= f.input :phone %>
+      <%= f.input :fax %>
+      <%= f.input :email %>
+  </fieldset>
+  <fieldset>
+    <legend>Podjetje</legend>
+    <%= f.input :title %>
+    <%= f.input :vat_id %>
+  </fieldset>
+  <fieldset>
+    <legend>Naročilo</legend>
+    <%= f.input :quantity %>
+    <%= f.input :comments %>
+  </fieldset>
   <div class='submit'>
     <%= f.submit %>
   </div>

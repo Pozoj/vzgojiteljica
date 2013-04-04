@@ -1,2 +1,23 @@
 = title "Naročila"
-- generate_table collection
+
+%table#articles
+  %thead
+    %tr
+      %th Naziv
+      %th Ime
+      %th Email
+      %th Količina
+      %th Oddano
+      %th
+  %tbody
+    - collection.each do |order|
+      %tr
+        %td.order_title= order.title
+        %td.order_name= order.name
+        %td.order_email= order.email       
+        %td.order_quantity= order.quantity
+        %td.order_created_at= l order.created_at, format: :simple
+        %td.admin
+          = link_to "Odstrani"
+          = link_to "Uredi"
+          = link_to "Odpri"

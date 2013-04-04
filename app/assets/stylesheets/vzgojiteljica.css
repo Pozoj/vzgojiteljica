@@ -26,6 +26,18 @@ h2 {
   margin-bottom: 10px;
 }
 
+h3 {
+  clear: both;
+  font-family: Georgia;
+  font-size: 18px;
+  font-weight: 100;
+  padding-bottom: 5px;
+}
+
+h4 {
+  clear: both;
+}
+
 header .inner, #container {
   margin: 0 auto; 
 }
@@ -46,6 +58,7 @@ header {
   border-bottom: 2px solid white;
 }
 
+/*Logotip Vzgojiteljica*/ 
 .inner h1 {
   font-size: 40px;
   font-family: Pacifico;
@@ -90,7 +103,7 @@ header {
 
 #content {
   float: left;
-  width: 530px;
+  width: 550px;
 }
 
 #editorial, #inquiry {
@@ -106,7 +119,7 @@ header {
 #inquiry {
   float: right;
   position: absolute;
-  top: 50px;
+  top: 100px;
   right: 40px;
 }
 
@@ -168,21 +181,21 @@ header {
 
 #orderlink {
   display: block;
-  background: rgb(51,49,77); /* Old browsers */
-  background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,49,77,1)), color-stop(30%,rgba(60,58,91,1)), color-stop(70%,rgba(60,58,91,1)), color-stop(100%,rgba(51,49,77,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* IE10+ */
-  background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33314d', endColorstr='#33314d',GradientType=1 ); /* IE6-9 */
-  width: 240px;
-  padding: 10px;
-  text-align: center;
+  background: #3c3a5b;
+  width: 230px;
   margin-top: 20px;
+  border: 1px solid #3c3a5b;
   border-radius: 5px;
-  box-shadow: 0px 2px 7px 0px rgba(127,127,127,0.4);
-  color: white;
+  font-size: 1em;
+  font-family: Helvetica Neue;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+}
+
+#orderlink:hover {
+  background: #f36e5c;
+  border: 1px solid #f36e5c;
 }
 
 a {
@@ -197,15 +210,6 @@ ul {
 
 #numbers h2 {
   padding: 30px;
-}
-
-h3 {
-  clear: both;
-  font-family: Georgia;
-  font-size: 18px;
-  font-weight: 100;
-  padding-left: 30px;
-  padding-bottom: 15px;
 }
 
 .inner {
@@ -228,25 +232,37 @@ footer {
 }
 
 footer p {
+  clear: both;
   font-family: Helvetica;
   font-weight: 800;
-  color: #dddad8;  
+  color: #b3b3b3;  
   text-shadow: 1px 1px 0px white;  
-  text-align: center;
+  text-align: right;
+  font-size: 0.8em;
+  line-height: 1.2em;
+}
+
+#pozoj {
+  float: left;
 }
 
 footer ul {
+  float: left;
   margin: 0 auto;
   list-style: none;
   width: 450px;
+  color: #b3b3b3; 
+  text-shadow: 1px 1px 0px white;  
 }
 
-footer ul li {
+footer ul li a{
   font-family: Helvetica;
   font-size: 14px;
   float: left;
   padding: 10px;  
-  padding-top: 0; 
+  padding-top: 0;
+  color: #b3b3b3; 
+  text-shadow: 1px 1px 0px white;  
 }
 
 br.clear {
@@ -257,27 +273,30 @@ aside.contact {
   float: right;
 }
 
-#content form {
+#keyword_search {
 	margin: 0 auto;
 }
 
-#content .search {
-  width: 400px;
+#keyword_search .search {
+  width: 450px;
   height: 30px;
   border: 2px solid rgba(210,208,202,0.3);
   border-radius: 3px;
   margin: 0px 0;
   font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 40px;
 }
 
-.button {
+#keyword_search .button {
   padding: 10px 15px;
   background: rgba(210,208,202,0.3);
   border: 1px solid rgba(210,208,202,0.3);
   border-radius: 3px;
+  width: 100px;
 }
 
-#lastissue #img1, #lastissue #img2, #issues img, .cover img {
+#lastissue #img1, #lastissue #img2 {
   border: 3px solid white;
   border-radius: 3px;
   margin: 10px;
@@ -318,8 +337,8 @@ aside.contact {
 }
 
 div.issue {
-  width: 146px;
   float: left;
+  margin-right: 23px;
 }
 
 p.title {
@@ -332,11 +351,13 @@ p.title {
 }
 
 .issue img {
+  width: 115px;
   border-radius: 3px;
   border: 4px solid rgba(255,255,255,0.68);
   box-shadow: 0px 1px 4px 0px rgba(127,127,127,0.4);
 }
 
+/*Inquiry Page*/
 #new_inquiry {
   margin: 20px;
 }
@@ -355,10 +376,18 @@ p.title {
   display: block;
   margin-bottom: 20px;
   margin-top: 5px;
-  border: 1px solid #dedede;
+  border: 1px solid #cccccc;
   border-radius: 5px;
   font-size: 1em;
   color: #3a3a3a;
+}
+
+#new_order .input {
+  float: left;
+}
+
+#new_order fieldset {
+  clear: left;
 }
 
 #new_inquiry .input input, #new_inquiry .input textarea {
@@ -370,80 +399,43 @@ p.title {
 }
 
 #new_inquiry .input textarea {
-  height: 100px;
-}
-
-#new_order .input input {
-  width: 400px;
-  height: 30px;
-}
-
-#new_order .input textarea {
-  width: 400px;
-  height: 100px;
-}
-
-#new_inquiry .submit input {
-  width: 160px;
-  background: #efefef;
-  height: 40px;
-  border: 1px solid #e3e3e3;
-  border-radius: 5px;
-  font-size: 1em;
-  font-family: Helvetica Neue;
+  height: 150px;
 }
 
 #new_inquiry textarea, #new_order textarea {
   height: 120px;
 }
 
-/*#new_order {
-  margin-top: 50px;
+.question {
+  width: 400px;
 }
-*/
-#new_order div {
-  float: left;
-  margin-right: 20px;
-}
+
+/*Orders Page*/
 
 #new_order div.submit {
   clear: both;
 }
 
-#new_order .order_title input {
-  width: 500px;
+#new_order .input {
+  width: 400px;
 }
 
-#new_order .order_name input, #new_order .order_place_and_date input, #new_order .order_email input {
-  width: 320px;
+#new_order .input input, #new_order .input textarea {
+  width: 380px;
 }
 
-#new_order .order_address input {
-  width: 360px;
+#new_order .input input {
+  height: 30px;
 }
 
-#new_order .order_post_id input {
-  width: 116px;
+#new_order .input textarea {
+  height: 30px;
 }
 
-#new_order .order_phone input, #new_order .order_fax input, #new_order .order_vat_id input {
-  width: 236px;
-}
 
-#new_order .order_vat_id {
-  margin-top: 30px;
-}
-
-#new_order .order_quantity, #new_order .order_comments {
-  clear: both;
-}
-
-#new_order .order_quantity input {
-  width: 60px;
-}
-
+/*Articles Page*/
 table {
-  width: 540px;
+  width: 100%;
   background: rgba(210,208,202,0.3);
   border-collapse: collapse; /* IE7 and lower */
   border-spacing: 0; 
@@ -451,6 +443,7 @@ table {
 
 table#articles {
   width: 880px; 
+  margin-top: 10px;
 }
 
 table thead {
@@ -482,11 +475,9 @@ td.article_author {
 td.article_issue {
   width: 80px;
 }
-tbody tr:nth-child(even) {
-  background: rgba(210,208,202,0.3);
-}
 
-tbody tr:nth-child(odd) {
+tbody tr {
+  border-bottom: 2px solid #d9d9d9;
   background: #fff;
 }
 
@@ -495,14 +486,16 @@ tbody tr:nth-child(odd) {
 }
 
 #inquiries-index #container {
-  min-height: 760px;
+  min-height: 840px;
 }
 
 div.cover img {
   width: 260px;
   position: absolute;
-  top: 80px;
-  right: 30px;
+  top: 100px;
+  right: 40px;
+  border: 4px solid rgba(255,255,255,0.68);
+  box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
 }
 
 ol.articles, .section {
@@ -523,3 +516,130 @@ ol.articles, .section {
 span.author {
   color: #a0a0a0;
 }
+
+p.contact_data {
+  float: left;
+  padding-left: 20px;
+}
+
+#container > .admin {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+}
+
+.admin a {
+  font-size: 0.8em;
+  font-weight: 800;
+  color: #fff;
+  display: table;
+  padding: 5px;
+  border: 2px solid #3c3a5b;
+  background: #3c3a5b;
+  float: right;
+  margin-left: 10px;
+  border-radius: 5px;
+  line-height: 1em;
+}
+
+/*Issues All*/
+td.admin {
+  width: 200px;
+}
+
+td.admin a {
+  display: block;
+  padding: 5px;
+  line-height: 1em;
+}
+
+td img {
+  width: 50px;
+}
+
+.admin a:hover {
+  color: #fff;
+  background: #f36e5c;
+  border: 2px solid #f36e5c;
+}
+
+tbody tr:hover {
+  background: #efefef;
+}
+
+#articles-show #container #abstract {
+  width: 560px;
+  min-height: 400px;
+}
+
+form input.string, textarea, input.tel, input.email, input.text {
+  width: 500px;
+  font-size: 1em;
+}
+
+form input.string, input.tel, input.email, input.text, select {
+  height: 30px;
+  border: 1px solid #b3b3b3;
+  border-radius: 3px;
+  font-size: 1em;
+}
+
+form .input.radio label {
+  padding-right: 30px;
+}
+
+form .input.radio input {
+  margin-right: 5px;
+}
+
+label.string, label.text, label.select, label.tel, label.email, label.file, label.integer {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.submit input {
+  height: 30px;
+  background: #3c3a5b;
+  padding: 5px 10px;
+  border: 1px solid #3c3a5b;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: Helvetica Neue;
+  color: #fff;
+  text-align: center;   
+  margin-top: 10px; 
+}
+
+.submit input:hover {
+  background: #f36e5c;
+  border: 1px solid #f36e5c;
+}
+
+select#issue_year, label.date.optional {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form div {
+  margin-bottom: 20px;
+}
+
+fieldset {
+  border-radius: 5px;
+  border: 1px solid #b3b3b3;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+legend {
+  padding: 10px;
+  font-weight: 800;
+  color: #3c3a5b;
+}
+
+.input.text.optional.order_comments {
+  clear: both;
+}
+
+

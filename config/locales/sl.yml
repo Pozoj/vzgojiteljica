@@ -116,7 +116,7 @@ sl:
         document: Revija
       order:
         title: 'Naziv podjetja / ustanove'
-        name: 'Priimek in ime naročnika / kontaktne osebe'
+        name: 'Ime in priimek'
         comments: Opombe
         place_and_date: Kraj
       author:
@@ -127,6 +127,9 @@ sl:
         abstract_html: Povzetek
         abstract_english: Povzetek (ENG)
         abstract_english_html: Povzetek (ENG)
+        keywords: Ključne besede
+        authors: Avtor
+
     errors:
       messages:
         record_invalid: "Vpis ni možen zaradi napak!"

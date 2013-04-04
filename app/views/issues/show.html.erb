@@ -16,7 +16,7 @@
     <ol class='articles'>
       <% articles.each do |article| %>
         <li>
-          <%= article.title %>
+          <%= link_to article.title, article %>
           <span class="author">
             (<%= article.authors.join(", ") %>)
           </span>

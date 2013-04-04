@@ -1,3 +1,4 @@
+/*_________________________________ General _________________________________*/
 * {
   padding: 0;
   margin: 0;
@@ -6,24 +7,25 @@
 body {
   font-family: Helvetica;
   font-size: 15px;
-  line-height: 1.6em;
-  background: url(/assets/ricepaper2.png) repeat;
+  line-height: 25px;
+  background: url(/assets/paperbg.png) repeat;
 }
 
 h1 {
   font-family: Georgia;
   font-size: 24px;
   font-weight: 100;
-  margin-bottom: 30px;
   margin-top: 20px;
-  color: rgb(51,49,77);
+  margin-bottom: 30px;
+  color: #3c3a5b;
 }
 
 h2 {
   font-family: Georgia;
-  font-weight: 400;
   font-size: 20px;
+  font-weight: 400;
   margin-bottom: 10px;
+  margin-top: 15px;
 }
 
 h3 {
@@ -31,34 +33,176 @@ h3 {
   font-family: Georgia;
   font-size: 18px;
   font-weight: 100;
-  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 h4 {
   clear: both;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/*Admin*/
+.admin a {
+  font-size: 0.8em;
+  font-weight: 800;
+  color: #fff;
+  display: table;
+  padding: 5px;
+  border: 2px solid #3c3a5b;
+  background: #3c3a5b;
+  float: right;
+  margin-left: 10px;
+  border-radius: 5px;
+  line-height: 1em;
+}
+
+.admin a:hover {
+  color: #fff;
+  background: #f36e5c;
+  border: 2px solid #f36e5c;
+}
+
+#container > .admin {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+}
+
+td.admin {
+  width: 200px;
+}
+
+td.admin a {
+  display: block;
+  padding: 5px;
+  line-height: 1em;
+}
+
+ul {
+  list-style: none;
+  padding-left: 16px;
+}
+
+/*_________________________________ Form _________________________________*/
+form input.string, textarea, input.tel, input.email, input.text {
+  width: 500px;
+  font-size: 15px;
+}
+
+form input.string, input.tel, input.email, input.text, select, textarea {
+  border: 1px solid #b3b3b3;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+form input.string, input.tel, input.email, input.text, select {
+  height: 30px;
+}
+
+form .input.radio label {
+  padding-right: 30px;
+}
+
+form .input.radio input {
+  margin-right: 5px;
+}
+
+label.string, label.text, label.select, label.tel, label.email, label.file, label.integer {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.submit input {
+  height: 30px;
+  background: #3c3a5b;
+  padding: 5px 10px;
+  border: 1px solid #3c3a5b;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: Helvetica Neue;
+  color: #fff;
+  text-align: center;   
+  margin-top: 10px; 
+}
+
+.submit input:hover {
+  background: #f36e5c;
+  border: 1px solid #f36e5c;
+}
+
+fieldset {
+  border-radius: 5px;
+  border: 1px dashed #cccccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+legend {
+  padding: 10px;
+  font-weight: 800;
+  color: #3c3a5b;
+}
+
+/*_________________________________ Table _________________________________*/
+table {
+  width: 100%;
+  background: rgba(210,208,202,0.3);
+  border-collapse: collapse;
+  border-spacing: 0; 
+}
+
+table thead {
+  background: rgb(51,49,77); 
+  background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,49,77,1)), color-stop(30%,rgba(60,58,91,1)), color-stop(70%,rgba(60,58,91,1)), color-stop(100%,rgba(51,49,77,1))); 
+  background: -webkit-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
+  background: -o-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
+  background: -ms-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
+  background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33314d', endColorstr='#33314d',GradientType=1 ); 
+  color: white;
+  text-align: left;
+  font-family: Helvetica;
+}
+
+table th, table td {
+  padding: 10px 10px;
+}
+
+tbody tr {
+  border-bottom: 2px solid #d9d9d9;
+  background: #fff;
+}
+
+tbody tr:hover {
+  background: #efefef;
+}
+
+/*_________________________________ Layout _________________________________*/
 header .inner, #container {
   margin: 0 auto; 
 }
 
 header {
   position: relative;
-  height: 85px;  
-  /* Gradient */
-  background: rgb(51,49,77); /* Old browsers */
-  background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,49,77,1)), color-stop(30%,rgba(60,58,91,1)), color-stop(70%,rgba(60,58,91,1)), color-stop(100%,rgba(51,49,77,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* IE10+ */
-  background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33314d', endColorstr='#33314d',GradientType=1); /* IE6-9 */
-  /* Gradient */
+  height: 85px;
+  background: rgb(51,49,77);
+  background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%); 
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,49,77,1)), color-stop(30%,rgba(60,58,91,1)), color-stop(70%,rgba(60,58,91,1)), color-stop(100%,rgba(51,49,77,1))); 
+  background: -webkit-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
+  background: -o-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
+  background: -ms-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
+  background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33314d', endColorstr='#33314d',GradientType=1); 
   border-bottom: 2px solid white;
 }
 
-/*Logotip Vzgojiteljica*/ 
+/*Vzgojiteljica Logo*/ 
 .inner h1 {
   font-size: 40px;
   font-family: Pacifico;
@@ -71,6 +215,17 @@ header {
 
 .inner, #container {
   width: 880px;
+}
+
+.inner {
+  position: relative;
+}
+
+.inner img {
+  position: absolute;
+  width: 80px;  
+  top: 20px;
+  left: -100px;
 }
 
 #menu {
@@ -101,128 +256,6 @@ header {
   padding: 30px 40px;
 }
 
-#content {
-  float: left;
-  width: 550px;
-}
-
-#editorial, #inquiry {
-  width: 300px;
-  background: rgba(210,208,202,0.3);
-  border-radius: 3px;
-  border: 4px solid rgba(255,255,255,0.68);
-  box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
-  margin-bottom: 30px;
-  padding-bottom: 10px;
-}
-
-#inquiry {
-  float: right;
-  position: absolute;
-  top: 100px;
-  right: 40px;
-}
-
-#editorial h2, #lastissue h2 {
-  margin-left: 15px;
-  margin-top: 15px;
-}
-
-#editorial p, #lastissue p {
-  margin-left: 15px;
-  font-size: 14px;
-  padding-bottom: 10px;
-}
-
-#publisher {
-  font-size: 14px;
-  background: rgba(210,208,202,0.3);
-  width: 300px;
-  height: 185px;
-  border-radius: 3px;
-  border: 4px solid rgba(255,255,255,0.68);
-  box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
-}
-
-#publisher h2 {
-  margin-left: 15px;
-  margin-top: 15px;
-  font-family: Georgia;
-  font-weight: 400;
-  font-size: 20px;
-}
-
-#publisher img{
-  width: 140px;
-  margin-left: 15px;
-  margin-top: 10px;
-  margin-right: 10px;
-  float: left;
-  box-shadow: 0px 2px 6px 0px rgba(127,127,127,0.4);
-}
-
-#content p {
-  padding-bottom: 10px;
-}
-
-#content h2, #numbers h2, #articlesfilter h2 {
-  font-family: Georgia; 
-  font-size: 20px;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  font-weight: 400;
-}
-
-#publisher p {
-  margin-left: 15px;
-  float: left;
-  padding-top: 8px;
-}
-
-#orderlink {
-  display: block;
-  background: #3c3a5b;
-  width: 230px;
-  margin-top: 20px;
-  border: 1px solid #3c3a5b;
-  border-radius: 5px;
-  font-size: 1em;
-  font-family: Helvetica Neue;
-  color: #fff;
-  text-align: center;
-  padding: 5px 10px;
-}
-
-#orderlink:hover {
-  background: #f36e5c;
-  border: 1px solid #f36e5c;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-ul {
-  list-style: none;
-  padding-left: 16px;
-}
-
-#numbers h2 {
-  padding: 30px;
-}
-
-.inner {
-  position: relative;
-}
-
-.inner img {
-  position: absolute;
-  width: 80px;  
-  top: 20px;
-  left: -100px;
-}
-
 footer {
   clear: both;
   height: 85px; 
@@ -242,254 +275,200 @@ footer p {
   line-height: 1.2em;
 }
 
-#pozoj {
+footer #pozoj {
   float: left;
 }
 
 footer ul {
-  float: left;
+  float: right;
   margin: 0 auto;
   list-style: none;
-  width: 450px;
+  width: 600px;
+  color: #b3b3b3; 
+  text-shadow: 1px 1px 0px white;  
+  font-size: 12px;
+}
+
+footer ul li a {
+  font-family: Helvetica;
+  font-size: 12px;
+  float: left;
+  padding: 5px;  
+  padding-top: 0;
   color: #b3b3b3; 
   text-shadow: 1px 1px 0px white;  
 }
 
-footer ul li a{
-  font-family: Helvetica;
-  font-size: 14px;
+footer p.contact_data {
   float: left;
-  padding: 10px;  
-  padding-top: 0;
-  color: #b3b3b3; 
-  text-shadow: 1px 1px 0px white;  
+  padding-left: 20px;
 }
 
 br.clear {
   clear: both;
 }
 
-aside.contact {
+/*_________________________________ Pages Index _________________________________*/
+#pages-index #content {
+  float: left;
+  width: 550px;
+}
+
+/*Aside*/
+#pages-index aside.contact {
   float: right;
 }
 
-#keyword_search {
-	margin: 0 auto;
-}
-
-#keyword_search .search {
-  width: 450px;
-  height: 30px;
-  border: 2px solid rgba(210,208,202,0.3);
-  border-radius: 3px;
-  margin: 0px 0;
-  font-size: 20px;
-  margin-top: 10px;
-  margin-bottom: 40px;
-}
-
-#keyword_search .button {
-  padding: 10px 15px;
+#pages-index #editorial, #inquiries-index #inquiry {
+  width: 300px;
   background: rgba(210,208,202,0.3);
-  border: 1px solid rgba(210,208,202,0.3);
   border-radius: 3px;
-  width: 100px;
+  border: 4px solid rgba(255,255,255,0.68);
+  box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
+  margin-bottom: 30px;
+  padding-bottom: 10px;
 }
 
-#lastissue #img1, #lastissue #img2 {
-  border: 3px solid white;
+#pages-index #editorial h2, #pages-index #lastissue h2 {
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+#pages-index #editorial p, #pages-index #lastissue p {
+  margin-left: 15px;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+
+/*Aside Pozoj's contact info*/
+#pages-index #publisher {
+  font-size: 14px;
+  background: rgba(210,208,202,0.3);
+  width: 300px;
+  height: 185px;
   border-radius: 3px;
-  margin: 10px;
+  border: 4px solid rgba(255,255,255,0.68);
+  box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
+}
+
+#pages-index #publisher h2 {
+  margin-left: 15px;
+  margin-top: 15px;
+  font-family: Georgia;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+/*Pozoj Logo*/
+#pages-index #publisher img{
+  width: 140px;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-right: 10px;
+  float: left;
   box-shadow: 0px 2px 6px 0px rgba(127,127,127,0.4);
 }
 
-#lastissue #img1 {
-  position: absolute;
-  left: 30px; 
-  top: 10px;
-  width: 140px;
-  transform: rotate(-2deg);
-  -ms-transform: rotate(-2deg); /* IE 9 */
-  -webkit-transform: rotate(-2deg); /* Safari and Chrome */
-  -o-transform: rotate(-2deg); /* Opera */
-  -moz-transform: rotate(-2deg); /* Firefox */ 
-}
-  
-#lastissue #img2 {
-  position: absolute;
-  top: 20px;
-  right: 10px;
-  width: 120px;
-  transform: rotate(2deg);
-  -ms-transform: rotate(2deg); /* IE 9 */
-  -webkit-transform: rotate(2deg); /* Safari and Chrome */
-  -o-transform: rotate(2deg); /* Opera */
-  -moz-transform: rotate(2deg); /* Firefox */}
-
-#lastissue {
-  position: relative;
-  width: 300px;
+#content p {
+  padding-bottom: 10px;
 }
 
-#lastissue p {
+#pages-index #content h2 /*#numbers h2 */{
+  font-family: Georgia; 
+  font-size: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-weight: 400;
+}
+
+#pages-index #publisher p {
+  margin-left: 15px;
   float: left;
-  margin-top: 270px;
+  padding-top: 8px;
 }
 
-div.issue {
-  float: left;
-  margin-right: 23px;
-}
-
-p.title {
-  margin-bottom: 40px;
+#pages-index #orderlink {
+  display: block;
+  background: #3c3a5b;
+  width: 230px;
+  margin-top: 20px;
+  border: 1px solid #3c3a5b;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: Helvetica Neue;
+  color: #fff;
   text-align: center;
+  padding: 5px 10px;
 }
 
-.year h3 {
-  padding-left: 0;
+#pages-index #orderlink:hover {
+  background: #f36e5c;
+  border: 1px solid #f36e5c;
 }
 
-.issue img {
-  width: 115px;
-  border-radius: 3px;
-  border: 4px solid rgba(255,255,255,0.68);
-  box-shadow: 0px 1px 4px 0px rgba(127,127,127,0.4);
+/*_________________________________ Articles Pages _________________________________*/
+#articles-index #content {
+  width: 800px;
 }
 
-/*Inquiry Page*/
-#new_inquiry {
-  margin: 20px;
+/*Keyword Search*/ 
+#articles-index #keyword_search {
+  margin: 0 auto;
 }
 
-#new_inquiry .input input, #new_inquiry .input submit, #new_inquiry .input textarea {
-  display: block;
-  margin-bottom: 20px;
-  margin-top: 5px;
-  border: 1px solid #dedede;
-  border-radius: 5px;
-  font-size: 1em;
-  color: #3a3a3a;
-}
-
-#new_order .input input, #new_order .input submit, #new_order .input textarea {
-  display: block;
-  margin-bottom: 20px;
-  margin-top: 5px;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  font-size: 1em;
-  color: #3a3a3a;
-}
-
-#new_order .input {
+#articles-index #keyword_search .search {
   float: left;
-}
-
-#new_order fieldset {
-  clear: left;
-}
-
-#new_inquiry .input input, #new_inquiry .input textarea {
-  width: 250px;
-}
-
-#new_inquiry .input input {
+  width: 524px;
   height: 30px;
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+  margin: 0px 0;
+  font-size: 20px;
+  margin-bottom: 60px;
+  margin-top: 15px;
 }
 
-#new_inquiry .input textarea {
-  height: 150px;
+#articles-index #keyword_search .submit {
+  float: left;
+  display: inline;
+  height: 33px;
+  background: #3c3a5b;
+  border: 1px solid rgba(210,208,202,0.3);
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: Helvetica Neue;
+  color: #fff;
+  width: 100px;
+  margin-left: 20px;
+  margin-top: 15px; 
 }
 
-#new_inquiry textarea, #new_order textarea {
-  height: 120px;
-}
-
-.question {
-  width: 400px;
-}
-
-/*Orders Page*/
-
-#new_order div.submit {
-  clear: both;
-}
-
-#new_order .input {
-  width: 400px;
-}
-
-#new_order .input input, #new_order .input textarea {
-  width: 380px;
-}
-
-#new_order .input input {
-  height: 30px;
-}
-
-#new_order .input textarea {
-  height: 30px;
-}
-
-
-/*Articles Page*/
-table {
-  width: 100%;
-  background: rgba(210,208,202,0.3);
-  border-collapse: collapse; /* IE7 and lower */
-  border-spacing: 0; 
-}
-
-table#articles {
+/*List of articles (Filter)*/ 
+#articles-index table#articles {
   width: 880px; 
   margin-top: 10px;
 }
 
-table thead {
-  background: rgb(51,49,77); /* Old browsers */
-  background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,49,77,1)), color-stop(30%,rgba(60,58,91,1)), color-stop(70%,rgba(60,58,91,1)), color-stop(100%,rgba(51,49,77,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* IE10+ */
-  background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33314d', endColorstr='#33314d',GradientType=1 ); /* IE6-9 */
-  color: white;
-  text-align: left;
-  font-family: Helvetica;
-}
-
-table th, table td {
-  padding: 10px 10px;
-}
-
-td.article_title {
+#articles-index td.article_title {
   width: 550px;
 }
 
-td.article_author {
+#articles-index td.article_author {
   width: 150px;
 }
 
-td.article_issue {
+#articles-index td.article_issue {
   width: 80px;
 }
 
-tbody tr {
-  border-bottom: 2px solid #d9d9d9;
-  background: #fff;
+/*Articles Show*/
+
+#articles-show #container #abstract {
+  width: 560px;
+  min-height: 400px;
 }
 
-#gotquestion {
-  margin: 20px 20px;
-}
-
-#inquiries-index #container {
-  min-height: 840px;
-}
-
-div.cover img {
+#articles-show div.cover img {
   width: 260px;
   position: absolute;
   top: 100px;
@@ -498,148 +477,182 @@ div.cover img {
   box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
 }
 
-ol.articles, .section {
+#articles-show ol.articles, .section {
   width: 560px;
 }
 
-.section li {
+#articles-show .section li {
   list-style: disc;
   margin-left: 30px;
-  
 }
 
-.section h2 {
+#articles-show .section h2 {
   padding: 0;
   margin: 10px 0 5px 0;
 }
 
-span.author {
+#articles-show span.author {
   color: #a0a0a0;
 }
 
-p.contact_data {
+/*_________________________________ Issues Pages _________________________________*/
+#issues-index div.issue {
   float: left;
-  padding-left: 20px;
+  margin-right: 23px;
 }
 
-#container > .admin {
-  position: absolute;
-  top: 30px;
-  right: 40px;
+#issues-index p.title {
+  margin-bottom: 40px;
+  text-align: center;
 }
 
-.admin a {
-  font-size: 0.8em;
-  font-weight: 800;
-  color: #fff;
-  display: table;
-  padding: 5px;
-  border: 2px solid #3c3a5b;
-  background: #3c3a5b;
-  float: right;
-  margin-left: 10px;
-  border-radius: 5px;
-  line-height: 1em;
+#issues-index .year h3 {
+  padding-left: 0;
+}
+
+#issues-index .issue img {
+  width: 115px;
+  border-radius: 3px;
+  border: 4px solid rgba(255,255,255,0.68);
+  box-shadow: 0px 1px 4px 0px rgba(127,127,127,0.4);
 }
 
 /*Issues All*/
-td.admin {
-  width: 200px;
-}
-
-td.admin a {
-  display: block;
-  padding: 5px;
-  line-height: 1em;
-}
-
-td img {
+#issues-all td img {
   width: 50px;
 }
 
-.admin a:hover {
-  color: #fff;
-  background: #f36e5c;
-  border: 2px solid #f36e5c;
+/*Issues Show*/
+#issues-show div.cover img {
+  width: 260px;
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  border: 4px solid rgba(255,255,255,0.68);
+  box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
 }
 
-tbody tr:hover {
-  background: #efefef;
-}
-
-#articles-show #container #abstract {
-  width: 560px;
-  min-height: 400px;
-}
-
-form input.string, textarea, input.tel, input.email, input.text {
-  width: 500px;
-  font-size: 1em;
-}
-
-form input.string, input.tel, input.email, input.text, select {
-  height: 30px;
-  border: 1px solid #b3b3b3;
-  border-radius: 3px;
-  font-size: 1em;
-}
-
-form .input.radio label {
-  padding-right: 30px;
-}
-
-form .input.radio input {
-  margin-right: 5px;
-}
-
-label.string, label.text, label.select, label.tel, label.email, label.file, label.integer {
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 10px;
-}
-
-.submit input {
-  height: 30px;
-  background: #3c3a5b;
-  padding: 5px 10px;
-  border: 1px solid #3c3a5b;
-  border-radius: 5px;
-  font-size: 1em;
-  font-family: Helvetica Neue;
-  color: #fff;
-  text-align: center;   
-  margin-top: 10px; 
-}
-
-.submit input:hover {
-  background: #f36e5c;
-  border: 1px solid #f36e5c;
-}
-
-select#issue_year, label.date.optional {
+/*Issues New*/
+#issues-new select#issue_year, label.date.optional {
   display: block;
   margin-bottom: 5px;
 }
 
-form div {
+#issues-new form div {
   margin-bottom: 20px;
 }
 
-fieldset {
-  border-radius: 5px;
+
+/*_________________________________ Inquiry Page _________________________________*/
+#inquiries-index #container {
+  min-height: 840px;
+}
+
+#inquiries-index #content {
+  width: 550px;
+}
+
+#inquiries-index #inquiry {
+  float: right;
+  position: absolute;
+  top: 100px;
+  right: 40px;
+}
+
+#inquiries-index #new_inquiry {
+  margin: 20px;
+}
+
+#inquiries-index #new_inquiry .input input, #inquiries-index #new_inquiry .input submit, #inquiries-index #new_inquiry .input textarea {
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 5px;
   border: 1px solid #b3b3b3;
-  padding: 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #3a3a3a;
+}
+
+#inquiries-index #new_inquiry .input input, #inquiries-index #new_inquiry .input textarea {
+  width: 250px;
+}
+
+#inquiries-index #new_inquiry .input input {
+  height: 30px;
+}
+
+#inquiries-index #new_inquiry .input textarea {
+  height: 150px;
+}
+
+#inquiries-index #new_inquiry textarea, #inquiries-index #new_order textarea {
+  height: 120px;
+}
+
+/*Width of "Question" head row in table*/
+#inquiries-index th.question {
+  width: 400px;
+}
+
+#inquiries-index #gotquestion {
+  margin: 20px 20px;
+}
+
+#inquiries-edit form div {
   margin-bottom: 20px;
 }
 
-legend {
-  padding: 10px;
-  font-weight: 800;
-  color: #3c3a5b;
+#inquiries-edit textarea {
+  height: 100px;
 }
 
-.input.text.optional.order_comments {
+/*_________________________________ Order Page _________________________________*/
+#orders-new div.submit {
   clear: both;
 }
 
+#orders-new .input {
+  width: 400px;
+}
+
+#orders-new .input input, #orders-new .input textarea {
+  width: 380px;
+}
+
+#orders-new .input input {
+  height: 30px;
+}
+
+#orders-new .input textarea {
+  height: 30px;
+}
+#orders-new .input input, #orders-new .input submit, #orders-new .input textarea {
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #3a3a3a;
+}
+
+#orders-new .input {
+  float: left;
+}
+
+#orders-new fieldset {
+  clear: left;
+}
+
+#orders-new .input #order_quantity input {
+  width: 100px;
+}
+
+#orders-new .order_comments {
+  clear: both;
+}
+
+#orders-new #order_comments {
+  height: 100px;
+}
 

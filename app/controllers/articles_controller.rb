@@ -2,7 +2,7 @@ class ArticlesController < InheritedResources::Base
   private
 
   def collection
-  	end_of_association_chain.limit(30)
+  	end_of_association_chain.order(:title).page params[:page]
   end
 
   def resource_params

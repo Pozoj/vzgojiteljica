@@ -1,10 +1,14 @@
 sl:
   yes: "DA"
   no: "NE"
-  
-  will_paginate:
-    next_label: "Starejše &rarr;"
-    previous_label: "&larr; Novejše"
+
+  views:
+    pagination:
+      first: "&laquo; Na začetek"
+      last: "Na konec &raquo;"
+      previous: "&lsaquo; Nazaj"
+      next: "Naprej &rsaquo;"
+      truncate: "..."
   
   times: "krat"
 

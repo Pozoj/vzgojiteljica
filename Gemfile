@@ -29,6 +29,7 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'haml'
 gem 'tinymce-rails'
+gem 'kaminari'
 
 group :development, :test do
   gem 'sqlite3'

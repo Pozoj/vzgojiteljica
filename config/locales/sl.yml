@@ -46,6 +46,7 @@ sl:
     section_id: Rubrika
     issue: Številka
     issue_id: Številka
+    remember_me: Zapomni si me na tem računalniku
 
   forms:
     submit:

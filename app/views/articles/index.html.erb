@@ -33,9 +33,11 @@
     <% collection.each do |article| %>
       <tr>
         <td class="article_title"><%= link_to article.title, article %></td>
-        <td class="article_author"><%= article.authors.join(", ") %></td>
+        <td class="article_author"><%= raw article.authors.map { |a| link_to a, a }.join(", ") %></td>
         <td class="article_issue"><%= link_to article.issue, article.issue %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= paginate collection %>

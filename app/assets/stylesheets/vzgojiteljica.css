@@ -262,46 +262,44 @@ footer {
   margin: 0 auto;
   width: 960px;
   margin-top: 20px; 
+  position: relative;
+}
+
+#pozoj {
+  padding-left: 40px;
 }
 
 footer p {
-  clear: both;
-  font-family: Helvetica;
   font-weight: 800;
   color: #b3b3b3;  
   text-shadow: 1px 1px 0px white;  
-  text-align: right;
   font-size: 0.8em;
   line-height: 1.2em;
 }
 
-footer #pozoj {
-  float: left;
+footer #lower_menu {
+  position: absolute;
+  right: 20px;
+  color: #b3b3b3;
+  font-size: 12px;
+  text-shadow: 1px 1px 0px white;
 }
 
 footer ul {
-  float: right;
-  margin: 0 auto;
   list-style: none;
-  width: 600px;
-  color: #b3b3b3; 
-  text-shadow: 1px 1px 0px white;  
-  font-size: 12px;
+}
+
+footer ul li {
+  float: left;
 }
 
 footer ul li a {
-  font-family: Helvetica;
-  font-size: 12px;
-  float: left;
   padding: 5px;  
   padding-top: 0;
-  color: #b3b3b3; 
-  text-shadow: 1px 1px 0px white;  
 }
 
-footer p.contact_data {
-  float: left;
-  padding-left: 20px;
+footer #lower_menu a {
+  color: #b3b3b3; 
 }
 
 br.clear {
@@ -585,7 +583,7 @@ br.clear {
   height: 150px;
 }
 
-#inquiries-index #new_inquiry textarea, #inquiries-index #new_order textarea {
+#inquiries-index #new_inquiry textarea {
   height: 120px;
 }
 
@@ -619,6 +617,10 @@ br.clear {
   width: 380px;
 }
 
+#orders-new .input input#order_quantity {
+  width: 89px;
+}
+
 #orders-new .input input {
   height: 30px;
 }
@@ -642,10 +644,6 @@ br.clear {
 
 #orders-new fieldset {
   clear: left;
-}
-
-#orders-new .input #order_quantity input {
-  width: 100px;
 }
 
 #orders-new .order_comments {

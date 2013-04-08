@@ -53,35 +53,38 @@
     
     <footer>
       <div id="pozoj">
-        <p class="contact_data">Pozoj, d.o.o.</p> 
-        <p class="contact_data">03 897 01 22</p> 
-        <p class="contact_data">info@pozoj.si</p>
-        <p class="contact_data">www.pozoj.si</p>
-      <ul>
-        <li>
-          <%= link_to 'Predstavitev', root_path %>
-        </li>
-        <li>
-          <%= link_to 'Številke', issues_path %>
-        </li>
-        <li>
-          <%= link_to 'Članki', articles_path %>
-        </li>
-        <li>
-          <%= link_to 'Vprašanja', inquiries_path %>
-        </li>
-        <li>
-          <%= link_to 'Naročila', new_order_path %>
-        </li>
-        <li>
+        <p>Pozoj, d.o.o.</p> 
+        <p>03 897 01 22</p> 
+        <p>info@pozoj.si</p>
+        <p>www.pozoj.si</p>
+      </div>
+      <div id="lower_menu">
+        <ul>
+          <li>
+            <%= link_to 'Predstavitev', root_path %>
+          </li>
+          <li>
+            <%= link_to 'Številke', issues_path %>
+          </li>
+          <li>
+            <%= link_to 'Članki', articles_path %>
+          </li>
+          <li>
+            <%= link_to 'Vprašanja', inquiries_path %>
+          </li>
+          <li>
+            <%= link_to 'Naročila', new_order_path %>
+          </li>
+        </ul>
+        <div id="login">
           <% if signed_in? %>
             <%= current_user %>
             (<%= link_to 'Odjava', destroy_user_session_path, method: :delete, confirm: 'Ste prepričani da se želite odjaviti?' %>)
           <% else %>
             <%= link_to 'Prijava', new_user_session_path %>
           <% end %>
-        </li>
-      </ul>
+        </div>
+      </div> 
     </footer>
   </body>
 </html>

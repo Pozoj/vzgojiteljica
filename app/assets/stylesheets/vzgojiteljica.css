@@ -88,18 +88,18 @@ ul {
 }
 
 /*_________________________________ Form _________________________________*/
-form input.string, textarea, input.tel, input.email, input.text {
+form input.string, textarea, input.tel, input.email, input.text, input.password {
   width: 500px;
   font-size: 15px;
 }
 
-form input.string, input.tel, input.email, input.text, select, textarea {
+form input.string, input.tel, input.email, input.text, select, textarea, input.password {
   border: 1px solid #b3b3b3;
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 15px;
 }
 
-form input.string, input.tel, input.email, input.text, select {
+form input.string, input.tel, input.email, input.text, select, input.password {
   height: 30px;
 }
 
@@ -111,7 +111,7 @@ form .input.radio input {
   margin-right: 5px;
 }
 
-label.string, label.text, label.select, label.tel, label.email, label.file, label.integer {
+label.string, label.text, label.select, label.tel, label.email, label.file, label.integer, label.password {
   display: block;
   margin-bottom: 5px;
   margin-top: 10px;
@@ -408,6 +408,21 @@ br.clear {
   border: 1px solid #f36e5c;
 }
 
+/*_________________________________ Login _________________________________*/
+
+#sessions-new form input.string, input.password {
+  width: 300px;
+}
+
+#sessions-new form input.boolean {
+  width: 20px;
+}
+
+#sessions-new form input.boolean, label.boolean {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
 /*_________________________________ Articles Pages _________________________________*/
 #articles-index #content {
   width: 800px;
@@ -504,6 +519,10 @@ br.clear {
   margin-right: 23px;
 }
 
+#issues-index div.issue a:hover {
+  text-decoration: underline;
+}
+
 #issues-index p.title {
   margin-bottom: 40px;
   text-align: center;
@@ -535,6 +554,23 @@ br.clear {
   box-shadow: 0px 1px 7px 0px rgba(127,127,127,0.4);
 }
 
+#issues-show .section h2 {
+  margin-bottom: 0;
+}
+
+#issues-show span.author {
+  color: #999999;
+}
+
+#issues-show .section a:hover {
+  text-decoration: underline;
+}
+
+#issues-show ol {
+  list-style: none;
+  margin-left: 20px;
+}
+
 /*Issues New*/
 #issues-new select#issue_year, label.date.optional {
   display: block;
@@ -544,7 +580,6 @@ br.clear {
 #issues-new form div {
   margin-bottom: 20px;
 }
-
 
 /*_________________________________ Inquiry Page _________________________________*/
 #inquiries-index #container {

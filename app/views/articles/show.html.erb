@@ -1,0 +1,10 @@
+<div id='abstract'>
+	<%= title resource.title %>
+	<%= raw resource.abstract_html %>
+	<%= resource.keywords.join(", ") %>
+	<%= resource.authors.join(", ") %>
+</div>
+<div class='cover'>
+  <%= image_tag resource.issue.cover.url %>
+</div>
+<br class="clear">

@@ -183,6 +183,10 @@ tbody tr:hover {
   background: #efefef;
 }
 
+tbody tr:hover a {
+  text-decoration: underline;
+}
+
 /*_________________________________ Layout _________________________________*/
 header .inner, #container {
   margin: 0 auto; 
@@ -407,6 +411,7 @@ br.clear {
 /*_________________________________ Articles Pages _________________________________*/
 #articles-index #content {
   width: 800px;
+  display: none;
 }
 
 /*Keyword Search*/ 

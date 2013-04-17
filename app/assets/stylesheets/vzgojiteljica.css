@@ -658,7 +658,8 @@ br.clear {
 }
 
 #issues-show .section a:hover {
-  text-decoration: underline;
+  border-bottom: 1px dotted #c0c0c0;
+  color: #f36e5c;
 }
 
 #issues-show ol {
@@ -791,4 +792,14 @@ br.clear {
 
 #orders-new #order_comments {
   height: 100px;
+}
+
+/*_________________________________ Authors Page _________________________________*/
+#authors-show #container a:hover {
+  border-bottom: 1px dotted #c0c0c0;
+  color: #f36e5c;
+}
+
+#authors-show span.author, #authors-show span.author a {
+  color: #999999;
 }

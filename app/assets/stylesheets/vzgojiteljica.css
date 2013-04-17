@@ -321,6 +321,34 @@ br.clear {
   clear: both;
 }
 
+/*____________________________ Generic pagination class _________________________*/
+.pagination {
+  margin: 40px auto 0 auto;
+  display: table;
+}
+.pagination span {
+  float: left;
+  margin-right: 8px;
+}
+.pagination span.current, .pagination span a {
+  display: table;
+  padding: 4px 15px;
+  text-align: center;
+  background: #efefef;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+.pagination span a:hover {
+  border-color: rgb(51,49,77);
+}
+.pagination span.current {
+  background: rgb(51,49,77);
+  color: #fff;
+  font-weight: bold;
+}
+
+
+
 /*_________________________________ Pages Index _________________________________*/
 #pages-index #content {
   float: left;

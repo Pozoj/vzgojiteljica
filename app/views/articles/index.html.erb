@@ -1,35 +1,38 @@
 <%= title "Članki" %>
 
+<%= link_to "Iskanje in filtriranje člankov", search_articles_path, id: :search_toggle %>
+
 <%= admin_section do %>
   <%= link_to "Pregled", all_articles_path %>
   <%= link_to "Dodaj članek", new_article_path %>
 <% end %>
 
 <div id="search">
-  <h3>
-    Iskanje
-  </h3>
-  <p>
-    V iskalno polje vpišite ključne besede, ime avtorja ali letnik revije.
-  </p>
-  <p>
-    Primeri:
-  </p>
-  <ul>
-    <li>Če želite poiskati članke iz leta 2007, samo vpišite <em>"2007"</em>.</li>
-    <li>Če želite poiskati članke, ki jih je napisala oseba z imenom Alenka, samo vpišite <em>"Alenka"</em>.</li>
-    <li>Če želite poiskat članke iz leta 2010, ki vsebujejo ključno besedo voda, samo vpišite <em>"voda 2010"</em>.</li>
-  </ul>
+  <h3>Iskanje</h3>
+  <div id="instructions">
+    <p>
+      V iskalno polje vpišite ključne besede, ime avtorja ali letnik revije.
+    </p>
+    <p>
+      Primeri:
+    </p>
+    <ul>
+      <li>Če želite poiskati članke iz leta 2007, samo vpišite <em>"2007"</em>.</li>
+      <li>Če želite poiskati članke, ki jih je napisala oseba z imenom Alenka, samo vpišite <em>"Alenka"</em>.</li>
+      <li>Če želite poiskat članke iz leta 2010, ki vsebujejo ključno besedo voda, samo vpišite <em>"voda 2010"</em>.</li>
+    </ul>
+  </div>
   <%= form_tag search_articles_path, method: :get do %>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Išči" %>
+    <%= text_field_tag :query, params[:query], autofocus: :autofocus %>
+    <%= submit_tag "Išči", class: :submit %>
+    <br class='clear'>
   <% end %>
 </div>  
 
+<div class="pagination_top"><%= paginate collection, window: 3 %><br class='clear'></div>
 <table id="articles">
   <thead>
     <tr>
-<div class="pagination_top"><%= paginate collection, window: 3 %><br class='clear'></div>
       <th>Naziv</th>
       <th>Avtor</th>
       <th>Revija</th>

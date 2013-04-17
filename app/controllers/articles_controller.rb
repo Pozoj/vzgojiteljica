@@ -2,8 +2,11 @@ class ArticlesController < InheritedResources::Base
   skip_before_filter :authenticate, only: :search
 
   def search
-    @search = Search.new params[:query]
-    @articles = @search.perform
+    if params[:query]
+      @search = Search.new params[:query]
+      @articles = @search.perform
+    end
+    
     render :action => :index
   end
 

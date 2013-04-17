@@ -468,29 +468,55 @@ br.clear {
 }
 
 /*_________________________________ Articles Pages _________________________________*/
-#articles-index #content {
-  width: 800px;
-  display: none;
-}
 
 /*Keyword Search*/ 
-#articles-index #keyword_search {
-  margin: 0 auto;
+#articles-index #search_toggle {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  display: table;
+  padding: 10px 20px;
+  padding-left: 45px;
+  background: #efefef url('search.png') 8px center no-repeat;
+  border-radius: 10px;
+  border: 1px solid transparent;
 }
-
-#articles-index #keyword_search .search {
+#articles-index #search_toggle:hover {
+  border-color: rgb(51,49,77);
+}
+#articles-search #search_toggle {
+  display: none;
+}
+#articles-search #search {
+  display: block;
+}
+#articles-search #search form {
+  margin-top: 20px;
+}
+.articles #search {
+  display: none;
+  background: #f0f0f0;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.articles #search #instructions {
+}
+.articles #search #instructions ul li {
+  list-style: disc inside;
+}
+.articles #search #query {
   float: left;
-  width: 524px;
+  width: 715px;
   height: 30px;
   border: 1px solid #b3b3b3;
   border-radius: 5px;
   margin: 0px 0;
   font-size: 20px;
-  margin-bottom: 60px;
-  margin-top: 15px;
+  padding: 0 5px;
 }
 
-#articles-index #keyword_search .submit {
+.articles #search .submit {
   float: left;
   display: inline;
   height: 33px;
@@ -501,11 +527,12 @@ br.clear {
   font-family: Helvetica Neue;
   color: #fff;
   width: 100px;
-  margin-left: 20px;
-  margin-top: 15px; 
+  margin-left: 10px;
+  margin-top: -1px;
+  cursor: pointer;
 }
 
-/*List of articles (Filter)*/ 
+/*List of articles*/ 
 #articles-index table#articles {
   width: 880px; 
   margin-top: 10px;

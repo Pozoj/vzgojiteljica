@@ -267,26 +267,36 @@ footer {
   width: 960px;
   margin-top: 20px; 
   position: relative;
+  color: #b3b3b3;  
+  text-shadow: 1px 1px 0px white;  
+  font-size: 0.8em;
 }
 
 #pozoj {
   padding-left: 40px;
 }
 
-footer p {
-  font-weight: 800;
-  color: #b3b3b3;  
-  text-shadow: 1px 1px 0px white;  
-  font-size: 0.8em;
-  line-height: 1.2em;
-}
-
 footer #lower_menu {
   position: absolute;
   right: 20px;
+  top: 0;
   color: #b3b3b3;
   font-size: 12px;
   text-shadow: 1px 1px 0px white;
+  text-align: right;
+  line-height: 1.4em;
+}
+
+footer #login a {
+  color: #ddd;
+}
+
+footer p {
+  line-height: 1.4em;
+}
+
+footer a {
+  color: #b3b3b3;
 }
 
 footer ul {
@@ -295,16 +305,16 @@ footer ul {
 
 footer ul li {
   float: left;
+  color: #ddd;
 }
 
 footer ul li a {
-  padding: 5px;  
-  padding-top: 0;
+  padding: 0 5px;
+}
+footer ul li:last-child a {
+  padding-right: 0;
 }
 
-footer #lower_menu a {
-  color: #b3b3b3; 
-}
 
 br.clear {
   clear: both;

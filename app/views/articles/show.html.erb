@@ -9,9 +9,18 @@
         <%= raw resource.keywords.map { |k| link_to k, search_articles_path(:query => k.keyword) }.join(", ") %>
       </p>
     <% end %>
-  	<p><strong>Avtor:</strong> <%= resource.authors.join(", ") %></p>
-  	<p><strong>Letnik:</strong> <%= resource.issue.year %>, št. <%= resource.issue.issue %></p>
-  	<p><strong>Rubrika:</strong> <%= resource.section %></p>
+  	<p>
+      <strong>Avtor:</strong> <%= raw resource.authors.map { |a| link_to a, a }.join(", ") %>
+    </p>
+  	<p>
+      <strong>Letnik:</strong> 
+      <%= link_to resource.issue do %>
+        <%= resource.issue.year %>, št. <%= resource.issue.issue %>
+      <% end %>
+    </p>
+  	<p>
+      <strong>Rubrika:</strong> <%= resource.section %>
+    </p>
   </div>
 </div>
 <div class='cover'>

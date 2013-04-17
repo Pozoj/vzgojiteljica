@@ -815,3 +815,7 @@ br.clear {
 #authors-show span.author, #authors-show span.author a {
   color: #999999;
 }
+
+#authors-show ul {
+  padding-left: 0;
+}

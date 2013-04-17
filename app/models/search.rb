@@ -18,14 +18,10 @@ class Search
     articles = Article.arel_table
     articles_table = Article.order(:title, :section_id)
 
-    # Try article title.
-    conditions << articles[:title].matches("%#{@tokens.join('%')}%")
-
     # Extract years.
     years_intersection = @tokens & Issue.select(:year).order(:year).group(:year).map { |i| i.year.to_s }
     if years_intersection.any?
-      articles_table = articles_table.joins(:issue)
-      conditions << Issue.arel_table[:year].eq(years_intersection.last)
+      articles_table = articles_table.joins(:issue).where Issue.arel_table[:year].eq(years_intersection.last)
 
       # Remove year from search tokens now.
       @tokens.delete years_intersection.last
@@ -33,6 +29,9 @@ class Search
 
     # Is there anymore tokens? Otherwise let's wrap up.
     if @tokens.any?
+      # Try article title.
+      conditions << articles[:title].matches("%#{@tokens.join('%')}%")
+
       # Extract keywords.
       keywords = Keyword.select(:id).where(keyword: @tokens).map(&:id)
       if keywords.any?

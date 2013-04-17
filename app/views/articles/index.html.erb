@@ -5,22 +5,27 @@
   <%= link_to "Dodaj članek", new_article_path %>
 <% end %>
 
-<div id="content">
+<div id="search">
   <h3>
-    Iskanje po ključnih besedah
+    Iskanje
   </h3>
   <p>
-    V iskalno polje začnite vpisovati ključne besede in sistem vam bo izpisal predloge. <br>Željenega potrdite s tipko <em>enter</em> ali tako, da kliknete nanj. 
+    V iskalno polje vpišite ključne besede, ime avtorja ali letnik revije.
   </p>
-  <form id="keyword_search">
-    <input type="text" class="search">
-    <input type="button" class="submit" value="Search">
-  </form>
+  <p>
+    Primeri:
+  </p>
+  <ul>
+    <li>Če želite poiskati članke iz leta 2007, samo vpišite <em>"2007"</em>.</li>
+    <li>Če želite poiskati članke, ki jih je napisala oseba z imenom Alenka, samo vpišite <em>"Alenka"</em>.</li>
+    <li>Če želite poiskat članke iz leta 2010, ki vsebujejo ključno besedo voda, samo vpišite <em>"voda 2010"</em>.</li>
+  </ul>
+  <%= form_tag search_articles_path, method: :get do %>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Išči" %>
+  <% end %>
 </div>  
 
-<h3>
-  Filtriranje po naslovu, avtorju ali številki revije. (Kaj pa po rubriki?)
-</h3>
 <table id="articles">
   <thead>
     <tr>

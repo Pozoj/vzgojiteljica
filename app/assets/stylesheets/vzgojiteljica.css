@@ -198,7 +198,6 @@ header .inner, #container {
 }
 
 header {
-  position: relative;
   height: 70px;
   background: rgb(51,49,77);
   background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%); 
@@ -209,25 +208,6 @@ header {
   background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33314d', endColorstr='#33314d',GradientType=1); 
   border-bottom: 2px solid white;
-}
-
-/*Vzgojiteljica Logo*/ 
-header .inner h1 {
-  font-size: 40px;
-  font-family: Pacifico;
-  color: #292646;
-  line-height: 85px;
-  margin: 0;
-  text-shadow: 0px 1px 0px rgba(255,255,255,0.6);
-  float: left; 
-}
-
-#logo img {
-  width: 220px;
-  height: 90px;
-  position: absolute;
-  top: 10px;
-  left: -15px;
 }
 
 header .inner, #container {
@@ -245,8 +225,32 @@ header .inner img {
   left: -100px;
 }
 
+/*Vzgojiteljica Logo*/ 
+header .inner #logo {
+  position: absolute;
+  left: 0px;
+}
+header .inner #logo h1 {
+  font-size: 40px;
+  font-family: Pacifico;
+  color: #292646;
+  line-height: 85px;
+  margin: 0;
+  text-shadow: 0px 1px 0px rgba(255,255,255,0.6);
+  position: absolute;
+}
+
+header .inner #logo img {
+  width: 220px;
+  height: 90px;
+  position: absolute;
+  top: 10px;
+  left: -15px;
+}
+
 #menu {
-  float: right;
+  position: absolute;
+  right: 0px;
 }
 
 #menu ul li {

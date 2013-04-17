@@ -1,10 +1,18 @@
 <%= title resource.title %>
 <div id='abstract'>
 	<%= raw resource.abstract_html %>
-	<p class="firstdata"><strong>Ključne besede:</strong> <%= resource.keywords.join(", ") %></p>
-	<p><strong>Avtor:</strong> <%= resource.authors.join(", ") %></p>
-	<p><strong>Letnik:</strong> <%= resource.issue.year %>, št. <%= resource.issue.issue %></p>
-	<p><strong>Rubrika:</strong> <%= resource.section %></p>
+
+  <div class="data">
+    <% if resource.keywords.any? %>
+    	<p>
+        <strong>Ključne besede:</strong> 
+        <%= raw resource.keywords.map { |k| link_to k, search_articles_path(:query => k.keyword) }.join(", ") %>
+      </p>
+    <% end %>
+  	<p><strong>Avtor:</strong> <%= resource.authors.join(", ") %></p>
+  	<p><strong>Letnik:</strong> <%= resource.issue.year %>, št. <%= resource.issue.issue %></p>
+  	<p><strong>Rubrika:</strong> <%= resource.section %></p>
+  </div>
 </div>
 <div class='cover'>
   <%= image_tag resource.issue.cover.url %>

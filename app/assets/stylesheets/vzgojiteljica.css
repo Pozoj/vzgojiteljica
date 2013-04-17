@@ -286,7 +286,8 @@ footer {
   clear: both;
   height: 85px; 
   margin: 0 auto;
-  width: 960px;
+  width: 880px;
+  padding: 0 40px;
   margin-top: 20px; 
   position: relative;
   color: #b3b3b3;  
@@ -294,13 +295,9 @@ footer {
   font-size: 0.8em;
 }
 
-#pozoj {
-  padding-left: 40px;
-}
-
 footer #lower_menu {
   position: absolute;
-  right: 20px;
+  right: 40px;
   top: 0;
   color: #b3b3b3;
   font-size: 12px;
@@ -310,7 +307,7 @@ footer #lower_menu {
 }
 
 footer #login a {
-  color: #ddd;
+  color: #ccc;
 }
 
 footer p {

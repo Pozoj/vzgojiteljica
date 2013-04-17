@@ -80,7 +80,8 @@
         </ul>
         <div id="login">
           <% if signed_in? %>
-            <%= current_user %>
+            Prijavljeni kot
+            <strong><%= current_user %></strong>
             (<%= link_to 'Odjava', destroy_user_session_path, method: :delete, confirm: 'Ste prepričani da se želite odjaviti?' %>)
           <% else %>
             <%= link_to 'Prijava', new_user_session_path %>

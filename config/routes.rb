@@ -12,7 +12,9 @@ Web3::Application.routes.draw do
     end
   end
   resources :articles do
-    get :all, on: :collection
+    collection do
+      get :all, :search
+    end
   end
   resources :sections
   resources :issues do

@@ -16,7 +16,7 @@
     </title>
   </head>
   
-  <body id="<%= body_id %>">
+  <body id="<%= body_id %>" class="<%= body_class %>">
     <header>
       <div class="inner">
         <%= image_tag 'Untitled-4.png' %>
@@ -54,10 +54,11 @@
     
     <footer>
       <div id="pozoj">
-        <p>Pozoj, d.o.o.</p> 
-        <p>03 897 01 22</p> 
-        <p>info@pozoj.si</p>
-        <p>www.pozoj.si</p>
+        <p><strong>Pozoj, d.o.o.</strong></p> 
+        <p>T: 03 897 01 22</p> 
+        <p>F: 03 897 01 24</p> 
+        <p>E: <%= link_to "info@pozoj.si", "mailto:info@pozoj.si" %></p>
+        <p>W: <%= link_to "http://pozoj.si", "http://pozoj.si" %></p>
       </div>
       <div id="lower_menu">
         <ul>

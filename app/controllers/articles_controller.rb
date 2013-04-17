@@ -1,8 +1,19 @@
 class ArticlesController < InheritedResources::Base
+  skip_before_filter :authenticate, only: :search
+
+  def search
+    if params[:query]
+      @search = Search.new params[:query]
+      @articles = @search.perform
+    end
+    
+    render :action => :index
+  end
+
   private
 
   def collection
-  	end_of_association_chain.order(:title).page params[:page]
+  	(@articles or end_of_association_chain.includes(:authors, :issue)).order(:title, :issue_id).page params[:page]
   end
 
   def resource_params

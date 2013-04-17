@@ -9,6 +9,7 @@ body {
   font-size: 15px;
   line-height: 25px;
   background: url(/assets/paperbg.png) repeat;
+  margin-bottom: 50px;
 }
 
 h1 {
@@ -211,7 +212,7 @@ header {
 }
 
 /*Vzgojiteljica Logo*/ 
-.inner h1 {
+header .inner h1 {
   font-size: 40px;
   font-family: Pacifico;
   color: #292646;
@@ -229,15 +230,15 @@ header {
   left: -15px;
 }
 
-.inner, #container {
+header .inner, #container {
   width: 880px;
 }
 
-.inner {
+header .inner {
   position: relative;
 }
 
-.inner img {
+header .inner img {
   position: absolute;
   width: 80px;  
   top: 20px;
@@ -253,6 +254,10 @@ header {
   text-decoration: none;
   list-style: none;  
   z-index: 1;
+}
+
+#menu ul li:last-child a {
+  padding-right: 0;
 }
 
 #menu ul li a {
@@ -280,27 +285,36 @@ footer {
   width: 960px;
   margin-top: 20px; 
   position: relative;
+  color: #b3b3b3;  
+  text-shadow: 1px 1px 0px white;  
+  font-size: 0.8em;
 }
 
 #pozoj {
   padding-left: 40px;
 }
 
-footer p {
-  font-weight: 800;
-  color: #b3b3b3;  
-  text-shadow: 1px 1px 0px white;  
-  font-size: 0.8em;
-  line-height: 1.2em;
-}
-
 footer #lower_menu {
   position: absolute;
-  right: 30px;
-  bottom: 20px;
+  right: 20px;
+  top: 0;
   color: #b3b3b3;
   font-size: 12px;
   text-shadow: 1px 1px 0px white;
+  text-align: right;
+  line-height: 1.4em;
+}
+
+footer #login a {
+  color: #ddd;
+}
+
+footer p {
+  line-height: 1.4em;
+}
+
+footer a {
+  color: #b3b3b3;
 }
 
 footer ul {
@@ -309,29 +323,53 @@ footer ul {
 
 footer ul li {
   float: left;
+  color: #ddd;
 }
 
 footer ul li a {
   padding: 0 5px;
 }
 
-footer #lower_menu a:hover {
-  color: #f36e5c;  
-}
-
-
-footer #lower_menu a {
-  color: #b3b3b3; 
-}
-
-footer #login {
-  float: right;
-  padding-right: 5px;
+footer ul li:last-child a {
+  padding-right: 0;
 }
 
 br.clear {
   clear: both;
 }
+
+/*____________________________ Generic pagination class _________________________*/
+.pagination_top {
+  margin-bottom: 20px;
+}
+.pagination_bottom {
+  margin-top: 20px;
+}
+.pagination span {
+  float: left;
+  margin-right: 9px;
+}
+.pagination span:last-child {
+  margin-right: 0;
+}
+.pagination span.current, .pagination span a {
+  display: table;
+  padding: 4px 16px;
+  text-align: center;
+  background: #efefef;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+.pagination span a:hover {
+  border-color: rgb(51,49,77);
+}
+.pagination span.current {
+  background: rgb(51,49,77);
+  color: #fff;
+  font-weight: bold;
+}
+
+
 
 /*_________________________________ Pages Index _________________________________*/
 #pages-index #content {
@@ -446,29 +484,55 @@ br.clear {
 }
 
 /*_________________________________ Articles Pages _________________________________*/
-#articles-index #content {
-  width: 800px;
-  display: none;
-}
 
 /*Keyword Search*/ 
-#articles-index #keyword_search {
-  margin: 0 auto;
+#articles-index #search_toggle {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  display: table;
+  padding: 10px 20px;
+  padding-left: 45px;
+  background: #efefef url('search.png') 8px center no-repeat;
+  border-radius: 10px;
+  border: 1px solid transparent;
 }
-
-#articles-index #keyword_search .search {
+#articles-index #search_toggle:hover {
+  border-color: rgb(51,49,77);
+}
+#articles-search #search_toggle {
+  display: none;
+}
+#articles-search #search {
+  display: block;
+}
+#articles-search #search form {
+  margin-top: 20px;
+}
+.articles #search {
+  display: none;
+  background: #f0f0f0;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.articles #search #instructions {
+}
+.articles #search #instructions ul li {
+  list-style: disc inside;
+}
+.articles #search #query {
   float: left;
-  width: 524px;
+  width: 715px;
   height: 30px;
   border: 1px solid #b3b3b3;
   border-radius: 5px;
   margin: 0px 0;
   font-size: 20px;
-  margin-bottom: 60px;
-  margin-top: 15px;
+  padding: 0 5px;
 }
 
-#articles-index #keyword_search .submit {
+.articles #search .submit {
   float: left;
   display: inline;
   height: 33px;
@@ -479,11 +543,12 @@ br.clear {
   font-family: Helvetica Neue;
   color: #fff;
   width: 100px;
-  margin-left: 20px;
-  margin-top: 15px; 
+  margin-left: 10px;
+  margin-top: -1px;
+  cursor: pointer;
 }
 
-/*List of articles (Filter)*/ 
+/*List of articles*/ 
 #articles-index table#articles {
   width: 880px; 
   margin-top: 10px;

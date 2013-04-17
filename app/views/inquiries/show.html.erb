@@ -1,0 +1,15 @@
+<%= title resource %>
+
+<%= admin_section do %>
+  <%= link_to "Odstrani", resource, method: :delete, confirm: 'Ste prepričani?' %>
+  <%= link_to "Uredi", edit_inquiry_path(resource) %>
+  <%= link_to "Odgovori vprašanje", answer_question_inquiry_path(resource) %>
+<% end %>
+
+<%= resource.question %>
+
+<% if resource.answer? %>
+  <%= resource.answer %>
+<% else %>
+  To vprašanje še ni odgovorjeno.
+<% end %>

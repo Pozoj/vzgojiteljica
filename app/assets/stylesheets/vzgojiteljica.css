@@ -217,6 +217,14 @@ header {
   float: left; 
 }
 
+#logo img {
+  width: 220px;
+  height: 90px;
+  position: absolute;
+  top: 10px;
+  left: -15px;
+}
+
 .inner, #container {
   width: 880px;
 }
@@ -240,6 +248,7 @@ header {
   float: left;
   text-decoration: none;
   list-style: none;  
+  z-index: 1;
 }
 
 #menu ul li a {

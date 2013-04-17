@@ -504,12 +504,14 @@ br.clear {
   display: table;
   padding: 10px 20px;
   padding-left: 45px;
-  background: #efefef url('search.png') 8px center no-repeat;
-  border-radius: 10px;
+  background: #efefef url('icon_search.png') 3px 1px no-repeat;
+  border-radius: 5px;
   border: 1px solid transparent;
 }
 #articles-index #search_toggle:hover {
-  border-color: rgb(51,49,77);
+  border: 1px solid #f36e5c;
+  color: #fff;
+  background: #f36e5c url('icon_search.png') 3px -46px no-repeat;
 }
 #articles-search #search_toggle {
   display: none;
@@ -524,9 +526,6 @@ br.clear {
   display: none;
   margin-bottom: 20px;
   padding: 20px;
-}
-
-.articles #search #instructions {
 }
 
 .articles #search #instructions ul li {

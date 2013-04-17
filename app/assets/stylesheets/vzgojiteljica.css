@@ -679,6 +679,10 @@ br.clear {
   margin-left: 20px;
 }
 
+#issues-show span.author, #issues-show span.author a {
+  color: #999999;
+}
+
 /*Issues New*/
 #issues-new select#issue_year, label.date.optional {
   display: block;

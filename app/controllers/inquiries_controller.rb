@@ -1,17 +1,22 @@
 class InquiriesController < InheritedResources::Base
-  skip_before_filter :authenticate, only: [:new, :create]
+  skip_before_filter :authenticate, only: [:create]
 
   def destroy
     destroy! { all_inquiries_path }
   end
 
-
   def create
   	create! { inquiries_path }
   end
 
+  def answer
+    resource.update_attributes params.require(:inquiry).permit(:answer)
+
+    redirect_to resource_path
+  end
+
   def update
-  	update! { inquiries_path }
+  	update! { resource_path }
   end
 
   private

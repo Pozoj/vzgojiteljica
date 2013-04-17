@@ -2,6 +2,6 @@
 
 - generate_fields resource, [:name, :institution, :email, :phone, :subject, :question]
 
-= simple_form_for resource do |f|
+= simple_form_for resource, url: answer_inquiry_path(resource) do |f|
   = f.input :answer
   .submit= f.submit

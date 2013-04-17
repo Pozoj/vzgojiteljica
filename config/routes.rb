@@ -8,7 +8,7 @@ Web3::Application.routes.draw do
     get :all, on: :collection
     member do
       get :answer_question
-      post :answer
+      patch :answer
     end
   end
   resources :articles do

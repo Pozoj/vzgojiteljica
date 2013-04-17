@@ -29,6 +29,7 @@
 <table id="articles">
   <thead>
     <tr>
+<div class="pagination_top"><%= paginate collection, window: 3 %><br class='clear'></div>
       <th>Naziv</th>
       <th>Avtor</th>
       <th>Revija</th>
@@ -45,4 +46,4 @@
   </tbody>
 </table>
 
-<%= paginate collection %>
+<div class="pagination_bottom"><%= paginate collection, window: 3 %><br class='clear'></div>

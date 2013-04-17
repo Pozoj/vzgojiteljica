@@ -322,17 +322,22 @@ br.clear {
 }
 
 /*____________________________ Generic pagination class _________________________*/
-.pagination {
-  margin: 40px auto 0 auto;
-  display: table;
+.pagination_top {
+  margin-bottom: 20px;
+}
+.pagination_bottom {
+  margin-top: 20px;
 }
 .pagination span {
   float: left;
-  margin-right: 8px;
+  margin-right: 9px;
+}
+.pagination span:last-child {
+  margin-right: 0;
 }
 .pagination span.current, .pagination span a {
   display: table;
-  padding: 4px 15px;
+  padding: 4px 16px;
   text-align: center;
   background: #efefef;
   border-radius: 5px;

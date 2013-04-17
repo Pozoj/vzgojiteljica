@@ -161,14 +161,7 @@ table {
 }
 
 table thead {
-  background: rgb(51,49,77); 
-  background: -moz-linear-gradient(left, rgba(51,49,77,1) 0%, rgba(60,58,91,1) 30%, rgba(60,58,91,1) 70%, rgba(51,49,77,1) 100%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(51,49,77,1)), color-stop(30%,rgba(60,58,91,1)), color-stop(70%,rgba(60,58,91,1)), color-stop(100%,rgba(51,49,77,1))); 
-  background: -webkit-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
-  background: -o-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
-  background: -ms-linear-gradient(left, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
-  background: linear-gradient(to right, rgba(51,49,77,1) 0%,rgba(60,58,91,1) 30%,rgba(60,58,91,1) 70%,rgba(51,49,77,1) 100%); 
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33314d', endColorstr='#33314d',GradientType=1 ); 
+  background: #3c3a5b; 
   color: white;
   text-align: left;
   font-family: Helvetica;
@@ -176,6 +169,14 @@ table thead {
 
 table th, table td {
   padding: 10px 10px;
+}
+
+table th:first-child{
+  border-radius: 5px 0 0 5px;
+}
+
+table th:last-child{
+  border-radius: 0 5px 5px 0;
 }
 
 tbody tr {

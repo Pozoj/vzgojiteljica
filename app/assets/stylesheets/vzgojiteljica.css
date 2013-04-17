@@ -292,7 +292,8 @@ footer p {
 
 footer #lower_menu {
   position: absolute;
-  right: 20px;
+  right: 30px;
+  bottom: 20px;
   color: #b3b3b3;
   font-size: 12px;
   text-shadow: 1px 1px 0px white;
@@ -307,12 +308,21 @@ footer ul li {
 }
 
 footer ul li a {
-  padding: 5px;  
-  padding-top: 0;
+  padding: 0 5px;
 }
+
+footer #lower_menu a:hover {
+  color: #f36e5c;  
+}
+
 
 footer #lower_menu a {
   color: #b3b3b3; 
+}
+
+footer #login {
+  float: right;
+  padding-right: 5px;
 }
 
 br.clear {

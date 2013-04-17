@@ -1,0 +1,23 @@
+<%= title resource %>
+
+<%= admin_section do %>
+  <%= link_to "Uredi", edit_author_path(resource) %>
+  <%= link_to "Odstrani", resource, method: :delete %>
+<% end %>
+
+<% if signed_in? %>
+  <% generate_fields resource, [:title, :institution, :education, :notes] %>
+<% end %>
+
+<h2>Članki</h2>
+
+<ul>
+  <% resource.articles.each do |article| %>
+    <li>
+      <%= link_to article.title, article %>
+      <span class="author">(Letnik 
+      <%= link_to article.issue do %>
+        <%= article.issue.year %>, št. <%= article.issue.issue %>
+      <% end %>)</span>
+  <% end %>
+</ul>

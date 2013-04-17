@@ -344,10 +344,11 @@ br.clear {
 
 /*____________________________ Generic pagination class _________________________*/
 .pagination_top {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 30px;
 }
 .pagination_bottom {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .pagination span {
   float: left;
@@ -358,22 +359,25 @@ br.clear {
 }
 .pagination span.current, .pagination span a {
   display: table;
-  padding: 4px 16px;
+  font-size: 11px;
+  line-height: 14px;
+  padding: 2px 6px;
   text-align: center;
   background: #efefef;
-  border-radius: 5px;
+  border-radius: 3px;
   border: 1px solid transparent;
 }
+
 .pagination span a:hover {
-  border-color: rgb(51,49,77);
+  background: #f36e5c;
+  border: 1px solid #f36e5c;
+  color: #fff;
 }
 .pagination span.current {
   background: rgb(51,49,77);
   color: #fff;
   font-weight: bold;
 }
-
-
 
 /*_________________________________ Pages Index _________________________________*/
 #pages-index #content {
@@ -562,20 +566,20 @@ br.clear {
 }
 
 /*List of articles*/ 
-#articles-index table#articles {
+#articles-index table#articles, #articles-search table#articles {
   width: 880px; 
   margin-top: 10px;
 }
 
-#articles-index td.article_title {
+#articles-index td.article_title, #articles-search td.article_title {
   width: 550px;
 }
 
-#articles-index td.article_author {
+#articles-index td.article_author, #articles-search td.article_author {
   width: 150px;
 }
 
-#articles-index td.article_issue {
+#articles-index td.article_issue, #articles-search td.article_issue {
   width: 80px;
 }
 

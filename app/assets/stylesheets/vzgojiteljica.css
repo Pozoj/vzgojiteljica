@@ -9,6 +9,7 @@ body {
   font-size: 15px;
   line-height: 25px;
   background: url(/assets/paperbg.png) repeat;
+  margin-bottom: 50px;
 }
 
 h1 {

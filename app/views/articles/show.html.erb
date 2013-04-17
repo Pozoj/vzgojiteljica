@@ -1,8 +1,10 @@
+<%= title resource.title %>
 <div id='abstract'>
-	<%= title resource.title %>
 	<%= raw resource.abstract_html %>
-	<%= resource.keywords.join(", ") %>
-	<%= resource.authors.join(", ") %>
+	<p class="firstdata"><strong>Ključne besede:</strong> <%= resource.keywords.join(", ") %></p>
+	<p><strong>Avtor:</strong> <%= resource.authors.join(", ") %></p>
+	<p><strong>Letnik:</strong> <%= resource.issue.year %>, št. <%= resource.issue.issue %></p>
+	<p><strong>Rubrika:</strong> <%= resource.section %></p>
 </div>
 <div class='cover'>
   <%= image_tag resource.issue.cover.url %>

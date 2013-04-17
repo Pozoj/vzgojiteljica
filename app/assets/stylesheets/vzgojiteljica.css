@@ -208,7 +208,7 @@ header {
 }
 
 /*Vzgojiteljica Logo*/ 
-.inner h1 {
+header .inner h1 {
   font-size: 40px;
   font-family: Pacifico;
   color: #292646;
@@ -218,15 +218,15 @@ header {
   float: left; 
 }
 
-.inner, #container {
+header .inner, #container {
   width: 880px;
 }
 
-.inner {
+header .inner {
   position: relative;
 }
 
-.inner img {
+header .inner img {
   position: absolute;
   width: 80px;  
   top: 20px;
@@ -241,6 +241,10 @@ header {
   float: left;
   text-decoration: none;
   list-style: none;  
+}
+
+#menu ul li:last-child a {
+  padding-right: 0;
 }
 
 #menu ul li a {

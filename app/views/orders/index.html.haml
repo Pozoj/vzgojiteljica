@@ -18,6 +18,5 @@
         %td.order_quantity= order.quantity
         %td.order_created_at= l order.created_at, format: :simple
         %td.admin
-          = link_to "Odstrani"
-          = link_to "Uredi"
-          = link_to "Odpri"
+          = link_to "Odstrani", order, method: :delete, confirm: 'Ste prepričani?'
+          = link_to "Odpri", order

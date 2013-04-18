@@ -6,6 +6,11 @@ module ApplicationHelper
     end
   end
 
+  def menu_item _title, url, section
+    klass = controller_name == section.to_s ? "current" : nil
+    content_tag :li, link_to(_title, url), :class => klass
+  end
+
   def format_field record, field
     data = record.send field
     return unless data
@@ -87,10 +92,10 @@ module ApplicationHelper
     klass = resource.class
     columns ||= klass.column_names if klass
 
-    haml_tag :dl, :class => klass.to_s do
+    content_tag :dl, :class => klass.to_s do
       columns.each do |column|
-        haml_tag :dt, klass.human_attribute_name(column)
-        haml_tag :dd, format_field(resource, column)
+        concat content_tag :dt, klass.human_attribute_name(column)
+        concat content_tag :dd, format_field(resource, column)
       end
     end
   end

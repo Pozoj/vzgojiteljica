@@ -28,21 +28,11 @@
         </div>
         <nav id="menu">
           <ul>
-            <li>
-              <%= link_to 'Predstavitev', root_path %>
-            </li>
-            <li>
-              <%= link_to 'Številke', issues_path %>
-            </li>
-            <li>
-              <%= link_to 'Članki', articles_path %>
-            </li>
-            <li>
-              <%= link_to 'Vprašanja', inquiries_path %>
-            </li>
-            <li>
-              <%= link_to 'Naročila', new_order_path %>
-            </li>
+            <%= menu_item 'Predstavitev', root_path, :root %>
+            <%= menu_item 'Številke', issues_path, :issues %>
+            <%= menu_item 'Članki', articles_path, :articles %>
+            <%= menu_item 'Vprašanja', inquiries_path, :inquiries %>
+            <%= menu_item 'Naročila', new_order_path, :orders %>
           </ul>
         </nav>
       </div>

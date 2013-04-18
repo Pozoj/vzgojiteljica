@@ -1,0 +1,15 @@
+<%= title "Odgovori na vprašanje"%>
+
+<p><span class="author">Ime:</span> <%= resource.name %></p>
+<p><span class="author">Institucija:</span> <%= resource.institution %></p>
+<p><span class="author">E-pošta:</span> <%= resource.email %></p>
+<p><span class="author">Telefon:</span> <%= resource.phone %></p>
+<p><span class="author">Zadeva:</span> <%= resource.subject %></p>
+<p><span class="author">Vprašanje:</span> <%= resource.question %></p>
+
+<%= simple_form_for resource, url: answer_inquiry_path(resource) do |f| %>
+  <%= f.input :answer %>
+  <div class="submit">
+    <%= f.submit %>
+  </div>
+<% end %>

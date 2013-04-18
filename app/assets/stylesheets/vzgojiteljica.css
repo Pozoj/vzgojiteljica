@@ -64,8 +64,8 @@ a {
 
 .admin a:hover {
   color: #fff;
-  background: #f36e5c;
-  border: 2px solid #f36e5c;
+  background: #F48374;
+  border: 2px solid #F48374;
 }
 
 #container > .admin {
@@ -133,8 +133,8 @@ label.string, label.text, label.select, label.tel, label.email, label.file, labe
 }
 
 .submit input:hover {
-  background: #f36e5c;
-  border: 1px solid #f36e5c;
+  background: #F48374;
+  border: 1px solid #F48374;
 }
 
 fieldset {
@@ -190,7 +190,7 @@ tbody tr:hover {
 
 tbody tr a:hover {
   border-bottom: 1px dotted #c0c0c0;
-  color: #f36e5c;
+  color: #F48374;
 }
 
 /*_________________________________ Layout _________________________________*/
@@ -371,8 +371,8 @@ br.clear {
 }
 
 .pagination span a:hover {
-  background: #f36e5c;
-  border: 1px solid #f36e5c;
+  background: #F48374;
+  border: 1px solid #F48374;
   color: #fff;
 }
 .pagination span.current {
@@ -478,8 +478,8 @@ br.clear {
 }
 
 #pages-index #orderlink:hover {
-  background: #f36e5c;
-  border: 1px solid #f36e5c;
+  background: #f48374;
+  border: 1px solid #F48374;
 }
 
 /*_________________________________ Login _________________________________*/
@@ -511,9 +511,9 @@ br.clear {
   border: 1px solid transparent;
 }
 #articles-index #search_toggle:hover {
-  border: 1px solid #f36e5c;
+  border: 1px solid #F48374;
   color: #fff;
-  background: #f36e5c url('icon_search.png') 3px -46px no-repeat;
+  background: #F48374 url('icon_search.png') 3px -46px no-repeat;
 }
 #articles-search #search_toggle {
   display: none;
@@ -562,8 +562,8 @@ br.clear {
 }
 
 .articles #search .submit:hover {
-  background: #f36e5c;
-  border: 1px solid #f36e5c;
+  background: #F48374;
+  border: 1px solid #F48374;
 }
 
 /*List of articles*/ 
@@ -679,7 +679,7 @@ br.clear {
 
 #issues-show .section a:hover {
   border-bottom: 1px dotted #c0c0c0;
-  color: #f36e5c;
+  color: #F48374;
 }
 
 #issues-show ol {

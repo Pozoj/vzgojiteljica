@@ -6,7 +6,7 @@
 <% end %>
 
 <% if signed_in? %>
-  <% generate_fields resource, [:title, :institution, :education, :notes] %>
+  <%= generate_fields resource, [:title, :institution, :education, :notes] %>
 <% end %>
 
 <h2>Članki</h2>

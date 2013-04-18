@@ -6,6 +6,11 @@ module ApplicationHelper
     end
   end
 
+  def menu_item _title, url, section
+    klass = controller_name == section.to_s ? "current" : nil
+    content_tag :li, link_to(_title, url), :class => klass
+  end
+
   def format_field record, field
     data = record.send field
     return unless data

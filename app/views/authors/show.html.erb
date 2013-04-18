@@ -6,7 +6,19 @@
 <% end %>
 
 <% if signed_in? %>
-  <%= generate_fields resource, [:title, :institution, :education, :notes] %>
+<div class="data">
+  <p><strong>Ime:</strong> <%= resource.first_name %></p>
+  <p><strong>Priimek:</strong> <%= resource.last_name %></p>
+  <p><strong>Naslov</strong> <%= resource.address %></p>
+  <p><strong>Pošta:</strong> <%= resource.post %></p> 
+  <p><strong>E-pošta:</strong> <%= resource.email %></p>
+  <p><strong>Notes:</strong> <%= resource.notes %></p>
+  <p><strong>Institucija:</strong> <%= resource.institution %></p>
+  <p><strong>Telefon:</strong> <%= resource.phone %></p>
+  <p><strong>Naziv:</strong> <%= resource.title %></p>
+  <p><strong>Izobrazba:</strong> <%= resource.education %></p>
+  
+</div>
 <% end %>
 
 <h2>Članki</h2>

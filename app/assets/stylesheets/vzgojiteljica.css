@@ -592,13 +592,14 @@ br.clear {
   float: left;
 }
 
-#articles-show #abstract .data {
+#articles-show #abstract .data, #authors-show .data {
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 #articles-show #abstract a:hover {
   border-bottom: 1px dotted #c0c0c0;
-  color: #f36e5c;
+  color: #F48374;
 }
 
 #articles-show div.cover {
@@ -839,7 +840,11 @@ br.clear {
 /*_________________________________ Authors Page _________________________________*/
 #authors-show #container a:hover {
   border-bottom: 1px dotted #c0c0c0;
-  color: #f36e5c;
+  color: #F48374;
+}
+
+#authors-show #container .admin a:hover {
+  color: #fff;
 }
 
 #authors-show span.author, #authors-show span.author a {

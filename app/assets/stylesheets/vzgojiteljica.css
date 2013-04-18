@@ -252,27 +252,30 @@ header .inner #logo img {
 
 #menu {
   position: absolute;
-  right: 0px;
+  right: -40px;
 }
 
 #menu ul li {
   float: left;
-  text-decoration: none;
-  list-style: none;  
-  z-index: 1;
-}
-
-#menu ul li:last-child a {
-  padding-right: 0;
+  list-style: none;
 }
 
 #menu ul li a {
+  display: block;
   text-align: center;
-  list-style: none;
   color: #edeae6;
   text-decoration: none;   
-  padding: 30px;
-  line-height: 85px;  
+  padding: 35px 20px 20px 20px;
+  line-height: 15px;
+  height: 15px; 
+}
+
+#menu ul li.current {
+  background: #f48374;
+}
+
+#menu ul li a:hover {
+  background: #f48374;
 }
 
 #container {

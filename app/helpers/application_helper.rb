@@ -92,10 +92,10 @@ module ApplicationHelper
     klass = resource.class
     columns ||= klass.column_names if klass
 
-    haml_tag :dl, :class => klass.to_s do
+    content_tag :dl, :class => klass.to_s do
       columns.each do |column|
-        haml_tag :dt, klass.human_attribute_name(column)
-        haml_tag :dd, format_field(resource, column)
+        concat content_tag :dt, klass.human_attribute_name(column)
+        concat content_tag :dd, format_field(resource, column)
       end
     end
   end

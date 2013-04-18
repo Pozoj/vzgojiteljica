@@ -188,7 +188,7 @@ tbody tr:hover {
   background: #f5f5f6;
 }
 
-tbody tr:hover a {
+tbody tr a:hover {
   border-bottom: 1px dotted #c0c0c0;
   color: #f36e5c;
 }
@@ -591,6 +591,11 @@ br.clear {
 
 #articles-show #abstract .data {
   margin-top: 20px;
+}
+
+#articles-show #abstract a:hover {
+  border-bottom: 1px dotted #c0c0c0;
+  color: #f36e5c;
 }
 
 #articles-show div.cover {

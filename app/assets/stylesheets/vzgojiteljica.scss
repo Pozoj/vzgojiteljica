@@ -15,7 +15,7 @@ body {
 
 h1 {
   font-family: Georgia;
-  font-size: 24px;
+  font-size: image_24px;
   font-weight: 100;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -64,8 +64,8 @@ a {
   line-height: 1em;
   &:hover {
     color: #fff;
-    background: #f36e5c;
-    border: 2px solid #f36e5c;
+    background: #F48374;
+    border: 2px solid #f48374;
   }
 }
 
@@ -166,8 +166,8 @@ label {
   text-align: center;
   margin-top: 10px;
   &:hover {
-    background: #f36e5c;
-    border: 1px solid #f36e5c;
+    background: #F48374;
+    border: 1px solid #f48374;
   }
 }
 
@@ -220,7 +220,7 @@ tbody tr {
   }
   a:hover {
     border-bottom: 1px dotted silver;
-    color: #f36e5c;
+    color: #F48374;
   }
 }
 
@@ -396,8 +396,8 @@ br.clear {
     border-radius: 3px;
     border: 1px solid transparent;
     &:hover {
-      background: #f36e5c;
-      border: 1px solid #f36e5c;
+      background: #F48374;
+      border: 1px solid #f48374;
       color: #fff;
     }
   }
@@ -511,8 +511,8 @@ br.clear {
     text-align: center;
     padding: 5px 10px;
     &:hover {
-      background: #f36e5c;
-      border: 1px solid #f36e5c;
+      background: #f48374;
+      border: 1px solid #f48374;
     }
   }
 }
@@ -547,9 +547,10 @@ label.boolean {
   border-radius: 5px;
   border: 1px solid transparent;
   &:hover {
-    border: 1px solid #f36e5c;
+    border: 1px solid #f48374;
     color: #fff;
-    background: #f36e5c image_url('icon_search.png') 3px -46px no-repeat;
+    background-color: #f48374;
+    background-position: 3px -46px;
   }
 }
 
@@ -597,8 +598,8 @@ label.boolean {
     margin-top: -1px;
     cursor: pointer;
     &:hover {
-      background: #f36e5c;
-      border: 1px solid #f36e5c;
+      background: #F48374;
+      border: 1px solid #f48374;
     }
   }
 }
@@ -630,14 +631,21 @@ label.boolean {
     min-height: 400px;
     float: left;
   }
-  #abstract {
-    .data {
-      margin-top: 20px;
-    }
-    a:hover {
-      border-bottom: 1px dotted silver;
-      color: #f36e5c;
-    }
+  #abstract .data {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+#authors-show .data {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+#articles-show {
+  #abstract a:hover {
+    border-bottom: 1px dotted silver;
+    color: #F48374;
   }
   div.cover {
     width: 260px;
@@ -721,7 +729,7 @@ label.boolean {
   }
   .section a:hover {
     border-bottom: 1px dotted silver;
-    color: #f36e5c;
+    color: #F48374;
   }
   ol {
     list-style: none;
@@ -873,9 +881,14 @@ label.boolean {
 /*_________________________________ Authors Page _________________________________*/
 
 #authors-show {
-  #container a:hover {
-    border-bottom: 1px dotted silver;
-    color: #f36e5c;
+  #container {
+    a:hover {
+      border-bottom: 1px dotted silver;
+      color: #F48374;
+    }
+    .admin a:hover {
+      color: #fff;
+    }
   }
   span.author {
     color: #999999;

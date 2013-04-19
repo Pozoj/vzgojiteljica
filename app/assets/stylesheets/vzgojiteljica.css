@@ -311,8 +311,13 @@ footer #lower_menu {
   line-height: 1.4em;
 }
 
+footer #login {
+  clear: both;
+}
+
 footer #login a {
   color: #ccc;
+
 }
 
 footer p {
@@ -321,15 +326,6 @@ footer p {
 
 footer a {
   color: #b3b3b3;
-}
-
-footer ul {
-  list-style: none;
-}
-
-footer ul li {
-  float: left;
-  color: #ddd;
 }
 
 footer ul li a {

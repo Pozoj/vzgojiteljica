@@ -4,7 +4,7 @@ class AuthorsController < InheritedResources::Base
   private
 
     def collection
-      Author.all.order(:last_name, :first_name)
+      Author.all.order(:last_name, :first_name).page params[:page]
     end
 
     def resource_params

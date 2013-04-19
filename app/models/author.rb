@@ -6,7 +6,15 @@ class Author < ActiveRecord::Base
 
   validates_presence_of :last_name
 
-  def to_s
+  def name
     "#{first_name} #{last_name}"
+  end
+
+  def to_s
+    name
+  end
+
+  def to_param
+    "#{id}-#{name.parameterize}"
   end
 end

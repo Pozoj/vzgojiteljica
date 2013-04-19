@@ -1,2 +1,11 @@
 = title "Avtorji"
+
+.pagination_top
+  = paginate collection, window: 3
+  %br.clear
+
 - generate_table collection, [:last_name, :first_name, :email, :address, :post_id, :phone, :institution_id, :title, :education], [:show, :edit, :destroy]
+
+.pagination_bottom
+  = paginate collection, window: 3
+  %br.clear

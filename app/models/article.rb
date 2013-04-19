@@ -8,4 +8,8 @@ class Article < ActiveRecord::Base
   belongs_to :section
   belongs_to :issue
   belongs_to :institution
+
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
 end

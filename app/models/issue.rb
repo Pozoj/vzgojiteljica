@@ -43,4 +43,8 @@ class Issue < ActiveRecord::Base
   def to_s
     "#{year} / #{issue}."
   end
+
+  def to_param
+    "#{id}-leto-#{year}-stevilka-#{issue}"
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130304042347) do
+ActiveRecord::Schema.define(version: 20130419005528) do
 
   create_table "articles", force: true do |t|
     t.integer  "section_id"
@@ -109,8 +109,8 @@ ActiveRecord::Schema.define(version: 20130304042347) do
   add_index "issues", ["year"], name: "index_issues_on_year"
 
   create_table "keywordables", force: true do |t|
-    t.string   "keyword_id"
-    t.string   "article_id"
+    t.integer  "keyword_id", limit: 255
+    t.integer  "article_id", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end

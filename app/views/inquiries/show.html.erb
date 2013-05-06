@@ -6,10 +6,14 @@
   <%= link_to "Odgovori vprašanje", answer_question_inquiry_path(resource) %>
 <% end %>
 
-<%= resource.question %>
+<p>
+  <%= resource.question %>
+</p>
 
-<% if resource.answer? %>
-  <%= resource.answer %>
-<% else %>
-  To vprašanje še ni odgovorjeno.
-<% end %>
+<p>
+  <% if resource.answer? %>
+    <%= resource.answer %>
+  <% else %>
+    To vprašanje še ni odgovorjeno.
+  <% end %>
+</p>

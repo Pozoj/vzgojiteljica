@@ -7,7 +7,13 @@
 <% end %>
 
 <div class='cover'>
-  <%= image_tag resource.cover.url %>
+  <% if resource.document.file? %>
+    <%= link_to resource.document.url do %>
+      <%= image_tag resource.cover.url %>
+    <% end %>
+  <% else %>
+    <%= image_tag resource.cover.url %>
+  <% end %>
 </div>
 
 <% resource.articles_grouped_by_sections.each do |section, articles| %>

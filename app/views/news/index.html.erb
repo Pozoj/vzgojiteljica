@@ -1,0 +1,13 @@
+<%= title "Pedagoško društvo Vzgojiteljica" %>
+<%= admin_section do %>
+  <%= link_to "Dodaj novico", new_news_path %>
+<% end %>
+
+<%= render collection %>
+
+<aside class="about">
+  <% if @copy %>
+    <h2><%= @copy.title %></h2>
+    <%= raw @copy.copy_html %>
+  <% end %>
+</aside>

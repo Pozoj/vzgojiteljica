@@ -103,6 +103,13 @@ input {
   }
 }
 
+form span.hint {
+  color: #666;
+  font-size: 12px;
+  margin-top: -15px;
+  display: block;
+}
+
 form input.string {
   border: 1px solid #b3b3b3;
   border-radius: 5px;
@@ -165,9 +172,15 @@ label {
   color: #fff;
   text-align: center;
   margin-top: 10px;
+  cursor: pointer;
   &:hover {
     background: #F48374;
     border: 1px solid #f48374;
+  }
+  &.disabled {
+    background: #ccc;
+    border-color: transparent;
+    cursor: default;
   }
 }
 
@@ -724,6 +737,9 @@ label.boolean {
 /*Issues Show*/
 
 #issues-show {
+  #container {
+    min-height: 400px;
+  }
   div.cover img {
     width: 260px;
     position: absolute;
@@ -847,6 +863,9 @@ label.boolean {
 /*_________________________________ Order Page _________________________________*/
 
 #orders-new {
+  .notice {
+    margin: 20px 0;
+  }
   div.submit {
     clear: both;
   }

@@ -1,21 +1,21 @@
 <%= simple_form_for resource do |f| %>
   <fieldset>
-    <legend>Kontaktni podatki</legend>
-      <%= f.input :name %>
-      <%= f.input :address %>
-      <%= f.input :post_id %>
-      <%= f.input :phone %>
-      <%= f.input :fax %>
-      <%= f.input :email %>
-  </fieldset>
-  <fieldset>
     <legend>Podjetje</legend>
     <%= f.input :title %>
     <%= f.input :vat_id %>
   </fieldset>
   <fieldset>
+    <legend>Kontaktni podatki</legend>
+      <%= f.input :name %>
+      <%= f.input :address %>
+      <%= f.association :post %>
+      <%= f.input :phone %>
+      <%= f.input :fax %>
+      <%= f.input :email %>
+  </fieldset>
+  <fieldset>
     <legend>Naročilo</legend>
-    <%= f.input :quantity %>
+    <%= f.input :quantity, hint: 'Število revij, ki jih naročam(o)' %>
     <%= f.input :comments %>
   </fieldset>
   <div class='submit'>

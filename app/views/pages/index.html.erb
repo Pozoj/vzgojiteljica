@@ -1,3 +1,7 @@
+<%= admin_section do %>
+	<%= link_to "Uredi", edit_copy_path(@copy) %>
+<% end %>
+
 <aside class="contact">
 	<div id="editorial">
 	  <h2>Uredništvo</h2>
@@ -34,20 +38,10 @@
 </aside>
 
 <div id="content">
-	<h1>Vzgojiteljica, revija za dobro prakso v vrtcih</h1>
-	<p>
-	  Ustanovitelj revije je Aktiv ravnateljev in ravnateljic samostojnih javnih vrtcev celjske regije. Revija Vzgojiteljica izhaja od leta 1997 in jo prejema večina vrtcev, knjižnice, večina osnovnih šol in pedgaoške fakultete. 
-	  V letu 2003 je urejanje, oblikovanje in tisk prevzela založba Pozoj. Letno izide 6 številk.
-	</p>
-	<p>
-	  V skladu z uredniškim konceptom objavljamo tekste, ki pomenijo prispevek k izboljševanju vzgojne prakse, omogočajo strokovnim delavcem vpogled v delo in spoznavanje dobrih zamisli iz drugih okolij ter predstavljajo stališca teoretikov in praktikov do posameznih strokovnih vprašanj, povezanih z vzgojo in izobraževanjem predšolskih otrok. Doslej je na straneh revije objavilo svoje izkušnje in razmišljanja veliko vzgojiteljic, drugih strokovnih delavcev in strokovnjakov - teoretikov s področja predšolske vzgoje in izobraževanja pedagoških delavcev.
-	</p>
-	<p>
-	  Revija Vzgojiteljica je trenutno edina publikacija te vrste v slovenskem prostoru - omogoča soočanje praktičnih izkušenj strokovnih delavcev v slovenskih vrtcih, pomemben je tudi njen prispevek h krepitvi strokovne avtonomije in poklicne samozavesti vzgojiteljic. Na straneh revije se vse pogosteje pojavljajo tudi prispevki učiteljic iz prve triade devetletne osnovne šole.
-	</p>  
-	<p>  
-	  Vabimo Vas, da tudi Vi postanete naročnik revije Vzgojiteljica - letna naročnina revije za 6 številk za letošnje leto je €34,80.
-	</p>
+	<% if @copy %>
+		<h1><%= @copy.title %></h1>
+		<%= raw @copy.copy_html %>
+	<% end %>
 	<%= link_to 'Želim prejemati revijo Vzgojiteljica', new_order_path, id: 'orderlink' %>
 </div>
 <br class="clear">

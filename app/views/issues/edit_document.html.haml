@@ -1,4 +1,4 @@
-= render "shared/fileupload_assets"
+= javascript_include_tag "upload"
 
 = title "Uredi dokument"
 = simple_form_for resource do |f|
@@ -9,7 +9,7 @@
     .bar 
     .percent 0%
 
-.submit= button_to "Prosimo počakajte ...", resource, :id => :finish, :disabled => true, :method => :get
+.submit= button_to "Prosimo počakajte ...", resource, :id => :finish, :disabled => true, :method => :get, :class => :disabled
 
 :javascript
   var FileUploadDOMId = '#issue_document'
@@ -18,5 +18,3 @@
       $('#document a').attr('href', data.result.url).text(data.result.file_name);
     }
   }
-
-= render "shared/fileupload_init"

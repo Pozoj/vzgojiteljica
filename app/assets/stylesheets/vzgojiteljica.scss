@@ -359,6 +359,17 @@ br.clear {
   clear: both;
 }
 
+/*______________________________ Generic progress bar ___________________________*/
+
+#progress {
+  width: 400px;
+  .bar {
+    background: #3c3a5b;
+    border-radius: 3px;
+    height: 20px;
+  }
+}
+
 /*____________________________ Generic pagination class _________________________*/
 
 .pagination_top {

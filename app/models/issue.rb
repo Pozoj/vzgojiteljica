@@ -40,6 +40,10 @@ class Issue < ActiveRecord::Base
     articles.joins(:section).order('sections.position').group_by { |a| a.section }
   end
 
+  def older_than_2_years?
+    Date.today.year - year >= 2
+  end
+
   def to_s
     "#{year} / #{issue}."
   end

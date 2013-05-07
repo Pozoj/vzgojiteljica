@@ -21,6 +21,7 @@ class Issue < ActiveRecord::Base
                       :medium => ["180x180>", :jpg], 
                       :original => ["960x720>", :jpg]
                     },
+                    :default_url => '/assets/cover_missing.jpg',
                     :convert_options => { :all => "-strip -quality 75"},
                     :whiny => false,
                     :storage => :s3,

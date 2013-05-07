@@ -16,3 +16,4 @@ rerun.txt
 pickle-email-*.html
 .DS_Store
 app/assets/stylesheets/config.rb
+public/assets

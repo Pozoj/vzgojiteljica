@@ -11,9 +11,9 @@
 
   <% if resource.document.file? %>
     <% if resource.older_than_2_years? or signed_in? %>
-      <%= link_to resource.document.url do %>
-        Prenesite številko
-      <% end %>
+      <div id="download_issue">
+        <%= link_to "Prenesite številko", resource.document.url%>
+      </div>
     <% end %>
   <% end %>
 </div>

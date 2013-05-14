@@ -677,6 +677,7 @@ label.boolean {
   }
   div.cover {
     width: 260px;
+    position: absolute;
     float: left;
     margin-left: 30px;
     img {
@@ -774,6 +775,27 @@ label.boolean {
     color: #999999;
     a {
       color: #999999;
+    }
+  }
+  #download_issue {
+    display: block;
+    background: #3c3a5b;
+    width: 130px;
+    margin-top: 10px;
+    border: 1px solid #3c3a5b;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #fff;
+    text-align: center;
+    padding: 5px 10px;
+    position: relative;
+    left: 55px;
+    a {
+      color: #fff;
+    }
+    &:hover {
+      background: #f48374;
+      border: 1px solid #f48374;
     }
   }
 }

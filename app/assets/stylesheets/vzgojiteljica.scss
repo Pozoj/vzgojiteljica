@@ -677,7 +677,6 @@ label.boolean {
   }
   div.cover {
     width: 260px;
-    position: absolute;
     float: left;
     margin-left: 30px;
     img {
@@ -776,6 +775,9 @@ label.boolean {
     a {
       color: #999999;
     }
+  }
+  div.cover {
+    position: absolute;
   }
   #download_issue {
     display: block;

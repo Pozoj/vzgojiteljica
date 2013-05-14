@@ -1,15 +1,16 @@
-= render "shared/fileupload_assets"
+= javascript_include_tag "upload"
 
 = title "Uredi naslovnico"
 = simple_form_for resource do |f|
   = f.input :cover, input_html: {:"data-url" => "cover"}
   #cover
-    = image_tag resource.cover.file? ? resource.cover.url(:medium) : ""
+    - if resource.cover.file?
+      = image_tag resource.cover.url(:medium)
   #progress
     .bar 
     .percent 0%
 
-.submit= button_to "Prosimo počakajte ...", resource, :id => :finish, :disabled => true, :method => :get
+.submit= button_to "Prosimo počakajte ...", resource, :id => :finish, :disabled => true, :method => :get, :class => :disabled
 
 :javascript
   var FileUploadDOMId = '#issue_cover'
@@ -18,5 +19,3 @@
       $('#cover img').attr('src', data.result.url_medium);
     }
   }
-
-= render "shared/fileupload_init"

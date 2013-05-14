@@ -1,4 +1,8 @@
 class NewsController < InheritedResources::Base
+  def index
+    @copy = Copy.find_by_page_code 'news_index'
+    index!
+  end
 
   private
 

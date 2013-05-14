@@ -1,3 +1,14 @@
+Copy.create([
+  {
+    page_code: 'pages_index',
+    title: 'Vzgojiteljica, revija za dobro prakso v vrtcih'
+  },
+  {
+    page_code: 'news_index',
+    title: 'Pedagoško društvo Vzgojiteljica'
+  }
+])
+
 User.create([
   {
     name: 'Miha Rebernik',

@@ -21,6 +21,7 @@ class Issue < ActiveRecord::Base
                       :medium => ["180x180>", :jpg], 
                       :original => ["960x720>", :jpg]
                     },
+                    :default_url => '/assets/cover_missing.jpg',
                     :convert_options => { :all => "-strip -quality 75"},
                     :whiny => false,
                     :storage => :s3,
@@ -38,6 +39,10 @@ class Issue < ActiveRecord::Base
 
   def articles_grouped_by_sections
     articles.joins(:section).order('sections.position').group_by { |a| a.section }
+  end
+
+  def older_than_2_years?
+    Date.today.year - year >= 2
   end
 
   def to_s

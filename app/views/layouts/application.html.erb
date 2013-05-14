@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link href='http://fonts.googleapis.com/css?family=Oxygen:400,700|Pontano+Sans|Comfortaa' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Trocchi|Pacifico|Merriweather:400,300,700|Open+Sans:300italic,400italic,400,300,600,700' rel='stylesheet' type='text/css'>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <title>
       <% if @page_title %>
@@ -32,7 +32,8 @@
             <%= menu_item 'Številke', issues_path, :issues %>
             <%= menu_item 'Članki', articles_path, :articles %>
             <%= menu_item 'Vprašanja', inquiries_path, :inquiries %>
-            <%= menu_item 'Naročila', new_order_path, :orders %>
+            <%= menu_item 'PD Vzgojiteljica', news_index_path, :news %>
+            <%= menu_item 'Naročilo', new_order_path, :orders %>
           </ul>
         </nav>
       </div>

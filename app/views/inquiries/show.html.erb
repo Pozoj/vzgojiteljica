@@ -12,9 +12,10 @@
     <strong><%= resource.question %></strong>
   </p>
 </div>
-
-<% if resource.answer? %>
-  <%= resource.answer %>
-<% else %>
-  To vprašanje še ni odgovorjeno.
-<% end %>
+<p>
+  <% if resource.answer? %>
+    <%= resource.answer %>
+  <% else %>
+    To vprašanje še ni odgovorjeno.
+  <% end %>
+</p>

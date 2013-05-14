@@ -103,6 +103,13 @@ input {
   }
 }
 
+form span.hint {
+  color: #666;
+  font-size: 12px;
+  margin-top: -15px;
+  display: block;
+}
+
 form input.string {
   border: 1px solid #b3b3b3;
   border-radius: 5px;
@@ -165,9 +172,15 @@ label {
   color: #fff;
   text-align: center;
   margin-top: 10px;
+  cursor: pointer;
   &:hover {
     background: #F48374;
     border: 1px solid #f48374;
+  }
+  &.disabled {
+    background: #ccc;
+    border-color: transparent;
+    cursor: default;
   }
 }
 
@@ -357,6 +370,17 @@ footer {
 
 br.clear {
   clear: both;
+}
+
+/*______________________________ Generic progress bar ___________________________*/
+
+#progress {
+  width: 400px;
+  .bar {
+    background: #3c3a5b;
+    border-radius: 3px;
+    height: 20px;
+  }
 }
 
 /*____________________________ Generic pagination class _________________________*/
@@ -656,6 +680,7 @@ label.boolean {
     float: left;
     margin-left: 30px;
     img {
+      display: block;
       width: 260px;
       border: 4px solid rgba(255, 255, 255, 0.68);
       box-shadow: 0px 1px 7px 0px rgba(127, 127, 127, 0.4);
@@ -717,13 +742,19 @@ label.boolean {
 /*Issues Show*/
 
 #issues-show {
-  div.cover img {
-    width: 260px;
+  #container {
+    min-height: 400px;
+  }
+  div.cover {
+    width: 270px;
     position: absolute;
     top: 100px;
     right: 40px;
-    border: 4px solid rgba(255, 255, 255, 0.68);
-    box-shadow: 0px 1px 7px 0px rgba(127, 127, 127, 0.4);
+    img {
+      width: 260px;
+      border: 4px solid rgba(255, 255, 255, 0.68);
+      box-shadow: 0px 1px 7px 0px rgba(127, 127, 127, 0.4);
+    }
   }
   .section h2 {
     margin-bottom: 0;
@@ -840,6 +871,9 @@ label.boolean {
 /*_________________________________ Order Page _________________________________*/
 
 #orders-new {
+  .notice {
+    margin: 20px 0;
+  }
   div.submit {
     clear: both;
   }

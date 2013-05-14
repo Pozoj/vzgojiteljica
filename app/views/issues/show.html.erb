@@ -8,6 +8,14 @@
 
 <div class='cover'>
   <%= image_tag resource.cover.url %>
+
+  <% if resource.document.file? %>
+    <% if resource.older_than_2_years? or signed_in? %>
+      <%= link_to resource.document.url do %>
+        Prenesite številko
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
 
 <% resource.articles_grouped_by_sections.each do |section, articles| %>

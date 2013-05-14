@@ -3,11 +3,14 @@
   <%= link_to "Dodaj novico", new_news_path %>
 <% end %>
 
-<%= render collection %>
+<div class='news'>
+  <%= render collection %>
+</div>
 
 <aside class="about">
   <% if @copy %>
     <h2><%= @copy.title %></h2>
     <%= raw @copy.copy_html %>
   <% end %>
+  <a href='http://vzgojiteljica.s3.amazonaws.com/Pristopna_izjava_PD_Vzgojiteljica.doc'>Prenesite pristopno izjavo</a>
 </aside>

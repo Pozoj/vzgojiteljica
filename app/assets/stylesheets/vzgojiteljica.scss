@@ -883,7 +883,7 @@ label.boolean {
   }
   .input {
     width: 400px;
-    input, textarea {
+    input, textarea, select#order_post_id {
       width: 380px;
     }
     input {

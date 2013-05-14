@@ -219,7 +219,7 @@ tbody tr {
     background: #f5f5f6;
   }
   a:hover {
-    border-bottom: 1px dotted silver;
+    border-bottom: 1px dotted #c0c0c0;
     color: #F48374;
   }
 }
@@ -446,6 +446,10 @@ br.clear {
     margin-left: 15px;
     margin-top: 15px;
   }
+  aside a:hover {
+    border-bottom: 1px dotted #c0c0c0;
+    color: #F48374;
+  }
   #editorial p, #lastissue p {
     margin-left: 15px;
     font-size: 14px;
@@ -644,7 +648,7 @@ label.boolean {
 
 #articles-show {
   #abstract a:hover {
-    border-bottom: 1px dotted silver;
+    border-bottom: 1px dotted #c0c0c0;
     color: #F48374;
   }
   div.cover {
@@ -728,7 +732,7 @@ label.boolean {
     color: #999999;
   }
   .section a:hover {
-    border-bottom: 1px dotted silver;
+    border-bottom: 1px dotted #c0c0c0;
     color: #F48374;
   }
   ol {
@@ -883,7 +887,7 @@ label.boolean {
 #authors-show {
   #container {
     a:hover {
-      border-bottom: 1px dotted silver;
+      border-bottom: 1px dotted #c0c0c0;
       color: #F48374;
     }
     .admin a:hover {

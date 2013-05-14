@@ -830,8 +830,12 @@ label.boolean {
       height: 120px;
     }
   }
-  th.question {
-    width: 400px;
+  td.question_title {
+    width: 280px;
+  }
+  td.created_at {
+    text-align: right;
+    color: #999999;
   }
   #gotquestion {
     margin: 20px 20px;

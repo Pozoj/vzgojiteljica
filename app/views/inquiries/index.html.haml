@@ -8,13 +8,9 @@
 
 #content
   %table
-    %thead
-      %tr
-        %th.question Vprašanje
-        %th 
     %tbody
       - collection.each do |inquiry|
         %tr
-          %td= link_to inquiry, inquiry
-          %td= l inquiry.created_at, format: :simple
+          %td.question_title= link_to inquiry, inquiry
+          %td.created_at= l inquiry.created_at, format: :simple
 %br.clear

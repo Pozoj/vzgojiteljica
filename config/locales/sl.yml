@@ -122,11 +122,12 @@ sl:
       order:
         title: 'Naziv podjetja / ustanove'
         name: 'Ime in priimek'
-        comments: Opombe
+        comments: Opomba         
         place_and_date: Kraj
       author:
         title: Naziv
         education: Izobrazba
+        notes: Opomba
       article:
         abstract: Povzetek
         abstract_html: Povzetek

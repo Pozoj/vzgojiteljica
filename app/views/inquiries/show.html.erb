@@ -6,7 +6,12 @@
   <%= link_to "Odgovori vprašanje", answer_question_inquiry_path(resource) %>
 <% end %>
 
-<%= resource.question %>
+<div id="question">
+  Vprašanje:
+  <p>
+    <strong><%= resource.question %></strong>
+  </p>
+</div>
 
 <% if resource.answer? %>
   <%= resource.answer %>

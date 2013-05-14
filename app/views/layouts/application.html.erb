@@ -19,7 +19,10 @@
   <body id="<%= body_id %>" class="<%= body_class %>">
     <header>
       <div class="inner">
-        <%= image_tag 'bird.png' %>
+          <div class="animate">
+            <%= image_tag 'birdy.png', id: 'bottom' %>
+            <%= image_tag 'birdy_blink.png', id: 'top' %>
+          </div>
         <div id="logo">
           <%= link_to root_path do %>
             <%= image_tag 'bubble.png' %>

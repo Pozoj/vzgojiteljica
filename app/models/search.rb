@@ -41,7 +41,7 @@ class Search
 
       # Try authors.
       authors = Author.select(:id).where(
-        @tokens.map { |t| "first_name LIKE ? OR last_name LIKE ?" }.join(' OR '), 
+        @tokens.map { |t| "lower(first_name) LIKE ? OR lower(last_name) LIKE ?" }.join(' OR '), 
        *(@tokens.map { |t| ["%#{t}%", "%#{t}%"] } ).flatten 
       ).map(&:id)
       if authors.any?
@@ -51,7 +51,7 @@ class Search
 
       # Try section titles.
       sections = Section.select(:id).where(
-        @tokens.map { |t| "name LIKE ?" }.join(' OR '), 
+        @tokens.map { |t| "lower(name) LIKE ?" }.join(' OR '), 
        *@tokens.map { |t| "%#{t}%" }
       ).map(&:id)
       if sections.any?

@@ -61,7 +61,8 @@
           <%= link_to 'Številke', issues_path %>  | 
           <%= link_to 'Članki', articles_path %>  | 
           <%= link_to 'Vprašanja', inquiries_path %>  | 
-          <%= link_to 'Naročila', new_order_path %> 
+          <%= link_to 'Naročila', new_order_path %> | 
+          <%= link_to 'Avtorji', '/avtorji' %>
         </p>
         <% if signed_in? %>
           <p>
@@ -75,8 +76,6 @@
             Prijavljeni kot
             <strong><%= current_user %></strong>
             (<%= link_to 'Odjava', destroy_user_session_path, method: :delete, confirm: 'Ste prepričani da se želite odjaviti?' %>)
-          <% else %>
-            <%= link_to 'Prijava', new_user_session_path %>
           <% end %>
         </div>
       </div> 

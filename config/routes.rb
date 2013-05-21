@@ -31,6 +31,8 @@ Web3::Application.routes.draw do
   resources :authors
   resources :news
 
+  get '/avtorji', to: 'pages#authors'
+
   # You can have the root of your site routed with "root"
   # root to: 'copies#show', id: 'pages#index'
   root to: 'pages#index'

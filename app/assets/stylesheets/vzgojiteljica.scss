@@ -131,6 +131,22 @@ ul {
   }
 }
 
+/*_______________________________ Backdoor _______________________________*/
+#backdoor {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    &:hover {
+      background: pink;
+    }
+  }
+}
+
 /*_________________________________ Form _________________________________*/
 
 form input.string, textarea {

@@ -1,37 +1,39 @@
 Web3::Application.routes.draw do
   devise_for :users
 
-  resources :keywords
-  resources :posts
-  resources :institutions
-  resources :inquiries do
-    get :all, on: :collection
-    member do
-      get :answer_question
-      patch :answer
+  scope :path_names => {:new => "novo", :edit => "uredi", :all => "vse", :search => "isci" } do
+    resources :keywords, path: 'kljucne_besede'
+    resources :posts, path: 'poste'
+    resources :institutions, path: 'institucije'
+    resources :inquiries, path: 'vprasanja' do
+      get :all, on: :collection
+      member do
+        get :answer_question
+        patch :answer
+      end
     end
-  end
-  resources :articles do
-    collection do
-      get :all, :search
+    resources :articles, path: 'clanki' do
+      collection do
+        get :all, :search
+      end
     end
-  end
-  resources :sections
-  resources :issues do
-    get :all, on: :collection
-    member do
-      get :edit_cover
-      get :edit_document
-      patch :cover
-      patch :document
+    resources :sections, path: 'sekcije'
+    resources :issues, path: 'revije' do
+      get :all, on: :collection
+      member do
+        get :edit_cover
+        get :edit_document
+        patch :cover
+        patch :document
+      end
     end
+    resources :orders, path: 'narocila'
+    resources :copies, path: 'besedila'
+    resources :authors, path: 'avtorji'
+    resources :news, path: 'pd-vzgojiteljica'
   end
-  resources :orders
-  resources :copies
-  resources :authors
-  resources :news
 
-  get '/avtorji', to: 'pages#authors'
+  get '/avtorji-spletne-aplikacije', to: 'pages#authors'
 
   # You can have the root of your site routed with "root"
   # root to: 'copies#show', id: 'pages#index'

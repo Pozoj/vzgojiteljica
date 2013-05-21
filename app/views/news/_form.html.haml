@@ -3,6 +3,7 @@
 = simple_form_for resource do |f|
   = f.input :title
   = f.input :body_html, input_html: {class: :tinymce, rows: 40, cols: 120}
-  = f.submit
+  .submit
+    = f.submit
 
 = render "shared/tinymce"

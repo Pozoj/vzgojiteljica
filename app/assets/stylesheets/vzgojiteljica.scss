@@ -1032,12 +1032,11 @@ label.boolean {
 #news-index
   .news {
     float: left;
-    width: 550px;
+    width: 520px;
     margin-bottom: 5px;
     padding: 5px 0;
   }
   .body {
-    width: 520px;
     margin-top: 10px;
     padding-bottom: 15px;
     border-bottom: 1px solid silver;
@@ -1045,6 +1044,7 @@ label.boolean {
   aside.about {
     float: right;
     margin-top: 10px;
+    padding: 10px;
   }
   h3 {
     margin: 0;

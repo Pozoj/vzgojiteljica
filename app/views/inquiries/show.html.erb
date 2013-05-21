@@ -7,15 +7,25 @@
 <% end %>
 
 <div id="question">
-  Vprašanje:
   <p>
-    <strong><%= resource.question %></strong>
+    <span>&ldquo;</span><%= resource.question %><span>&rdquo;</span>
+  </p>
+  <p class='author'>
+    &mdash;
+    <%= resource.name %>
+    <% if resource.institution.present? %>
+      (<%= resource.institution %>)
+    <% end %>
   </p>
 </div>
-<p>
-  <% if resource.answer? %>
-    <%= resource.answer %>
-  <% else %>
-    To vprašanje še ni odgovorjeno.
-  <% end %>
-</p>
+
+<div id="answer">
+  <p>Odgovor:</p>
+  <p>
+    <% if resource.answer? %>
+      <strong><%= resource.answer %></strong>
+    <% else %>
+      To vprašanje še ni odgovorjeno.
+    <% end %>
+  </p>
+</div>

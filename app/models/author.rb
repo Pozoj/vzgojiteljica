@@ -4,10 +4,18 @@ class Author < ActiveRecord::Base
   belongs_to :institution
   belongs_to :post
 
+  default_scope order('last_name, first_name, institution_id')
+
   validates_presence_of :last_name
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def unique_name
+    uniq_name = "#{last_name}, #{first_name}"
+    uniq_name = "#{uniq_name} (#{institution})" if institution and institution.name.present?
+    uniq_name
   end
 
   def to_s

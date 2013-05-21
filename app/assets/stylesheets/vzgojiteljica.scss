@@ -203,26 +203,29 @@ label {
   }
 }
 
-.submit input {
-  height: 30px;
-  background: #3c3a5b;
-  padding: 5px 10px;
-  border: 1px solid #3c3a5b;
-  border-radius: 5px;
-  font-size: 15px;
-  font-family: Helvetica Neue;
-  color: #fff;
-  text-align: center;
-  margin-top: 10px;
-  cursor: pointer;
-  &:hover {
-    background: #F48374;
-    border: 1px solid #f48374;
-  }
-  &.disabled {
-    background: #ccc;
-    border-color: transparent;
-    cursor: default;
+.submit {
+  margin-top: 20px;
+  input {
+    height: 30px;
+    background: #3c3a5b;
+    padding: 5px 20px;
+    border: 1px solid #3c3a5b;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: Helvetica Neue;
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    &:hover {
+      background: #F48374;
+      border: 1px solid #f48374;
+    }
+    &.disabled {
+      background: #ccc;
+      border-color: transparent;
+      cursor: default;
+    }
   }
 }
 
@@ -750,6 +753,14 @@ label.boolean {
   }
   span.author {
     color: #a0a0a0;
+  }
+}
+
+#articles-new, #articles-edit {
+  form {
+    #article_keyword_ids, #article_author_ids {
+      width: 800px;
+    }
   }
 }
 

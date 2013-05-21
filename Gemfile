@@ -10,6 +10,7 @@ group :assets do
   gem 'coffee-rails', '~> 4.0.0.rc1'
   gem 'uglifier', '>= 1.0.3'
   gem 'asset_sync'
+  gem 'chosen-rails'
 end
 
 gem 'jquery-rails'

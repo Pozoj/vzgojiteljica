@@ -1,4 +1,10 @@
 <%= title resource.title %>
+
+<%= admin_section do %>
+  <%= link_to "Uredi", edit_article_path(resource) %>
+  <%= link_to "Odstrani", resource, method: :delete, confirm: 'Ste prepričani?' %>
+<% end %>
+
 <div id='abstract'>
 	<%= raw resource.abstract_html %>
 

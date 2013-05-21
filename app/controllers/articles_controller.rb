@@ -18,6 +18,6 @@ class ArticlesController < InheritedResources::Base
 
   def resource_params
     return [] if request.get?
-    [params.require(:article).permit(:section_id, :issue_id, :title, :abstract_html, :abstract_english_html)]
+    [params.require(:article).permit(:section_id, :issue_id, :title, :abstract_html, :abstract_english_html, author_ids: [], keyword_ids: [])]
   end
 end

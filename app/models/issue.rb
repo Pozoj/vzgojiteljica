@@ -1,6 +1,9 @@
 class Issue < ActiveRecord::Base
   has_many :articles
   has_many :keywords, through: :articles
+
+  default_scope order('year DESC, issue DESC')
+
   has_attached_file :document,
                     :whiny => false,
                     :storage => :s3,

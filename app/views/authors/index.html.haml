@@ -1,5 +1,8 @@
 = title "Avtorji"
 
+= admin_section do
+  = link_to "Dodaj avtorja", new_author_path
+
 .pagination_top
   = paginate collection, window: 3
   %br.clear

@@ -2,7 +2,7 @@ class Issue < ActiveRecord::Base
   has_many :articles
   has_many :keywords, through: :articles
 
-  default_scope order('year DESC, issue DESC')
+  scope :sorted, order(year: :desc, issue: :asc)
 
   has_attached_file :document,
                     :whiny => false,

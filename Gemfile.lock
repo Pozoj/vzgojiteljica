@@ -101,11 +101,9 @@ GEM
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
       responders (~> 1.0.0.rc)
-    jquery-rails (3.0.4)
+    jquery-rails (2.3.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (4.1.0)
-      railties (>= 3.1.0)
     json (1.8.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -200,8 +198,7 @@ DEPENDENCIES
   devise!
   haml
   inherited_resources
-  jquery-rails
-  jquery-ui-rails
+  jquery-rails (~> 2.3.0)
   kaminari
   paperclip
   pg

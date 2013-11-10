@@ -2,6 +2,10 @@ class OrdersController < InheritedResources::Base
   before_filter :authenticate
   skip_before_filter :authenticate, only: [:new, :create]
 
+  def create
+    create!(:notice => "Hvala! Vaše naročilo je bilo uspešno sprejeto.") { root_url }
+  end
+
   private
 
     def resource_params

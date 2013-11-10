@@ -5,6 +5,10 @@ class IssuesController < InheritedResources::Base
     @issues_by_years = Issue.sorted.group_by { |issue| issue.year }
   end
 
+  def all
+    @issues = Issue.all.order 'year DESC, issue DESC'
+  end
+
   def cover
     resource.cover = params[:issue][:cover]
     resource.save

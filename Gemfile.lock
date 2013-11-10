@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/Compass/compass-rails.git
+  revision: aea69635f6000bbc7180f7fdd0ce216f904db30d
+  specs:
+    compass-rails (2.0.alpha.0)
+      compass (>= 0.12.2, < 0.14)
+
+GIT
   remote: https://github.com/plataformatec/devise.git
   revision: 6b5988d756d780903bf8c9ccb3e2b3b724ccebe8
   branch: rails4
@@ -52,7 +59,7 @@ GEM
       compass-rails (>= 1.0)
       railties (>= 3.0)
       sass-rails (>= 3.2)
-    chunky_png (1.2.8)
+    chunky_png (1.2.9)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -68,8 +75,6 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
     erubis (2.7.0)
     excon (0.25.3)
     execjs (1.4.0)
@@ -189,6 +194,7 @@ DEPENDENCIES
   aws-sdk
   chosen-rails
   coffee-rails (~> 4.0.0)
+  compass-rails!
   devise!
   haml
   inherited_resources

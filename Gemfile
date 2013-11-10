@@ -11,6 +11,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'asset_sync'
   gem 'chosen-rails'
+  gem 'compass-rails', github: 'Compass/compass-rails'
 end
 
 gem 'jquery-rails'

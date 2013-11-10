@@ -17,3 +17,4 @@ pickle-email-*.html
 .DS_Store
 app/assets/stylesheets/config.rb
 public/assets
+config/s3.yml

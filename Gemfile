@@ -12,10 +12,9 @@ group :assets do
   gem 'asset_sync'
   gem 'chosen-rails'
   gem 'compass-rails', github: 'Compass/compass-rails'
+  gem 'jquery-rails'
+  gem 'jquery-ui-rails'
 end
-
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
 
 group :production do
   gem 'pg'

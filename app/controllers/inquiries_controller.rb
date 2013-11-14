@@ -6,6 +6,11 @@ class InquiriesController < InheritedResources::Base
   end
 
   def create
+    if params[:inquiry][:helmet] and params[:inquiry][:helmet].present?
+      render :text => "Thank you!"
+      return
+    end
+
   	create! { inquiries_path }
   end
 
@@ -23,6 +28,6 @@ class InquiriesController < InheritedResources::Base
 
     def resource_params
       return [] if request.get?
-      [params.require(:inquiry).permit(:name, :institution, :email, :phone, :subject, :question)]
+      [params.require(:inquiry).permit(:name, :institution, :email, :phone, :subject, :question, :helmet)]
     end
 end

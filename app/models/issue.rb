@@ -2,7 +2,7 @@ class Issue < ActiveRecord::Base
   has_many :articles
   has_many :keywords, through: :articles
 
-  scope :sorted, order(year: :desc, issue: :asc)
+  scope :sorted, -> { order(year: :desc, issue: :asc) }
 
   has_attached_file :document,
                     :whiny => false,
@@ -39,6 +39,9 @@ class Issue < ActiveRecord::Base
                     },
                     :s3_storage_class => :reduced_redundancy,
                     :path => "/assets/issues/:id/cover/:style_:basename.:extension"
+
+  validates_attachment_content_type :document, content_type: 'application/pdf'
+  validates_attachment_content_type :cover, content_type: %w(image/jpeg image/jpg)
 
   def articles_grouped_by_sections
     articles.joins(:section).order('sections.position').group_by { |a| a.section }

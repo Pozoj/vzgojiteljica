@@ -2,6 +2,8 @@ class Issue < ActiveRecord::Base
   has_many :articles
   has_many :keywords, through: :articles
 
+  validates :issue, numericality: { only_integer: true, greater_than: 0, less_than: 8 }
+
   scope :sorted, -> { order(year: :desc, issue: :asc) }
 
   has_attached_file :document,

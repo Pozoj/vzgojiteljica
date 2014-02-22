@@ -1,7 +1,7 @@
 Web3::Application.routes.draw do
   devise_for :users
 
-  scope :path_names => {:new => "novo", :edit => "uredi", :all => "vse", :search => "isci" } do
+  scope :path_names => {:new => "novo", :edit => "uredi", :all => "vse", :search => "isci"} do
     resources :keywords, path: 'kljucne_besede'
     resources :posts, path: 'poste'
     resources :institutions, path: 'institucije'

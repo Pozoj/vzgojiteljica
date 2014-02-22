@@ -81,6 +81,7 @@
         </p>
         <% if signed_in? %>
           <p>
+            <%= link_to 'Rubrike', sections_path %>  | 
             <%= link_to 'Avtorji', authors_path %>  | 
             <%= link_to 'Institucije', institutions_path %>  | 
             <%= link_to 'Ključne besede', keywords_path %>

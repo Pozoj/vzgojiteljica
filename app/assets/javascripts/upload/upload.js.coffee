@@ -6,7 +6,7 @@ $ ->
     dataType: 'json'
     done: (e, data) ->
       FileUploadVzgojiteljica(e, data)
-      $('.submit input').attr('disabled', false).removeClass('disabled').val 'Končaj'
+      $('.submit input').attr('disabled', false).click().attr('disabled', true).val('Zaključujem ...')
       $('#progress').hide()
     progressall: (e, data) ->
       progress = parseInt (data.loaded / data.total) * 100, 10

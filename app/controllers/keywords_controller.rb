@@ -1,6 +1,13 @@
 class KeywordsController < InheritedResources::Base
   before_filter :authenticate
 
+  def create
+    create! { redirect_to :back }
+  end
+  def update
+    update! { redirect_to :back }
+  end
+
   private
 
   def collection

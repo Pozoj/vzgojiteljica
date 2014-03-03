@@ -161,8 +161,6 @@ ActiveRecord::Schema.define(version: 20130419005528) do
     t.datetime "updated_at"
   end
 
-  add_index "posts", ["id"], name: "index_posts_on_id"
-
   create_table "sections", force: true do |t|
     t.string   "name"
     t.integer  "position"

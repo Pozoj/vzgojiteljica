@@ -1,0 +1,14 @@
+= title "Ključne besede"
+
+= admin_section do
+  = link_to "Dodaj besedo", new_keyword_path
+
+.pagination_top
+  = paginate collection, window: 3
+  %br.clear
+
+- generate_table collection, [:keyword], [:edit, :destroy]
+
+.pagination_bottom
+  = paginate collection, window: 3
+  %br.clear

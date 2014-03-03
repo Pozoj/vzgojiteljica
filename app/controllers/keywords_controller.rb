@@ -2,10 +2,10 @@ class KeywordsController < InheritedResources::Base
   before_filter :authenticate
 
   def create
-    create! { redirect_to :back }
+    create! { keywords_path }
   end
   def update
-    update! { redirect_to :back }
+    update! { keywords_path }
   end
 
   private

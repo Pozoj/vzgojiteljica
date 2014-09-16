@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130419005528) do
+ActiveRecord::Schema.define(version: 20140902171239) do
 
   create_table "articles", force: true do |t|
     t.integer  "section_id"
@@ -59,6 +59,14 @@ ActiveRecord::Schema.define(version: 20130419005528) do
   add_index "authorships", ["author_id", "article_id"], name: "index_authorships_on_author_id_and_article_id", unique: true
   add_index "authorships", ["author_id"], name: "index_authorships_on_author_id"
 
+  create_table "batches", force: true do |t|
+    t.string   "name"
+    t.decimal  "price"
+    t.integer  "issues_per_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "copies", force: true do |t|
     t.string   "page_code"
     t.text     "copy"
@@ -69,6 +77,28 @@ ActiveRecord::Schema.define(version: 20130419005528) do
   end
 
   add_index "copies", ["page_code"], name: "index_copies_on_page_code"
+
+  create_table "entities", force: true do |t|
+    t.string   "title"
+    t.string   "name"
+    t.string   "address"
+    t.integer  "post_id",         limit: 4
+    t.string   "city"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "vat_id"
+    t.boolean  "vat_exempt"
+    t.string   "type"
+    t.integer  "quantity"
+    t.integer  "entity_id"
+    t.integer  "subscription_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "entities", ["entity_id"], name: "index_entities_on_entity_id"
+  add_index "entities", ["post_id"], name: "index_entities_on_post_id"
+  add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id"
 
   create_table "inquiries", force: true do |t|
     t.string   "name"
@@ -89,6 +119,22 @@ ActiveRecord::Schema.define(version: 20130419005528) do
     t.datetime "updated_at"
   end
 
+  create_table "invoices", force: true do |t|
+    t.integer  "subscription_id"
+    t.integer  "issue_id"
+    t.date     "due_at"
+    t.decimal  "subtotal"
+    t.decimal  "total"
+    t.decimal  "tax"
+    t.boolean  "paid"
+    t.integer  "reference_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invoices", ["issue_id"], name: "index_invoices_on_issue_id"
+  add_index "invoices", ["subscription_id"], name: "index_invoices_on_subscription_id"
+
   create_table "issues", force: true do |t|
     t.integer  "year"
     t.integer  "issue"
@@ -103,8 +149,10 @@ ActiveRecord::Schema.define(version: 20130419005528) do
     t.string   "document_content_type"
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
+    t.integer  "batch_id"
   end
 
+  add_index "issues", ["batch_id"], name: "index_issues_on_batch_id"
   add_index "issues", ["issue"], name: "index_issues_on_issue"
   add_index "issues", ["year"], name: "index_issues_on_year"
 
@@ -154,9 +202,27 @@ ActiveRecord::Schema.define(version: 20130419005528) do
     t.datetime "updated_at"
   end
 
+  create_table "plans", force: true do |t|
+    t.string   "name"
+    t.decimal  "price"
+    t.integer  "billing_frequency"
+    t.integer  "batch_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", id: false, force: true do |t|
     t.integer  "id"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "remarks", force: true do |t|
+    t.integer  "user_id"
+    t.text     "remark"
+    t.string   "remarkable_type"
+    t.integer  "remarkable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -167,6 +233,18 @@ ActiveRecord::Schema.define(version: 20130419005528) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "subscriptions", force: true do |t|
+    t.integer  "customer_id"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "discount"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -182,9 +260,11 @@ ActiveRecord::Schema.define(version: 20130419005528) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "entity_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["entity_id"], name: "index_users_on_entity_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

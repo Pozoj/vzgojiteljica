@@ -11,7 +11,7 @@ module ApplicationHelper
     content_tag :li, link_to(_title, url), :class => klass
   end
 
-  def format_field record, field
+  def format_field record, field, path_prefix = nil
     data = record.send field
     return unless data
 
@@ -20,12 +20,12 @@ module ApplicationHelper
     # Belongs to relations.
     if field =~ /_id/ and record.respond_to?(field.gsub('_id', ''))
       data = record.send field.gsub('_id', '')
-      return link_to data, polymorphic_url(data)
+      return link_to data, polymorphic_url([path_prefix, data])
     end
 
     # Has many relations.
     if field =~ /s$/ and record.send(field).respond_to?(:all)
-      return record.send(field).map { |r| link_to r, r }.join(', ').html_safe
+      return record.send(field).map { |r| link_to r, polymorphic_url([path_prefix, r]) }.join(', ').html_safe
     end
 
     # Paperclip files.
@@ -45,7 +45,7 @@ module ApplicationHelper
     data
   end
 
-  def generate_table(collection, columns = nil, crud_fields = [:show, :edit, :destroy])
+  def generate_table(collection, columns = nil, crud_fields = [:show, :edit, :destroy], path_prefix = nil)
     klass = if collection.klass and collection.klass.column_names
       collection.klass
     elsif collection.first and collection.first.class and collection.first.class.column_names
@@ -69,17 +69,17 @@ module ApplicationHelper
         collection.each do |record|
           haml_tag :tr do
             columns.each do |column|
-              haml_tag :td, format_field(record, column)
+              haml_tag :td, format_field(record, column, path_prefix)
             end
             haml_tag :td, :class => :admin do
               if crud_fields and crud_fields.include?(:destroy)
-                concat link_to "Odstrani", polymorphic_url(record), method: :delete, confirm: 'Ste prepričani?'
+                concat link_to "Odstrani", polymorphic_url([path_prefix, record]), method: :delete, confirm: 'Ste prepričani?'
               end
               if crud_fields and crud_fields.include?(:edit)
-                concat link_to "Uredi", polymorphic_url(record, action: :edit)
+                concat link_to "Uredi", polymorphic_url([path_prefix, record], action: :edit)
               end
               if crud_fields and crud_fields.include?(:show)
-                concat link_to "Odpri", polymorphic_url(record)
+                concat link_to "Odpri", polymorphic_url([path_prefix, record])
               end
             end
           end
@@ -88,14 +88,15 @@ module ApplicationHelper
     end
   end
 
-  def generate_fields(resource, columns = nil)
+  def generate_fields(resource, columns = nil, path_prefix = nil)
     klass = resource.class
     columns ||= klass.column_names if klass
 
     content_tag :dl, :class => klass.to_s do
       columns.each do |column|
+        next unless format_field(resource, column, path_prefix).present?
         concat content_tag :dt, klass.human_attribute_name(column)
-        concat content_tag :dd, format_field(resource, column)
+        concat content_tag :dd, format_field(resource, column, path_prefix)
       end
     end
   end

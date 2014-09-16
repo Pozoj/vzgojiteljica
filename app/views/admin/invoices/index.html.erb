@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Izdaja računov</h3>
+  </div>
+  <div class="panel-body">
+    <%= form_for @invoice_wizard, url: admin_invoices_path, method: :post do |f| %>
+      <%= f.collection_select :issue_id, Issue.order('published_at DESC'), :id, :to_s %>
+      <%= f.text_field :last_invoice_number %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>
+
+<h2>Izdani računi</h2>
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>Ref. št.</th>
+      <th>Stranka</th>
+      <th>Številka</th>
+      <th>Izdan</th>
+      <th>Rok</th>
+      <th>Znesek</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% collection.each do |invoice| %>
+      <tr>
+        <td>
+          <%= link_to "", admin_invoice_path(invoice) %>
+          <%= invoice.reference_number %></td>
+        <td><%= invoice.customer %></td>
+        <td><%= invoice.issue %></td>
+        <td><%= l invoice.created_at, format: :simple %></td>
+        <td><%= l invoice.due_at, format: :simple %></td>
+        <td><%= number_to_currency invoice.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

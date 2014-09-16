@@ -1,0 +1,24 @@
+<h1>Račun <%= resource.reference_number %>/ REV /<%= resource.created_at.strftime("%Y") %></h1>
+
+
+
+<p>
+  <strong>Skupaj brez DDV:</strong>
+  <%= number_to_currency resource.subtotal %>
+</p>
+<p>
+  <strong>DDV:</strong>
+  <%= number_to_percentage resource.tax_percent %>
+</p>
+<p>
+  <strong>Davek:</strong>
+  <%= number_to_currency resource.tax %>
+</p>
+<p>
+  <strong>Skupaj za plačilo:</strong>
+  <%= number_to_currency resource.total %>
+</p>
+
+<p>
+  <%= link_to "Natisni", print_admin_invoice_path(resource)%>
+</p>

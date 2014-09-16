@@ -18,3 +18,5 @@ pickle-email-*.html
 app/assets/stylesheets/config.rb
 public/assets
 config/s3.yml
+latest.dump
+vzgojiteljica.sublime-workspace

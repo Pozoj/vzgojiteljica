@@ -35,6 +35,22 @@ Web3::Application.routes.draw do
 
   get '/avtorji-spletne-aplikacije', to: 'pages#authors'
 
+  namespace :admin do
+    root to: 'admin#index'
+    resources :entities
+    resources :customers
+    resources :subscribers
+    resources :posts
+    resources :subscriptions
+    resources :plans
+    resources :batches
+    resources :remarks
+    resources :invoices do
+      get :print, on: :member
+      get :print_all, on: :collection
+    end
+  end
+
   # You can have the root of your site routed with "root"
   # root to: 'copies#show', id: 'pages#index'
   root to: 'pages#index'

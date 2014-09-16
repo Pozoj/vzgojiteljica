@@ -1,0 +1,18 @@
+.jumbotron
+  %h1 
+    Vzgojiteljica
+    %br
+    %small= l Time.now
+
+%h2
+  = Customer.all.count
+  %small naročnikov
+
+%h2
+  = Subscriber.active.sum(:quantity)
+  %small izvodov
+
+%h2
+  = @last_issue
+  %small zadnja številka
+

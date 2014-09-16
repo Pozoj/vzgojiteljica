@@ -1,6 +1,7 @@
 class Issue < ActiveRecord::Base
   has_many :articles
   has_many :keywords, through: :articles
+  belongs_to :batch
 
   validates :issue, numericality: { only_integer: true, greater_than: 0, less_than: 8 }
 
@@ -22,8 +23,8 @@ class Issue < ActiveRecord::Base
                     :path => "/assets/issues/:id/document/:style_:basename.:extension"
 
   has_attached_file :cover,
-                    :styles => { 
-                      :medium => ["180x180>", :jpg], 
+                    :styles => {
+                      :medium => ["180x180>", :jpg],
                       :original => ["960x720>", :jpg]
                     },
                     :default_url => '/assets/cover_missing.jpg',

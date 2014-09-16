@@ -1,0 +1,10 @@
+%h1= resource.customer
+%h2= resource.plan
+
+= generate_fields resource, [:id, :start, :end]
+
+%h2 Naslovniki
+- generate_table resource.subscribers, [:id, :title, :name, :quantity], [:show], :admin
+
+%h2 Opombe
+- generate_table resource.remarks, [:remark], []

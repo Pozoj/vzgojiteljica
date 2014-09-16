@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
-gem 'rails', '4.0.2'
+ruby '2.1.2'
+gem 'rails', '4.1.4'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -17,7 +17,6 @@ end
 
 group :production do
   gem 'pg'
-  gem 'therubyracer-heroku'
   gem 'unicorn'
 end
 
@@ -28,8 +27,9 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'haml'
 gem 'kaminari'
+gem 'has_scope'
 
 group :development, :test do
   gem 'sqlite3'
-  # gem 'mysql2'
+  gem 'pry'
 end

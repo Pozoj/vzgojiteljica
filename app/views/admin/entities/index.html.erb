@@ -1,0 +1,58 @@
+<br>
+
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Naziv</th>
+      <th>Naslov</th>
+      <th>Pošta</th>
+      <th>Nar.</th>
+      <th>ID za DDV</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entities.each do |entity| %>
+      <tr>
+        <td>
+          <% if entity.customer? %>
+            <span class="glyphicon glyphicon-home"></span>
+          <% elsif entity.subscriber? %>
+            <span class="glyphicon glyphicon-envelope"></span>
+          <% else %>
+            <span class="glyphicon glyphicon-user"></span>
+          <% end %>
+        </td>
+        <td>
+          <% if entity.customer %>
+            <%= link_to "", admin_customer_path(entity.customer) %>
+          <% end %>
+          <%= entity.title or entity.name %>
+          <% unless entity.customer? %>
+            <br>
+            <small class="text-muted"><%= entity.customer %></small>
+          <% end %>
+        </td>
+        <td><%= entity.address %></td>
+        <td><%= entity.post %></td>
+        <td>
+          <% if entity.customer? %>
+            <% if entity.subscriptions.active.any? %>
+              <span class="active" style="color: green;">&#10003;</span>
+            <% else %>
+              <span class="inactive" style="color: red;">&#10007;</span>
+            <% end %>
+          <% elsif entity.subscriber? %>
+            <% if entity.subscription.active? %>
+              <span class="active" style="color: green;">&#10003;</span>
+            <% else %>
+              <span class="inactive" style="color: red;">&#10007;</span>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= entity.vat_id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @entities %>

@@ -1,0 +1,42 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require admin.scss
+ */
+
+#container {
+  padding-top: 48px;
+}
+
+#filter_global {
+  width: 300px;
+}
+
+#new_filter {
+  position: relative;
+}
+#new_filter .advanced {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  background: #222;
+  white-space: nowrap;
+  padding: 10px 15px 15px 15px;
+}
+
+#header:hover .advanced {
+  display: block;
+}
+
+.rowlinks tr:hover td {
+  cursor: pointer;
+  background: #efefef;
+}

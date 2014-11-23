@@ -1,5 +1,12 @@
 %h1= resource
 
 = simple_form_for [:admin, resource] do |f|
-  = render "admin/entities/fields", f: f
+  = f.input :title
+  = f.input :address
+  = f.association :post
+  = f.input :city
+  = f.input :phone
+  = f.input :email
+  = f.input :vat_id
+  = f.input :vat_exempt
   = f.submit

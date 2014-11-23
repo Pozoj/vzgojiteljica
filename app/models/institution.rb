@@ -1,5 +1,5 @@
 class Institution < ActiveRecord::Base
-  default_scope order(:name)
+  default_scope { order(:name) }
   has_many :authors
 
   def to_s

@@ -4,7 +4,7 @@ class Author < ActiveRecord::Base
   belongs_to :institution
   belongs_to :post
 
-  default_scope order('last_name, first_name, institution_id')
+  default_scope { order('last_name, first_name, institution_id') }
 
   validates_presence_of :last_name
 

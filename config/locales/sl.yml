@@ -285,9 +285,9 @@ sl:
        many:   "%{count} minute"
        other: "%{count} minut"
      about_x_hours:
-       one:   "okoli 1 ura"
-       few:   "okoli 2 uri"
-       many:   "okoli %{count} ure"
+       one:   "okoli 1 uro"
+       few:   "okoli 2 urama"
+       many:   "okoli %{count} urami"
        other: "okoli %{count} ur"
      x_days:
        one:   "1 dan"

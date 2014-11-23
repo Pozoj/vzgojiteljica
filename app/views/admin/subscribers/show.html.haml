@@ -1,0 +1,83 @@
+%h1
+  = resource
+  %small.muted
+    Prejemnik za
+    = link_to resource.customer, [:admin, resource.customer]
+
+.admin_actions
+  = link_to "Uredi", edit_admin_subscriber_path(resource)
+
+.row
+  .col-xs-6
+    .details.panel.panel-default
+      .panel-body
+        %strong= I18n.t 'attributes.title'
+        %p= resource.title
+        %strong= I18n.t 'attributes.address'
+        %p= resource.address
+        %strong= I18n.t 'attributes.post'
+        %p= resource.post
+        - if resource.city?
+          %strong= I18n.t 'attributes.city'
+          %p= resource.city
+        - if resource.phone?
+          %strong= I18n.t 'attributes.phone'
+          %p= resource.phone
+        - if resource.email?
+          %strong= I18n.t 'attributes.email'
+          %p= mail_to resource.email
+
+  .col-xs-6
+    .panel.panel-default
+      .panel-heading 
+        %h3.panel-title Opombe
+      %table.table
+        %tbody
+          - resource.remarks.each do |r|
+            %tr
+              %td= r.remark
+              %td= r.created_at
+              %td= link_to "x", [:admin, r], method: :delete
+      .panel-body
+        = simple_form_for [:admin, resource.remarks.build(user: current_user)], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
+          = f.hidden_field :user_id
+          = f.hidden_field :remarkable_id
+          = f.hidden_field :remarkable_type
+          = f.input :remark, placeholder: "Nova opomba", label: false
+          = f.submit :Shrani
+
+
+.panel.panel-default
+  .panel-heading 
+    %h3.panel-title Naročnine
+
+  %table.table
+    %thead
+      %tr
+        %th ID
+        %th Aktivna
+        %th Pričetek
+        %th Konec
+        %th Popust
+        %th Plan
+
+        %th
+    %tbody
+      - resource.subscriptions.each do |s|
+        %tr
+          %td= s.id
+          %td 
+            - if s.active?
+              %small.label.label-success Aktivna
+            - else
+              %small.label.label-danger Neaktivna
+          %td
+            - if s.start?
+              = l s.start
+          %td
+            - if s.end?
+              = l s.end
+          %td= number_to_percentage s.discount || 0
+          %td= s.plan
+          %td
+            = link_to "Odpri", admin_subscription_path(s)

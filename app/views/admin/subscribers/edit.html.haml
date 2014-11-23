@@ -1,0 +1,15 @@
+%h1
+  = resource
+  %small.muted
+    = resource.customer
+
+= simple_form_for [:admin, resource] do |f|
+  = f.input :title
+  = f.input :address
+  = f.association :post
+  = f.input :city
+  = f.input :phone
+  = f.input :email
+  = f.submit
+
+= simple_form_for [:admin, resource.subscription]

@@ -1,0 +1,59 @@
+<h1>
+  Naročnina
+  <% if resource.active? %>
+    <small class="label label-success">Aktivna</small>
+  <% else %>
+    <small class="label label-danger">Neaktivna</small>
+  <% end %>
+  <br>
+  <small class="muted">
+    Naročnik
+    <%= link_to resource.customer, [:admin, resource.customer] %>,
+    prejemnik
+    <%= link_to resource.subscriber, [:admin, resource.subscriber] %>
+  </small>
+</h1>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong>Pričetek:</strong>
+        <p>
+          <%= l resource.start %>
+        </p>
+        <% if resource.end %>
+          <strong>Konec:</strong>
+          <p>
+            <%= l resource.end %>
+          </p>
+        <% end %>
+        <% if resource.discount %>
+          <strong>Popust:</strong>
+          <p>
+            <%= number_to_percentage resource.discount %>
+          </p>
+        <% end %>
+        <strong>Plan:</strong>
+        <p>
+          <%= resource.plan %>
+        </p>
+        <hr>
+        <strong>Kreiran:</strong>
+        <p>
+          <%= l resource.created_at %>
+        </p>
+        <strong>Osvežen:</strong>
+        <p>
+          <%= l resource.updated_at %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <%= render "admin/remarks/form", resource: resource %>
+  </div>
+  <div class="col-xs-6">
+
+  </div>
+</div>

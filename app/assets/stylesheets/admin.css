@@ -13,6 +13,10 @@
 
 #container {
   padding-top: 48px;
+  position: relative;
+}
+#container > h1 {
+  padding-bottom: 25px;
 }
 
 #filter_global {
@@ -39,4 +43,10 @@
 .rowlinks tr:hover td {
   cursor: pointer;
   background: #efefef;
+}
+
+.admin_actions {
+  position: absolute;
+  top: 75px;
+  right: 15px;
 }

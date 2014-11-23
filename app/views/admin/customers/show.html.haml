@@ -1,57 +1,16 @@
 %h1= resource
 
 .admin_actions
-  = link_to "Uredi", edit_admin_customer_path(resource)
+  = link_to edit_admin_customer_path(resource), class: 'btn btn-default' do
+    %i.glyphicon.glyphicon-edit
+    Uredi
 
 .row
   .col-xs-6
     .details.panel.panel-default
-      .panel-body
-        %strong= I18n.t 'attributes.title'
-        %p= resource.title
-        %strong= I18n.t 'attributes.address'
-        %p= resource.address
-        %strong= I18n.t 'attributes.post'
-        %p= resource.post
-        - if resource.city?
-          %strong= I18n.t 'attributes.city'
-          %p= resource.city
-        - if resource.phone?
-          %strong= I18n.t 'attributes.phone'
-          %p= resource.phone
-        - if resource.email?
-          %strong= I18n.t 'attributes.email'
-          %p= mail_to resource.email
-        - if resource.vat_exempt?
-          %strong= I18n.t 'attributes.vat_exempt'
-        - else
-          %strong= I18n.t 'attributes.vat_id'
-          %p
-            - if resource.vat_id? && !resource.vat_id.to_i.zero?
-              = resource.vat_id
-            - else
-              .muted Manjka
+      .panel-body= render "customer_info", resource: resource
 
-  .col-xs-6
-    .panel.panel-default
-      .panel-heading 
-        %h3.panel-title Opombe
-
-      %table.table
-        %tbody
-          - resource.remarks.each do |r|
-            %tr
-              %td= r.remark
-              %td= r.created_at
-              %td= link_to "x", [:admin, r], method: :delete
-      .panel-body
-        = simple_form_for [:admin, resource.remarks.build(user: current_user)], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
-          = f.hidden_field :user_id
-          = f.hidden_field :remarkable_id
-          = f.hidden_field :remarkable_type
-          = f.input :remark, placeholder: "Nova opomba", label: false
-          = f.submit :Shrani
-
+  .col-xs-6= render "admin/remarks/form", resource: resource
 
 .panel.panel-default
   .panel-heading 
@@ -82,9 +41,9 @@
               %small.text-muted== (#{subscription.id})
               %br
               - if subscription.start?
-                %small.label.label-success= subscription.start
+                %small.label.label-success= l subscription.start
               - if subscription.end?
-                %small.label.label-danger= subscription.end
+                %small.label.label-danger= l subscription.end
 
 
 .panel.panel-default

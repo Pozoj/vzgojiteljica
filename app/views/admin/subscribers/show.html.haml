@@ -5,7 +5,9 @@
     = link_to resource.customer, [:admin, resource.customer]
 
 .admin_actions
-  = link_to "Uredi", edit_admin_subscriber_path(resource)
+  = link_to edit_admin_subscriber_path(resource), class: 'btn btn-default' do
+    %i.glyphicon.glyphicon-edit
+    Uredi
 
 .row
   .col-xs-6
@@ -27,50 +29,32 @@
           %strong= I18n.t 'attributes.email'
           %p= mail_to resource.email
 
-  .col-xs-6
-    .panel.panel-default
-      .panel-heading 
-        %h3.panel-title Opombe
-      %table.table
-        %tbody
-          - resource.remarks.each do |r|
-            %tr
-              %td= r.remark
-              %td= r.created_at
-              %td= link_to "x", [:admin, r], method: :delete
-      .panel-body
-        = simple_form_for [:admin, resource.remarks.build(user: current_user)], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
-          = f.hidden_field :user_id
-          = f.hidden_field :remarkable_id
-          = f.hidden_field :remarkable_type
-          = f.input :remark, placeholder: "Nova opomba", label: false
-          = f.submit :Shrani
-
+  .col-xs-6= render "admin/remarks/form", resource: resource
 
 .panel.panel-default
   .panel-heading 
     %h3.panel-title Naročnine
 
-  %table.table
+  %table.table.rowlinks
     %thead
       %tr
+        %th
         %th ID
-        %th Aktivna
         %th Pričetek
         %th Konec
         %th Popust
         %th Plan
-
-        %th
     %tbody
       - resource.subscriptions.each do |s|
         %tr
-          %td= s.id
-          %td 
+          %td
             - if s.active?
               %small.label.label-success Aktivna
             - else
               %small.label.label-danger Neaktivna
+          %td
+            = link_to "", admin_subscription_path(s)
+            = s.id
           %td
             - if s.start?
               = l s.start
@@ -79,5 +63,3 @@
               = l s.end
           %td= number_to_percentage s.discount || 0
           %td= s.plan
-          %td
-            = link_to "Odpri", admin_subscription_path(s)

@@ -33,7 +33,7 @@ class Entity < ActiveRecord::Base
       entities = entities.where(Entity.arel_table[filter].matches("%#{filters[filter]}%"))
     end
 
-    if filters[:global] and filters[:global].present?
+    if filters[:global] && filters[:global].present?
       query = nil
       PARTIAL_FILTERS.each do |filter|
         unless query
@@ -54,10 +54,10 @@ class Entity < ActiveRecord::Base
     elsif subscriber?
       subscription.customer
     elsif respond_to? :entity
-      if entity and entity.customer?
+      if entity && entity.customer?
         entity
-      elsif entity and entity.subscriber?
-        entity.subscription.customer
+      elsif entity && entity.subscriber?
+        entity.customer
       end
     end
   end

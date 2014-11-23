@@ -16,27 +16,15 @@ class Subscription < ActiveRecord::Base
     subscriber.quantity || 0
   end
 
-  # def price
-  #   plan.price
-  # end
-
-  # def subtotal
-  #   quantity * price
-  # end
-
-  # def total
-  #   subtotal * tax_multiplier
-  # end
-
-  # def tax
-  #   total - subtotal
-  # end
-
   def active?
     !self.end.present? || self.end >= Date.today
   end
 
   def inactive?
     !active?
+  end
+
+  def to_s
+    "#{plan} za #{subscriber}"
   end
 end

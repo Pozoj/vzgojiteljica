@@ -16,3 +16,24 @@
   = @last_issue
   %small zadnja številka
 
+%br
+%br
+
+.panel.panel-default
+  .panel-heading 
+    %h3.panel-title Zadnje opombe
+  %table.table
+    %tbody
+      - Remark.all.order(created_at: :desc).limit(10).each do |r|
+        %tr
+          %td= truncate r.remark, length: 255
+          %td
+            - if r.remarkable
+              = link_to r.remarkable.to_s, polymorphic_path([:admin, r.remarkable])
+          %td= r.user
+          %td
+            - if r.created_at > 1.week.ago
+              pred
+              = distance_of_time_in_words_to_now r.created_at
+            - else
+              = l r.created_at

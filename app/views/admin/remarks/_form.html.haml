@@ -3,13 +3,14 @@
     %h3.panel-title Opombe
   %table.table
     %tbody
-      - resource.remarks.each do |r|
+      - resource.remarks.order(created_at: :desc).each do |r|
         %tr
           %td= r.remark
           %td
             %small.muted
               = r.user
               - if r.created_at > 1.week.ago
+                pred
                 = distance_of_time_in_words_to_now r.created_at
               - else
                 = l r.created_at, format: :short

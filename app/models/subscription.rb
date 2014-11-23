@@ -17,7 +17,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def active?
-    !self.end.present? || self.end >= Date.today
+    !self.end.present? || self.end > Date.today
   end
 
   def inactive?

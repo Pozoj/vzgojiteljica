@@ -8,7 +8,17 @@
 .row
   .col-xs-6
     .details.panel.panel-default
-      .panel-body= render "customer_info", resource: resource
+      .panel-body
+        = render "fields", resource: resource
+
+        - if resource.contact_person
+          %hr
+          %h4 Kontaktna oseba
+          = render "admin/people/fields", resource: resource.contact_person
+        - if resource.billing_person
+          %hr
+          %h4 Plačilni kontakt
+          = render "admin/people/fields", resource: resource.billing_person
 
   .col-xs-6= render "admin/remarks/form", resource: resource
 
@@ -44,7 +54,6 @@
                 %small.label.label-success= l subscription.start
               - if subscription.end?
                 %small.label.label-danger= l subscription.end
-
 
 .panel.panel-default
   .panel-heading 

@@ -49,6 +49,8 @@ sl:
     issue: Številka
     issue_id: Številka
     remember_me: Zapomni si me na tem računalniku
+    entities:
+      title: "Naziv"
 
   forms:
     submit:
@@ -280,15 +282,15 @@ sl:
        many:   "manj kot %{count} minute"
        other: "manj kot %{count} minut"
      x_minutes:
-       one:   "1 minuta"
-       few:   "2 minuti"
+       one:   "1 minuto"
+       few:   "2 minutama"
        many:   "%{count} minute"
-       other: "%{count} minut"
+       other: "%{count} minutami"
      about_x_hours:
        one:   "okoli 1 uro"
        few:   "okoli 2 urama"
        many:   "okoli %{count} urami"
-       other: "okoli %{count} ur"
+       other: "okoli %{count} urami"
      x_days:
        one:   "1 dan"
        few:   "2 dneva"

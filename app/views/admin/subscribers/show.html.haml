@@ -12,22 +12,7 @@
 .row
   .col-xs-6
     .details.panel.panel-default
-      .panel-body
-        %strong= I18n.t 'attributes.title'
-        %p= resource.title
-        %strong= I18n.t 'attributes.address'
-        %p= resource.address
-        %strong= I18n.t 'attributes.post'
-        %p= resource.post
-        - if resource.city?
-          %strong= I18n.t 'attributes.city'
-          %p= resource.city
-        - if resource.phone?
-          %strong= I18n.t 'attributes.phone'
-          %p= resource.phone
-        - if resource.email?
-          %strong= I18n.t 'attributes.email'
-          %p= mail_to resource.email
+      .panel-body= render "fields", resource: resource
 
   .col-xs-6= render "admin/remarks/form", resource: resource
 

@@ -1,0 +1,8 @@
+%strong= I18n.t 'attributes.name'
+%p= resource.name
+- if resource.phone?
+  %strong= I18n.t 'attributes.phone'
+  %p= resource.phone
+- if resource.email?
+  %strong= I18n.t 'attributes.email'
+  %p= mail_to resource.email

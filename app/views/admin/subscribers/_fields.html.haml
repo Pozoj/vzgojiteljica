@@ -1,4 +1,4 @@
-%strong= I18n.t 'attributes.title'
+%strong= I18n.t 'attributes.entities.title'
 %p= resource.title
 %strong= I18n.t 'attributes.address'
 %p= resource.address
@@ -13,12 +13,3 @@
 - if resource.email?
   %strong= I18n.t 'attributes.email'
   %p= mail_to resource.email
-- if resource.vat_exempt?
-  %strong= I18n.t 'attributes.vat_exempt'
-- else
-  %strong= I18n.t 'attributes.vat_id'
-  %p
-    - if resource.vat_id? && !resource.vat_id.to_i.zero?
-      = resource.vat_id
-    - else
-      .muted Manjka

@@ -1,6 +1,56 @@
 %h1= resource
 
-= generate_fields resource, [:title, :name, :address, :post, :city, :phone, :email, :vat_id]
+.admin_actions
+  = link_to "Uredi", edit_admin_customer_path(resource)
+
+.row
+  .col-xs-6
+    .details.panel.panel-default
+      .panel-body
+        %strong= I18n.t 'attributes.title'
+        %p= resource.title
+        %strong= I18n.t 'attributes.name'
+        %p= resource.name
+        %strong= I18n.t 'attributes.address'
+        %p= resource.address
+        %strong= I18n.t 'attributes.post'
+        %p= resource.post
+        %strong= I18n.t 'attributes.city'
+        %p= resource.city
+        %strong= I18n.t 'attributes.phone'
+        %p= resource.phone
+        %strong= I18n.t 'attributes.email'
+        %p= resource.email
+        - if resource.vat_exempt?
+          %strong= I18n.t 'attributes.vat_exempt'
+        - else
+          %strong= I18n.t 'attributes.vat_id'
+          %p
+            - if resource.vat_id? && !resource.vat_id.to_i.zero?
+              = resource.vat_id
+            - else
+              .muted Manjka
+
+  .col-xs-6
+    .panel.panel-default
+      .panel-heading 
+        %h3.panel-title Opombe
+
+      %table.table
+        %tbody
+          - resource.remarks.each do |r|
+            %tr
+              %td= r.remark
+              %td= r.created_at
+              %td= link_to "x", [:admin, r], method: :delete
+      .panel-body
+        = simple_form_for [:admin, resource.remarks.build(user: current_user)], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
+          = f.hidden_field :user_id
+          = f.hidden_field :remarkable_id
+          = f.hidden_field :remarkable_type
+          = f.input :remark, placeholder: "Nova opomba", label: false
+          = f.submit :Shrani
+
 
 .panel.panel-default
   .panel-heading 
@@ -24,46 +74,36 @@
           %td= s.post
           %td= s.quantity
           %td
-            = s.subscription.plan
-            %small.text-muted
-              (Naročnina
-              == ##{s.subscription.id})
+            - s.subscriptions.each do |subscription|
+              = subscription.plan
+              %small.text-muted== (#{subscription.id})
+              %br
+              - if subscription.start?
+                %small.label.label-success= subscription.start
+              - if subscription.end?
+                %small.label.label-danger= subscription.end
+
 
 .panel.panel-default
   .panel-heading 
-    %h3.panel-title Naročnine
+    %h3.panel-title Izdani računi
 
-  %table.table
+  %table.table.rowlinks
     %thead
       %tr
-        %th ID
-        %th Pričetek
-        %th Konec
-        %th Tip
-        %th Prejemniki
+        %th Ref. št.
+        %th Številka
+        %th Izdan
+        %th Rok
+        %th Znesek
     %tbody
-      - resource.subscriptions.each do |s|
+      - resource.invoices.each do |invoice|
         %tr
-          %td= s.id
-          %td= s.start or 'Neznan'
-          %td= s.end
-          %td= s.plan
-          %td= s.subscribers.map(&:to_s).join(', ')
-
-.panel.panel-default
-  .panel-heading 
-    %h3.panel-title Opombe
-
-  %table.table
-    %tbody
-      - resource.remarks.each do |r|
-        %tr
-          %td= r.remark
-          %td= r.created_at
-
-  = form_for resource.remarks.build(user: current_user), url: admin_remarks_path do |f|
-    = f.text_field :remark
-    = f.hidden_field :remarkable_id
-    = f.hidden_field :remarkable_type
-    = f.hidden_field :user_id
-    = f.submit :Shrani
+          %td
+            = link_to "", admin_invoice_path(invoice)
+            = invoice.reference_number
+          %td= invoice.issue
+          %td= l invoice.created_at, format: :simple
+          %td= l invoice.due_at, format: :simple
+          %td= number_to_currency invoice.total
+        </tr>

@@ -17,7 +17,7 @@ class Admin::InvoicesController < InheritedResources::Base
   end
 
   def print_all
-    @invoices = Invoice.all
+    @invoices = Invoice.where(issue_id: 1)
     render layout: 'print'
   end
 end

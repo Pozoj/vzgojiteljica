@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
-gem 'rails', '4.1.4'
+ruby '2.1.4'
+gem 'rails', '~> 4.1.8'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -13,6 +13,7 @@ group :assets do
   gem 'chosen-rails'
   gem 'compass-rails', github: 'Compass/compass-rails'
   gem 'jquery-rails', '~> 2.3.0'
+  gem 'sprockets', '2.11.0'
 end
 
 group :production do
@@ -22,7 +23,7 @@ end
 
 gem 'devise'
 gem 'inherited_resources'
-gem 'simple_form'
+gem 'simple_form', '~> 3.1.0.rc2'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'haml'

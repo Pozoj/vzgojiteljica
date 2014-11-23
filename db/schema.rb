@@ -11,48 +11,74 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902171239) do
+ActiveRecord::Schema.define(version: 20140923190333) do
 
-  create_table "articles", force: true do |t|
-    t.integer  "section_id"
-    t.integer  "issue_id"
-    t.text     "title",                 limit: 255
-    t.text     "abstract"
-    t.text     "abstract_html"
-    t.text     "abstract_english"
-    t.text     "abstract_english_html"
+  create_table "_line_items_old_20140923", force: true do |t|
+    t.integer  "invoice_id"
+    t.string   "entity_name"
+    t.string   "product"
+    t.integer  "quantity"
+    t.string   "unit"
+    t.decimal  "price_per_item"
+    t.decimal  "discount_percent"
+    t.decimal  "price_per_item_with_discount"
+    t.decimal  "tax"
+    t.decimal  "subtotal"
+    t.decimal  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "keywords_string"
+  end
+
+  create_table "_subscriptions_old_20140922", force: true do |t|
+    t.integer  "customer_id"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "discount"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "articles", force: true do |t|
+    t.integer   "section_id"
+    t.integer   "issue_id"
+    t.text      "title"
+    t.text      "abstract"
+    t.text      "abstract_html"
+    t.text      "abstract_english"
+    t.text      "abstract_english_html"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "keywords_string"
   end
 
   add_index "articles", ["issue_id"], name: "index_articles_on_issue_id"
   add_index "articles", ["section_id"], name: "index_articles_on_section_id"
 
   create_table "authors", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "address"
-    t.integer  "post_id"
-    t.string   "email"
-    t.text     "notes"
-    t.integer  "institution_id"
-    t.string   "phone"
-    t.string   "title"
-    t.string   "education"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "first_name"
+    t.string    "last_name"
+    t.string    "address"
+    t.integer   "post_id"
+    t.string    "email"
+    t.text      "notes"
+    t.integer   "institution_id"
+    t.string    "phone"
+    t.string    "title"
+    t.string    "education"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "authors", ["institution_id"], name: "index_authors_on_institution_id"
   add_index "authors", ["post_id"], name: "index_authors_on_post_id"
 
   create_table "authorships", force: true do |t|
-    t.integer  "article_id"
-    t.integer  "author_id"
-    t.integer  "position",   default: 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "article_id"
+    t.integer   "author_id"
+    t.integer   "position",   default: 1
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "authorships", ["article_id"], name: "index_authorships_on_article_id"
@@ -68,12 +94,12 @@ ActiveRecord::Schema.define(version: 20140902171239) do
   end
 
   create_table "copies", force: true do |t|
-    t.string   "page_code"
-    t.text     "copy"
-    t.text     "copy_html"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
+    t.string    "page_code"
+    t.text      "copy"
+    t.text      "copy_html"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "title"
   end
 
   add_index "copies", ["page_code"], name: "index_copies_on_page_code"
@@ -92,6 +118,7 @@ ActiveRecord::Schema.define(version: 20140902171239) do
     t.integer  "quantity"
     t.integer  "entity_id"
     t.integer  "subscription_id"
+    t.integer  "customer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -101,55 +128,53 @@ ActiveRecord::Schema.define(version: 20140902171239) do
   add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id"
 
   create_table "inquiries", force: true do |t|
-    t.string   "name"
-    t.string   "institution"
-    t.string   "email"
-    t.string   "phone"
-    t.boolean  "show"
-    t.string   "subject"
-    t.text     "question"
-    t.text     "answer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.string    "institution"
+    t.string    "email"
+    t.string    "phone"
+    t.boolean   "show"
+    t.string    "subject"
+    t.text      "question"
+    t.text      "answer"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "institutions", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "invoices", force: true do |t|
-    t.integer  "subscription_id"
+    t.integer  "customer_id"
     t.integer  "issue_id"
     t.date     "due_at"
     t.decimal  "subtotal"
     t.decimal  "total"
     t.decimal  "tax"
+    t.decimal  "tax_percent"
     t.boolean  "paid"
     t.integer  "reference_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "invoices", ["issue_id"], name: "index_invoices_on_issue_id"
-  add_index "invoices", ["subscription_id"], name: "index_invoices_on_subscription_id"
-
   create_table "issues", force: true do |t|
-    t.integer  "year"
-    t.integer  "issue"
-    t.date     "published_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "cover_file_name"
-    t.string   "cover_content_type"
-    t.integer  "cover_file_size"
-    t.datetime "cover_updated_at"
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
-    t.datetime "document_updated_at"
-    t.integer  "batch_id"
+    t.integer   "year"
+    t.integer   "issue"
+    t.date      "published_at"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "cover_file_name"
+    t.string    "cover_content_type"
+    t.integer   "cover_file_size"
+    t.timestamp "cover_updated_at"
+    t.string    "document_file_name"
+    t.string    "document_content_type"
+    t.integer   "document_file_size"
+    t.timestamp "document_updated_at"
+    t.integer   "batch_id"
   end
 
   add_index "issues", ["batch_id"], name: "index_issues_on_batch_id"
@@ -157,10 +182,10 @@ ActiveRecord::Schema.define(version: 20140902171239) do
   add_index "issues", ["year"], name: "index_issues_on_year"
 
   create_table "keywordables", force: true do |t|
-    t.integer  "keyword_id", limit: 255
-    t.integer  "article_id", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "keyword_id"
+    t.integer   "article_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "keywordables", ["article_id", "keyword_id"], name: "index_keywordables_on_article_id_and_keyword_id", unique: true
@@ -169,37 +194,84 @@ ActiveRecord::Schema.define(version: 20140902171239) do
   add_index "keywordables", ["keyword_id"], name: "index_keywordables_on_keyword_id"
 
   create_table "keywords", force: true do |t|
-    t.string   "keyword"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "keyword"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "keywords", ["keyword"], name: "index_keywords_on_keyword", unique: true
 
-  create_table "news", force: true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.text     "body_html"
-    t.string   "author"
+  create_table "legacies", id: false, force: true do |t|
+    t.integer  "customer_id"
+    t.string   "customer_title",            limit: nil
+    t.string   "customer_address",          limit: nil
+    t.integer  "customer_post_id"
+    t.string   "customer_bankaccount",      limit: nil
+    t.string   "customer_phone1",           limit: nil
+    t.string   "customer_phone3",           limit: nil
+    t.string   "customer_email",            limit: nil
+    t.string   "customer_contact_person",   limit: nil
+    t.string   "customer_payment_person",   limit: nil
+    t.string   "customer_notes",            limit: nil
+    t.string   "customer_vat_id",           limit: nil
+    t.string   "customer_vat_exempt",       limit: nil
+    t.integer  "customer_annuity"
+    t.integer  "customer_id_again"
+    t.integer  "subscriber_id"
+    t.string   "subcriber_title",           limit: nil
+    t.string   "subscriber_address",        limit: nil
+    t.integer  "subscriber_post_id"
+    t.datetime "subscription_start"
+    t.string   "subscription_quantity",     limit: nil
+    t.datetime "subscription_change"
+    t.datetime "subscription_last_event"
+    t.string   "subscriber_contact_person", limit: nil
+    t.string   "subscriber_notes",          limit: nil
+    t.datetime "subscription_end"
+    t.boolean  "subscription_status"
+  end
+
+  create_table "line_items", force: true do |t|
+    t.integer  "invoice_id"
+    t.string   "entity_name"
+    t.string   "product"
+    t.integer  "quantity"
+    t.string   "unit"
+    t.decimal  "price_per_item"
+    t.decimal  "price_per_item_with_discount"
+    t.decimal  "discount_percent"
+    t.decimal  "tax"
+    t.decimal  "tax_percent"
+    t.decimal  "subtotal"
+    t.decimal  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "news", force: true do |t|
+    t.string    "title"
+    t.text      "body"
+    t.text      "body_html"
+    t.string    "author"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+  end
+
   create_table "orders", force: true do |t|
-    t.string   "title"
-    t.string   "name"
-    t.string   "address"
-    t.integer  "post_id"
-    t.string   "phone"
-    t.string   "fax"
-    t.string   "email"
-    t.string   "vat_id"
-    t.string   "place_and_date"
-    t.text     "comments"
-    t.integer  "quantity"
-    t.string   "ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "title"
+    t.string    "name"
+    t.string    "address"
+    t.integer   "post_id"
+    t.string    "phone"
+    t.string    "fax"
+    t.string    "email"
+    t.string    "vat_id"
+    t.string    "place_and_date"
+    t.text      "comments"
+    t.integer   "quantity"
+    t.string    "ip"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "plans", force: true do |t|
@@ -212,11 +284,13 @@ ActiveRecord::Schema.define(version: 20140902171239) do
   end
 
   create_table "posts", id: false, force: true do |t|
-    t.integer  "id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "id"
+    t.string    "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
+
+  add_index "posts", ["id"], name: "index_posts_on_id"
 
   create_table "remarks", force: true do |t|
     t.integer  "user_id"
@@ -228,14 +302,14 @@ ActiveRecord::Schema.define(version: 20140902171239) do
   end
 
   create_table "sections", force: true do |t|
-    t.string   "name"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.integer   "position"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "subscriptions", force: true do |t|
-    t.integer  "customer_id"
+    t.integer  "subscriber_id"
     t.date     "start"
     t.date     "end"
     t.integer  "discount"
@@ -247,20 +321,20 @@ ActiveRecord::Schema.define(version: 20140902171239) do
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "entity_id"
+    t.string    "name"
+    t.string    "email",                  default: "", null: false
+    t.string    "encrypted_password",     default: "", null: false
+    t.string    "reset_password_token"
+    t.timestamp "reset_password_sent_at"
+    t.timestamp "remember_created_at"
+    t.integer   "sign_in_count",          default: 0
+    t.timestamp "current_sign_in_at"
+    t.timestamp "last_sign_in_at"
+    t.string    "current_sign_in_ip"
+    t.string    "last_sign_in_ip"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "entity_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -5,9 +5,9 @@ Entity.delete_all
 Subscription.delete_all
 Plan.delete_all
 
-plan_annual = Plan.create name: "Vzgojiteljica 2014 - Letna naročnina", billing_frequency: 1, price: 6
-plan_per_issue = Plan.create name: "Vzgojiteljica 2014 - Posamezna revija", billing_frequency: 6, price: 1
-plan_free = Plan.create name: "Vzgojiteljica 2014 - Brezplačno", billing_frequency: 6, price: 0
+PLAN_ANNUAL = Plan.create name: "Vzgojiteljica 2014 - Letna naročnina", billing_frequency: 1, price: 34.8
+PLAN_PER_ISSUE = Plan.create name: "Vzgojiteljica 2014 - Posamezna revija", billing_frequency: 6, price: 5.3
+PLAN_FREE = Plan.create name: "Vzgojiteljica 2014 - Brezplačno", billing_frequency: 6, price: 0
 
 def levenshtein(s, t)
   s = s.downcase
@@ -68,23 +68,57 @@ def parse_customer r
   c
 end
 
-def parse_subscriber r
+def parse_subscription r1
+  s = Subscription.new
+  s.start = fix_and_parse_date r1.subscription_start_before_type_cast
+  s.end = fix_and_parse_date r1.subscription_end_before_type_cast
+
+  if r1.subscriber_contact_person.present? && r1.subscriber_contact_person.match(/zastonj/i)
+    s.plan = PLAN_FREE
+  elsif r1.customer_id_again == 0
+    s.plan = PLAN_FREE
+  elsif r1.customer_id_again == 1
+    s.plan = PLAN_ANNUAL
+  elsif r1.customer_id_again == 6
+    s.plan = PLAN_PER_ISSUE
+  else
+    puts "PLAN ERROR #{r1.customer_id_again}"
+  end
+
+  s.save!
+
+  s.remarks.create remark: "LAST CHANGE: #{r1.subscription_change}\nPREV QUANTITY: #{r1.subscription_last_event}\nSTATUS: #{r1.subscription_status}"
+
+  puts "[SUBSCRIPTION] #{s.inspect}"
+
+  s
+end
+
+def parse_subscriber r, true_customer = false
   s = Subscriber.new
   s.title = titleize r.subcriber_title
   s.address = titleize r.subscriber_address
   s.post_id = r.subscriber_post_id
-  s.quantity = r.subscription_quantity
+  s.quantity = r.subscription_last_event
   s.save!
 
+  s.subscriptions << parse_subscription(r)
+
   if r.subscriber_contact_person.present?
-    if r.subscriber_contact_person.match(/.+\@.+\..+/i)
+    if r.subscriber_contact_person.match(/zastonj/i)
+      s.remarks.create remark: 'Zastonj'
+    elsif r.subscriber_contact_person.match(/.+\@.+\..+/i)
       s.email = r.subscriber_contact_person.downcase.strip
       s.save
     elsif r.subscriber_contact_person.match(/\d{2,3}[\/\-]{1}.*/i)
       s.phone = r.subscriber_contact_person.strip
       s.save
     else
-      s.create_contact_person name: titleize(r.subscriber_contact_person)
+      if true_customer
+        s.create_contact_person name: titleize(r.subscriber_contact_person)
+      else
+        s.remarks.create remark: r.subscriber_contact_person.strip
+      end
     end
   end
 
@@ -96,113 +130,34 @@ def parse_subscriber r
   s
 end
 
+def fix_and_parse_date date_string
+  return unless date_string
+  return unless matching = date_string.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/)
+  fixed_date = date_string.gsub("#{matching[1]}/#{matching[2]}/#{matching[3]}", "#{matching[2]}/#{matching[1]}/#{matching[3]}")
+  Date.parse fixed_date
+end
 
 Legacy.all.reject { |r| r.customer_id == 16 }.group_by { |r| r.customer_id }.each do |cid, r|
   # CUSTOMER
   c = parse_customer r.first
   puts "[CUSTOMER] #{c.inspect}"
 
-  s = Subscription.new
-  r1 = r.first
-  s.start = r1.subscription_start
-  s.end = r1.subscription_end
-
-  if r1.customer_id_again == 0
-    s.plan = plan_free
-  elsif r1.customer_id_again == 1
-    s.plan = plan_annual
-  elsif r1.customer_id_again == 6
-    s.plan = plan_per_issue
-  else
-    puts "PLAN ERROR #{r1.customer_id_again}"
-  end
-
-  s.save!
-
-  s.remarks.create remark: "LAST CHANGE: #{r1.subscription_change}\nLAST EVENT: #{r1.subscription_last_event}\nSTATUS: #{r1.subscription_status}"
-
-  puts "[SUBSCRIPTION] #{s.inspect}"
-
-  r.each { |subscriber| s.subscribers << parse_subscriber(subscriber) }
-
-  c.subscriptions << s
+  r.each { |subscriber| c.subscribers << parse_subscriber(subscriber) }
 end
 
 Legacy.where(customer_id: 16).each do |r|
   # CUSTOMER
-  c = Customer.new
+  c = parse_customer r
   c.title = titleize r.subcriber_title
   c.address = titleize r.subscriber_address
   c.post_id = r.subscriber_post_id
-  c.phone = r.customer_phone1 or r.customer_phone3
-  c.email = r.customer_email.downcase
-  c.vat_id = r.customer_vat_id.upcase
   c.vat_exempt = true
   c.save!
 
-  if r.customer_contact_person.present?
-    c.create_contact_person name: titleize(r.customer_contact_person)
-  end
-  if r.customer_payment_person.present?
-    c.create_billing_person name: titleize(r.customer_payment_person)
-  end
-  if r.customer_notes.present?
-    c.remarks.create remark: r.customer_notes
-  end
-  c
+  su = parse_subscriber r, true
 
-  puts "[CUSTOMER] #{c.inspect}"
+  c.email = su.email if su.email
+  c.phone = su.phone if su.phone
 
-  s = Subscription.new
-  s.start = r.subscription_start
-  s.end = r.subscription_end
-
-
-  if r.subscriber_contact_person.present? and r.subscriber_contact_person.match(/zastonj/i)
-    s.plan = plan_free
-  elsif r.customer_id_again == 0
-    s.plan = plan_free
-  elsif r.customer_id_again == 1
-    s.plan = plan_annual
-  elsif r.customer_id_again == 6
-    s.plan = plan_per_issue
-  else
-    puts "PLAN ERROR #{r.customer_id_again}"
-  end
-
-  s.save!
-
-  s.remarks.create remark: "LAST CHANGE: #{r.subscription_change}\nLAST EVENT: #{r.subscription_last_event}\nSTATUS: #{r.subscription_status}"
-
-  puts "[SUBSCRIPTION] #{s.inspect}"
-
-  su = Subscriber.new
-  su.title = titleize r.subcriber_title
-  su.address = titleize r.subscriber_address
-  su.post_id = r.subscriber_post_id
-  su.quantity = r.subscription_quantity
-  su.save!
-
-  if r.subscriber_contact_person.present?
-    if r.subscriber_contact_person.match(/zastonj/i)
-      su.remarks.create remark: 'Zastonj'
-    elsif r.subscriber_contact_person.match(/.+\@.+\..+/i)
-      c.email = r.subscriber_contact_person.downcase.strip
-      c.save
-    elsif r.subscriber_contact_person.match(/\d{2,3}[\/\-]{1}.*/i)
-      c.phone = r.subscriber_contact_person.strip
-      c.save
-    else
-      su.remarks.create remark: r.subscriber_contact_person.strip
-    end
-  end
-
-  if r.subscriber_notes.present?
-    su.remarks.create remark: r.subscriber_notes
-  end
-
-  puts "[SUBSCRIBER] #{su.inspect}"
-
-  s.subscribers << su
-  c.subscriptions << s
+  c.subscribers << su
 end

@@ -1,4 +1,6 @@
 Web3::Application.routes.draw do
+  resources :line_items
+
   devise_for :users
 
   scope :path_names => {:new => "novo", :edit => "uredi", :all => "vse", :search => "isci"} do

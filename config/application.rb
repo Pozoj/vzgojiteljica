@@ -20,5 +20,9 @@ module Web3
     config.i18n.default_locale = :sl
 
     config.assets.precompile += ['print.css', 'admin.css', 'upload.js', 'admin.js']
+
+    config.autoload_paths << Rails.root.join('lib')
+
+    config.action_controller.permit_all_parameters = true
   end
 end

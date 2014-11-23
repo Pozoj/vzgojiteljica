@@ -26,6 +26,7 @@ body {
   padding: 0 50px;
   page-break-after: always;
   page-break-inside: avoid;
+  height: 975px;
 }
 
 table {
@@ -42,8 +43,10 @@ table td, table th {
 }
 
 .recipient {
-  padding-bottom: 120px;
+  padding-bottom: 95px;
   padding-top: 150px;
+  font-size: 16px;
+  line-height: 1.4em;
 }
 
 header {
@@ -66,7 +69,7 @@ header p {
 }
 
 .items {
-  margin-top: 100px;
+  margin-top: 70px;
   font-size: 10px;
 }
 .items table th {
@@ -85,7 +88,10 @@ header p {
 }
 
 .instructions {
-  margin-top: 125px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   text-align: center;
 }
 .instructions p {

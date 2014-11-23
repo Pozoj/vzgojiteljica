@@ -1,7 +1,7 @@
 class CreateInvoices < ActiveRecord::Migration
   def change
     create_table :invoices do |t|
-      t.integer :subscription_id
+      t.integer :customer_id
       t.integer :issue_id
       t.date :due_at
       t.decimal :subtotal

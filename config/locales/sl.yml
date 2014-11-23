@@ -33,6 +33,8 @@ sl:
     address: Naslov
     post: Pošta
     post_id: Poštna št.
+    city: Kraj
+    vat_exempt: "Ni zavezanec za DDV"
     phone: Telefon
     fax: Faks
     vat_id: ID št. za DDV

@@ -14,6 +14,7 @@ class CreateEntities < ActiveRecord::Migration
       t.integer :quantity
       t.integer :entity_id
       t.integer :subscription_id
+      t.integer :customer_id
 
       t.timestamps
     end

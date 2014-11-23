@@ -43,7 +43,7 @@
               <span class="inactive" style="color: red;">&#10007;</span>
             <% end %>
           <% elsif entity.subscriber? %>
-            <% if entity.subscription.active? %>
+            <% if entity.subscriptions.active.any? %>
               <span class="active" style="color: green;">&#10003;</span>
             <% else %>
               <span class="inactive" style="color: red;">&#10007;</span>

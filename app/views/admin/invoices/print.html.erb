@@ -1,3 +1,4 @@
+<% invoice ||= resource %>
 <div class="invoice">
   <header>
     <%= image_tag "pozoj_logo-100w.png" %>
@@ -22,7 +23,7 @@
 
   <div class="recipient">
     <p>
-      <%= invoice.customer %>
+      <strong><%= invoice.customer %></strong>
       <br>
       <%= invoice.customer.address %>
       <br>
@@ -55,27 +56,22 @@
           <th>Cena</th>
           <th>Popust</th>
           <th>Cena s popustom</th>
-          <th>DDV</th>
           <th>Skupaj brez DDV</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><%= invoice.customer %></td>
-          <td>Vzgojiteljica <%= invoice.issue %></td>
-          <td><%= invoice.subscription.quantity %></td>
-          <td>kom</td>
-          <td><%= number_to_currency invoice.subscription.plan.price %></td>
-          <td>
-            <% if invoice.subscription.discount %>
-              <%= number_to_percentage invoice.subscription.discount %></td>
-            <% else %>
-              0%
-            <% end %>
-          <td><%= number_to_currency invoice.subtotal %></td>
-          <td><%= number_to_percentage invoice.tax_percent %></td>
-          <td><%= number_to_currency invoice.subtotal %></td>
-        </tr>
+        <% invoice.line_items.each do |li| %>
+          <tr>
+            <td><%= li.entity_name %></td>
+            <td><%= li.product %></td>
+            <td><%= li.quantity %></td>
+            <td><%= li.unit %></td>
+            <td><%= number_to_currency li.price_per_item %></td>
+            <td><%= number_to_percentage li.discount_percent %></td>
+            <td><%= number_to_currency li.price_per_item_with_discount %></td>
+            <td><%= number_to_currency li.subtotal %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

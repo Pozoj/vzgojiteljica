@@ -3,9 +3,9 @@ class Admin::RemarksController < InheritedResources::Base
   layout "admin"
 
   def create
-    @resource = Remark.new params[:remark], without_protection: true
-    @resource.user = current_user
-    create! { polymorphic_path([:admin, @resource.remarkable]) }
+    @remark = Remark.new params[:remark], without_protection: true
+    @remark.user = current_user
+    create! { polymorphic_path([:admin, @remark.remarkable]) }
   end
 
   def update

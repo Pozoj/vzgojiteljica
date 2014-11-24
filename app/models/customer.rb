@@ -7,5 +7,5 @@ class Customer < Entity
 
   def quantity
     subscriptions.active.inject(0) { |sum, s| sum += s.subscriber.quantity }
-  end 
+  end
 end

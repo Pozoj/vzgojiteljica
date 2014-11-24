@@ -1,5 +1,9 @@
-%strong= I18n.t 'attributes.entities.title'
-%p= resource.title
+- if resource.name?
+  %strong= I18n.t 'attributes.entities.name'
+  %p= resource.name
+- else
+  %strong= I18n.t 'attributes.entities.title'
+  %p= resource.title
 %strong= I18n.t 'attributes.address'
 %p= resource.address
 %strong= I18n.t 'attributes.post'

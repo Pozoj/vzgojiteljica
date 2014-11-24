@@ -23,8 +23,12 @@
   .col-xs-6= render "admin/remarks/form", resource: resource
 
 .panel.panel-default
-  .panel-heading 
-    %h3.panel-title Prejemniki
+  .panel-heading
+    %h3.panel-title
+      Prejemniki
+      = link_to new_admin_subscriber_path(customer_id: resource.id), class: 'btn btn-default btn-xs pull-right' do
+        %i.glyphicon.glyphicon-plus
+        Ustvari
 
   %table.table.rowlinks
     %thead

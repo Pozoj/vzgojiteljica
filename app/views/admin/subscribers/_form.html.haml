@@ -1,0 +1,13 @@
+.form-inputs
+  = f.input :name
+  = f.input :title
+  = f.input :address
+  = f.association :post
+  = f.input :city
+  = f.input :phone
+  = f.input :email
+  %hr
+  = f.input :quantity
+  %hr
+.form-actions
+  = f.button :submit

@@ -18,7 +18,11 @@
 
 .panel.panel-default
   .panel-heading 
-    %h3.panel-title Naročnine
+    %h3.panel-title 
+      Naročnine
+      = link_to new_admin_subscription_path(subscriber_id: resource.id), class: 'btn btn-default btn-xs pull-right' do
+        %i.glyphicon.glyphicon-plus
+        Ustvari
 
   %table.table.rowlinks
     %thead

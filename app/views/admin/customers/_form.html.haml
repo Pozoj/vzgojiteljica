@@ -1,0 +1,13 @@
+.form-inputs
+  = f.input :name
+  = f.input :title
+  = f.input :address
+  = f.association :post
+  = f.input :city
+  = f.input :phone
+  = f.input :email
+  = f.input :vat_id
+  = f.input :vat_exempt
+  %hr
+.form-actions
+  = f.button :submit

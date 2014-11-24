@@ -44,7 +44,9 @@ Web3::Application.routes.draw do
     resources :subscribers
     resources :posts
     resources :subscriptions do
-      put :end_subscription, on: :member
+      put :end_now, on: :member
+      put :end_by_end_of_year, on: :member
+      put :reinstate, on: :member
     end
     resources :plans
     resources :batches

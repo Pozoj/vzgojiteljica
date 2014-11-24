@@ -51,6 +51,7 @@ sl:
     remember_me: Zapomni si me na tem računalniku
     entities:
       title: "Naziv"
+      name: "Ime in priimek"
 
   forms:
     submit:
@@ -135,6 +136,7 @@ sl:
         notes: Opomba
       entity:
         title: Naziv
+        name: Ime in priimek
       article:
         abstract: Povzetek
         abstract_html: Povzetek

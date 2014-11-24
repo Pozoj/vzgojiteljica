@@ -4,17 +4,28 @@
     %br
     %small= l Time.now
 
-%h2
-  = Customer.all.count
-  %small naročnikov
+.row
+  .col-xs-8
+    %h2
+      = Customer.all.count
+      %small naročnikov
 
-%h2
-  = Subscriber.active.sum(:quantity)
-  %small izvodov
+    %h2
+      = Subscriber.active.sum(:quantity)
+      %small izvodov
 
-%h2
-  = @last_issue
-  %small zadnja številka
+    %h2
+      = @last_issue
+      %small zadnja številka
+
+  .col-xs-4
+    .panel.panel-default
+      .panel-heading 
+        %h3.panel-title Ustvari novo
+      .panel-body
+        = link_to new_admin_customer_path, class: 'btn btn-success' do
+          %i.glyphicon.glyphicon-home
+          Stranko     
 
 %br
 %br

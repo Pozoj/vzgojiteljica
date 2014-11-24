@@ -1,0 +1,30 @@
+<h1>
+  Ustvari naročnino
+  <small class="muted">
+    za
+    <%= link_to resource.customer, [:admin, resource.customer] %>,
+    prejemnik
+    <%= link_to resource.subscriber, [:admin, resource.subscriber] %>
+  </small>
+</h1>
+
+<div class="row">
+  <div class="col-xs-8">
+    <%= simple_form_for [:admin, resource] do |f| %>
+      <%= f.error_notification %>
+
+      <%= f.hidden_field :subscriber_id %>
+      <div class="form-inputs">
+        <%= f.input :start %>
+        <% if resource.end %>
+          <%= f.input :end %>
+        <% end %>
+        <%= f.association :plan %>
+        <%= f.input :discount %>
+      </div>
+      <div class="form-actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

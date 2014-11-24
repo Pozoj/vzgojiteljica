@@ -6,7 +6,7 @@ class Entity < ActiveRecord::Base
   has_many :remarks, as: :remarkable
 
   def to_s
-    title || name
+    name || title
   end
 
   def customer?; self.is_a? Customer; end

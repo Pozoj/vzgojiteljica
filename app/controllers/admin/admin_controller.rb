@@ -3,6 +3,6 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   def index
-    @last_issue = Issue.order(:published_at).last
+    @last_issue = Issue.order(year: :desc, issue: :desc).first
   end
 end

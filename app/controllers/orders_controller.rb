@@ -6,6 +6,12 @@ class OrdersController < InheritedResources::Base
     create!(:notice => "Hvala! Vaše naročilo je bilo uspešno sprejeto.") { root_url }
   end
 
+  def mark_processed
+    resource.processed = true    
+    resource.save!
+    redirect_to resource
+  end
+
   private
 
     def resource_params

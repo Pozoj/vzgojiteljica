@@ -92,11 +92,11 @@ module ApplicationHelper
     klass = resource.class
     columns ||= klass.column_names if klass
 
-    content_tag :dl, :class => klass.to_s do
+    content_tag :div, :class => klass.to_s do
       columns.each do |column|
         next unless format_field(resource, column, path_prefix).present?
-        concat content_tag :dt, klass.human_attribute_name(column)
-        concat content_tag :dd, format_field(resource, column, path_prefix)
+        concat content_tag :strong, klass.human_attribute_name(column)
+        concat content_tag :p, format_field(resource, column, path_prefix)
       end
     end
   end

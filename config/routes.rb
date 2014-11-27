@@ -29,7 +29,9 @@ Web3::Application.routes.draw do
         patch :document
       end
     end
-    resources :orders, path: 'narocila'
+    resources :orders, path: 'narocila' do
+      put :mark_processed, on: :member
+    end
     resources :copies, path: 'besedila'
     resources :authors, path: 'avtorji'
     resources :news, path: 'pd-vzgojiteljica'
@@ -40,7 +42,9 @@ Web3::Application.routes.draw do
   namespace :admin do
     root to: 'admin#index'
     resources :entities
-    resources :customers
+    resources :customers do
+      post :new_from_order, on: :member
+    end
     resources :subscribers
     resources :posts
     resources :subscriptions do

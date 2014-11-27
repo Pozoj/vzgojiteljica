@@ -35,6 +35,8 @@
             <%= l resource.end %>
           </p>
         <% end %>
+        <strong>Količina:</strong>
+        <p><%= resource.quantity %></p>
         <% if resource.discount %>
           <strong>Popust:</strong>
           <p>
@@ -105,7 +107,7 @@
         <strong>
           <%= I18n.t 'attributes.quantity' %>
         </strong>
-        <p><%= resource.subscriber.quantity %> kom.</p>
+        <p><%= resource.quantity %> kom.</p>
       </div>
     </div>
   </div>

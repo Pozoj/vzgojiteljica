@@ -31,6 +31,7 @@
         %th ID
         %th Pričetek
         %th Konec
+        %th Količina
         %th Popust
         %th Plan
     %tbody
@@ -50,5 +51,6 @@
           %td
             - if s.end?
               = l s.end
+          %td= s.quantity
           %td= number_to_percentage s.discount || 0
           %td= s.plan

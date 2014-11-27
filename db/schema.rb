@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127063848) do
+ActiveRecord::Schema.define(version: 20141127065307) do
 
   create_table "articles", force: true do |t|
     t.integer   "section_id"
@@ -215,6 +215,7 @@ ActiveRecord::Schema.define(version: 20141127063848) do
     t.string    "ip"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.integer   "plan_type"
   end
 
   create_table "plans", force: true do |t|

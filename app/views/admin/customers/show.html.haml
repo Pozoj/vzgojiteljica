@@ -48,16 +48,17 @@
           %td= s.title or s.name
           %td= s.address
           %td= s.post
-          %td= s.quantity
+          %td= s.subscriptions.active.sum(:quantity)
           %td
             - s.subscriptions.each do |subscription|
-              = subscription.plan
-              %small.text-muted== (#{subscription.id})
-              %br
-              - if subscription.start?
-                %small.label.label-success= l subscription.start
-              - if subscription.end?
-                %small.label.label-danger= l subscription.end
+              %div
+                = subscription.plan
+                %small.text-muted== (#{subscription.id})
+                %br
+                - if subscription.start?
+                  %small.label.label-success= l subscription.start
+                - if subscription.end?
+                  %small.label.label-danger= l subscription.end
 
 .panel.panel-default
   .panel-heading 

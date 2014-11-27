@@ -26,7 +26,7 @@ class InvoiceWizard
         li = i.line_items.build
         li.entity_name = s.subscriber.to_s
         li.product = "Vzgojiteljica #{i.issue}"
-        li.quantity = s.subscriber.quantity
+        li.quantity = s.quantity
         li.unit = 'kom'
         li.price_per_item = s.plan.price
         li.discount_percent = 0

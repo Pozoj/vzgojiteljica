@@ -2,6 +2,12 @@ class OrdersController < InheritedResources::Base
   before_filter :authenticate
   skip_before_filter :authenticate, only: [:new, :create]
 
+  def index
+    unless params[:all]
+      @orders = collection.where(processed: false)
+    end
+  end
+
   def create
     create!(:notice => "Hvala! Vaše naročilo je bilo uspešno sprejeto.") { root_url }
   end

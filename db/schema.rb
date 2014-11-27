@@ -11,33 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923190333) do
-
-  create_table "_line_items_old_20140923", force: true do |t|
-    t.integer  "invoice_id"
-    t.string   "entity_name"
-    t.string   "product"
-    t.integer  "quantity"
-    t.string   "unit"
-    t.decimal  "price_per_item"
-    t.decimal  "discount_percent"
-    t.decimal  "price_per_item_with_discount"
-    t.decimal  "tax"
-    t.decimal  "subtotal"
-    t.decimal  "total"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "_subscriptions_old_20140922", force: true do |t|
-    t.integer  "customer_id"
-    t.date     "start"
-    t.date     "end"
-    t.integer  "discount"
-    t.integer  "plan_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20141127063848) do
 
   create_table "articles", force: true do |t|
     t.integer   "section_id"
@@ -115,7 +89,6 @@ ActiveRecord::Schema.define(version: 20140923190333) do
     t.string   "vat_id"
     t.boolean  "vat_exempt"
     t.string   "type"
-    t.integer  "quantity"
     t.integer  "entity_id"
     t.integer  "subscription_id"
     t.integer  "customer_id"
@@ -200,36 +173,6 @@ ActiveRecord::Schema.define(version: 20140923190333) do
   end
 
   add_index "keywords", ["keyword"], name: "index_keywords_on_keyword", unique: true
-
-  create_table "legacies", id: false, force: true do |t|
-    t.integer  "customer_id"
-    t.string   "customer_title",            limit: nil
-    t.string   "customer_address",          limit: nil
-    t.integer  "customer_post_id"
-    t.string   "customer_bankaccount",      limit: nil
-    t.string   "customer_phone1",           limit: nil
-    t.string   "customer_phone3",           limit: nil
-    t.string   "customer_email",            limit: nil
-    t.string   "customer_contact_person",   limit: nil
-    t.string   "customer_payment_person",   limit: nil
-    t.string   "customer_notes",            limit: nil
-    t.string   "customer_vat_id",           limit: nil
-    t.string   "customer_vat_exempt",       limit: nil
-    t.integer  "customer_annuity"
-    t.integer  "customer_id_again"
-    t.integer  "subscriber_id"
-    t.string   "subcriber_title",           limit: nil
-    t.string   "subscriber_address",        limit: nil
-    t.integer  "subscriber_post_id"
-    t.datetime "subscription_start"
-    t.string   "subscription_quantity",     limit: nil
-    t.datetime "subscription_change"
-    t.datetime "subscription_last_event"
-    t.string   "subscriber_contact_person", limit: nil
-    t.string   "subscriber_notes",          limit: nil
-    t.datetime "subscription_end"
-    t.boolean  "subscription_status"
-  end
 
   create_table "line_items", force: true do |t|
     t.integer  "invoice_id"
@@ -316,6 +259,7 @@ ActiveRecord::Schema.define(version: 20140923190333) do
     t.integer  "plan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quantity"
   end
 
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"

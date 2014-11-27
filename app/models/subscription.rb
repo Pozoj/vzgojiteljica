@@ -8,12 +8,11 @@ class Subscription < ActiveRecord::Base
   scope :active, -> { where(arel_table[:end].eq(nil).or(arel_table[:end].gteq(Date.today))) }
   scope :inactive, -> { where(arel_table[:end].not_eq(nil).or(arel_table[:end].lteq(Date.today))) }
 
+  validates_presence_of :quantity
+  validates_numericality_of :quantity
+
   def customer
     subscriber.customer
-  end
-
-  def quantity
-    subscriber.quantity || 0
   end
 
   def active?

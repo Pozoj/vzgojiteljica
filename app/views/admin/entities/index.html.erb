@@ -27,7 +27,7 @@
           <% if entity.customer %>
             <%= link_to "", admin_customer_path(entity.customer) %>
           <% end %>
-          <%= entity.title or entity.name %>
+          <%= entity %>
           <% unless entity.customer? %>
             <br>
             <small class="text-muted"><%= entity.customer %></small>

@@ -29,6 +29,9 @@
       = link_to new_admin_subscriber_path(customer_id: resource.id), class: 'btn btn-default btn-xs pull-right' do
         %i.glyphicon.glyphicon-plus
         Ustvari
+      = link_to new_admin_subscriber_path(customer_id: resource.id, customer: true), class: 'btn btn-default btn-xs pull-right' do
+        %i.glyphicon.glyphicon-plus
+        Ustvari kot kopijo naročnika
 
   %table.table.rowlinks
     %thead
@@ -49,9 +52,9 @@
           %td= s.address
           %td= s.post
           %td= s.subscriptions.active.sum(:quantity)
-          %td
-            - s.subscriptions.each do |subscription|
-              %div
+          %td.subscriptions
+            - s.subscriptions.active.each do |subscription|
+              .subscription
                 = subscription.plan
                 %small.text-muted== (#{subscription.id})
                 %br

@@ -50,3 +50,14 @@
   top: 75px;
   right: 15px;
 }
+
+td.subscriptions .subscription {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+td.subscriptions .subscription:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}

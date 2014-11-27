@@ -24,6 +24,10 @@
         %i.glyphicon.glyphicon-plus
         Ustvari
 
+      = link_to new_admin_subscription_path(subscriber_id: resource.id, yearly: true), class: 'btn btn-default btn-xs pull-right' do
+        %i.glyphicon.glyphicon-plus
+        Ustvari letno za naslednje leto
+
   %table.table.rowlinks
     %thead
       %tr

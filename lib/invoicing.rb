@@ -4,6 +4,12 @@ module Invoicing
   protected
 
   def tax_multiplier
-    (tax_percent / 100) + 1
+    tp = if defined? tax_percent
+      tax_percent
+    else
+      TAX_PERCENT
+    end
+    
+    (tp / 100) + 1
   end
 end

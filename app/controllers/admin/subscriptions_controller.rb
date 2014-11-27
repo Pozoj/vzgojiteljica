@@ -6,6 +6,11 @@ class Admin::SubscriptionsController < InheritedResources::Base
     subscriber_id = params.delete(:subscriber_id)
     if subscriber_id && @subscriber = Subscriber.find(subscriber_id)
       @subscription = @subscriber.subscriptions.build
+
+      if params[:yearly]
+        @subscription.start = 1.year.from_now.beginning_of_year
+        @subscription.plan = Plan.latest_yearly
+      end
     end
 
     new!

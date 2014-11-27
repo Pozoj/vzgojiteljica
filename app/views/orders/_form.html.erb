@@ -6,16 +6,16 @@
   </fieldset>
   <fieldset>
     <legend>Kontaktni podatki</legend>
-      <%= f.input :name %>
-      <%= f.input :address %>
-      <%= f.association :post %>
-      <%= f.input :phone %>
-      <%= f.input :fax %>
-      <%= f.input :email %>
+    <%= f.input :name %>
+    <%= f.input :address %>
+    <%= f.association :post %>
+    <%= f.input :phone %>
+    <%= f.input :email %>
   </fieldset>
   <fieldset>
     <legend>Naročilo</legend>
     <%= f.input :quantity, hint: 'Število revij, ki jih naročam(o)' %>
+    <%= f.input :plan_type, label: "Naročnina", collection: [['Letna naročnina', 1] ,['Vsaka revija posebej', 6]], as: :radio_buttons %>
     <%= f.input :comments %>
   </fieldset>
   <div class='submit'>

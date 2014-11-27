@@ -1,4 +1,6 @@
 class Plan < ActiveRecord::Base
+  include Invoicing
+
   has_many :subscriptions
   belongs_to :batch
 
@@ -6,7 +8,23 @@ class Plan < ActiveRecord::Base
     price == 0.0
   end
 
+  def price_with_tax
+    price * tax_multiplier
+  end
+
   def to_s
     name
+  end
+
+  def self.latest frequency
+    Plan.where(billing_frequency: frequency).where('price > 0').order(created_at: :desc).first
+  end
+
+  def self.latest_yearly
+    Plan.latest 1
+  end
+
+  def self.latest_per_issue
+    Plan.latest 6
   end
 end

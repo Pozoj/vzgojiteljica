@@ -33,7 +33,7 @@ class Admin::CustomersController < InheritedResources::Base
     @subscription.start = Date.today
     @subscription.quantity = @order.quantity
     if @order.plan_type
-      @subscription.plan = Plan.where(billing_frequency: @order.plan_type).order(created_at: :desc).first
+      @subscription.plan = Plan.latest(@order.plan_type)
     end
     @subscription.save!
 

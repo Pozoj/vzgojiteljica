@@ -114,3 +114,55 @@ header p {
   bottom: -40px;
   right: -50px;
 }
+
+/* LABELS */
+.labels {
+  padding: 0 25px;
+  page-break-after: always;
+  page-break-inside: avoid;
+  height: 975px;
+  font-size: 12px;
+}
+.labels .label {
+  height: 324px;
+  position: relative;
+  border-bottom: 1px dashed #ccc;
+}
+.labels .label p {
+  margin: 0.25em 0;
+}
+.labels .label .logo {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+}
+.labels .label .logo img {
+  width: 50%;
+}
+.labels .label .address {
+  position: absolute;
+  left: 0px;
+  top: 200px;
+  font-size: 16px;
+}
+.labels .label .postage {
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  text-align: right;
+}
+.labels .label .classification {
+  font-size: 36px;
+  font-weight: bold;
+  position: absolute;
+  right: 0px;
+  top: 200px;
+}
+.labels .label .quantity {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+}
+.labels .label .quantity small {
+  font-size: 9px;
+}

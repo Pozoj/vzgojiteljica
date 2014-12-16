@@ -1,0 +1,23 @@
+<div class="label">
+  <div class="logo">
+    <p><%= image_tag "pozoj_logo-100w.png" %></p>
+    <p><strong>POZOJ, d.o.o.</strong></p>
+    <p>Pirešica 2<br>3320 Velenje</p>
+  </div>
+  <div class="address">
+    <p><strong><%= label.subscriber.to_s %></strong></p>
+    <p><%= label.subscriber.address %></p>
+    <p><%= label.subscriber.post %></p>
+  </div>
+  <div class="quantity">
+    <small><%= label.quantity %></small>
+  </div>
+  <div class="postage">
+    <p>
+      Poštnina plačana pri
+      <br>
+      pošti 3320 Velenje
+    </p>
+  </div>
+  <div class="classification">NDP</div>
+</div>

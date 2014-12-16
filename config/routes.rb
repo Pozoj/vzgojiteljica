@@ -45,6 +45,7 @@ Web3::Application.routes.draw do
     resources :customers do
       post :new_from_order, on: :member
     end
+    resources :labels, only: :index
     resources :subscribers
     resources :posts
     resources :subscriptions do

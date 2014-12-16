@@ -6,7 +6,7 @@ class Subscription < ActiveRecord::Base
   has_many :remarks, as: :remarkable, dependent: :destroy
 
   scope :active, -> { where(arel_table[:start].lteq(Date.today).and(arel_table[:end].eq(nil).or(arel_table[:end].gteq(Date.today)))) }
-  scope :inactive, -> { where(arel_table[:end].not_eq(nil).or(arel_table[:end].lteq(Date.today))) }
+  scope :inactive, -> { where(arel_table[:end].not_eq(nil).or(arel_table[:end].lteq(Date.today).or(arel_table[:start].gteq(Date.today)))) }
 
   validates_presence_of :quantity
   validates_numericality_of :quantity, greater_than: 0, only_integer: true

@@ -4,6 +4,7 @@ class Admin::InvoicesController < InheritedResources::Base
 
   def index
     @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
+    @invoices = Invoice.order(reference_number: :desc).page params[:page]
   end
 
   def create
@@ -17,7 +18,7 @@ class Admin::InvoicesController < InheritedResources::Base
   end
 
   def print_all
-    @invoices = Invoice.where(issue_id: 1)
+    @invoices = Invoice.where(issue_id: params[:issue_id])
     render layout: 'print'
   end
 end

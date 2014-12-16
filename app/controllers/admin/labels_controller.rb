@@ -12,7 +12,7 @@ class Admin::LabelsController < InheritedResources::Base
       label
     end
 
-    @labels = @labels.sort_by(&:quantity)
+    @labels = @labels.compact.sort_by(&:quantity)
 
     render layout: 'print'
   end

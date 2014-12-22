@@ -56,3 +56,47 @@
     </div>
   </div>
 </div>
+
+<div class="panel panel-default" style="margin-bottom: 150px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">Postavke</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Entiteta</th>
+          <th>Produkt</th>
+          <th>Revija</th>
+          <th>Kol.</th>
+          <th>ME</th>
+          <th>Cena</th>
+          <th>Pop. %</th>
+          <th>Cena s pop.</th>
+          <th>Znesek</th>
+          <th>Davek %</th>
+          <th>Davek</th>
+          <th>Za plačilo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% resource.line_items.each do |li| %>
+          <tr>
+            <td><%= li.entity_name %></td>
+            <td><%= li.product %></td>
+            <td><%= li.issue %></td>
+            <td><%= li.quantity %></td>
+            <td><%= li.unit %></td>
+            <td><%= number_to_currency li.price_per_item %></td>
+            <td><%= number_to_percentage li.discount_percent || 0 %></td>
+            <td><%= number_to_currency li.price_per_item_with_discount %></td>
+            <td><%= number_to_currency li.subtotal %></td>
+            <td><%= number_to_percentage li.tax_percent %></td>
+            <td><%= number_to_currency li.tax %></td>
+            <td><%= number_to_currency li.total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

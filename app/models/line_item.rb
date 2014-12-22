@@ -2,6 +2,7 @@ class LineItem < ActiveRecord::Base
   include Invoicing
 
   belongs_to :invoice
+  belongs_to :issue
   before_save :calculate
 
   def calculate

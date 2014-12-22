@@ -10,8 +10,12 @@
       <div class="panel-body">
         <%= form_for @invoice_wizard, url: admin_invoices_path, method: :post, html: {class: 'form-inline'} do |f| %>
           <div class="form-group">
-            <%= f.collection_select :issue_id, Issue.order(published_at: :desc), :id, :to_s, {}, {class: 'form-control'} %>
+            <%= f.collection_select :issue_id, Issue.order(year: :desc, issue: :desc, published_at: :desc), :id, :to_s, {}, {class: 'form-control'} %>
             <%= f.text_field :last_invoice_number, placeholder: '811 - računi od 811 naprej', class: 'form-control' %>
+            <%= f.label :include_yearly do %>
+              <%= f.check_box :include_yearly %>
+              Vključi letne
+            <% end %>
           </div>
           <div class="form-group pull-right">
             <%= f.submit "Ustvari račune", class: 'btn btn-default' %>
@@ -30,14 +34,14 @@
         </h3>
       </div>
       <div class="panel-body">
-        <%= form_for @invoice_wizard, url: print_all_admin_invoices_path, method: :get, html: {class: 'form-inline'} do |f| %>
+        <%= form_tag print_all_admin_invoices_path, method: :get, class: 'form-inline print_invoices' do %>
           <div class="form-group">
-            <%= f.collection_select :issue_id, 
-                Invoice.select(:issue_id).distinct(:issue_id).map(&:issue).compact, :id, :to_s,
-                {}, {class: 'form-control'} %>
+            <%= number_field_tag :gte, @gte, {class: 'form-control', placeholder: 'Od Ref. Št.'} %>
+            &mdash;
+            <%= number_field_tag :lte, @lte, {class: 'form-control', placeholder: 'Do Ref. Št.'} %>
           </div>
           <div class="form-group pull-right">
-            <%= f.submit "Natisni račune", class: 'btn btn-default' %>
+            <%= submit_tag "Natisni račune", class: 'btn btn-default' %>
           </div>
         <% end %>
       </div>
@@ -51,7 +55,6 @@
     <tr>
       <th>Ref. št.</th>
       <th>Stranka</th>
-      <th>Številka</th>
       <th>Izdan</th>
       <th>Rok</th>
       <th>Znesek</th>
@@ -64,7 +67,6 @@
           <%= link_to "", admin_invoice_path(invoice) %>
           <%= invoice.reference_number %></td>
         <td><%= invoice.customer %></td>
-        <td><%= invoice.issue %></td>
         <td><%= l invoice.created_at, format: :simple %></td>
         <td><%= l invoice.due_at, format: :simple %></td>
         <td><%= number_to_currency invoice.total %></td>

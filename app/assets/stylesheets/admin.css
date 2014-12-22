@@ -65,3 +65,7 @@ td.subscriptions .subscription:last-child {
 .row.tools { 
   margin-top: 40px;
 }
+
+.print_invoices .form-control {
+  width: 100px;
+}

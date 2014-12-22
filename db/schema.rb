@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127071855) do
+ActiveRecord::Schema.define(version: 20141222015848) do
 
   create_table "articles", force: true do |t|
     t.integer   "section_id"
@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(version: 20141127071855) do
 
   create_table "invoices", force: true do |t|
     t.integer  "customer_id"
-    t.integer  "issue_id"
     t.date     "due_at"
     t.decimal  "subtotal"
     t.decimal  "total"
@@ -189,6 +188,7 @@ ActiveRecord::Schema.define(version: 20141127071855) do
     t.decimal  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "issue_id"
   end
 
   create_table "news", force: true do |t|
@@ -226,6 +226,8 @@ ActiveRecord::Schema.define(version: 20141127071855) do
     t.integer  "batch_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "quantity_unit"
+    t.string   "quantity_unit_abbr"
   end
 
   create_table "posts", id: false, force: true do |t|

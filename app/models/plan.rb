@@ -16,6 +16,10 @@ class Plan < ActiveRecord::Base
     name
   end
 
+  def yearly?
+    billing_frequency == 1
+  end
+
   def self.latest frequency
     Plan.where(billing_frequency: frequency).where('price > 0').order(created_at: :desc).first
   end

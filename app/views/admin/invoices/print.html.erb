@@ -33,8 +33,10 @@
 
   <div class="details">
     <p>
-      ID št. za DDV kupca: <strong>SI<%= invoice.customer.vat_id %></strong>
-      <br>
+      <% if invoice.customer.vat_id? %>
+        ID št. za DDV kupca: <strong>SI<%= invoice.customer.vat_id %></strong>
+        <br>
+      <% end %>
       Kraj izdaje: <strong>Velenje</strong>
       <br>
       Datume izdaje: <strong><%= l invoice.created_at.to_date, format: :simple %></strong>
@@ -67,7 +69,7 @@
             <td><%= li.quantity %></td>
             <td><%= li.unit %></td>
             <td><%= number_to_currency li.price_per_item %></td>
-            <td><%= number_to_percentage li.discount_percent %></td>
+            <td><%= number_to_percentage li.discount_percent || 0 %></td>
             <td><%= number_to_currency li.price_per_item_with_discount %></td>
             <td><%= number_to_currency li.subtotal %></td>
           </tr>

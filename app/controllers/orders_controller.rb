@@ -9,7 +9,10 @@ class OrdersController < InheritedResources::Base
   end
 
   def create
-    create!(:notice => "Hvala! Vaše naročilo je bilo uspešno sprejeto.") { root_url }
+    create!(:notice => "Hvala! Vaše naročilo je bilo uspešno sprejeto.") do
+      AdminMailer.new_order(@order.id)
+      redirect_to root_url
+    end
   end
 
   def mark_processed

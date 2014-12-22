@@ -1,0 +1,32 @@
+Novo naročilo Vzgojiteljica!
+
+<% if @order.title? %>
+  Naziv: <%= @order.title %>
+<% end %>
+<% if @order.name? %>
+  Ime: <%= @order.name %>
+<% end %>
+<% if @order.address? %>
+  Naslov: <%= @order.address %>
+<% end %>
+<% if @order.post_id? %>
+  Poštna št.:<%= @order.post_id %>
+<% end %>
+<% if @order.phone? %>
+  Telefon: <%= @order.phone %>
+<% end %>
+<% if @order.email? %>
+  Email: <%= @order.email %>
+<% end %>
+<% if @order.comments? %>
+  Opombe: <%= @order.comments %>
+<% end %>
+<% if @order.quantity? %>
+  Količina: <%= @order.quantity %>
+<% end %>
+<% if @order.ip? %>
+  IP: <%= @order.ip %>
+<% end %>
+<% if @order.plan_type? %>
+  Plan: <%= @order.plan_type %>
+<% end %>

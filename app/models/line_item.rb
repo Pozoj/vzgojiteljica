@@ -5,6 +5,7 @@ class LineItem < ActiveRecord::Base
   monetize :total_cents
   monetize :price_per_item_cents
   monetize :price_per_item_with_discount_cents
+  monetize :tax_cents
 
   belongs_to :invoice
   belongs_to :issue

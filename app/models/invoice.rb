@@ -4,6 +4,7 @@ class Invoice < ActiveRecord::Base
   monetize :subtotal_cents
   monetize :total_cents
   monetize :paid_amount_cents
+  monetize :tax_cents
 
   belongs_to :customer
   belongs_to :issue

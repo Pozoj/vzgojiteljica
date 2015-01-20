@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120070256) do
+ActiveRecord::Schema.define(version: 20150120081254) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -134,7 +134,6 @@ ActiveRecord::Schema.define(version: 20150120070256) do
   create_table "invoices", force: :cascade do |t|
     t.integer  "customer_id"
     t.date     "due_at"
-    t.decimal  "tax"
     t.decimal  "tax_percent"
     t.integer  "reference_number"
     t.datetime "created_at"
@@ -148,6 +147,8 @@ ActiveRecord::Schema.define(version: 20150120070256) do
     t.string   "total_currency",       default: "EUR", null: false
     t.integer  "paid_amount_cents",    default: 0,     null: false
     t.string   "paid_amount_currency", default: "EUR", null: false
+    t.integer  "tax_cents",            default: 0,     null: false
+    t.string   "tax_currency",         default: "EUR", null: false
   end
 
   add_index "invoices", ["bank_reference"], name: "index_invoices_on_bank_reference", unique: true
@@ -202,7 +203,6 @@ ActiveRecord::Schema.define(version: 20150120070256) do
     t.integer  "quantity"
     t.string   "unit",                                  limit: 255
     t.decimal  "discount_percent"
-    t.decimal  "tax"
     t.decimal  "tax_percent"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -215,6 +215,8 @@ ActiveRecord::Schema.define(version: 20150120070256) do
     t.string   "price_per_item_currency",                           default: "EUR", null: false
     t.integer  "price_per_item_with_discount_cents",                default: 0,     null: false
     t.string   "price_per_item_with_discount_currency",             default: "EUR", null: false
+    t.integer  "tax_cents",                                         default: 0,     null: false
+    t.string   "tax_currency",                                      default: "EUR", null: false
   end
 
   create_table "news", force: :cascade do |t|

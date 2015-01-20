@@ -49,7 +49,9 @@
   </div>
 </div>
 
-<h2>Izdani računi</h2>
+<h2>
+  Izdani računi
+</h2>
 <table class="table rowlinks">
   <thead>
     <tr>
@@ -57,6 +59,7 @@
       <th>Stranka</th>
       <th>Izdan</th>
       <th>Rok</th>
+      <th>Plačan</th>
       <th>Znesek</th>
     </tr>
   </thead>
@@ -69,6 +72,12 @@
         <td><%= invoice.customer %></td>
         <td><%= l invoice.created_at, format: :simple %></td>
         <td><%= l invoice.due_at, format: :simple %></td>
+        <td>
+          <% if invoice.paid? %>
+            <%= l invoice.paid_at, format: :simple %></td>
+          <% elsif invoice.due? %>
+            <span class="label label-danger"><%= invoice.late_days %> dni</span>
+          <% end %>
         <td><%= number_to_currency invoice.total %></td>
       </tr>
     <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120081254) do
+ActiveRecord::Schema.define(version: 20150120083119) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20150120081254) do
     t.integer  "reference_number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "paid_at"
+    t.date     "paid_at"
     t.text     "bank_data"
     t.string   "bank_reference"
     t.integer  "subtotal_cents",       default: 0,     null: false

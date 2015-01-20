@@ -1,4 +1,8 @@
 class Admin::SubscriptionsController < Admin::AdminController
+  def show
+    respond_with resource
+  end
+  
   def new
     subscriber_id = params.delete(:subscriber_id)
     if subscriber_id && @subscriber = Subscriber.find(subscriber_id)
@@ -10,7 +14,7 @@ class Admin::SubscriptionsController < Admin::AdminController
       end
     end
 
-    new!
+    respond_with resource
   end
 
   def end_now
@@ -32,5 +36,11 @@ class Admin::SubscriptionsController < Admin::AdminController
     resource.save
     resource.remarks.create user: current_user, remark: "Naročnina ponovno aktivirana"
     redirect_to admin_subscription_path(resource)
+  end
+
+  private
+
+  def resource
+    @subscription ||= Subscription.find(params[:id])
   end
 end

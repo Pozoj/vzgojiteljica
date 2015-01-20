@@ -1,7 +1,7 @@
-%h1= resource
+%h1= @customer
 
 .admin_actions
-  = link_to edit_admin_customer_path(resource), class: 'btn btn-default' do
+  = link_to edit_admin_customer_path(@customer), class: 'btn btn-default' do
     %i.glyphicon.glyphicon-edit
     Uredi
 
@@ -9,27 +9,27 @@
   .col-xs-6
     .details.panel.panel-default
       .panel-body
-        = render "fields", resource: resource
+        = render "fields", resource: @customer
 
-        - if resource.contact_person
+        - if @customer.contact_person
           %hr
           %h4 Kontaktna oseba
-          = render "admin/people/fields", resource: resource.contact_person
-        - if resource.billing_person
+          = render "admin/people/fields", resource: @customer.contact_person
+        - if @customer.billing_person
           %hr
           %h4 Plačilni kontakt
-          = render "admin/people/fields", resource: resource.billing_person
+          = render "admin/people/fields", resource: @customer.billing_person
 
-  .col-xs-6= render "admin/remarks/form", resource: resource
+  .col-xs-6= render "admin/remarks/form", resource: @customer
 
 .panel.panel-default
   .panel-heading
     %h3.panel-title
       Prejemniki
-      = link_to new_admin_subscriber_path(customer_id: resource.id), class: 'btn btn-default btn-xs pull-right' do
+      = link_to new_admin_subscriber_path(customer_id: @customer.id), class: 'btn btn-default btn-xs pull-right' do
         %i.glyphicon.glyphicon-plus
         Ustvari
-      = link_to new_admin_subscriber_path(customer_id: resource.id, customer: true), class: 'btn btn-default btn-xs pull-right' do
+      = link_to new_admin_subscriber_path(customer_id: @customer.id, customer: true), class: 'btn btn-default btn-xs pull-right' do
         %i.glyphicon.glyphicon-plus
         Ustvari kot kopijo naročnika
 
@@ -43,7 +43,7 @@
         %th Količina
         %th Naročnina
     %tbody
-      - resource.subscribers.each do |s|
+      - @customer.subscribers.each do |s|
         %tr
           %td
             = link_to "", admin_subscriber_path(s)
@@ -76,7 +76,7 @@
         %th Rok
         %th Znesek
     %tbody
-      - resource.invoices.each do |invoice|
+      - @customer.invoices.each do |invoice|
         %tr
           %td
             = link_to "", admin_invoice_path(invoice)

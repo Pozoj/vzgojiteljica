@@ -1,6 +1,10 @@
 class Admin::SubscribersController < Admin::AdminController
   has_scope :page, :default => 1
 
+  def show
+    respond_with resource
+  end
+
   def new
     customer_id = params.delete(:customer_id)
     if customer_id && @customer = Customer.find(customer_id)
@@ -14,6 +18,12 @@ class Admin::SubscribersController < Admin::AdminController
       end
     end
 
-    new!
+    respond_with resource
+  end
+
+  private
+
+  def resource
+    @subscriber ||= Subscriber.find(params[:id])
   end
 end

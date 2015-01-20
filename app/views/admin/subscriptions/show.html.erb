@@ -1,6 +1,6 @@
 <h1>
   Naročnina
-  <% if resource.active? %>
+  <% if @subscription.active? %>
     <small class="label label-success">Aktivna</small>
   <% else %>
     <small class="label label-danger">Neaktivna</small>
@@ -8,14 +8,14 @@
   <br>
   <small class="muted">
     Naročnik
-    <%= link_to resource.customer, [:admin, resource.customer] %>,
+    <%= link_to @subscription.customer, [:admin, @subscription.customer] %>,
     prejemnik
-    <%= link_to resource.subscriber, [:admin, resource.subscriber] %>
+    <%= link_to @subscription.subscriber, [:admin, @subscription.subscriber] %>
   </small>
 </h1>
 
 <div class="admin_actions">
-  <%= link_to edit_admin_subscription_path(resource), class: 'btn btn-default' do %>
+  <%= link_to edit_admin_subscription_path(@subscription), class: 'btn btn-default' do %>
     <i class="glyphicon glyphicon-edit"></i>
     Uredi
   <% end %>
@@ -27,34 +27,34 @@
       <div class="panel-body">
         <strong>Pričetek:</strong>
         <p>
-          <%= l resource.start %>
+          <%= l @subscription.start %>
         </p>
-        <% if resource.end %>
+        <% if @subscription.end %>
           <strong>Konec:</strong>
           <p>
-            <%= l resource.end %>
+            <%= l @subscription.end %>
           </p>
         <% end %>
         <strong>Količina:</strong>
-        <p><%= resource.quantity %></p>
-        <% if resource.discount %>
+        <p><%= @subscription.quantity %></p>
+        <% if @subscription.discount %>
           <strong>Popust:</strong>
           <p>
-            <%= number_to_percentage resource.discount %>
+            <%= number_to_percentage @subscription.discount %>
           </p>
         <% end %>
         <strong>Plan:</strong>
         <p>
-          <%= resource.plan %>
+          <%= @subscription.plan %>
         </p>
         <hr>
         <strong>Kreiran:</strong>
         <p>
-          <%= l resource.created_at %>
+          <%= l @subscription.created_at %>
         </p>
         <strong>Osvežen:</strong>
         <p>
-          <%= l resource.updated_at %>
+          <%= l @subscription.updated_at %>
         </p>
       </div>
     </div>
@@ -65,10 +65,10 @@
         <h3 class="panel-title">Orodja za naročnino</h3>
       </div>
       <div class="panel-body">
-        <% unless resource.plan.free? %>
-          <%= link_to build_for_subscription_admin_invoices_path(subscription_id: resource), class: 'btn btn-sm btn-success', method: :post do %>
+        <% unless @subscription.plan.free? %>
+          <%= link_to build_for_subscription_admin_invoices_path(subscription_id: @subscription), class: 'btn btn-sm btn-success', method: :post do %>
             <i class="glyphicon glyphicon-asterisk"></i>
-            <% if resource.plan.yearly? %>
+            <% if @subscription.plan.yearly? %>
               Ustvari račun za to leto
             <% else %>
               Ustvari račun za zadnjo št.
@@ -76,22 +76,22 @@
           <% end %>
         <% end %>
 
-        <% unless resource.active? %>
-          <%= link_to reinstate_admin_subscription_path(resource), class: 'btn btn-sm btn-success', method: :put do %>
+        <% unless @subscription.active? %>
+          <%= link_to reinstate_admin_subscription_path(@subscription), class: 'btn btn-sm btn-success', method: :put do %>
             <i class="glyphicon glyphicon-refresh"></i>
             Ponovno aktiviraj
           <% end %>
         <% end %>
 
-        <% if resource.active? && !resource.end? %>
-          <%= link_to end_by_end_of_year_admin_subscription_path(resource), class: 'btn btn-sm btn-warning', method: :put do %>
+        <% if @subscription.active? && !@subscription.end? %>
+          <%= link_to end_by_end_of_year_admin_subscription_path(@subscription), class: 'btn btn-sm btn-warning', method: :put do %>
             <i class="glyphicon glyphicon-remove"></i>
             Končaj s koncem leta
           <% end %>
         <% end %>
 
-        <% if resource.active? %>
-          <%= link_to end_now_admin_subscription_path(resource), class: 'btn btn-sm btn-danger', method: :put do %>
+        <% if @subscription.active? %>
+          <%= link_to end_now_admin_subscription_path(@subscription), class: 'btn btn-sm btn-danger', method: :put do %>
             <i class="glyphicon glyphicon-remove"></i>
             Končaj
           <% end %>
@@ -99,14 +99,14 @@
       </div>
     </div>
 
-    <%= render "admin/remarks/form", resource: resource %>
+    <%= render "admin/remarks/form", resource: @subscription %>
 
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Naročnik</h3>
       </div>
       <div class="panel-body">
-        <%= render "admin/customers/fields", resource: resource.customer %>
+        <%= render "admin/customers/fields", resource: @subscription.customer %>
       </div>
     </div>
 
@@ -115,12 +115,12 @@
         <h3 class="panel-title">Prejemnik</h3>
       </div>
       <div class="panel-body">
-        <%= render "admin/subscribers/fields", resource: resource.subscriber %>
+        <%= render "admin/subscribers/fields", resource: @subscription.subscriber %>
 
         <strong>
           <%= I18n.t 'attributes.quantity' %>
         </strong>
-        <p><%= resource.quantity %> kom.</p>
+        <p><%= @subscription.quantity %> kom.</p>
       </div>
     </div>
   </div>

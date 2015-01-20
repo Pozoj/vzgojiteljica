@@ -1,6 +1,10 @@
 class Admin::CustomersController < Admin::AdminController
   has_scope :page, :default => 1
 
+  def show
+    respond_with resource
+  end
+
   def new_from_order
     @order = Order.find(params[:order_id])
 
@@ -39,5 +43,11 @@ class Admin::CustomersController < Admin::AdminController
     @order.save!
 
     redirect_to admin_customer_path(@customer)
+  end
+
+  private
+
+  def resource
+    @customer ||= Customer.find(params[:id])
   end
 end

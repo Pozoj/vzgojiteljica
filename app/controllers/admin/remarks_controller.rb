@@ -2,14 +2,23 @@ class Admin::RemarksController < Admin::AdminController
   def create
     @remark = Remark.new params[:remark], without_protection: true
     @remark.user = current_user
-    create! { polymorphic_path([:admin, @remark.remarkable]) }
+    @remark.save
+    respond_with resource, location: -> { polymorphic_path([:admin, @remark.remarkable]) }
   end
 
   def update
-    update! { polymorphic_path([:admin, resource.remarkable]) }
+    resource.update_attributes params[:remark]
+    respond_with resource, location: -> { polymorphic_path([:admin, resource.remarkable]) }
   end
 
   def destroy
-    destroy! { polymorphic_path([:admin, resource.remarkable]) }
+    resource.destroy
+    respond_with resource, location: -> { polymorphic_path([:admin, resource.remarkable]) }
+  end
+
+  private
+
+  def resource
+    @remark ||= Remark.find(params[:id])
   end
 end

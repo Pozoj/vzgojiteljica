@@ -18,7 +18,7 @@ class Invoice < ActiveRecord::Base
   def self.match_to_statements!
     Invoice.unpaid.each do |i|
       next unless i.match_statement_entry
-      next unless i.match_statement_entry.amount == total
+      next unless i.match_statement_entry.amount == i.total
       i.paid_by! i.match_statement_entry
     end
   end

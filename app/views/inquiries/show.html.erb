@@ -1,20 +1,20 @@
-<%= title resource %>
+<%= title @inquiry %>
 
 <%= admin_section do %>
-  <%= link_to "Odstrani", resource, method: :delete, confirm: 'Ste prepričani?' %>
-  <%= link_to "Uredi", edit_inquiry_path(resource) %>
-  <%= link_to "Odgovori vprašanje", answer_question_inquiry_path(resource) %>
+  <%= link_to "Odstrani", @inquiry, method: :delete, confirm: 'Ste prepričani?' %>
+  <%= link_to "Uredi", edit_inquiry_path(@inquiry) %>
+  <%= link_to "Odgovori vprašanje", answer_question_inquiry_path(@inquiry) %>
 <% end %>
 
 <div id="question">
   <p>
-    <span>&ldquo;</span><%= resource.question %><span>&rdquo;</span>
+    <span>&ldquo;</span><%= @inquiry.question %><span>&rdquo;</span>
   </p>
   <p class='author'>
     &mdash;
-    <%= resource.name %>
-    <% if resource.institution.present? %>
-      (<%= resource.institution %>)
+    <%= @inquiry.name %>
+    <% if @inquiry.institution.present? %>
+      (<%= @inquiry.institution %>)
     <% end %>
   </p>
 </div>
@@ -22,8 +22,8 @@
 <div id="answer">
   <p>Odgovor:</p>
   <p>
-    <% if resource.answer? %>
-      <strong><%= resource.answer %></strong>
+    <% if @inquiry.answer? %>
+      <strong><%= @inquiry.answer %></strong>
     <% else %>
       To vprašanje še ni odgovorjeno.
     <% end %>

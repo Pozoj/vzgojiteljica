@@ -1,15 +1,15 @@
 = javascript_include_tag "upload"
 
 = title "Uredi dokument"
-= simple_form_for resource do |f|
+= simple_form_for @issue do |f|
   = f.input :document, input_html: {:"data-url" => "document"}
   #document
-    = link_to resource.document_file_name, resource.document.file? ? resource.document.url : ""
+    = link_to @issue.document_file_name, @issue.document.file? ? @issue.document.url : ""
   #progress
     .bar 
     .percent 0%
 
-.submit= button_to "Prosimo počakajte ...", resource, :id => :finish, :disabled => true, :method => :get, :class => :disabled
+.submit= button_to "Prosimo počakajte ...", @issue, :id => :finish, :disabled => true, :method => :get, :class => :disabled
 
 :javascript
   var FileUploadDOMId = '#issue_document'

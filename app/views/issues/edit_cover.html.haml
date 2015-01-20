@@ -1,16 +1,16 @@
 = javascript_include_tag "upload"
 
 = title "Uredi naslovnico"
-= simple_form_for resource do |f|
+= simple_form_for @issue do |f|
   = f.input :cover, input_html: {:"data-url" => "cover"}
   #cover
-    - if resource.cover.file?
-      = image_tag resource.cover.url(:medium)
+    - if @issue.cover.file?
+      = image_tag @issue.cover.url(:medium)
   #progress
     .bar 
     .percent 0%
 
-.submit= button_to "Prosimo počakajte ...", resource, :id => :finish, :disabled => true, :method => :get, :class => :disabled
+.submit= button_to "Prosimo počakajte ...", @issue, :id => :finish, :disabled => true, :method => :get, :class => :disabled
 
 :javascript
   var FileUploadDOMId = '#issue_cover'

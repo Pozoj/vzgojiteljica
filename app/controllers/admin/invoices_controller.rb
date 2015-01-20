@@ -1,7 +1,4 @@
-class Admin::InvoicesController < InheritedResources::Base
-  before_filter :authenticate
-  layout "admin"
-
+class Admin::InvoicesController < Admin::AdminController
   def index
     @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
     @invoices = Invoice.order(reference_number: :desc).page params[:page]

@@ -29,7 +29,7 @@
   <% end %>
 </div>  
 
-<div class="pagination_top"><%= paginate collection, window: 3 %><br class='clear'></div>
+<div class="pagination_top"><%= paginate @articles, window: 3 %><br class='clear'></div>
 <table id="articles">
   <thead>
     <tr>
@@ -39,7 +39,7 @@
     </tr>
   </thead>
   <tbody>
-    <% collection.each do |article| %>
+    <% @articles.each do |article| %>
       <tr>
         <td class="article_title"><%= link_to article.title, article %></td>
         <td class="article_author"><%= raw article.authors.map { |a| link_to a, a }.join(", ") %></td>
@@ -49,4 +49,4 @@
   </tbody>
 </table>
 
-<div class="pagination_bottom"><%= paginate collection, window: 3 %><br class='clear'></div>
+<div class="pagination_bottom"><%= paginate @articles, window: 3 %><br class='clear'></div>

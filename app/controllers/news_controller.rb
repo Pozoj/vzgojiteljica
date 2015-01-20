@@ -1,13 +1,48 @@
-class NewsController < InheritedResources::Base
+class NewsController < ApplicationController
   def index
     @copy = Copy.find_by_page_code 'news_index'
-    index!
+    respond_with collection
+  end
+
+  def show
+    respond_with resource
+  end
+
+  def new
+    @news = News.new
+    respond_with resource
+  end
+
+  def create
+    @news = News.create resource_params
+    respond_with resource
+  end
+
+  def edit
+    respond_with resource
+  end
+
+  def update
+    resource.update_attributes resource_params
+    respond_with resource
+  end
+
+  def destroy
+    resource.destroy
+    respond_with resource
   end
 
   private
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:news).permit(:title, :body_html)]
-    end
+  def collection
+    @news ||= News.page(params[:page])
+  end
+
+  def resource
+    @news ||= News.find(params[:id])
+  end
+
+  def resource_params
+    params.require(:news).permit(:title, :body_html)
+  end
 end

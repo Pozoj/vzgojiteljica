@@ -1,21 +1,53 @@
-class KeywordsController < InheritedResources::Base
+class KeywordsController < ApplicationController
   before_filter :authenticate
 
-  def create
-    create! { keywords_path }
+  def index
+    respond_with collection
   end
+
+  def all
+    respond_with collection
+  end
+
+  def show
+    respond_with resource
+  end
+
+  def new
+    @keyword = Keyword.new
+    respond_with resource
+  end
+
+  def create
+    @keyword = Keyword.create resource_params
+    respond_with resource, location: -> { keywords_path }
+  end
+
+  def edit
+    respond_with resource
+  end
+
   def update
-    update! { keywords_path }
+    resource.update_attributes resource_params
+    respond_with resource, location: -> { keywords_path }
+  end
+
+  def destroy
+    resource.destroy
+    respond_with resource
   end
 
   private
 
   def collection
-    Keyword.all.order(:keyword).page params[:page]
+    @keywords ||= Keyword.all.order(:keyword).page(params[:page])
+  end
+
+  def resource
+    @keyword ||= Keyword.find(params[:id])
   end
 
   def resource_params
-    return [] if request.get?
-    [params.require(:keyword).permit(:keyword)]
+    params.require(:keyword).permit(:keyword)
   end
 end

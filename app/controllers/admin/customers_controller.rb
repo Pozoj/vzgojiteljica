@@ -1,6 +1,4 @@
-class Admin::CustomersController < InheritedResources::Base
-  before_filter :authenticate
-  layout "admin"
+class Admin::CustomersController < Admin::AdminController
   has_scope :page, :default => 1
 
   def new_from_order

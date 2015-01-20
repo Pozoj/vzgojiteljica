@@ -1,4 +1,13 @@
 = title "Institucije"
 = admin_section do
   = link_to "Dodaj institucijo", new_institution_path
-- generate_table collection, [:name], [:edit, :destroy]
+
+.pagination_top
+  = paginate @institutions, window: 3
+  %br.clear
+
+- generate_table @institutions, [:name], [:edit, :destroy]
+
+.pagination_bottom
+  = paginate @institutions, window: 3
+  %br.clear

@@ -1,4 +1,4 @@
-= title resource.title, false
+= title @copy.title, false
 = admin_section do
-  = link_to "Uredi", edit_copy_path(resource)
-= raw resource.copy_html
+  = link_to "Uredi", edit_copy_path(@copy)
+= raw @copy.copy_html

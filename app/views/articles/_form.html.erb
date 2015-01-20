@@ -9,7 +9,7 @@
   });
 </script>
 
-<%= simple_form_for resource do |f| %>
+<%= simple_form_for @article do |f| %>
   <%= f.association :section %>
   <%= f.association :issue, collection: Issue.sorted %>
   <%= f.input :title, as: :string %>

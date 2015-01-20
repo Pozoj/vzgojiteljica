@@ -1,7 +1,4 @@
-class Admin::RemarksController < InheritedResources::Base
-  before_filter :authenticate
-  layout "admin"
-
+class Admin::RemarksController < Admin::AdminController
   def create
     @remark = Remark.new params[:remark], without_protection: true
     @remark.user = current_user

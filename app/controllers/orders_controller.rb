@@ -1,4 +1,4 @@
-class OrdersController < InheritedResources::Base
+class OrdersController < ApplicationController
   before_filter :authenticate
   skip_before_filter :authenticate, only: [:new, :create]
 
@@ -8,10 +8,16 @@ class OrdersController < InheritedResources::Base
     end
   end
 
+  def new
+    @order = Order.new
+    respond_with @order
+  end
+
   def create
-    create!(:notice => "Hvala! Vaše naročilo je bilo uspešno sprejeto.") do
-      AdminMailer.new_order(@order.id)
-      redirect_to root_url
+    @order = Order.new params[:order]
+    if @order.save
+      AdminMailer.new_order(@order.id).deliver
+      redirect_to root_url notice: "Hvala! Vaše naročilo je bilo uspešno sprejeto."
     end
   end
 
@@ -22,6 +28,14 @@ class OrdersController < InheritedResources::Base
   end
 
   private
+
+  def resource
+    @order ||= Order.find(params[:id])
+  end
+
+  def collection
+    @orders ||= Order.page(params[:page])
+  end
 
     def resource_params
       return [] if request.get?

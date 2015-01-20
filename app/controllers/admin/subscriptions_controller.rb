@@ -1,7 +1,4 @@
-class Admin::SubscriptionsController < InheritedResources::Base
-  before_filter :authenticate
-  layout "admin"
-
+class Admin::SubscriptionsController < Admin::AdminController
   def new
     subscriber_id = params.delete(:subscriber_id)
     if subscriber_id && @subscriber = Subscriber.find(subscriber_id)

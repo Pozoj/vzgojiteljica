@@ -1,4 +1,4 @@
 = title "Številke"
 = admin_section do
   = link_to "Dodaj številko", new_issue_path
-- generate_table collection, [:id, :cover, :year, :issue, :published_at]
+- generate_table @issues, [:id, :cover, :year, :issue, :published_at]

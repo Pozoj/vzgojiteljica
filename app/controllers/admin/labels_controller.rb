@@ -1,7 +1,4 @@
-class Admin::LabelsController < InheritedResources::Base
-  before_filter :authenticate
-  layout "admin"
-
+class Admin::LabelsController < Admin::AdminController
   def index
     @labels = Subscriber.active.map do |subscriber|
       label = Label.new

@@ -1,22 +1,22 @@
-<%= title resource %>
+<%= title @author %>
 
 <%= admin_section do %>
-  <%= link_to "Uredi", edit_author_path(resource) %>
-  <%= link_to "Odstrani", resource, method: :delete %>
+  <%= link_to "Uredi", edit_author_path(@author) %>
+  <%= link_to "Odstrani", @author, method: :delete %>
 <% end %>
 
 <% if signed_in? %>
 <div class="data">
-  <p><strong>Ime:</strong> <%= resource.first_name %></p>
-  <p><strong>Priimek:</strong> <%= resource.last_name %></p>
-  <p><strong>Naslov</strong> <%= resource.address %></p>
-  <p><strong>Pošta:</strong> <%= resource.post %></p> 
-  <p><strong>E-pošta:</strong> <%= resource.email %></p>
-  <p><strong>Opombe:</strong> <%= resource.notes %></p>
-  <p><strong>Institucija:</strong> <%= resource.institution %></p>
-  <p><strong>Telefon:</strong> <%= resource.phone %></p>
-  <p><strong>Naziv:</strong> <%= resource.title %></p>
-  <p><strong>Izobrazba:</strong> <%= resource.education %></p>
+  <p><strong>Ime:</strong> <%= @author.first_name %></p>
+  <p><strong>Priimek:</strong> <%= @author.last_name %></p>
+  <p><strong>Naslov</strong> <%= @author.address %></p>
+  <p><strong>Pošta:</strong> <%= @author.post %></p> 
+  <p><strong>E-pošta:</strong> <%= @author.email %></p>
+  <p><strong>Opombe:</strong> <%= @author.notes %></p>
+  <p><strong>Institucija:</strong> <%= @author.institution %></p>
+  <p><strong>Telefon:</strong> <%= @author.phone %></p>
+  <p><strong>Naziv:</strong> <%= @author.title %></p>
+  <p><strong>Izobrazba:</strong> <%= @author.education %></p>
   
 </div>
 <% end %>
@@ -24,7 +24,7 @@
 <h2>Članki</h2>
 
 <ul>
-  <% resource.articles.each do |article| %>
+  <% @author.articles.each do |article| %>
     <li>
       <%= link_to article.title, article %>
       <span class="author">(Letnik 

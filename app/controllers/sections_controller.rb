@@ -1,21 +1,53 @@
-class SectionsController < InheritedResources::Base
+class SectionsController < ApplicationController
   before_filter :authenticate
 
-  def create
-    create! { sections_path }
+  def index
+    respond_with collection
   end
+
+  def all
+    respond_with collection
+  end
+
+  def show
+    respond_with resource
+  end
+
+  def new
+    @section = Section.new
+    respond_with resource
+  end
+
+  def create
+    @section = Section.create resource_params
+    respond_with resource, location: -> { sections_path }
+  end
+
+  def edit
+    respond_with resource
+  end
+
   def update
-    update! { sections_path }
+    resource.update_attributes resource_params
+    respond_with resource, location: -> { sections_path }
+  end
+
+  def destroy
+    resource.destroy
+    respond_with resource
   end
 
   private
 
-    def collection
-      Section.all.order(:position)
-    end
+  def collection
+    @sections ||= Section.all.order(:position).page(params[:page])
+  end
 
-    def resource_params
-      return [] if request.get?
-      [params.require(:section).permit(:name, :position)]
-    end
+  def resource
+    @section ||= Section.find(params[:id])
+  end
+
+  def resource_params
+    params.require(:section).permit(:name, :position)
+  end
 end

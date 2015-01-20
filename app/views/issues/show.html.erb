@@ -1,24 +1,24 @@
-<%= title "Vzgojiteljica št. #{resource.issue}, letnik #{resource.year}" %>
+<%= title "Vzgojiteljica št. #{@issue.issue}, letnik #{@issue.year}" %>
 <%= admin_section do %>
-  <%= link_to "Uredi", edit_issue_path(resource) %>
-  <%= link_to "Uredi naslovnico", edit_cover_issue_path(resource) %>
-  <%= link_to "Uredi dokument", edit_document_issue_path(resource) %>
-  <%= link_to "Odstrani", resource, method: :delete %>
+  <%= link_to "Uredi", edit_issue_path(@issue) %>
+  <%= link_to "Uredi naslovnico", edit_cover_issue_path(@issue) %>
+  <%= link_to "Uredi dokument", edit_document_issue_path(@issue) %>
+  <%= link_to "Odstrani", @issue, method: :delete %>
 <% end %>
 
 <div class='cover'>
-  <%= image_tag resource.cover.url %>
+  <%= image_tag @issue.cover.url %>
 
-  <% if resource.document.file? %>
-    <% if resource.older_than_2_years? or signed_in? %>
+  <% if @issue.document.file? %>
+    <% if @issue.older_than_2_years? or signed_in? %>
       <div id="download_issue">
-        <%= link_to "Prenesite številko", resource.document.url%>
+        <%= link_to "Prenesite številko", @issue.document.url%>
       </div>
     <% end %>
   <% end %>
 </div>
 
-<% resource.articles_grouped_by_sections.each do |section, articles| %>
+<% @issue.articles_grouped_by_sections.each do |section, articles| %>
   <div class='section'>
     <h2><%= section %></h2>
     <ol class='articles'>

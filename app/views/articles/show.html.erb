@@ -1,35 +1,35 @@
-<%= title resource.title %>
+<%= title @article.title %>
 
 <%= admin_section do %>
-  <%= link_to "Uredi", edit_article_path(resource) %>
-  <%= link_to "Odstrani", resource, method: :delete, confirm: 'Ste prepričani?' %>
+  <%= link_to "Uredi", edit_article_path(@article) %>
+  <%= link_to "Odstrani", @article, method: :delete, confirm: 'Ste prepričani?' %>
 <% end %>
 
 <div id='abstract'>
-	<%= raw resource.abstract_html %>
+	<%= raw @article.abstract_html %>
 
   <div class="data">
-    <% if resource.keywords.any? %>
+    <% if @article.keywords.any? %>
     	<p>
         <strong>Ključne besede:</strong> 
-        <%= raw resource.keywords.map { |k| link_to k, search_articles_path(:query => k.keyword) }.join(", ") %>
+        <%= raw @article.keywords.map { |k| link_to k, search_articles_path(:query => k.keyword) }.join(", ") %>
       </p>
     <% end %>
   	<p>
-      <strong>Avtor:</strong> <%= raw resource.authors.map { |a| link_to a, a }.join(", ") %>
+      <strong>Avtor:</strong> <%= raw @article.authors.map { |a| link_to a, a }.join(", ") %>
     </p>
   	<p>
       <strong>Letnik:</strong> 
-      <%= link_to resource.issue do %>
-        <%= resource.issue.year %>, št. <%= resource.issue.issue %>
+      <%= link_to @article.issue do %>
+        <%= @article.issue.year %>, št. <%= @article.issue.issue %>
       <% end %>
     </p>
   	<p>
-      <strong>Rubrika:</strong> <%= resource.section %>
+      <strong>Rubrika:</strong> <%= @article.section %>
     </p>
   </div>
 </div>
 <div class='cover'>
-  <%= image_tag resource.issue.cover.url %>
+  <%= image_tag @article.issue.cover.url %>
 </div>
 <br class="clear">

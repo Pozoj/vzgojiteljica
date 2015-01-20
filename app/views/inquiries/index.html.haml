@@ -9,7 +9,7 @@
 #content
   %table
     %tbody
-      - collection.each do |inquiry|
+      - @inquiries.each do |inquiry|
         %tr
           %td.question_title= link_to inquiry, inquiry
           %td.created_at= l inquiry.created_at, format: :simple

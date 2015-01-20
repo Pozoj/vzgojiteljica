@@ -1,6 +1,4 @@
-class Admin::SubscribersController < InheritedResources::Base
-  before_filter :authenticate
-  layout "admin"
+class Admin::SubscribersController < Admin::AdminController
   has_scope :page, :default => 1
 
   def new

@@ -1,7 +1,7 @@
 <h1>
-  Račun <%= resource.reference_number %>/ REV /<%= resource.created_at.strftime("%Y") %>
+  Račun <%= @invoice.reference_number %>/ REV /<%= @invoice.created_at.strftime("%Y") %>
   <small class="muted">
-    za <%= link_to resource.customer, [:admin, resource.customer] %>
+    za <%= link_to @invoice.customer, [:admin, @invoice.customer] %>
   </small>
 </h1>
 
@@ -11,32 +11,32 @@
       <div class="panel-body">
         <strong>Skupaj brez DDV:</strong>
         <p>
-          <%= number_to_currency resource.subtotal %>
+          <%= number_to_currency @invoice.subtotal %>
         </p>
         <strong>DDV:</strong>
         <p>
-          <%= number_to_percentage resource.tax_percent %>
+          <%= number_to_percentage @invoice.tax_percent %>
         </p>
         <strong>Davek:</strong>
         <p>
-          <%= number_to_currency resource.tax %>
+          <%= number_to_currency @invoice.tax %>
         </p>
         <strong>Skupaj za plačilo:</strong>
         <p>
-          <%= number_to_currency resource.total %>
+          <%= number_to_currency @invoice.total %>
         </p>
         <hr>
         <strong>Kreiran:</strong>
         <p>
-          <%= l resource.created_at %>
+          <%= l @invoice.created_at %>
         </p>
         <strong>Osvežen:</strong>
         <p>
-          <%= l resource.updated_at %>
+          <%= l @invoice.updated_at %>
         </p>
         <hr>
         <p>
-          <%= link_to print_admin_invoice_path(resource), class: 'btn btn-default' do %>
+          <%= link_to print_admin_invoice_path(@invoice), class: 'btn btn-default' do %>
             <i class="glyphicon glyphicon-print"></i>
             Natisni
           <% end %>
@@ -51,7 +51,7 @@
         <h3 class="panel-title">Naročnik</h3>
       </div>
       <div class="panel-body">
-        <%= render "admin/customers/fields", resource: resource.customer %>
+        <%= render "admin/customers/fields", resource: @invoice.customer %>
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@
         </tr>
       </thead>
       <tbody>
-        <% resource.line_items.each do |li| %>
+        <% @invoice.line_items.each do |li| %>
           <tr>
             <td><%= li.entity_name %></td>
             <td><%= li.product %></td>

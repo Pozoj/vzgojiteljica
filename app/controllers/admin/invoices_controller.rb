@@ -6,6 +6,10 @@ class Admin::InvoicesController < Admin::AdminController
     @lte = Invoice.select(:reference_number).order(reference_number: :desc).first.try(:reference_number)
   end
 
+  def show
+    respond_with resource
+  end
+
   def create
     @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
     @collection = if params[:invoice_wizard][:include_yearly] == "1"
@@ -30,7 +34,7 @@ class Admin::InvoicesController < Admin::AdminController
   end
 
   def print
-    render layout: 'print'
+    respond_with resource, layout: 'print'
   end
 
   def print_all
@@ -43,5 +47,11 @@ class Admin::InvoicesController < Admin::AdminController
     end
 
     render layout: 'print'
+  end
+
+  private
+
+  def resource
+    @invoice = Invoice.find(params[:id])
   end
 end

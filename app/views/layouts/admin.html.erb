@@ -46,6 +46,7 @@
             <li><a href="<%= admin_entities_path %>">Naročniki</a></li>
             <li><a href="<%= admin_invoices_path %>">Računi</a></li>
             <li><a href="<%= admin_labels_path %>">Nalepke</a></li>
+            <li><a href="<%= admin_bank_statements_path %>">Bančni izpiski</a></li>
           </ul>
 
           <%= form_for @filter, url: admin_entities_path, method: :get, html: {class: 'navbar-form navbar-left pull-right', role: :search} do |f| %>

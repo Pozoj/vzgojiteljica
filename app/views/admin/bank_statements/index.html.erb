@@ -1,0 +1,55 @@
+<div class="row tools">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="glyphicon glyphicon-asterisk"></i>
+          Nalaganje bančnih izpiskov
+        </h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for [:admin, @statement], html: {class: 'form-inline'} do |f| %>
+          <div class="form-group">
+            <%= f.file_field :statement, {class: 'form-control'} %>
+          </div>
+          <div class="form-group pull-right">
+            <%= f.submit "Naloži", class: 'btn btn-default' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Naloženi izpiski</h2>
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Datoteka</th>
+      <th>Naloženo</th>
+      <th>Sprocesirano</th>
+      <th>Št. postavk</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @statements.each do |statement| %>
+      <tr>
+        <td>
+          <%= link_to "", admin_bank_statement_path(statement) %>
+          <%= statement.id %></td>
+        <td><%= statement.statement_file_name %></td>
+        <td><%= l statement.created_at, format: :simple %></td>
+        <td>
+          <% if statement.processed_at? %>
+            <%= l statement.processed_at, format: :simple %>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+        <td><%= statement.entries %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <%= paginate @statements %>
+</table>

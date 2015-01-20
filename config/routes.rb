@@ -61,6 +61,10 @@ Web3::Application.routes.draw do
       get :print_all, on: :collection
       post :build_for_subscription, on: :collection
     end
+    resources :bank_statements do
+      post :parse, on: :member
+    end
+    resources :statement_entries
   end
 
   # You can have the root of your site routed with "root"

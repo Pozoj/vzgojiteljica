@@ -40,6 +40,11 @@
   display: block;
 }
 
+#statement_raw {
+  overflow: auto;
+  max-height: 300px;
+}
+
 .rowlinks tr:hover td {
   cursor: pointer;
   background: #efefef;

@@ -1,0 +1,10 @@
+<h2>Nalaganje izpiska</h2>
+<%= form_for [:admin, @statement], html: {class: 'form-inline'} do |f| %>
+  <%= @statement.errors.inspect %>
+  <div class="form-group">
+    <%= f.file_field :statement, {class: 'form-control'} %>
+  </div>
+  <div class="form-group pull-right">
+    <%= f.submit "Naloži", class: 'btn btn-default' %>
+  </div>
+<% end %>

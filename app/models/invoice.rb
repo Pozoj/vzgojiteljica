@@ -12,6 +12,15 @@ class Invoice < ActiveRecord::Base
     "#{reference_number}/ REV /#{created_at.strftime("%Y")}"
   end
 
+  def invoice_id
+    "SI00#{reference_number}-#{created_at.strftime("%Y")}"
+  end
+
+  def match_statement_entry
+    query = "%#{invoice_id}%"
+    StatementEntry.where(StatementEntry.arel_table[:details].matches(query)).first
+  end
+
   def calculate_totals
     self.tax_percent = TAX_PERCENT
     self.tax = line_items.to_a.sum(&:tax)

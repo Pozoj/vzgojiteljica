@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120060431) do
+ActiveRecord::Schema.define(version: 20150120070256) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -134,17 +134,20 @@ ActiveRecord::Schema.define(version: 20150120060431) do
   create_table "invoices", force: :cascade do |t|
     t.integer  "customer_id"
     t.date     "due_at"
-    t.decimal  "subtotal"
-    t.decimal  "total"
     t.decimal  "tax"
     t.decimal  "tax_percent"
     t.integer  "reference_number"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "paid_at"
-    t.decimal  "paid_amount"
     t.text     "bank_data"
     t.string   "bank_reference"
+    t.integer  "subtotal_cents",       default: 0,     null: false
+    t.string   "subtotal_currency",    default: "EUR", null: false
+    t.integer  "total_cents",          default: 0,     null: false
+    t.string   "total_currency",       default: "EUR", null: false
+    t.integer  "paid_amount_cents",    default: 0,     null: false
+    t.string   "paid_amount_currency", default: "EUR", null: false
   end
 
   add_index "invoices", ["bank_reference"], name: "index_invoices_on_bank_reference", unique: true
@@ -194,20 +197,24 @@ ActiveRecord::Schema.define(version: 20150120060431) do
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "invoice_id"
-    t.string   "entity_name",                  limit: 255
-    t.string   "product",                      limit: 255
+    t.string   "entity_name",                           limit: 255
+    t.string   "product",                               limit: 255
     t.integer  "quantity"
-    t.string   "unit",                         limit: 255
-    t.decimal  "price_per_item"
-    t.decimal  "price_per_item_with_discount"
+    t.string   "unit",                                  limit: 255
     t.decimal  "discount_percent"
     t.decimal  "tax"
     t.decimal  "tax_percent"
-    t.decimal  "subtotal"
-    t.decimal  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "issue_id"
+    t.integer  "subtotal_cents",                                    default: 0,     null: false
+    t.string   "subtotal_currency",                                 default: "EUR", null: false
+    t.integer  "total_cents",                                       default: 0,     null: false
+    t.string   "total_currency",                                    default: "EUR", null: false
+    t.integer  "price_per_item_cents",                              default: 0,     null: false
+    t.string   "price_per_item_currency",                           default: "EUR", null: false
+    t.integer  "price_per_item_with_discount_cents",                default: 0,     null: false
+    t.string   "price_per_item_with_discount_currency",             default: "EUR", null: false
   end
 
   create_table "news", force: :cascade do |t|
@@ -240,13 +247,14 @@ ActiveRecord::Schema.define(version: 20150120060431) do
 
   create_table "plans", force: :cascade do |t|
     t.string   "name",               limit: 255
-    t.decimal  "price"
     t.integer  "billing_frequency"
     t.integer  "batch_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "quantity_unit",      limit: 255
     t.string   "quantity_unit_abbr", limit: 255
+    t.integer  "price_cents",                    default: 0,     null: false
+    t.string   "price_currency",                 default: "EUR", null: false
   end
 
   create_table "posts", id: false, force: :cascade do |t|
@@ -277,13 +285,14 @@ ActiveRecord::Schema.define(version: 20150120060431) do
   create_table "statement_entries", force: :cascade do |t|
     t.string   "account_holder"
     t.string   "account_number"
-    t.decimal  "amount"
+    t.integer  "amount_cents",      default: 0,     null: false
+    t.string   "amount_currency",   default: "EUR", null: false
     t.date     "date"
     t.string   "details"
     t.integer  "bank_statement_id"
     t.string   "reference"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "statement_entries", ["bank_statement_id"], name: "index_statement_entries_on_bank_statement_id"

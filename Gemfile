@@ -33,6 +33,7 @@ gem 'has_scope'
 gem 'mt940_parser', require: 'MT940', github: 'mihar/mt940_parser'
 gem 'paperclip'
 gem 'raygun4ruby'
+gem 'money-rails'
 
 group :development, :test do
   gem 'sqlite3'

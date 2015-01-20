@@ -1,6 +1,8 @@
 class Plan < ActiveRecord::Base
   include Invoicing
 
+  monetize :price_cents
+
   has_many :subscriptions
   belongs_to :batch
 

@@ -3,7 +3,7 @@ class CreateStatementEntries < ActiveRecord::Migration
     create_table :statement_entries do |t|
       t.string :account_holder
       t.string :account_number
-      t.decimal :amount
+      t.money :amount
       t.date :date
       t.string :details
       t.integer :bank_statement_id

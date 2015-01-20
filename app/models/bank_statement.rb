@@ -1,5 +1,3 @@
-require 'MT940'
-
 class BankStatement < ActiveRecord::Base
   has_attached_file :statement,
                     :whiny => false,

@@ -23,6 +23,7 @@ class BankStatement < ActiveRecord::Base
     parsed_mt940.each_with_index do |entry, index|
       next unless entry.is_a?(MT940::StatementLine)
       next if entry.funds_code != :credit
+      next if entry.reference == 'NONREF'
       next unless entry_info = parsed_mt940[index+1]
       next unless entry_info.is_a?(MT940::StatementLineInformation)
 

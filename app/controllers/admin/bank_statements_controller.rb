@@ -16,7 +16,6 @@ class Admin::BankStatementsController < Admin::AdminController
 
   def create
     @statement = BankStatement.create params[:bank_statement]
-    # binding.pry
     respond_with resource, location: -> { admin_bank_statement_path(@statement) }
   end
 

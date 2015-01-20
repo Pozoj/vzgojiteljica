@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222015848) do
+ActiveRecord::Schema.define(version: 20150120003528) do
 
   create_table "articles", force: true do |t|
     t.integer   "section_id"
@@ -126,11 +126,16 @@ ActiveRecord::Schema.define(version: 20141222015848) do
     t.decimal  "total"
     t.decimal  "tax"
     t.decimal  "tax_percent"
-    t.boolean  "paid"
     t.integer  "reference_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "paid_at"
+    t.decimal  "paid_amount"
+    t.text     "bank_data"
   end
+
+  add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id"
+  add_index "invoices", ["reference_number"], name: "index_invoices_on_reference_number"
 
   create_table "issues", force: true do |t|
     t.integer   "year"

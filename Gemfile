@@ -30,6 +30,7 @@ gem 'aws-sdk'
 gem 'haml'
 gem 'kaminari'
 gem 'has_scope'
+gem 'mt940_parser'
 
 group :development, :test do
   gem 'sqlite3'

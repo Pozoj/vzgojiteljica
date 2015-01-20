@@ -32,6 +32,7 @@ gem 'kaminari'
 gem 'has_scope'
 gem 'mt940_parser'
 gem 'paperclip'
+gem 'raygun4ruby'
 
 group :development, :test do
   gem 'sqlite3'

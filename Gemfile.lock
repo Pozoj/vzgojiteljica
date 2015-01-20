@@ -186,6 +186,9 @@ GEM
       tilt
     has_scope (0.5.1)
     hike (1.2.3)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
@@ -214,6 +217,7 @@ GEM
     minitest (5.5.1)
     mt940_parser (1.2.0)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -264,6 +268,10 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
+    raygun4ruby (1.1.5)
+      httparty (~> 0.11)
+      json
+      rack
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -335,6 +343,7 @@ DEPENDENCIES
   pry
   rails (~> 4.2.0)
   rails_12factor
+  raygun4ruby
   sass-rails (~> 5.0.1)
   simple_form
   sprockets (= 2.11.0)

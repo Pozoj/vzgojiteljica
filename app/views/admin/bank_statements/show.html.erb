@@ -8,24 +8,10 @@
         <p>
           <%= l @statement.created_at %>
         </p>
-        <% if @statement.processed_at? %>
-          <strong>Sprocesirano:</strong>
-          <p>
-            <%= l @statement.processed_at %>
-          </p>
-          <strong>Vnosov:</strong>
-          <p>
-            <%= @statement.entries %>
-          </p>
-        <% else %>
-          <hr>
-          <p>
-            <%= link_to parse_admin_bank_statement_path(@statement), method: :post, class: 'btn btn-default' do %>
-              <i class="glyphicon glyphicon-asterisk"></i>
-              Sprocesiraj
-            <% end %>
-          </p>
-        <% end %>
+        <strong>Neobdelanih vnosov:</strong>
+        <p>
+          <%= @statement.entries.count %>
+        </p>
       </div>
     </div>
   </div>

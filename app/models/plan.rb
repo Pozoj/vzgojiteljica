@@ -23,7 +23,7 @@ class Plan < ActiveRecord::Base
   end
 
   def self.latest frequency
-    Plan.where(billing_frequency: frequency).where('price > 0').order(created_at: :desc).first
+    Plan.where(billing_frequency: frequency).where('price_cents > 0').order(created_at: :desc).first
   end
 
   def self.latest_yearly

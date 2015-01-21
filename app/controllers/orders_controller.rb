@@ -6,6 +6,8 @@ class OrdersController < ApplicationController
     unless params[:all]
       @orders = collection.where(processed: false)
     end
+
+    respond_with collection
   end
 
   def new

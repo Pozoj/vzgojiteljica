@@ -10,7 +10,7 @@
       %th Oddano
       %th
   %tbody
-    - collection.each do |order|
+    - @invoices.each do |order|
       %tr
         %td.order_title= order.title
         %td.order_name= order.name

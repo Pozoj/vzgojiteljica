@@ -1,9 +1,10 @@
 class Admin::InvoicesController < Admin::AdminController
   def index
     @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
-    @invoices = Invoice.order(reference_number: :desc).page params[:page]
     @gte = Invoice.select(:reference_number).order(reference_number: :asc).first.try(:reference_number)
     @lte = Invoice.select(:reference_number).order(reference_number: :desc).first.try(:reference_number)
+
+    respond_with collection
   end
 
   def show
@@ -50,6 +51,10 @@ class Admin::InvoicesController < Admin::AdminController
   end
 
   private
+
+  def collection
+    @invoices ||= Invoice.order(reference_number: :desc).page(params[:page])
+  end
 
   def resource
     @invoice = Invoice.find(params[:id])

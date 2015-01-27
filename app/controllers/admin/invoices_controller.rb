@@ -23,7 +23,7 @@ class Admin::InvoicesController < Admin::AdminController
 
   def build_for_subscription
     subscription = Subscription.find(params[:subscription_id])
-    
+
     wizard = InvoiceWizard.new
     unless subscription.plan.yearly?
       wizard.issue_id = Issue.order(published_at: :desc).first.id
@@ -46,6 +46,7 @@ class Admin::InvoicesController < Admin::AdminController
     if gte = params[:gte]
       @invoices = @invoices.where("reference_number >= #{gte}")
     end
+    @invoices.order(:reference_number)
 
     render layout: 'print'
   end

@@ -10,14 +10,14 @@
   <p><strong>Ime:</strong> <%= @author.first_name %></p>
   <p><strong>Priimek:</strong> <%= @author.last_name %></p>
   <p><strong>Naslov</strong> <%= @author.address %></p>
-  <p><strong>Pošta:</strong> <%= @author.post %></p> 
+  <p><strong>Pošta:</strong> <%= @author.post %></p>
   <p><strong>E-pošta:</strong> <%= @author.email %></p>
   <p><strong>Opombe:</strong> <%= @author.notes %></p>
   <p><strong>Institucija:</strong> <%= @author.institution %></p>
   <p><strong>Telefon:</strong> <%= @author.phone %></p>
   <p><strong>Naziv:</strong> <%= @author.title %></p>
   <p><strong>Izobrazba:</strong> <%= @author.education %></p>
-  
+
 </div>
 <% end %>
 
@@ -27,9 +27,11 @@
   <% @author.articles.each do |article| %>
     <li>
       <%= link_to article.title, article %>
-      <span class="author">(Letnik 
-      <%= link_to article.issue do %>
-        <%= article.issue.year %>, št. <%= article.issue.issue %>
-      <% end %>)</span>
+      <% if article.issue %>
+        <span class="author">(Letnik
+        <%= link_to article.issue do %>
+          <%= article.issue.year %>, št. <%= article.issue.issue %>
+        <% end %>)</span>
+      <% end %>
   <% end %>
 </ul>

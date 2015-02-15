@@ -1,6 +1,10 @@
 class Admin::CustomersController < Admin::AdminController
   has_scope :page, :default => 1
 
+  def new
+    @customer = Customer.new
+  end
+
   def show
     respond_with resource
   end

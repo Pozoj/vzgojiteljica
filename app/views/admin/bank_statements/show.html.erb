@@ -13,9 +13,6 @@
           <p>
             <%= @statement.entries.count %>
           </p>
-          <p>
-            <%= button_to "Obdelaj", parse_admin_bank_statement_path(@statement), method: :post %>
-          </p>
         <% end %>
       </div>
     </div>

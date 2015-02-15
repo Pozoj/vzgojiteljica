@@ -10,6 +10,10 @@ class OrdersController < ApplicationController
     respond_with collection
   end
 
+  def show
+    @order = resource
+  end
+
   def new
     @order = Order.new
     respond_with @order
@@ -24,7 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def mark_processed
-    resource.processed = true    
+    resource.processed = true
     resource.save!
     redirect_to resource
   end
@@ -38,9 +42,4 @@ class OrdersController < ApplicationController
   def collection
     @orders ||= Order.page(params[:page])
   end
-
-    def resource_params
-      return [] if request.get?
-      [params.require(:order).permit(:title, :name, :address, :post_id, :phone, :fax, :email, :vat_id, :place_and_date, :comments, :quantity)]
-    end
 end

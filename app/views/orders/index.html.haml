@@ -1,5 +1,9 @@
 = title "Naročila"
 
+= admin_section do
+  - unless params[:all]
+    = link_to "Prikaži obdelane", orders_path(all: true)
+
 %table#articles
   %thead
     %tr
@@ -8,15 +12,19 @@
       %th Email
       %th Količina
       %th Oddano
+      - if params[:all]
+        %th Obdelano
       %th
   %tbody
     - @orders.each do |order|
       %tr
         %td.order_title= order.title
         %td.order_name= order.name
-        %td.order_email= order.email       
+        %td.order_email= order.email
         %td.order_quantity= order.quantity
         %td.order_created_at= l order.created_at, format: :simple
+        - if params[:all]
+          %td.order_processed= order.processed? ? 'Da' : 'Ne'
         %td.admin
           = link_to "Odstrani", order, method: :delete, confirm: 'Ste prepričani?'
           = link_to "Odpri", order

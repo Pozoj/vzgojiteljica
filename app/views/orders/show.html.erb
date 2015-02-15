@@ -1,12 +1,12 @@
-<%= title "Naročilo #{resource.id}" %>
+<%= title "Naročilo #{@order.id}" %>
 
-<% if resource.processed? %>
+<% if @order.processed? %>
   <h2 class="notice notice-success">
     Naročilo obdelano
   </h2>
 <% end %>
 
-<%= generate_fields resource %>
+<%= generate_fields @order %>
 
-<%= button_to "Ustvari novo stranko", new_from_order_admin_customer_path(order_id: resource.id), method: :post %>
-<%= button_to "Označi kot obdelano", mark_processed_order_path(resource), method: :put %>
+<%= button_to "Ustvari novo stranko", new_from_order_admin_customer_path(order_id: @order.id), method: :post %>
+<%= button_to "Označi kot obdelano", mark_processed_order_path(@order), method: :put %>

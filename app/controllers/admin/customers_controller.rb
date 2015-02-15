@@ -22,7 +22,7 @@ class Admin::CustomersController < Admin::AdminController
     @customer.vat_id = @order.vat_id
     @customer.save!
 
-    @customer.remarks.create remark: 'Naročnik ustvarjen avtomatsko iz naročila na spletni strani.'
+    @customer.remarks.create remark: "Naročnik ustvarjen avtomatsko iz naročila ##{@order.id} na spletni strani."
 
     @subscriber = @customer.subscribers.new
     @subscriber.title = @order.title

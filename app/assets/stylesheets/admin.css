@@ -33,7 +33,10 @@
   right: 0px;
   background: #222;
   white-space: nowrap;
-  padding: 10px 15px 15px 15px;
+  padding: 10px 12px 15px 15px;
+}
+#new_filter .advanced input {
+  margin-bottom: 10px;
 }
 
 #header:hover .advanced {
@@ -67,7 +70,7 @@ td.subscriptions .subscription:last-child {
   margin-bottom: 0;
 }
 
-.row.tools { 
+.row.tools {
   margin-top: 40px;
 }
 

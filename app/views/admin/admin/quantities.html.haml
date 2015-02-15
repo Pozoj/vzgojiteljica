@@ -1,0 +1,12 @@
+%h1 Količine
+%table.table
+  %thead
+    %tr
+      %th Količina
+      %th Št. naročnikov
+  %tbody
+    - @quantities.each do |quantity, customers|
+      %tr
+        %td= quantity
+        %td= customers.count
+

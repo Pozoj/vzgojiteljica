@@ -47,6 +47,12 @@
             <li><a href="<%= admin_invoices_path %>">Računi</a></li>
             <li><a href="<%= admin_labels_path %>">Nalepke</a></li>
             <li><a href="<%= admin_bank_statements_path %>">Bančni izpiski</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ostalo <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="<%= admin_quantities_path %>">Količine</a></li>
+              </ul>
+            </li>
           </ul>
 
           <%= form_for @filter, url: admin_entities_path, method: :get, html: {class: 'navbar-form navbar-left pull-right', role: :search} do |f| %>
@@ -56,9 +62,13 @@
               <%= f.search_field :global, placeholder: 'Naziv, ime, naslov, davčna, ...', class: 'form-control' %>
               <div class="advanced">
                 <%= f.text_field :title, placeholder: 'Naziv', class: 'form-control' %>
+                <br>
                 <%= f.text_field :name, placeholder: 'Ime in priimek', class: 'form-control' %>
+                <br>
                 <%= f.text_field :address, placeholder: 'Naslov', class: 'form-control' %>
+                <br>
                 <%= f.text_field :vat_id, placeholder: 'Davčna', class: 'form-control' %>
+                <br>
                 <%= f.select :type, [['', ''], ['Stranka', 'Customer'], ['Naročnik', 'Subscriber']], {}, class: 'form-control' %>
               </div>
             </div>

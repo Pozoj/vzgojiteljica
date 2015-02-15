@@ -8,10 +8,15 @@
         <p>
           <%= l @statement.created_at %>
         </p>
-        <strong>Neobdelanih vnosov:</strong>
-        <p>
-          <%= @statement.entries.count %>
-        </p>
+        <% if @statement.entries.any? %>
+          <strong>Neobdelanih vnosov:</strong>
+          <p>
+            <%= @statement.entries.count %>
+          </p>
+          <p>
+            <%= button_to "Obdelaj", parse_admin_bank_statement_path(@statement), method: :post %>
+          </p>
+        <% end %>
       </div>
     </div>
   </div>

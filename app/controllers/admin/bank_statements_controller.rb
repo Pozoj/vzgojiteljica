@@ -21,7 +21,7 @@ class Admin::BankStatementsController < Admin::AdminController
 
   def parse
     resource.parse!
-    respond_with resource
+    respond_with resource, location: -> { admin_bank_statement_path(@statement) }
   end
 
   private

@@ -55,7 +55,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def match_statement_entry
-    query = "%#{invoice_id}%"
+    query = "%SI00#{reference_number}%"
     @statement_entry ||= StatementEntry.where(StatementEntry.arel_table[:details].matches(query)).first
   end
 

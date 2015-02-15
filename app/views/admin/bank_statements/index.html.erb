@@ -53,3 +53,32 @@
   </tbody>
   <%= paginate @statements %>
 </table>
+
+<h2>Neobdelane postavke</h2>
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Datum</th>
+      <th>Plačnik</th>
+      <th>TRR</th>
+      <th>Znesek</th>
+      <th>Podatki</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td>
+          <%= link_to "", admin_statement_entry_path(entry) %>
+          <%= entry.reference %>
+        </td>
+        <td><%= l entry.date, format: :simple %></td>
+        <td><%= simple_format entry.account_holder %></td>
+        <td><%= entry.account_number %></td>
+        <td><%= number_to_currency entry.amount %></td>
+        <td><%= simple_format entry.details %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,6 +1,7 @@
 class Admin::BankStatementsController < Admin::AdminController
   def index
     @statement = BankStatement.new
+    @entries = StatementEntry.all
     respond_with collection
   end
 

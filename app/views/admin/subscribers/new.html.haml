@@ -1,12 +1,12 @@
-%h1 
+%h1
   Ustvari prejemnika
   %small.muted
     za
-    = link_to resource.customer, [:admin, resource.customer]
+    = link_to @subscriber.customer, [:admin, @subscriber.customer]
 
 .row
   .col-xs-8
-    = simple_form_for [:admin, resource] do |f|
+    = simple_form_for [:admin, @subscriber] do |f|
       = f.error_notification
-      = f.hidden_field :customer_id      
+      = f.hidden_field :customer_id
       = render "form", f: f

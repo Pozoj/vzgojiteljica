@@ -21,9 +21,27 @@ class Admin::SubscribersController < Admin::AdminController
     respond_with resource
   end
 
+  def create
+    @subscriber = Subscriber.create resource_params
+    respond_with resource, location: -> { admin_subscriber_path(@subscriber) }
+  end
+
+  def edit
+    respond_with resource, location: -> { admin_subscriber_path(@subscriber) }
+  end
+
+  def update
+    resource.update_attributes resource_params
+    respond_with resource, location: -> { admin_subscriber_path(@subscriber) }
+  end
+
   private
 
   def resource
     @subscriber ||= Subscriber.find(params[:id])
+  end
+
+  def resource_params
+    params.require(:subscriber)
   end
 end

@@ -2,7 +2,7 @@ class Admin::SubscriptionsController < Admin::AdminController
   def show
     respond_with resource
   end
-  
+
   def new
     subscriber_id = params.delete(:subscriber_id)
     if subscriber_id && @subscriber = Subscriber.find(subscriber_id)
@@ -15,6 +15,20 @@ class Admin::SubscriptionsController < Admin::AdminController
     end
 
     respond_with resource
+  end
+
+  def create
+    @subscription = Subscription.create resource_params
+    respond_with resource, location: -> { admin_subscription_path(@subscription) }
+  end
+
+  def edit
+    respond_with resource, location: -> { admin_subscription_path(@subscription) }
+  end
+
+  def update
+    resource.update_attributes resource_params
+    respond_with resource, location: -> { admin_subscription_path(@subscription) }
   end
 
   def end_now
@@ -42,5 +56,9 @@ class Admin::SubscriptionsController < Admin::AdminController
 
   def resource
     @subscription ||= Subscription.find(params[:id])
+  end
+
+  def resource_params
+    params.require(:subscription)
   end
 end

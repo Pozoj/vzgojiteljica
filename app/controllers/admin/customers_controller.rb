@@ -1,10 +1,6 @@
 class Admin::CustomersController < Admin::AdminController
   has_scope :page, :default => 1
 
-  def new
-    @customer = Customer.new
-  end
-
   def show
     respond_with resource
   end
@@ -49,9 +45,32 @@ class Admin::CustomersController < Admin::AdminController
     redirect_to admin_customer_path(@customer)
   end
 
+  def new
+    @customer = Customer.new
+    respond_with resource
+  end
+
+  def create
+    @customer = Customer.create resource_params
+    respond_with resource, location: -> { admin_customer_path(@customer) }
+  end
+
+  def edit
+    respond_with resource, location: -> { admin_customer_path(@customer) }
+  end
+
+  def update
+    resource.update_attributes resource_params
+    respond_with resource, location: -> { admin_customer_path(@customer) }
+  end
+
   private
 
   def resource
     @customer ||= Customer.find(params[:id])
+  end
+
+  def resource_params
+    params.require(:customer)
   end
 end

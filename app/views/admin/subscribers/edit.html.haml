@@ -1,11 +1,11 @@
 %h1
-  = resource
+  = @subscriber
   %small.muted
     prejemnik za
-    = link_to resource.customer, [:admin, resource.customer]
+    = link_to @subscriber.customer, [:admin, @subscriber.customer]
 
 .row
   .col-xs-8
-    = simple_form_for [:admin, resource] do |f|
+    = simple_form_for [:admin, @subscriber] do |f|
       = f.error_notification
       = render "form", f: f

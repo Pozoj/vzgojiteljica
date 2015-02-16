@@ -2,15 +2,15 @@
   Naročnina
   <small class="muted">
     za
-    <%= link_to resource.customer, [:admin, resource.customer] %>,
+    <%= link_to @subscription.customer, [:admin, @subscription.customer] %>,
     prejemnik
-    <%= link_to resource.subscriber, [:admin, resource.subscriber] %>
+    <%= link_to @subscription.subscriber, [:admin, @subscription.subscriber] %>
   </small>
 </h1>
 
-<%= simple_form_for [:admin, resource] do |f| %>
+<%= simple_form_for [:admin, @subscription] do |f| %>
   <%= f.input :start %>
-  <% if resource.end %>
+  <% if @subscription.end %>
     <%= f.input :end %>
   <% end %>
   <%= f.association :plan %>

@@ -54,6 +54,10 @@ class Issue < ActiveRecord::Base
     Date.today.year - year >= 2
   end
 
+  def self.last
+    Issue.order(year: :desc, issue: :desc).first
+  end
+
   def to_s
     "#{year} / #{issue}."
   end

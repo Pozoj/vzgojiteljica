@@ -10,9 +10,7 @@
 
 <%= simple_form_for [:admin, @subscription] do |f| %>
   <%= f.input :start %>
-  <% if @subscription.end %>
-    <%= f.input :end %>
-  <% end %>
+  <%= f.input :end, include_blank: true %>
   <%= f.association :plan %>
   <%= f.input :discount %>
   <%= f.submit %>

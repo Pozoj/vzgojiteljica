@@ -13,7 +13,7 @@
         %td= quantity * subscribers.count
   %tfoot
     %tr
-      %th= @quantities.inject(0) { |sum, quantities| sum += quantities.first }
+      %th
       %th= @quantities.inject(0) { |sum, quantities| sum += quantities.last.count }
       %th= @quantities.inject(0) { |sum, quantities| sum += (quantities.first * quantities.last.count) }
 

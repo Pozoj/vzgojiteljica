@@ -4,9 +4,16 @@
     %tr
       %th Količina
       %th Št. naročnikov
+      %th Skupno
   %tbody
-    - @quantities.each do |quantity, customers|
+    - @quantities.each do |quantity, subscribers|
       %tr
         %td= quantity
-        %td= customers.count
+        %td= subscribers.count
+        %td= quantity * subscribers.count
+  %tfoot
+    %tr
+      %th= @quantities.inject(0) { |sum, quantities| sum += quantities.first }
+      %th= @quantities.inject(0) { |sum, quantities| sum += quantities.last.count }
+      %th= @quantities.inject(0) { |sum, quantities| sum += (quantities.first * quantities.last.count) }
 

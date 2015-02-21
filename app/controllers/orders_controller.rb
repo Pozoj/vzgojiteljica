@@ -40,6 +40,6 @@ class OrdersController < ApplicationController
   end
 
   def collection
-    @orders ||= Order.page(params[:page])
+    @orders ||= Order.page(params[:page]).order(created_at: :desc)
   end
 end

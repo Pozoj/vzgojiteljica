@@ -7,8 +7,8 @@ class Admin::AdminController < ApplicationController
   end
 
   def quantities
-    @quantities = Customer.all.group_by do |customer|
-      customer.subscriptions.active.sum(:quantity)
+    @quantities = Subscriber.all.group_by do |subscriber|
+      subscriber.subscriptions.active.sum(:quantity)
     end.reject do |quantity, customers|
       quantity < 1
     end.sort_by do |quantity, customers|

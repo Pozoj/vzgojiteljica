@@ -5,6 +5,9 @@
     = link_to @subscriber.customer, [:admin, @subscriber.customer]
 
 .admin_actions
+  = link_to admin_label_path(@subscriber), class: 'btn btn-default' do
+    %i.glyphicon.glyphicon-print
+    Natisni nalepko
   = link_to edit_admin_subscriber_path(@subscriber), class: 'btn btn-default' do
     %i.glyphicon.glyphicon-edit
     Uredi

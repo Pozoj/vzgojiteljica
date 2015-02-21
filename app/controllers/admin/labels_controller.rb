@@ -13,4 +13,20 @@ class Admin::LabelsController < Admin::AdminController
 
     render layout: 'print'
   end
+
+  def show
+    subscriber = Subscriber.find(params[:id])
+    label = Label.new
+    label.subscriber = subscriber
+    label.quantity = subscriber.subscriptions.active.sum(:quantity)
+
+    unless label.quantity > 0
+      render nothing: true 
+      return
+    end
+
+    @labels = [label]
+
+    render action: 'index', layout: 'print'
+  end
 end

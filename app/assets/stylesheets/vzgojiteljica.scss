@@ -1075,30 +1075,15 @@ label.boolean {
 
 /*_________________________________ PD Page _________________________________*/
 
-#news-index
+#news-index {
   .news {
     float: left;
     width: 520px;
-    margin-bottom: 5px;
-    padding: 5px 0;
-  }
-  .body {
-    margin-top: 10px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid silver;
   }
   aside.about {
     float: right;
     margin-top: 10px;
     padding: 10px;
-  }
-  h3 {
-    margin: 0;
-  }
-  p.date {
-    font-size: 12px;
-    line-height: 13px;
-    color: #999999;
   }
   #download {
     display: block;
@@ -1121,3 +1106,41 @@ label.boolean {
       border: 1px solid #f48374;
     }
   }
+}
+#news-index, #news-show {
+  .news {
+    margin-bottom: 5px;
+    padding: 5px 0;
+    h3 {
+      margin: 0;
+    }
+    p.date {
+      font-size: 12px;
+      line-height: 13px;
+      color: #999999;
+    }
+    .body {
+      margin-top: 10px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid silver;
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      h3, h4, h5, h6 {
+        margin: 1em 0 0.5em 0;
+      }
+      p {
+        margin: 1em 0;
+        line-height: 1.4em;
+      }
+      ul, ol {
+        margin-left: 25px;
+        list-style: inside;
+      }
+    }
+  }
+}
+#news-show .news .body {
+  border-bottom: 0;
+}

@@ -4,6 +4,6 @@
     <%= link_to "Odstrani", news, method: :delete, confirm: 'Ste prepričani?' %>
   <% end %>
   <h2><%= news.title %></h2>
-  <p class='date'><%= l news.created_at, format: :short %></p>
+  <p class='date'><%= l news.created_at, format: :long %></p>
   <div class='body'><%= raw news.body_html %></div>
 </div>

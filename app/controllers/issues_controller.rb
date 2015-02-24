@@ -1,4 +1,5 @@
 class IssuesController < ApplicationController
+  skip_before_filter :authenticate, only: [:index, :show]
   respond_to :json, :only => [:cover, :document]
 
   def index

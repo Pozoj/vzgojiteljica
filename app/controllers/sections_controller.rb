@@ -1,6 +1,4 @@
 class SectionsController < ApplicationController
-  before_filter :authenticate
-
   def index
     respond_with collection
   end

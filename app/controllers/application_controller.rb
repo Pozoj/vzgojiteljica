@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_section, :body_attrs, :body_id, :body_class, :admin?
-  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate
   before_filter :build_filter
 
   # Current section accessor.

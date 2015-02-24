@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  before_filter :authenticate, :except => :show
+  skip_before_filter :authenticate, only: [:show]
 
   def index
     respond_with collection

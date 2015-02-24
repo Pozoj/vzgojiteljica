@@ -1,4 +1,6 @@
 class NewsController < ApplicationController
+  skip_before_filter :authenticate, only: [:index]
+
   def index
     @copy = Copy.find_by_page_code 'news_index'
     respond_with collection
@@ -35,7 +37,7 @@ class NewsController < ApplicationController
   private
 
   def collection
-    @news ||= News.page(params[:page])
+    @news ||= News.page(params[:page]).order(created_at: :desc)
   end
 
   def resource

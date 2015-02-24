@@ -1,5 +1,5 @@
 class InquiriesController < ApplicationController
-  skip_before_filter :authenticate, only: [:create]
+  skip_before_filter :authenticate, only: [:index, :show, :create]
 
   def index
     @inquiry = Inquiry.new
@@ -50,7 +50,7 @@ class InquiriesController < ApplicationController
   private
 
   def collection
-    @inquiries = Inquiry.all.page(params[:page])
+    @inquiries = Inquiry.all.page(params[:page]).order(created_at: :desc)
   end
 
   def resource

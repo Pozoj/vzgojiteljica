@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  skip_before_filter :authenticate, only: :search
+  skip_before_filter :authenticate, only: [:index, :show, :search]
 
   def index
     respond_with collection

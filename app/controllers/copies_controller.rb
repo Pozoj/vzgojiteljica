@@ -1,4 +1,6 @@
 class CopiesController < ApplicationController
+  skip_before_filter :authenticate, only: [:show]
+
   def show
     respond_with resource  
   end

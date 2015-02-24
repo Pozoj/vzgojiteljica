@@ -934,28 +934,23 @@ label.boolean {
   }
   #new_inquiry {
     margin: 20px;
-    .input {
-      input, submit, textarea {
-        display: block;
-        margin-bottom: 20px;
-        margin-top: 5px;
-        border: 1px solid #b3b3b3;
-        border-radius: 5px;
-        font-size: 1em;
-        color: #3a3a3a;
-      }
-      input, textarea {
-        width: 250px;
-      }
-      input {
-        height: 30px;
-      }
-      textarea {
-        height: 150px;
-      }
+    input.string, input.email, input.tel, textarea {
+      display: block;
+      margin-bottom: 20px;
+      margin-top: 5px;
+      border: 1px solid #b3b3b3;
+      border-radius: 5px;
+      font-size: 1em;
+      color: #3a3a3a;
+    }
+    input, textarea {
+      width: 255px;
+    }
+    input {
+      height: 30px;
     }
     textarea {
-      height: 120px;
+      height: 150px;
     }
   }
   td.question_title {

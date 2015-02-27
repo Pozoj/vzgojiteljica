@@ -21,6 +21,6 @@ class Admin::AdminController < ApplicationController
   end
 
   def freeriders
-    @freeriders = Subscription.free.active
+    @freeriders = Subscription.free.active.order(:start)
   end
 end

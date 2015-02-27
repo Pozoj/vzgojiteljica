@@ -24,7 +24,9 @@
           <% end %>
         </td>
         <td>
-          <% if entity.customer %>
+          <% if entity.subscriber? %>
+            <%= link_to "", admin_subscriber_path(entity) %>
+          <% elsif entity.customer %>
             <%= link_to "", admin_customer_path(entity.customer) %>
           <% end %>
           <%= entity %>

@@ -19,4 +19,8 @@ class Admin::AdminController < ApplicationController
       quantity
     end
   end
+
+  def freeriders
+    @freeriders = Subscription.free.active
+  end
 end

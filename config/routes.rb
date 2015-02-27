@@ -42,6 +42,7 @@ Web3::Application.routes.draw do
   namespace :admin do
     root to: 'admin#index'
     get :quantities, to: 'admin#quantities'
+    get :freeriders, to: 'admin#freeriders'
     resources :entities
     resources :customers do
       post :new_from_order, on: :member

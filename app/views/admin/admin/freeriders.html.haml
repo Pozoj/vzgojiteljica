@@ -1,0 +1,32 @@
+%h1 Brezplačni prejemniki
+
+%table.table.rowlinks
+  %thead
+    %tr
+      %th Naročnina
+      %th Prejemnik
+      %th Pričetek prejemanja
+      %th Konec prejemanja
+      %th Količina
+  %tbody
+    - @freeriders.each do |subscription|
+      %tr
+        %td
+          = link_to "", admin_subscription_path(subscription)
+          Naročnina
+          == ##{subscription.id}
+        %td= subscription.subscriber
+        %td= l subscription.start
+        %td
+          - if subscription.end
+            = l subscription.end
+          - else
+            &mdash;
+        %td= subscription.quantity
+  %tfoot
+    %tr
+      %th
+      %th
+      %th
+      %th
+      %th= @freeriders.sum(:quantity)

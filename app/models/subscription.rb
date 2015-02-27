@@ -9,8 +9,8 @@ class Subscription < ActiveRecord::Base
   scope :inactive, -> { where(arel_table[:end].not_eq(nil).or(arel_table[:end].lteq(Date.today).or(arel_table[:start].gteq(Date.today)))) }
   scope :yearly, -> { joins(:plan).where(plans: {billing_frequency: 1}) }
   scope :per_issue, -> { joins(:plan).where.not(plans: {billing_frequency: 1}) }
-  scope :paid, -> { joins(:plan).where.not(plans: {price: 0}) }
-  scope :free, -> { joins(:plan).where(plans: {price: 0}) }
+  scope :paid, -> { joins(:plan).where.not(plans: {price_cents: 0}) }
+  scope :free, -> { joins(:plan).where(plans: {price_cents: 0}) }
 
   validates_presence_of :quantity
   validates_numericality_of :quantity, greater_than: 0, only_integer: true

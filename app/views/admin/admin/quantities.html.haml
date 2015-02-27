@@ -1,4 +1,10 @@
-%h1 Količine
+%h1
+  Količine
+  - if params[:only_paid]
+    = link_to "Prikaži vse", admin_quantities_path, class: 'btn btn-primary btn-xs'
+  - else
+    = link_to "Prikaži samo plačljive", admin_quantities_path(only_paid: true), class: 'btn btn-default btn-xs'
+
 %table.table
   %thead
     %tr
@@ -16,4 +22,3 @@
       %th
       %th= @quantities.inject(0) { |sum, quantities| sum += quantities.last.count }
       %th= @quantities.inject(0) { |sum, quantities| sum += (quantities.first * quantities.last.count) }
-

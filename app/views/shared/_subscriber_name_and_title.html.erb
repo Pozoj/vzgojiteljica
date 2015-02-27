@@ -1,0 +1,9 @@
+<% if subscriber.name.present? && subscriber.title.present? %>
+  <%= subscriber.name %>
+  <br>
+  <small class="muted"><%= subscriber.title %></small>
+<% elsif subscriber.name.present? %>
+  <%= subscriber.name %>
+<% else %>
+  <%= subscriber.title %>
+<% end %>

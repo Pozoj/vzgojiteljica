@@ -48,7 +48,7 @@
           %td
             = link_to "", admin_subscriber_path(s)
             = s.id
-          %td= s.title or s.name
+          %td= render "shared/subscriber_name_and_title", subscriber: s
           %td= s.address
           %td= s.post
           %td= s.subscriptions.active.sum(:quantity)

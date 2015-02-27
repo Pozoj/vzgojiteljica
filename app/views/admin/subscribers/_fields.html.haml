@@ -1,7 +1,7 @@
 - if resource.name?
   %strong= I18n.t 'attributes.entities.name'
   %p= resource.name
-- else
+- if resource.title?
   %strong= I18n.t 'attributes.entities.title'
   %p= resource.title
 %strong= I18n.t 'attributes.address'

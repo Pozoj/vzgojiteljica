@@ -5,7 +5,12 @@
     <p>Pirešica 2<br>3320 Velenje</p>
   </div>
   <div class="address">
-    <p><strong><%= label.subscriber.to_s %></strong></p>
+    <p>
+      <strong><%= label.subscriber %></strong>
+    </p>
+    <% if label.subscriber.name.present? && label.subscriber.title.present? %>
+      <p><%= label.subscriber.title %></p>
+    <% end %>
     <p><%= label.subscriber.address %></p>
     <p><%= label.subscriber.post %></p>
   </div>

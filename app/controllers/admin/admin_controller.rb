@@ -7,8 +7,12 @@ class Admin::AdminController < ApplicationController
   end
 
   def quantities
+    paid = params[:only_paid] == 'true'
+
     @quantities = Subscriber.all.group_by do |subscriber|
-      subscriber.subscriptions.active.sum(:quantity)
+      quantity = subscriber.subscriptions.active
+      quantity = quantity.paid if paid
+      quantity = quantity.sum(:quantity)
     end.reject do |quantity, customers|
       quantity < 1
     end.sort_by do |quantity, customers|

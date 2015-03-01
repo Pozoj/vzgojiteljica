@@ -7,20 +7,34 @@ class Admin::AdminController < ApplicationController
   end
 
   def quantities
-    paid = params[:only_paid] == 'true'
+    @paid = params[:only_paid] == 'true'
 
-    @quantities = Subscriber.all.group_by do |subscriber|
-      quantity = subscriber.subscriptions.active
-      quantity = quantity.paid if paid
+    @which = params[:which]
+    klass = if @which == 'customers'
+      Customer
+    else
+      Subscriber
+    end
+
+    @quantities = klass.all.group_by do |entity|
+      quantity = entity.subscriptions.active
+      quantity = quantity.paid if @paid
       quantity = quantity.sum(:quantity)
-    end.reject do |quantity, customers|
+    end.reject do |quantity, entities|
       quantity < 1
-    end.sort_by do |quantity, customers|
+    end.sort_by do |quantity, entities|
       quantity
     end
   end
 
   def freeriders
     @freeriders = Subscription.free.active.order(:start)
+  end
+
+  def regional
+    paid = params[:only_paid] == 'true'
+
+    customers = Customer.all.reject { |customer| customer.subscriptions.active.empty? }
+    @regional = customers.group_by { |customer| customer.post.regional_master_id }
   end
 end

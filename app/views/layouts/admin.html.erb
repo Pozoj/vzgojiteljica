@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
     <%= stylesheet_link_tag "admin" %>
+    <%= javascript_include_tag "admin" %>
     <%= csrf_meta_tags %>
     <%= yield :head %>
     <title>
@@ -97,6 +98,5 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <%= javascript_include_tag "admin" %>
   </body>
 </html>

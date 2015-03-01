@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120083119) do
+ActiveRecord::Schema.define(version: 20150301063428) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -106,8 +106,12 @@ ActiveRecord::Schema.define(version: 20150120083119) do
     t.integer  "customer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "account_number"
+    t.boolean  "einvoice"
   end
 
+  add_index "entities", ["customer_id"], name: "index_entities_on_customer_id"
+  add_index "entities", ["einvoice"], name: "index_entities_on_einvoice"
   add_index "entities", ["entity_id"], name: "index_entities_on_entity_id"
   add_index "entities", ["post_id"], name: "index_entities_on_post_id"
   add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id"
@@ -153,6 +157,7 @@ ActiveRecord::Schema.define(version: 20150120083119) do
 
   add_index "invoices", ["bank_reference"], name: "index_invoices_on_bank_reference", unique: true
   add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id"
+  add_index "invoices", ["paid_at"], name: "index_invoices_on_paid_at"
   add_index "invoices", ["reference_number"], name: "index_invoices_on_reference_number"
 
   create_table "issues", force: :cascade do |t|
@@ -219,6 +224,8 @@ ActiveRecord::Schema.define(version: 20150120083119) do
     t.string   "tax_currency",                                      default: "EUR", null: false
   end
 
+  add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id"
+
   create_table "news", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.text     "body"
@@ -277,6 +284,10 @@ ActiveRecord::Schema.define(version: 20150120083119) do
     t.datetime "updated_at"
   end
 
+  add_index "remarks", ["remarkable_id"], name: "index_remarks_on_remarkable_id"
+  add_index "remarks", ["remarkable_type"], name: "index_remarks_on_remarkable_type"
+  add_index "remarks", ["user_id"], name: "index_remarks_on_user_id"
+
   create_table "sections", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.integer  "position"
@@ -311,7 +322,10 @@ ActiveRecord::Schema.define(version: 20150120083119) do
     t.integer  "quantity"
   end
 
+  add_index "subscriptions", ["end"], name: "index_subscriptions_on_end"
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"
+  add_index "subscriptions", ["start"], name: "index_subscriptions_on_start"
+  add_index "subscriptions", ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255

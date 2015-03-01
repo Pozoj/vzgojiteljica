@@ -52,6 +52,9 @@ sl:
     entities:
       title: "Naziv"
       name: "Ime in priimek"
+    start: Pričetek
+    end: Konec
+    discount: Popust
 
   forms:
     submit:

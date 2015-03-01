@@ -5,20 +5,29 @@
     %small= l Time.now
 
 .row
-  .col-xs-8
+  .col-xs-6
     %h2
-      = Customer.all.count
+      = Customer.active_count
       %small naročnikov
-
+    %h3
+      = Customer.paid_count
+      %small plačljivih naročnikov
+    %hr
     %h2
       = Subscription.active.sum(:quantity)
       %small izvodov
-
+    %h3
+      = Subscription.active.paid.sum(:quantity)
+      %small plačljivih izvodov
+    %h3
+      = Subscription.active.free.sum(:quantity)
+      %small brezplačnih izvodov
+    %hr
     %h2
       = @last_issue
       %small zadnja številka
 
-  .col-xs-4
+  .col-xs-4.pull-right
     .panel.panel-default
       .panel-heading 
         %h3.panel-title Ustvari novo

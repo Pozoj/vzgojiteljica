@@ -64,6 +64,11 @@ class Admin::CustomersController < Admin::AdminController
     respond_with resource, location: -> { admin_customer_path(@customer) }
   end
 
+  def destroy
+    resource.destroy
+    respond_with resource, location: -> { admin_entities_path }
+  end
+
   private
 
   def resource

@@ -35,6 +35,11 @@ class Admin::SubscribersController < Admin::AdminController
     respond_with resource, location: -> { admin_subscriber_path(@subscriber) }
   end
 
+  def destroy
+    resource.destroy
+    respond_with resource, location: -> { admin_customer_path(resource.customer) }
+  end
+
   private
 
   def resource

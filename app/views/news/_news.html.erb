@@ -1,7 +1,7 @@
 <div class='news'>
   <%= admin_section do %>
     <%= link_to "Uredi", edit_news_path(news) %>
-    <%= link_to "Odstrani", news, method: :delete, confirm: 'Ste prepričani?' %>
+    <%= link_to "Odstrani", news, method: :delete, data: { confirm: 'Ste prepričani?' } %>
   <% end %>
   <h2><%= news.title %></h2>
   <p class='date'><%= l news.created_at, format: :long %></p>

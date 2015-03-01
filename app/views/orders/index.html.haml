@@ -26,5 +26,5 @@
         - if params[:all]
           %td.order_processed= order.processed? ? 'Da' : 'Ne'
         %td.admin
-          = link_to "Odstrani", order, method: :delete, confirm: 'Ste prepričani?'
+          = link_to "Odstrani", order, method: :delete, data: { confirm: 'Ste prepričani?' }
           = link_to "Odpri", order

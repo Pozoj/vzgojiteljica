@@ -89,7 +89,7 @@
           <% if signed_in? %>
             Prijavljeni kot
             <strong><%= current_user %></strong>
-            (<%= link_to 'Odjava', destroy_user_session_path, method: :delete, confirm: 'Ste prepričani da se želite odjaviti?' %>)
+            (<%= link_to 'Odjava', destroy_user_session_path, method: :delete, data: { confirm: 'Ste prepričani da se želite odjaviti?' } %>)
           <% end %>
         </div>
       </div> 

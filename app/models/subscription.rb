@@ -14,6 +14,7 @@ class Subscription < ActiveRecord::Base
 
   validates_presence_of :quantity
   validates_numericality_of :quantity, greater_than: 0, only_integer: true
+  validate :validate_end_after_start
 
   def customer
     subscriber.customer
@@ -46,5 +47,13 @@ class Subscription < ActiveRecord::Base
 
   def to_s
     "#{plan} za #{subscriber}"
+  end
+
+  private
+
+  def validate_end_after_start
+    if self.end.present? && self.end <= self.start
+      errors.add :end, "mora biti kasneje od pričetka"
+    end
   end
 end

@@ -3,7 +3,7 @@ class Entity < ActiveRecord::Base
   PARTIAL_FILTERS = [:title, :name, :address, :vat_id]
 
   belongs_to :post
-  has_many :remarks, as: :remarkable
+  has_many :remarks, as: :remarkable, dependent: :destroy
 
   def to_s
     if name.present?

@@ -1,0 +1,63 @@
+<h2>Postavka <%= @statement_entry.id %></h2>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong>ID</strong>
+        <p>
+          <%= @statement_entry.reference %>
+        </p>
+        <strong>Datum</strong>
+        <p><%= l @statement_entry.date, format: :simple %></p>
+        <strong>Plačnik</strong>
+        <p><%= simple_format @statement_entry.account_holder %></p>
+        <strong>TRR</strong>
+        <p><%= @statement_entry.account_number %></p>
+        <strong>Znesek</strong>
+        <p><%= number_to_currency @statement_entry.amount %></p>
+        <strong>Podatki</strong>
+        <p><%= simple_format @statement_entry.details %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>Ref. št.</th>
+      <th>Stranka</th>
+      <th>Izdan</th>
+      <th>Rok</th>
+      <th>Plačan</th>
+      <th>Znesek</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @statement_entry.matches.each do |invoice| %>
+      <tr>
+        <td>
+          <%= link_to "", admin_invoice_path(invoice) %>
+          <%= invoice.reference_number %></td>
+        <td><%= invoice.customer %></td>
+        <td><%= l invoice.created_at, format: :simple %></td>
+        <td><%= l invoice.due_at, format: :simple %></td>
+        <td>
+          <% if invoice.paid? %>
+            <%= l invoice.paid_at, format: :simple %></td>
+          <% elsif invoice.due? %>
+            <span class="label label-danger"><%= invoice.late_days %> dni</span>
+          <% end %>
+        <td><%= number_to_currency invoice.total %></td>
+        <td>
+          <%= button_to match_admin_statement_entry_path(@statement_entry, invoice_id: invoice), method: :post, class: 'btn btn-success btn-xs' do %>
+            <i class="glyphicon glyphicon-link"></i>
+            Združi
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

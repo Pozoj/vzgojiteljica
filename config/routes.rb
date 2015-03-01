@@ -66,7 +66,9 @@ Web3::Application.routes.draw do
     resources :bank_statements do
       post :parse, on: :member
     end
-    resources :statement_entries
+    resources :statement_entries, only: [:show] do
+      post :match, on: :member
+    end
   end
 
   # You can have the root of your site routed with "root"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301063428) do
+ActiveRecord::Schema.define(version: 20150301175935) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -268,12 +268,16 @@ ActiveRecord::Schema.define(version: 20150301063428) do
 
   create_table "posts", id: false, force: :cascade do |t|
     t.integer  "id"
-    t.string   "name",       limit: 255
+    t.string   "name",               limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "regional_master"
+    t.integer  "regional_master_id"
   end
 
   add_index "posts", ["id"], name: "index_posts_on_id"
+  add_index "posts", ["regional_master"], name: "index_posts_on_regional_master"
+  add_index "posts", ["regional_master_id"], name: "index_posts_on_regional_master_id"
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "user_id"

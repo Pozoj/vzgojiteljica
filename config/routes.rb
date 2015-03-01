@@ -43,6 +43,7 @@ Web3::Application.routes.draw do
     root to: 'admin#index'
     get :quantities, to: 'admin#quantities'
     get :freeriders, to: 'admin#freeriders'
+    get :regional, to: 'admin#regional'
     resources :entities
     resources :customers do
       post :new_from_order, on: :member

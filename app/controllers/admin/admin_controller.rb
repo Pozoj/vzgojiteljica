@@ -32,9 +32,12 @@ class Admin::AdminController < ApplicationController
   end
 
   def regional
-    paid = params[:only_paid] == 'true'
+    customers = Customer.all.reject do |customer|
+      subscriptions = customer.subscriptions.active.empty?
+    end
 
-    customers = Customer.all.reject { |customer| customer.subscriptions.active.empty? }
-    @regional = customers.group_by { |customer| customer.post.regional_master_id }
+    @regional = customers.group_by { |customer| customer.post.try(:master) }
+    .reject { |region, customers| region.nil? }
+    @total = customers.count
   end
 end

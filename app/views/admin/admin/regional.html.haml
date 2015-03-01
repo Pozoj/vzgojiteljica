@@ -1,0 +1,25 @@
+%h1
+  Pregled naročnikov po regijah
+
+%table.table
+  %thead
+    %tr
+      %th Regija
+      %th Št. naročnikov
+      %th Količina
+      %th
+        \%
+  %tbody
+    - @regional.each do |region, customers|
+      %tr
+        %td= region
+        %td= customers.count
+        %td= customers.inject(0) { |sum, customer| sum += customer.subscriptions.active.sum(:quantity) }
+        %td= number_to_percentage (customers.count / @total.to_f) * 100
+  %tfoot
+    %tr
+      %th
+      %th= @regional.inject(0) { |sum, customers| sum += customers.last.count }
+      %th
+        = @regional.inject(0) { |sum, customers| sum += customers.last.inject(0) { |sum, customer| sum += customer.subscriptions.active.sum(:quantity) } }
+      %th= number_to_percentage @regional.inject(0) { |sum, customers| sum += ((customers.last.count / @total.to_f) * 100) }

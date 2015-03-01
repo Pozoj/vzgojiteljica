@@ -1,5 +1,12 @@
 %h1
   Količine
+  %small
+    - if params[:which] == 'customers'
+      po naročnikih
+    - else
+      po prejemnikih
+    - if @paid
+      brez brezplačnih prejemnikov
 
 .admin_actions
   - if @paid

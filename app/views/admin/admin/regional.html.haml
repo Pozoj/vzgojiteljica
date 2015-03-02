@@ -4,22 +4,27 @@
 %table.table
   %thead
     %tr
-      %th Regija
-      %th Št. naročnikov
-      %th Količina
-      %th
-        \%
+      %th{rowspan: 2} Regija
+      %th{colspan: 2} Naročnikov
+      %th{colspan: 2} Količina
+    %tr
+      %th Št.
+      %th %
+      %th Št.
+      %th %      
   %tbody
-    - @regional.each do |region, customers|
+    - @regional.each do |region, data|
       %tr
         %td= region
-        %td= customers.count
-        %td= customers.inject(0) { |sum, customer| sum += customer.subscriptions.active.sum(:quantity) }
-        %td= number_to_percentage (customers.count / @total.to_f) * 100
+        %td= data[:customers_count]
+        %td= number_to_percentage (data[:customers_count] / @total_customers.to_f) * 100
+        %td= data[:quantities_count]
+        %td= number_to_percentage (data[:quantities_count] / @total_quantity.to_f) * 100
+
   %tfoot
     %tr
       %th
-      %th= @regional.inject(0) { |sum, customers| sum += customers.last.count }
-      %th
-        = @regional.inject(0) { |sum, customers| sum += customers.last.inject(0) { |sum, customer| sum += customer.subscriptions.active.sum(:quantity) } }
-      %th= number_to_percentage @regional.inject(0) { |sum, customers| sum += ((customers.last.count / @total.to_f) * 100) }
+      %th= @total_customers
+      %th 100.00%
+      %th= @total_quantity
+      %th 100.00%

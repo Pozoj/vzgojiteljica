@@ -31,7 +31,9 @@
     </p>
   </div>
 </div>
-<div class='cover'>
-  <%= image_tag @article.issue.cover.url %>
-</div>
+<% if @article.issue && @article.issue.cover %>
+  <div class='cover'>
+    <%= image_tag @article.issue.cover.url %>
+  </div>
+<% end %>
 <br class="clear">

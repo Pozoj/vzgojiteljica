@@ -3,6 +3,7 @@ class Entity < ActiveRecord::Base
   PARTIAL_FILTERS = [:title, :name, :address, :vat_id]
 
   belongs_to :post
+  belongs_to :bank
   has_many :remarks, as: :remarkable, dependent: :destroy
 
   def to_s

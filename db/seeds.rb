@@ -9,6 +9,13 @@ Copy.create([
   }
 ])
 
+Bank.create([
+  {
+    name: 'Hypo Alpe-Adria-Bank d.d.',
+    bic: 'HAABSI22XXX'
+  }
+])
+
 pozoj = Entity.create(
   title: 'POZOJ, d.o.o.',
   address: 'Pirešica 2',

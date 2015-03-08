@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308021315) do
+ActiveRecord::Schema.define(version: 20150308050908) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20150308021315) do
   add_index "entities", ["post_id"], name: "index_entities_on_post_id"
   add_index "entities", ["registration_number"], name: "index_entities_on_registration_number", unique: true
   add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id"
+  add_index "entities", ["vat_id"], name: "index_entities_on_vat_id", unique: true
 
   create_table "inquiries", force: :cascade do |t|
     t.string   "name",        limit: 255

@@ -10,7 +10,7 @@ class Entity < ActiveRecord::Base
   has_many :remarks, as: :remarkable, dependent: :destroy
 
   before_validation :format_account_number, if: :account_number?
-  validates_presence_of :vat_id, if: :company?
+  validates :vat_id, presence: true, uniqueness: true, if: :company?
   validate :validate_vat_id, if: :vat_id?
   validate :validate_name_or_title
   validate :validate_account_number, if: :account_number?

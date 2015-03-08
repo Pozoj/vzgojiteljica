@@ -17,12 +17,14 @@ Bank.create([
 ])
 
 pozoj = Entity.create(
-  title: 'POZOJ, d.o.o.',
+  title: 'POZOJ, Darja Slapničar s.p.',
   address: 'Pirešica 2',
   post_id: 3320,
-  phone: '041 627 915',
+  phone: '+386 41 627 915',
   email: 'info@pozoj.si',
-  vat_id: 43873723,
+  vat_id: 78459575,
+  vat_exempt: true,
+  registration_number: 6782990000,
   bank_id: Bank.where(bic: 'HAABSI22XXX').first.id,
   account_number: 'SI56330000006887185'
 )

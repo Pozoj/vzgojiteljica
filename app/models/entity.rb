@@ -37,6 +37,10 @@ class Entity < ActiveRecord::Base
     where(email: 'info@pozoj.si').first
   end
 
+  def pozoj?
+    email == 'info@pozoj.si'
+  end
+
   def self.search filters
     filters ||= {}
     entities = all

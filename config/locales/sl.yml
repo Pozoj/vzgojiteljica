@@ -38,6 +38,7 @@ sl:
     phone: Telefon
     fax: Faks
     vat_id: ID št. za DDV
+    registration_number: Matična številka
     quantity: Količina
     institution_id: Institucija
     institution: Institucija
@@ -49,6 +50,10 @@ sl:
     issue: Številka
     issue_id: Številka
     remember_me: Zapomni si me na tem računalniku
+    bank: Banka
+    account_number: Številka TRR (IBAN)
+    entity_type: Tip stranke
+    einvoice: 'Ali sprejemajo e-račune'
     entities:
       title: "Naziv"
       name: "Ime in priimek"
@@ -183,6 +188,7 @@ sl:
       odd: "mora biti liho"
       even: "mora biti sodo"
       record_invalid: ""
+      not_an_integer: "mora biti cela številka"
 
 
   number:

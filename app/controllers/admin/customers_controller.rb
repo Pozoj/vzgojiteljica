@@ -61,7 +61,11 @@ class Admin::CustomersController < Admin::AdminController
 
   def update
     resource.update_attributes resource_params
-    respond_with resource, location: -> { admin_customer_path(@customer) }
+    if resource.valid?
+      respond_with resource, location: -> { admin_customer_path(@customer) }
+    else
+      respond_with resource, location: -> { edit_admin_customer_path(@customer) }
+    end
   end
 
   def destroy

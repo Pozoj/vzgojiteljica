@@ -1,18 +1,45 @@
 :javascript
   $(function() {
     $('#customer_post_id').chosen()
+    $('#customer_bank_id').chosen()
   });
 
-.form-inputs
-  = f.input :name
-  = f.input :title
-  = f.input :address
-  = f.association :post
-  = f.input :city
-  = f.input :phone
-  = f.input :email
-  = f.input :vat_id
-  = f.input :vat_exempt
-  %hr
+.row
+  .form-inputs.col-xs-8
+    = f.input :name
+    = f.input :title
+    = f.input :address
+    = f.association :post
+    = f.input :city
+    = f.input :phone
+    = f.input :email
+  .form-inputs.col-xs-4
+    - if @customer.company?
+      .panel.panel-default
+        .panel-heading 
+          %h3.panel-title Šifre
+        .panel-body        
+          = f.input :registration_number
+          = f.input :vat_id
+          = f.input :vat_exempt
+        
+    .panel.panel-default
+      .panel-heading 
+        %h3.panel-title Napredno
+      .panel-body
+        .form-group.select.optional.customer_entity_type
+          = f.label :entity_type
+          = f.select :entity_type, [['', ''], ['Podjetje', Entity::ENTITY_COMPANY], ['Fizična oseba', Entity::ENTITY_PERSON]], {}, class: 'form-control'
+        - if @customer.company?
+          = f.input :einvoice
+    - if @customer.company?
+      .panel.panel-default
+        .panel-heading 
+          %h3.panel-title Banka
+        .panel-body        
+          = f.association :bank
+          = f.input :account_number
+
 .form-actions
+  %hr
   = f.button :submit

@@ -10,11 +10,12 @@ class Entity < ActiveRecord::Base
   has_many :remarks, as: :remarkable, dependent: :destroy
 
   before_validation :format_account_number, if: :account_number?
-  validates :vat_id, presence: true, uniqueness: true, if: :company?
+  validates :vat_id, presence: true, if: :company?
+  validates :vat_id, uniqueness: {allow_nil: true}, numericality: {only_integer: true, allow_nil: true, greater_than: 0}
   validate :validate_vat_id, if: :vat_id?
   validate :validate_name_or_title
   validate :validate_account_number, if: :account_number?
-  validates :registration_number, numericality: {allow_nil: true, integer_only: true}
+  validates :registration_number, uniqueness: {allow_nil: true}, numericality: {allow_nil: true, only_integer: true, greater_than: 0}
   validates :email, :email => true, if: :email?
 
   def to_s
@@ -123,19 +124,28 @@ class Entity < ActiveRecord::Base
   end
 
   # http://www.durs.gov.si/si/storitve/vpis_v_davcni_register_in_davcna_stevilka/vpis_v_davcni_register_in_davcna_stevilka_pojasnila/davcna_stevilka_splosno/
-  def validate_vat_id
+  def vat_id_checksum_matches?
     multipliers = [8, 7, 6, 5, 4, 3, 2]
     divider = 11
     digits = vat_id.to_s.split('').map(&:to_i)
     sum = multipliers.each_with_index.inject(0) { |sum, (multiplier, index)| sum += multiplier * digits[index] }
 
-    if sum % divider == 1
-      checksum = 0
+    checksum = if sum % divider == 1
+      0
     else
-      checksum = divider - (sum % divider)
+      divider - (sum % divider)
     end
 
-    unless checksum == digits.last
+    checksum == digits.last
+  end
+
+  def validate_vat_id
+    unless vat_id.to_s.length == 8
+      errors.add :vat_id, 'nepravilne dolžine'
+      return
+    end
+
+    unless vat_id_checksum_matches?
       errors.add :vat_id, 'nepravilna številka (checksum)'
     end
   end

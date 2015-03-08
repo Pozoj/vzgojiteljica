@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  skip_before_filter :authenticate, only: [:new, :create]
+  skip_before_filter :authenticate, only: [:new, :create, :successful]
 
   def index
     unless params[:all]

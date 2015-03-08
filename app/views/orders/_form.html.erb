@@ -36,7 +36,7 @@
         collection: [
           ["Letna naročnina 
             (#{number_to_currency Plan.latest_yearly.price_with_tax}/izvod)", 1],
-          ["Vsaka revija posebej
+          ["Vsaka številka posamezno
             (#{number_to_currency Plan.latest_per_issue.price_with_tax}/izvod)", 6]
         ], as: :radio_buttons %>
     <%= f.input :comments %>

@@ -1,4 +1,21 @@
+<script type="text/javascript">
+  $(function() {
+    if ($('.has-error').length) {
+      $('.has-error input').first().select().focus()
+    }
+    else {
+      $('#order_title').focus();
+    }
+
+    $('#order_post_id').chosen({
+      no_results_text: '<%= I18n.t('chosen.no_results_text') %>',
+      placeholder_text_single: '<%= I18n.t('chosen.placeholder_text_single') %>'
+    });
+  });
+</script>
+
 <%= simple_form_for @order do |f| %>
+  <%= f.input :desire, wrapper_html: { class: 'the_desire' } %>
   <fieldset>
     <legend>Podjetje</legend>
     <%= f.input :title %>
@@ -14,11 +31,17 @@
   </fieldset>
   <fieldset>
     <legend>Naročilo</legend>
-    <%= f.input :quantity, hint: 'Število revij, ki jih naročam(o)' %>
-    <%= f.input :plan_type, label: "Naročnina", collection: [['Letna naročnina', 1] ,['Vsaka revija posebej', 6]], as: :radio_buttons %>
+    <%= f.input :quantity, hint: 'Število revij, ki jih naročam(o). Primer: količina 3, pomeni da vsake dva meseca, ko izide nova številka, prejmete 3 izvode' %>
+    <%= f.input :plan_type, label: "Naročnina", 
+        collection: [
+          ["Letna naročnina 
+            (#{number_to_currency Plan.latest_yearly.price_with_tax}/izvod)", 1],
+          ["Vsaka revija posebej
+            (#{number_to_currency Plan.latest_per_issue.price_with_tax}/izvod)", 6]
+        ], as: :radio_buttons %>
     <%= f.input :comments %>
   </fieldset>
   <div class='submit'>
-    <%= f.submit %>
+    <%= f.submit :"Naročam revijo Vzgojiteljica" %>
   </div>
 <% end %>

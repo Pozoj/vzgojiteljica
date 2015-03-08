@@ -2,6 +2,10 @@ sl:
   yes: "DA"
   no: "NE"
 
+  chosen:
+    no_results_text: 'Ni rezultatov za'
+    placeholder_text_single: 'Prosim izberite opcijo'
+
   views:
     pagination:
       first: "&laquo; Na začetek"

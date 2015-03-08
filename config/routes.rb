@@ -31,6 +31,7 @@ Web3::Application.routes.draw do
     end
     resources :orders, path: 'narocila' do
       put :mark_processed, on: :member
+      get :successful, on: :collection, path: 'uspesno'
     end
     resources :copies, path: 'besedila'
     resources :authors, path: 'avtorji'

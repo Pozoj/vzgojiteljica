@@ -19,10 +19,19 @@ class OrdersController < ApplicationController
   end
 
   def create
+    # Honeypotz
+    if params[:order][:desire] && params[:order][:desire].present?
+      render :text => "Thank you for your order!"
+      return
+    end
+
     @order = Order.new params[:order]
     if @order.save
       AdminMailer.new_order(@order.id).deliver
-      redirect_to root_url notice: "Hvala! Vaše naročilo je bilo uspešno sprejeto."
+      Mailer.order_submitted(@order.id).deliver
+      redirect_to successful_orders_path
+    else
+      render action: :new
     end
   end
 

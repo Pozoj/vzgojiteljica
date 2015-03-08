@@ -162,57 +162,29 @@ ul {
 
 /*_________________________________ Form _________________________________*/
 
-form input.string, textarea {
-  width: 500px;
-  font-size: 15px;
-}
-
-input {
-  &.tel, &.email, &.text, &.password {
-    width: 500px;
-    font-size: 15px;
-  }
-}
-
-form span.hint {
-  color: #666;
-  font-size: 12px;
-  margin-top: -15px;
-  display: block;
-}
-
-form input.string {
-  border: 1px solid #b3b3b3;
-  border-radius: 5px;
-  font-size: 15px;
-}
-
-input {
-  &.tel, &.email, &.text {
+form {
+  input.string, input.tel, input.email, input.text, input.integer, input.password, select, textarea {
     border: 1px solid #b3b3b3;
     border-radius: 5px;
     font-size: 15px;
+    width: 500px;
+    padding: 5px;
   }
-}
-
-select, textarea, input.password {
-  border: 1px solid #b3b3b3;
-  border-radius: 5px;
-  font-size: 15px;
-}
-
-form input.string {
-  height: 30px;
-}
-
-input {
-  &.tel, &.email, &.text {
+  input.string, input.tel, input.email, input.text, input.integer, input.password, select {
     height: 30px;
   }
+  input.integer {
+    width: 100px;
+  }
+  textarea {
+    height: 100px;
+  }
 }
 
-select, input.password {
-  height: 30px;
+form .help-block {
+  display: block;
+  color: #999;
+  font-size: 12px;
 }
 
 form .input.radio {
@@ -224,12 +196,52 @@ form .input.radio {
   }
 }
 
+.radio_buttons {
+  .radio {
+    display: block;
+    label {
+      font-size: 12px;
+      input {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
 label {
   &.string, &.text, &.select, &.tel, &.email, &.file, &.integer, &.password {
     display: block;
     margin-bottom: 5px;
     margin-top: 10px;
   }
+}
+
+// Errors
+.has-error .help-block, .has-error .control-label, .has-error .radio,
+.has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+    color: #a94442
+}
+
+.has-error .form-control {
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)
+}
+
+.has-error .form-control:focus {
+    border-color: #843534;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483
+}
+
+.has-error .input-group-addon {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #a94442
+}
+
+.has-error .form-control-feedback {
+    color: #a94442
 }
 
 .submit {
@@ -1004,6 +1016,9 @@ label.boolean {
 
 /*_________________________________ Order Page _________________________________*/
 
+body.orders .the_desire {
+  display: none; // Honeypot
+}
 #orders-new {
   .notice {
     margin: 20px 0;
@@ -1038,7 +1053,7 @@ label.boolean {
   }
   fieldset {
     clear: left;
-    div {
+    &>div {
       margin-left: 10px;
     }
   }

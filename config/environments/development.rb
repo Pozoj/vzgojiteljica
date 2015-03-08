@@ -24,4 +24,7 @@ Web3::Application.configure do
 
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
+
+  # Use letter opener.
+  config.action_mailer.delivery_method = :letter_opener
 end

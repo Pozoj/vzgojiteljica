@@ -42,4 +42,5 @@ group :development, :test do
   gem 'sqlite3'
   gem 'pry'
   gem 'web-console'
+  gem 'letter_opener'
 end

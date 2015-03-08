@@ -62,6 +62,9 @@ class Entity < ActiveRecord::Base
         end
         query = query.or(Entity.arel_table[filter].matches("%#{filters[:global]}%"))
       end
+      LITERAL_FILTERS.each do |filter|
+        query = query.or(Entity.arel_table[filter].eq(filters[:global]))
+      end
       entities = entities.where query
     end
 

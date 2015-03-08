@@ -14,7 +14,7 @@ Za naročilo smo prejeli naslednje podatke:
   Naslov: <%= @order.address %>
 <% end -%>
 <% if @order.post_id? -%>
-  Poštna št.:<%= @order.post_id %>
+  Pošta: <%= @order.post %>
 <% end -%>
 <% if @order.phone? -%>
   Telefon: <%= @order.phone %>

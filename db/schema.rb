@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301175935) do
+ActiveRecord::Schema.define(version: 20150308021315) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -71,6 +71,15 @@ ActiveRecord::Schema.define(version: 20150301175935) do
     t.datetime "statement_updated_at"
   end
 
+  create_table "banks", force: :cascade do |t|
+    t.string   "name"
+    t.string   "bic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "banks", ["bic"], name: "index_banks_on_bic", unique: true
+
   create_table "batches", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.decimal  "price"
@@ -91,16 +100,16 @@ ActiveRecord::Schema.define(version: 20150301175935) do
   add_index "copies", ["page_code"], name: "index_copies_on_page_code"
 
   create_table "entities", force: :cascade do |t|
-    t.string   "title",           limit: 255
-    t.string   "name",            limit: 255
-    t.string   "address",         limit: 255
-    t.integer  "post_id",         limit: 4
-    t.string   "city",            limit: 255
-    t.string   "phone",           limit: 255
-    t.string   "email",           limit: 255
-    t.string   "vat_id",          limit: 255
+    t.string   "title",               limit: 255
+    t.string   "name",                limit: 255
+    t.string   "address",             limit: 255
+    t.integer  "post_id",             limit: 4
+    t.string   "city",                limit: 255
+    t.string   "phone",               limit: 255
+    t.string   "email",               limit: 255
+    t.integer  "vat_id",              limit: 255
     t.boolean  "vat_exempt"
-    t.string   "type",            limit: 255
+    t.string   "type",                limit: 255
     t.integer  "entity_id"
     t.integer  "subscription_id"
     t.integer  "customer_id"
@@ -108,12 +117,18 @@ ActiveRecord::Schema.define(version: 20150301175935) do
     t.datetime "updated_at"
     t.string   "account_number"
     t.boolean  "einvoice"
+    t.integer  "bank_id"
+    t.integer  "registration_number"
+    t.integer  "entity_type"
   end
 
+  add_index "entities", ["bank_id"], name: "index_entities_on_bank_id"
   add_index "entities", ["customer_id"], name: "index_entities_on_customer_id"
   add_index "entities", ["einvoice"], name: "index_entities_on_einvoice"
   add_index "entities", ["entity_id"], name: "index_entities_on_entity_id"
+  add_index "entities", ["entity_type"], name: "index_entities_on_entity_type"
   add_index "entities", ["post_id"], name: "index_entities_on_post_id"
+  add_index "entities", ["registration_number"], name: "index_entities_on_registration_number", unique: true
   add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id"
 
   create_table "inquiries", force: :cascade do |t|

@@ -2,8 +2,8 @@ class Entity < ActiveRecord::Base
   ENTITY_COMPANY = 1
   ENTITY_PERSON  = 2
 
-  LITERAL_FILTERS = [:type]
-  PARTIAL_FILTERS = [:title, :name, :address, :vat_id]
+  LITERAL_FILTERS = [:type, :vat_id]
+  PARTIAL_FILTERS = [:title, :name, :address]
 
   belongs_to :post
   belongs_to :bank

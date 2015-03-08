@@ -2,7 +2,14 @@ class MigrateVatIdsToIntegers < ActiveRecord::Migration
   def change
     entities = Entity.where.not(vat_id: nil).map { |e| [e.id, e.vat_id] }
 
-    change_column :entities, :vat_id, :integer, limit: 8
+    # SQLite:
+    # change_column :entities, :vat_id, :integer, limit: 8
+
+    # Postgres:
+    Entity.connection.execute <<-SQL
+      ALTER TABLE entities
+      ALTER COLUMN vat_id TYPE bigint USING vat_id::bigint
+    SQL
 
     entities.each do |e|
       entity = Entity.find(e.first)

@@ -1,0 +1,26 @@
+%br
+= paginate @remarks
+%table.table.rowlinks
+  %thead
+    %tr
+      %th Opomba
+      %th Entiteta
+      %th Admin
+      %th Datum
+  %tbody
+    - @remarks.each do |r|
+      %tr
+        %td
+          - if r.remarkable
+            = link_to "", polymorphic_path([:admin, r.remarkable])
+          = truncate r.remark, length: 255
+        %td= r.remarkable.to_s
+        %td= r.user
+        %td
+          - if r.created_at > 1.week.ago
+            pred
+            = distance_of_time_in_words_to_now r.created_at
+          - else
+            = l r.created_at
+
+= paginate @remarks

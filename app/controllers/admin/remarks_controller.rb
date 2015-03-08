@@ -1,4 +1,8 @@
 class Admin::RemarksController < Admin::AdminController
+  def index
+    @remarks = collection
+  end
+
   def create
     @remark = Remark.new params[:remark], without_protection: true
     @remark.user = current_user
@@ -20,5 +24,9 @@ class Admin::RemarksController < Admin::AdminController
 
   def resource
     @remark ||= Remark.find(params[:id])
+  end
+
+  def collection
+    @remarks ||= Remark.all.order(created_at: :desc).page(params[:page]).per(25)
   end
 end

@@ -17,11 +17,15 @@
 - if resource.email?
   %strong= I18n.t 'attributes.email'
   %p= mail_to resource.email
+  
 - if resource.vat_id?
   %strong= I18n.t 'attributes.vat_id'
-  %p= resource.vat_id_formatted
-  - if resource.vat_exempt?
-    %strong= I18n.t 'attributes.vat_exempt'
+  %p
+    = resource.vat_id_formatted
+    - if resource.vat_exempt?
+      %br
+      %span.muted= I18n.t 'attributes.vat_exempt'
+
 - if resource.account_number?
   %strong= I18n.t 'attributes.account_number'
   %p

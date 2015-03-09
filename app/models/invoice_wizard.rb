@@ -7,7 +7,7 @@ class InvoiceWizard
 
   def reference_number
     return last_invoice_number.to_i if last_invoice_number.present?
-    last = Invoice.order(reference_number: :asc).last
+    last = Invoice.order(invoice_id: :asc).last
     return last.reference_number if last
     0
   end

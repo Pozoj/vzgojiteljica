@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308152035) do
+ActiveRecord::Schema.define(version: 20150309031905) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -169,12 +169,18 @@ ActiveRecord::Schema.define(version: 20150308152035) do
     t.string   "paid_amount_currency", default: "EUR", null: false
     t.integer  "tax_cents",            default: 0,     null: false
     t.string   "tax_currency",         default: "EUR", null: false
+    t.string   "payment_id"
+    t.string   "invoice_id"
+    t.integer  "year"
   end
 
   add_index "invoices", ["bank_reference"], name: "index_invoices_on_bank_reference", unique: true
   add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id"
+  add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", unique: true
   add_index "invoices", ["paid_at"], name: "index_invoices_on_paid_at"
+  add_index "invoices", ["payment_id"], name: "index_invoices_on_payment_id", unique: true
   add_index "invoices", ["reference_number"], name: "index_invoices_on_reference_number"
+  add_index "invoices", ["year"], name: "index_invoices_on_year"
 
   create_table "issues", force: :cascade do |t|
     t.integer  "year"

@@ -11,6 +11,22 @@ class Invoice < ActiveRecord::Base
   has_many :remarks, as: :remarkable
   has_many :line_items, dependent: :destroy
 
+  validates_presence_of :customer
+  validates_presence_of :issue
+  validates_presence_of :year
+  validates_numericality_of :year, only_integer: true
+  validates_presence_of :invoice_id
+  validates_uniqueness_of :invoice_id
+  validates_presence_of :payment_id
+  validates_uniqueness_of :payment_id
+  validates_presence_of :total
+  validates_presence_of :subtotal
+  validates_presence_of :tax
+
+  before_validation :generate_year, unless: :year?
+  before_validation :generate_invoice_id, unless: :invoice_id?
+  before_validation :generate_payment_id, unless: :payment_id?
+
   before_save :calculate_totals
 
   scope :unpaid, -> { where(paid_at: nil) }
@@ -46,16 +62,21 @@ class Invoice < ActiveRecord::Base
     (Date.today - due_at.to_date).floor
   end
 
-  def reference_full
-    "#{reference_number}/ REV /#{created_at.strftime("%Y")}"
+  def generate_year
+    self.year ||= created_at.year
   end
 
-  def invoice_id
-    "SI00#{reference_number}-#{created_at.strftime("%Y")}"
+  def generate_invoice_id
+    self.invoice_id ||= "#{reference_number}-#{year}"
   end
 
-  def payment_id
-    "SI00#{customer.id}-#{reference_number}-#{created_at.strftime("%Y")}"
+  def generate_payment_id
+    return unless customer_id?
+    self.payment_id ||= "#{customer_id}-#{invoice_id}"
+  end
+
+  def payment_id_full
+    "SI 00 #{payment_id}"
   end
 
   def match_statement_entry

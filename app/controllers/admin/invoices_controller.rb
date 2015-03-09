@@ -61,7 +61,7 @@ class Admin::InvoicesController < Admin::AdminController
   private
 
   def collection
-    @invoices ||= Invoice.order(reference_number: :desc).page(params[:page])
+    @invoices ||= Invoice.order(invoice_id: :desc).page(params[:page])
   end
 
   def resource

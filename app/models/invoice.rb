@@ -7,12 +7,10 @@ class Invoice < ActiveRecord::Base
   monetize :tax_cents
 
   belongs_to :customer
-  belongs_to :issue
   has_many :remarks, as: :remarkable
   has_many :line_items, dependent: :destroy
 
   validates_presence_of :customer
-  validates_presence_of :issue
   validates_presence_of :year
   validates_numericality_of :year, only_integer: true
   validates_presence_of :invoice_id

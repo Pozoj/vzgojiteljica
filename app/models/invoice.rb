@@ -54,6 +54,10 @@ class Invoice < ActiveRecord::Base
     "SI00#{reference_number}-#{created_at.strftime("%Y")}"
   end
 
+  def payment_id
+    "SI00#{customer.id}-#{reference_number}-#{created_at.strftime("%Y")}"
+  end
+
   def match_statement_entry
     query = "%SI00#{reference_number}%"
     @statement_entry ||= StatementEntry.where(StatementEntry.arel_table[:details].matches(query)).first

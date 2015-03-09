@@ -34,6 +34,13 @@ class Admin::InvoicesController < Admin::AdminController
     redirect_to admin_invoice_path(invoice)
   end
 
+  def einvoice
+    @einvoice = EInvoice.new(invoice: resource).generate
+    respond_to do |format|
+      format.xml { render layout: 'einvoice' }
+    end
+  end
+
   def print
     respond_with resource, layout: 'print'
   end

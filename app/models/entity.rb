@@ -115,6 +115,19 @@ class Entity < ActiveRecord::Base
     entity_type == ENTITY_COMPANY
   end
 
+  def string_description
+    [
+      name,
+      title,
+      address,
+      post,
+      'Slovenija',
+      email,
+      "Davčna št.: #{vat_id_formatted}",
+      "Matična št.: #{registration_number}",
+    ].compact.map(&:to_s).join(', ')
+  end
+
   protected
 
   def format_account_number

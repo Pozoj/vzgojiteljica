@@ -61,6 +61,14 @@
             <i class="glyphicon glyphicon-print"></i>
             Natisni
           <% end %>
+          <%= link_to einvoice_admin_invoice_path(@invoice, format: :xml), class: 'btn btn-default' do %>
+            <i class="glyphicon glyphicon-indent-left"></i>
+            E-Račun XML
+          <% end %>
+          <%= link_to einvoice_admin_invoice_path(@invoice, format: :xml, style: true), class: 'btn btn-default' do %>
+            <i class="glyphicon glyphicon-align-justify"></i>
+            E-Račun
+          <% end %>
         </p>
       </div>
     </div>

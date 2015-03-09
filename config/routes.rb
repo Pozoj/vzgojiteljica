@@ -63,6 +63,7 @@ Web3::Application.routes.draw do
     resources :invoices do
       get :print, on: :member
       get :print_all, on: :collection
+      get :einvoice, on: :member
       post :build_for_subscription, on: :collection
     end
     resources :bank_statements do

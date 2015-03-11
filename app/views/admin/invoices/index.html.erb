@@ -1,3 +1,13 @@
+<script type="text/javascript">
+  $(function() {
+    $('#invoice_id').chosen({
+      search_contains: true
+    }).on('change', function() {
+      window.location.href = $(this).parents('form').attr('action') + '/' + $(this).val();
+    });
+  });
+</script>
+
 <div class="row tools">
   <div class="col-xs-6">
     <div class="panel panel-default">
@@ -25,7 +35,7 @@
     </div>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-xs-4">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -41,7 +51,24 @@
             <%= number_field_tag :lte, @lte, {class: 'form-control', placeholder: 'Do Ref. Št.'} %>
           </div>
           <div class="form-group pull-right">
-            <%= submit_tag "Natisni račune", class: 'btn btn-default' %>
+            <%= submit_tag "Natisni", class: 'btn btn-default' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="glyphicon glyphicon-search"></i>
+          Pojdi na račun
+        </h3>
+      </div>
+      <div class="panel-body">
+        <%= form_tag admin_invoices_path, method: :get, class: 'form-inline print_invoices' do %>
+          <div class="form-group">
+            <%= select_tag :id, options_for_select(@all_invoices), {class: 'form-control', id: 'invoice_id', placeholder: 'ID računa', prompt: ""} %>
           </div>
         <% end %>
       </div>
@@ -51,7 +78,19 @@
 
 <h2>
   Izdani računi
+  <% @years.each do |year| %>
+    <small>
+      <% if params[:year].to_i == year %>
+        <%= year %>
+      <% else %>
+        <%= link_to year, year: year %>
+      <% end %>
+      |
+    </small>
+  <% end %>
+  <small><%= link_to "Vsa leta", all: true %></small>
 </h2>
+<%= paginate @invoices %>
 <table class="table rowlinks">
   <thead>
     <tr>
@@ -82,5 +121,5 @@
       </tr>
     <% end %>
   </tbody>
-  <%= paginate @invoices %>
 </table>
+<%= paginate @invoices %>

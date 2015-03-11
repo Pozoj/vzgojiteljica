@@ -4,6 +4,16 @@ class Admin::InvoicesController < Admin::AdminController
     @gte = Invoice.select(:reference_number).order(reference_number: :asc).first.try(:reference_number)
     @lte = Invoice.select(:reference_number).order(reference_number: :desc).first.try(:reference_number)
 
+    @years = Invoice.years
+    @all_invoices = Invoice.select(:id, :invoice_id).order(year: :desc, reference_number: :desc).map { |i| [i.invoice_id, i.id] }
+
+    @invoices = collection
+    if params[:year]
+      @invoices = @invoices.where(year: params[:year])
+    elsif params[:all]
+    else
+      @invoices = @invoices.where(year: DateTime.now.year)
+    end
     respond_with collection
   end
 
@@ -61,7 +71,7 @@ class Admin::InvoicesController < Admin::AdminController
   private
 
   def collection
-    @invoices ||= Invoice.order(invoice_id: :desc).page(params[:page])
+    @invoices ||= Invoice.order(year: :desc, reference_number: :desc).page(params[:page]).per(50)
   end
 
   def resource

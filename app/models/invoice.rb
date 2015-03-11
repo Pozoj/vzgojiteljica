@@ -11,21 +11,19 @@ class Invoice < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
 
   validates_presence_of :customer
-  validates_presence_of :year
-  validates_numericality_of :year, only_integer: true
-  validates_presence_of :invoice_id
-  validates_uniqueness_of :invoice_id
-  validates_presence_of :payment_id
-  validates_uniqueness_of :payment_id
-  validates_presence_of :total
-  validates_presence_of :subtotal
-  validates_presence_of :tax
+  validates :year, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :reference_number, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :invoice_id, presence: true, uniqueness: true
+  validates :payment_id, presence: true, uniqueness: true
+  validates :total, presence: true, numericality: true
+  validates :subtotal, presence: true, numericality: true
+  validates :tax, presence: true, numericality: true
 
   before_validation :generate_year, unless: :year?
   before_validation :generate_invoice_id, unless: :invoice_id?
   before_validation :generate_payment_id, unless: :payment_id?
 
-  before_save :calculate_totals
+  before_save :calculate_totals, on: :create
 
   scope :unpaid, -> { where(paid_at: nil) }
 
@@ -35,6 +33,12 @@ class Invoice < ActiveRecord::Base
       next unless i.match_statement_entry.amount == i.total
       i.paid_by! i.match_statement_entry
     end
+  end
+
+  def self.years
+    years = Invoice.select(:year).group(:year).map(&:year)
+    years << DateTime.now.year
+    years.sort.reverse.uniq
   end
 
   def paid?
@@ -61,7 +65,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def generate_year
-    self.year ||= created_at.year
+    self.year ||= created_at.try(:year) || DateTime.now.year
   end
 
   def generate_invoice_id
@@ -83,9 +87,9 @@ class Invoice < ActiveRecord::Base
   end
 
   def calculate_totals
-    self.tax_percent ||= TAX_PERCENT
-    self.tax ||= line_items.to_a.sum(&:tax)
-    self.subtotal ||= line_items.to_a.sum(&:subtotal)
-    self.total ||= line_items.to_a.sum(&:total)
+    self.tax_percent = TAX_PERCENT
+    self.tax         = line_items.to_a.sum(&:tax)
+    self.subtotal    = line_items.to_a.sum(&:subtotal)
+    self.total       = line_items.to_a.sum(&:total)
   end
 end

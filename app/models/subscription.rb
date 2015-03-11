@@ -12,7 +12,9 @@ class Subscription < ActiveRecord::Base
   scope :paid, -> { joins(:plan).where.not(plans: {price_cents: 0}) }
   scope :free, -> { joins(:plan).where(plans: {price_cents: 0}) }
 
-  validates_presence_of :quantity, :plan, :subscriber
+  validates_presence_of :quantity
+  validates_presence_of :plan
+  validates_presence_of :subscriber
   validates_numericality_of :quantity, greater_than: 0, only_integer: true
   validate :validate_end_after_start
 

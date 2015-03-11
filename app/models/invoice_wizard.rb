@@ -80,7 +80,10 @@ class InvoiceWizard
       i.line_items.each(&:calculate)
       i.calculate_totals
 
-      next if i.subtotal === 0.00 # Skip if invoice 0.
+      # Sanity check
+      if i.subtotal === 0.00
+        raise "Invoice should not be 0."
+      end
 
       i.save!
     end
@@ -101,7 +104,10 @@ class InvoiceWizard
       i.line_items.each(&:calculate)
       i.calculate_totals
 
-      next if i.subtotal === 0.00 # Skip if invoice 0.
+      # Sanity check
+      if i.subtotal === 0.00
+        raise "Invoice should not be 0."
+      end
 
       i.save!
     end
@@ -122,7 +128,10 @@ class InvoiceWizard
       i.line_items.each(&:calculate)
       i.calculate_totals
 
-      next if i.subtotal === 0.00 # Skip if invoice 0.
+      # Sanity check
+      if i.subtotal === 0.00
+        raise "Invoice should not be 0."
+      end
 
       i.save!
     end

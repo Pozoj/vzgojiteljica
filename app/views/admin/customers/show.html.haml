@@ -84,7 +84,7 @@
           %td
             = link_to "", admin_invoice_path(invoice)
             = invoice.reference_number
-          %td= invoice.issue
+          %td= invoice.issues.distinct.join(', ')
           %td= l invoice.created_at, format: :simple
           %td= l invoice.due_at, format: :simple
           %td= number_to_currency invoice.total

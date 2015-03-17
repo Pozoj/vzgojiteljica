@@ -157,7 +157,7 @@ class EInvoice
   def invoice_head_hash
     {
       VrstaRacuna: 380,
-      StevilkaRacuna: invoice.reference_full,
+      StevilkaRacuna: invoice.invoice_id,
       FunkcijaRacuna: 9,
       NacinPlacila: 0,
       KodaNamena: 'SUBS'

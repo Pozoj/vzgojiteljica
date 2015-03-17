@@ -2,7 +2,7 @@ class Entity < ActiveRecord::Base
   ENTITY_COMPANY = 1
   ENTITY_PERSON  = 2
 
-  LITERAL_FILTERS = [:type, :vat_id]
+  LITERAL_FILTERS = [:type, :einvoice, :entity_type, :vat_id]
   PARTIAL_FILTERS = [:title, :name, :address]
 
   belongs_to :post
@@ -91,7 +91,7 @@ class Entity < ActiveRecord::Base
   end
 
   def vat_id_formatted
-    if company?
+    if company? && !vat_exempt?
       "SI#{vat_id}" 
     else
       vat_id

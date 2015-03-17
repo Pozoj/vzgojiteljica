@@ -1,4 +1,4 @@
 class Filter
   include ActiveModel::Model
-  attr_accessor :type, :title, :name, :address, :vat_id, :global
+  attr_accessor :type, :entity_type, :einvoice, :title, :name, :address, :vat_id, :global
 end

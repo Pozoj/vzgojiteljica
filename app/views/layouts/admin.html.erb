@@ -72,7 +72,11 @@
                 <br>
                 <%= f.text_field :vat_id, placeholder: 'Davčna', class: 'form-control' %>
                 <br>
-                <%= f.select :type, [['', ''], ['Stranka', 'Customer'], ['Naročnik', 'Subscriber']], {}, class: 'form-control' %>
+                <%= f.select :einvoice, [['E-račun?', ''], ['Da', 't'], ['Ne', 'f']], {}, class: 'form-control' %>
+                <br>
+                <%= f.select :entity_type, [['Tip entitete', ''], ['Podjetje', Entity::ENTITY_COMPANY], ['Oseba', Entity::ENTITY_PERSON]], {}, class: 'form-control' %>
+                <br><br>
+                <%= f.submit :"Išči" %>
               </div>
             </div>
           <% end %>

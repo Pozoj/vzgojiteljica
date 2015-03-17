@@ -8,6 +8,7 @@
       <th>Naslov</th>
       <th>Pošta</th>
       <th>Nar.</th>
+      <th>E-rač</th>
       <th>ID za DDV</th>
     </tr>
   </thead>
@@ -20,7 +21,7 @@
           <% elsif entity.subscriber? %>
             <span class="glyphicon glyphicon-envelope"></span>
           <% else %>
-            <span class="glyphicon glyphicon-user"></span>
+            <span class="glyphicon glyphicon-earphone"></span>
           <% end %>
         </td>
         <td>
@@ -38,21 +39,24 @@
         <td><%= entity.address %></td>
         <td><%= entity.post %></td>
         <td>
-          <% if entity.customer? %>
-            <% if entity.subscriptions.active.any? %>
-              <span class="active" style="color: green;">&#10003;</span>
+          <% if entity.customer? || entity.subscriber? %>
+            <% if (quantity = entity.subscriptions.active.sum(:quantity)) && (quantity > 0) %>
+              <span class="active" style="padding: 0 4px; color: white; background: green;"><%= quantity %></span>
             <% else %>
-              <span class="inactive" style="color: red;">&#10007;</span>
-            <% end %>
-          <% elsif entity.subscriber? %>
-            <% if entity.subscriptions.active.any? %>
-              <span class="active" style="color: green;">&#10003;</span>
-            <% else %>
-              <span class="inactive" style="color: red;">&#10007;</span>
+              <span class="inactive" style="padding: 0 4px; color: white; background: red;"><%= quantity %></span>
             <% end %>
           <% end %>
         </td>
-        <td><%= entity.vat_id %></td>
+        <td>
+          <% if entity.customer? %>
+            <% if entity.einvoice? %>
+              &#10003;
+            <% else %>
+              &#10007;
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= entity.vat_id_formatted %></td>
       </tr>
     <% end %>
   </tbody>

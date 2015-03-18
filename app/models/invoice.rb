@@ -27,6 +27,7 @@ class Invoice < ActiveRecord::Base
   before_save :calculate_totals, on: :create
 
   scope :unpaid, -> { where(paid_at: nil) }
+  scope :paid,   -> { where.not(paid_at: nil) }
 
   def self.match_to_statements!
     Invoice.unpaid.each do |i|
@@ -85,6 +86,14 @@ class Invoice < ActiveRecord::Base
   def match_statement_entry
     query = "%SI00#{reference_number}%"
     @statement_entry ||= StatementEntry.where(StatementEntry.arel_table[:details].matches(query)).first
+  end
+
+  def parse_iban_from_bank_data
+    return unless bank_data
+    return unless iban_string = bank_data.split("\n").first
+    return unless iban_string.present?
+    return unless IBANTools::IBAN.valid?(iban_string)
+    iban_string
   end
 
   def calculate_totals

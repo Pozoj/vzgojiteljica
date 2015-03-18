@@ -2,6 +2,7 @@ class Entity < ActiveRecord::Base
   ENTITY_COMPANY = 1
   ENTITY_PERSON  = 2
 
+  GLOBAL_FILTERS  = [:title, :name, :address]
   LITERAL_FILTERS = [:type, :einvoice, :entity_type, :vat_id]
   PARTIAL_FILTERS = [:title, :name, :address]
 
@@ -60,15 +61,12 @@ class Entity < ActiveRecord::Base
 
     if filters[:global] && filters[:global].present?
       query = nil
-      PARTIAL_FILTERS.each do |filter|
+      GLOBAL_FILTERS.each do |filter|
         unless query
           query = Entity.arel_table[filter].matches("%#{filters[:global]}%")
           next
         end
         query = query.or(Entity.arel_table[filter].matches("%#{filters[:global]}%"))
-      end
-      LITERAL_FILTERS.each do |filter|
-        query = query.or(Entity.arel_table[filter].eq(filters[:global]))
       end
       entities = entities.where query
     end

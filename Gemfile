@@ -37,8 +37,6 @@ gem 'money-rails', github: 'RubyMoney/money-rails', ref: '46660b70e5e25e02a0e67f
 gem 'gyoku', '~> 1.0'
 gem 'iban-tools'
 gem 'email_validator'
-gem 'nokogiri'
-gem 'levenshtein'
 
 group :development, :test do
   gem 'sqlite3'

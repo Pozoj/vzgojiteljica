@@ -129,7 +129,7 @@ class EInvoice
         BancniRacun: {
           StevilkaBancnegaRacuna: entity.account_number,
           NazivBanke1: entity.bank.name,
-          BIC: entity.bank.bic
+          BIC: entity.bank.bic_elongated
         }
       }
     }
@@ -239,7 +239,7 @@ class EInvoice
           # Koncni znesek
           {
             VrstaZneskaPostavke: 38,
-            ZnesekPostavke: li.subtotal.to_f
+            ZnesekPostavke: li.total.to_f
           },
           # Znesek s popustom
           {
@@ -379,32 +379,32 @@ class EInvoice
 
   def invoice_payment_shoutout_hash
     text_hash(
-      text_type: 'DODATNI_TEKST',
+      # text_type: 'DODATNI_TEKST',
       text: "Račun plačajte na TRR: #{Entity.pozoj.account_number_formatted}, odprt pri #{Entity.pozoj.bank} Pri plačilu računa se sklicujte na: #{invoice.payment_id}. Po izteku roka za plačilo zaračunavamo zakonske zamudne obresti. Reklamacije upoštevamo, če so podane v 7 dneh od izstavitve računa."
     )
   end
 
   def invoice_foot_hash
     text_hash(
-      text_type: 'NOGA_TEKST',
+      # text_type: 'NOGA_TEKST',
       text: Entity.pozoj.string_description
     )
   end
 
   def invoice_invoicer_hash
     text_hash(
-      text_type: 'FAKTURIST',
+      # text_type: 'FAKTURIST',
       text: "Darja Slapničar"
     )
   end
 
-  def text_hash(type: 'AAI', text_type:, text:, max_length: 280, max_segments: 4)
+  def text_hash(type: 'AAI', text_type: nil, text:, max_length: 280, max_segments: 4)
     if text.length > max_length
       raise "Text too long."
     end
 
     index = 2
-    texts = {Tekst1: text_type}
+    texts = text_type ? { Tekst1: text_type } : {}
     texts = text.chars.each_slice(70).inject(texts) do |hash, segment|
       hash[:"Tekst#{index}"] = segment.join
       index += 1

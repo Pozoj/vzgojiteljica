@@ -16,4 +16,28 @@ class Customer < Entity
   def self.paid_count
     Subscription.active.paid.group_by { |subscription| subscription.subscriber.customer_id }.count
   end
+
+  def halcom_export
+    [
+      to_s,
+      address,
+      post.to_s,
+      'SLOVENIJA',
+      '',
+      account_number,
+      bank.name,
+      bank.address,
+      bank.post.to_s,
+      'SLOVENIJA',
+      'SI',
+      '',
+      bank.bic,
+      bank.account_number,
+      '',
+      0,
+      '',
+      vat_id_formatted,
+      'SI'
+    ].map { |el| '"' + el.to_s + '"' }.join(',')
+  end
 end

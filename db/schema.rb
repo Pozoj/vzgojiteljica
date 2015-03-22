@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322045608) do
+ActiveRecord::Schema.define(version: 20150322165931) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -74,8 +74,11 @@ ActiveRecord::Schema.define(version: 20150322045608) do
   create_table "banks", force: :cascade do |t|
     t.string   "name"
     t.string   "bic"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "address"
+    t.integer  "post_id"
+    t.string   "account_number"
   end
 
   add_index "banks", ["bic"], name: "index_banks_on_bic", unique: true

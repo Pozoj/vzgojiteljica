@@ -122,17 +122,20 @@ class EInvoice
     reference_numbers
   end
 
+  # Commenting out this one, because it's supposedly invalid?!?
   def entity_bank_hash(entity)
-    return if !entity.bank || !entity.account_number?
-    {
-      FinancniPodatkiPodjetja: {
-        BancniRacun: {
-          StevilkaBancnegaRacuna: entity.account_number,
-          NazivBanke1: entity.bank.name,
-          BIC: entity.bank.bic_elongated
-        }
-      }
-    }
+    {}
+
+    # return if !entity.bank || !entity.account_number?
+    # {
+    #   FinancniPodatkiPodjetja: {
+    #     BancniRacun: {
+    #       StevilkaBancnegaRacuna: entity.account_number,
+    #       NazivBanke1: entity.bank.name,
+    #       BIC: entity.bank.bic_elongated
+    #     }
+    #   }
+    # }
   end
 
   def entity_hashes
@@ -190,11 +193,11 @@ class EInvoice
       },
       # NEED TO IMPLEMENT FROM TO for INVOICES
       {
-        VrstaDatuma: 236,
+        VrstaDatuma: 263,
         DatumRacuna: invoice.created_at.to_datetime.beginning_of_day
       },
       {
-        VrstaDatuma: 236,
+        VrstaDatuma: 263,
         DatumRacuna: invoice.created_at.to_datetime.beginning_of_day
       },
     ]
@@ -283,7 +286,6 @@ class EInvoice
           Identifikator: 'A',
           VrstaOdstotkaPostavke: 1,
           VrstaZneskaOdstotka: 204,
-          OdstotekPostavke: li.discount_percent || 0,
           ZnesekOdstotka: 0,
         }
       }
@@ -371,7 +373,7 @@ class EInvoice
         },
         SklicZaPlacilo: {
           SklicPlacila: 'PQ',
-          StevilkaSklica: invoice.payment_id
+          StevilkaSklica: invoice.payment_id_full
         }
       },
     ]

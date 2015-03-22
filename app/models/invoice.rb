@@ -80,7 +80,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def payment_id_full
-    "SI 00 #{payment_id}"
+    "SI00#{payment_id}"
   end
 
   def match_statement_entry

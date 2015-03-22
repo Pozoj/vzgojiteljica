@@ -32,12 +32,18 @@ class Customer < Entity
       'SI',
       '',
       bank.bic,
-      bank.account_number,
       '',
+      bank.account_number,
       0,
       '',
       vat_id_formatted,
       'SI'
-    ].map { |el| '"' + el.to_s + '"' }.join(',')
+    ].map do |el| 
+      if el.is_a?(String)
+        '"' + el + '"'
+      else
+        el
+      end
+    end.join(',')
   end
 end

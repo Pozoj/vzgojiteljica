@@ -15,7 +15,8 @@ class EboniteteScraper
     "#{ROOT}#{SEARCH_URL}#{@vat_id}"
   end
 
-  def data_url 
+  def data_url
+    return unless @data_url
     "#{ROOT}#{@data_url}"
   end
 
@@ -58,6 +59,9 @@ class EboniteteScraper
   def parse
     log "Parsing ..."
     search
+
+    return unless data_url
+    
     doc = open_url(data_url)
 
     {

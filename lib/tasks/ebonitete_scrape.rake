@@ -10,8 +10,15 @@ namespace :ebonitete do
         next
       end
       puts "Starting to search data for #{customer.to_s} (#{customer.vat_id})"
+
       scraper = EboniteteScraper.new(customer.vat_id)
       data = scraper.parse
+
+      unless data
+        puts "NOT FOUND ON EBONITETE"
+        next
+      end
+
       unless strip_bank(customer.title) == strip_bank(data[:title_long])
         if Levenshtein.normalized_distance(strip_bank(customer.title), strip_bank(data[:title_long])) > 0.6
           customer.title = data[:title_long]
@@ -96,7 +103,7 @@ namespace :ebonitete do
       },
       {
         name: 'DELAVSKA HRANILNICA D.D.',
-        aliases: [],
+        aliases: ['DH'],
         bic: 'HDELSI22'
       },
       {
@@ -111,7 +118,7 @@ namespace :ebonitete do
       },
       {
         name: 'GORENJSKA BANKA D.D.',
-        aliases: ['GORENJSKA'],
+        aliases: ['GORENJSKA', 'GB'],
         bic: 'GORESI2X'
       },
       {

@@ -15,9 +15,14 @@ class Entity < ActiveRecord::Base
   validates :vat_id, uniqueness: {allow_nil: true}, numericality: {only_integer: true, allow_nil: true, greater_than: 0}
   validate :validate_vat_id, if: :vat_id?
   validate :validate_name_or_title
-  validate :validate_account_number, if: :account_number?
+  validate :validate_account_number
   validates :registration_number, uniqueness: {allow_nil: true}, numericality: {allow_nil: true, only_integer: true, greater_than: 0}
   validates :email, :email => true, if: :email?
+
+  scope :person, where(entity_type: ENTITY_PERSON)
+  scope :not_person, where.not(entity_type: ENTITY_PERSON)
+  scope :company, where(entity_type: ENTITY_COMPANY)
+  scope :not_company, where.not(entity_type: ENTITY_COMPANY)
 
   def to_s
     if name.present?
@@ -166,6 +171,12 @@ class Entity < ActiveRecord::Base
   end
 
   def validate_account_number
+    if account_number.blank?
+      self.account_number = nil
+    end
+
+    return unless account_number?
+    
     unless IBANTools::IBAN.valid?(account_number)
       errors.add :account_number, 'ni v IBAN obliki'
     end

@@ -1,6 +1,6 @@
 namespace :ebonitete do
   task :scrape => :environment do
-    customers = Customer.all.where(account_number: nil).to_a
+    customers = Customer.not_person.where(account_number: nil).to_a
     customers = customers.shuffle
     puts "Starting EBoniteteScraper for #{customers.count} customers without bank accounts"
 

@@ -3,21 +3,21 @@
   <header>
     <%= image_tag "pozoj_logo-100w.png" %>
     <p>
-      <strong>POZOJ, Darja Slapničar s.p.</strong>
+      <strong><%= Entity.pozoj %></strong>
     </p>
     <p>
-      Pirešica 2
+      <%= Entity.pozoj.address %>
       <br>
-      3320 Velenje
+      <%= Entity.pozoj.post %>
       <br>
-      info@pozoj.si
+      <%= Entity.pozoj.email %>
     </p>
     <p>
-      ID št. za DDV: SI78459575
+      D. Št.: <%= Entity.pozoj.vat_id_formatted %>
       <br>
-      Matična št.: 6782990000
+      Matična št.: <%= Entity.pozoj.registration_number %>
       <br>
-      TRR: SI56 3300 0000 6887 185
+      TRR: <%= Entity.pozoj.iban.prettify %>
     </p>
   </header>
 
@@ -34,7 +34,7 @@
   <div class="details">
     <p>
       <% if invoice.customer.vat_id? %>
-        ID št. za DDV kupca: <strong>SI<%= invoice.customer.vat_id %></strong>
+        D.Št./ID št. za DDV kupca: <strong><%= invoice.customer.vat_id_formatted %></strong>
         <br>
       <% end %>
       Kraj izdaje: <strong>Velenje</strong>
@@ -109,15 +109,17 @@
   </div>
 
   <div class="signature">
-    <%= image_tag "miha_sig.png" %>
+    <%= image_tag "darja_sig.png" %>
     <p>
+      <strong>Fakturirala:</strong>
+      <br>
       Darja Slapničar
     </p>
   </div>
 
   <div class="instructions">
-    <p>Račun plačajte na TRR: <strong>SI56 3300 0000 6887 185</strong>, odprt pri Hypo Bank d.d.</p>
-    <p>Pri plačilu računa se sklicujeta na št. računa: <strong><%= invoice.reference_full %></strong>.</p>
+    <p>Račun plačajte na TRR: <strong><%= Entity.pozoj.iban.prettify %></strong>, odprt pri <%= Entity.pozoj.bank.name %></p>
+    <p>Pri plačilu računa se sklicujeta na: <strong><%= invoice.payment_id_full %></strong>.</p>
     <p>Po izteku roka za plačilo zaračunavamo z zakonom določene zamudne obresti.</p>
     <p>Reklamacije upoštevamo, če so podane v 7 dneh od izstavitve računa.</p>
   </div>

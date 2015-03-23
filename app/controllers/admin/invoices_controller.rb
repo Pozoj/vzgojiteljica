@@ -63,7 +63,7 @@ class Admin::InvoicesController < Admin::AdminController
     if gte = params[:gte]
       @invoices = @invoices.where("reference_number >= #{gte}")
     end
-    @invoices = @invoices.order(:reference_number)
+    @invoices = @invoices.order(:reference_number).reject { |i| i.customer.einvoice? }
 
     render layout: 'print'
   end

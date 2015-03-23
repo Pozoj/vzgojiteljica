@@ -19,10 +19,10 @@ class Entity < ActiveRecord::Base
   validates :registration_number, uniqueness: {allow_nil: true}, numericality: {allow_nil: true, only_integer: true, greater_than: 0}
   validates :email, :email => true, if: :email?
 
-  scope :person, where(entity_type: ENTITY_PERSON)
-  scope :not_person, where.not(entity_type: ENTITY_PERSON)
-  scope :company, where(entity_type: ENTITY_COMPANY)
-  scope :not_company, where.not(entity_type: ENTITY_COMPANY)
+  scope :person,      -> { where(entity_type: ENTITY_PERSON) }
+  scope :not_person,  -> { where.not(entity_type: ENTITY_PERSON) }
+  scope :company,     -> { where(entity_type: ENTITY_COMPANY) }
+  scope :not_company, -> { where.not(entity_type: ENTITY_COMPANY) }
 
   def to_s
     if name.present?

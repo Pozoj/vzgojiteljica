@@ -19,8 +19,6 @@ class LineItem < ActiveRecord::Base
   end
 
   def unit_eancom
-    if unit == 'kom'
-      'PCE'
-    end
+    'PCE'
   end
 end

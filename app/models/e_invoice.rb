@@ -231,7 +231,7 @@ class EInvoice
           {
             KodaOpisaArtikla: 'F',
             OpisArtikla: {
-              OpisArtikla1: li.product
+              OpisArtikla1: li.product.gsub('naročnina', 'naroč.')
             }
           },
           {

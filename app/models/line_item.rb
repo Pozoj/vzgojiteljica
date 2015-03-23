@@ -17,4 +17,10 @@ class LineItem < ActiveRecord::Base
     self.total = subtotal * tax_multiplier
     self.tax = total - subtotal
   end
+
+  def unit_eancom
+    if unit == 'kom'
+      'PCE'
+    end
+  end
 end

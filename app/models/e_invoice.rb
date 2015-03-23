@@ -35,6 +35,15 @@ class EInvoice
   end
 
   def entity_hash(entity, entity_type)
+    # Order is important here:
+    # 
+    # <xs:sequence>
+    #   <xs:element ref="NazivNaslovPodjetja"/>
+    #   <xs:element ref="FinancniPodatkiPodjetja" minOccurs="0" maxOccurs="unbounded"/>
+    #   <xs:element ref="ReferencniPodatkiPodjetja" maxOccurs="unbounded"/>
+    #   <xs:element ref="KontaktiPodjetja" minOccurs="0" maxOccurs="unbounded"/>
+    # </xs:sequence>
+
     hash = {
       NazivNaslovPodjetja: {
         VrstaPartnerja: entity_type,
@@ -48,13 +57,14 @@ class EInvoice
         NazivDrzave: 'Slovenija',
         PostnaStevilka: entity.post.id,
         KodaDrzave: 'SI'
-      },
-      ReferencniPodatkiPodjetja: entity_reference_numbers_hash(entity),
+      }
     }
 
     # Append bank hash if present.
     bank_hash = entity_bank_hash(entity)
     hash.merge!(bank_hash) if bank_hash
+    
+    hash.merge!(ReferencniPodatkiPodjetja: entity_reference_numbers_hash(entity))
 
     # Append contacts hash if this is POZOJ.
     if entity_type == ENTITY_TYPE_POZOJ
@@ -124,18 +134,16 @@ class EInvoice
 
   # Commenting out this one, because it's supposedly invalid?!?
   def entity_bank_hash(entity)
-    {}
-
-    # return if !entity.bank || !entity.account_number?
-    # {
-    #   FinancniPodatkiPodjetja: {
-    #     BancniRacun: {
-    #       StevilkaBancnegaRacuna: entity.account_number,
-    #       NazivBanke1: entity.bank.name,
-    #       BIC: entity.bank.bic_elongated
-    #     }
-    #   }
-    # }
+    return if !entity.bank || !entity.account_number?
+    {
+      FinancniPodatkiPodjetja: {
+        BancniRacun: {
+          StevilkaBancnegaRacuna: entity.account_number,
+          NazivBanke1: entity.bank.name,
+          BIC: entity.bank.bic_elongated
+        }
+      }
+    }
   end
 
   def entity_hashes
@@ -236,7 +244,7 @@ class EInvoice
         KolicinaArtikla: {
           VrstaKolicine: 47,
           Kolicina: li.quantity,
-          EnotaMere: li.unit,
+          EnotaMere: li.unit_eancom,
         },
         ZneskiPostavke: [
           # Koncni znesek
@@ -285,6 +293,7 @@ class EInvoice
         OdstotkiPostavk: {
           Identifikator: 'A',
           VrstaOdstotkaPostavke: 1,
+          OdstotekPostavke: li.discount_percent || 0,
           VrstaZneskaOdstotka: 204,
           ZnesekOdstotka: 0,
         }

@@ -39,6 +39,7 @@ gem 'iban-tools'
 gem 'email_validator'
 gem 'nokogiri'
 gem 'levenshtein'
+gem 'rubyzip'
 
 group :development, :test do
   gem 'sqlite3'

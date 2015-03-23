@@ -36,7 +36,7 @@ class Customer < Entity
       bank.account_number,
       0,
       '',
-      vat_id_formatted,
+      vat_id_formatted.to_s,
       'SI'
     ].map do |el| 
       if el.is_a?(String)

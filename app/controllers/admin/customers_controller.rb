@@ -15,7 +15,7 @@ class Admin::CustomersController < Admin::AdminController
     @customer.post_id = @order.post_id
     @customer.phone = @order.phone
     @customer.email = @order.email
-    @customer.vat_id = @order.vat_id
+    @customer.vat_id = @order.vat_id.gsub(/[^0-9]/, '')
     @customer.save!
 
     @customer.remarks.create remark: "Naročnik ustvarjen avtomatsko iz naročila ##{@order.id} na spletni strani."

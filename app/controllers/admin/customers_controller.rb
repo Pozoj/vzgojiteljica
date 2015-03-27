@@ -6,43 +6,12 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def new_from_order
-    @order = Order.find(params[:order_id])
-
-    @customer = Customer.new
-    @customer.title = @order.title
-    @customer.name = @order.name
-    @customer.address = @order.address
-    @customer.post_id = @order.post_id
-    @customer.phone = @order.phone
-    @customer.email = @order.email
-    @customer.vat_id = @order.vat_id.gsub(/[^0-9]/, '')
-    @customer.save!
-
-    @customer.remarks.create remark: "Naročnik ustvarjen avtomatsko iz naročila ##{@order.id} na spletni strani."
-
-    @subscriber = @customer.subscribers.new
-    @subscriber.title = @order.title
-    @subscriber.name = @order.name
-    @subscriber.address = @order.address
-    @subscriber.post_id = @order.post_id
-    @subscriber.save!
-
-    if @order.comments.present?
-      @subscriber.remarks.create remark: "Opomba naročnika: \"#{@order.comments}\""
+    @customer = Customer.new_from_order(params[:order_id])
+    if @customer.try(:persisted?)
+      redirect_to admin_customer_path(@customer)
+    else
+      redirect_to orders_path(error: @customer.errors.join(', ').inspect)
     end
-
-    @subscription = @subscriber.subscriptions.new
-    @subscription.start = Date.today
-    @subscription.quantity = @order.quantity
-    if @order.plan_type
-      @subscription.plan = Plan.latest(@order.plan_type)
-    end
-    @subscription.save!
-
-    @order.processed = true
-    @order.save!
-
-    redirect_to admin_customer_path(@customer)
   end
 
   def new

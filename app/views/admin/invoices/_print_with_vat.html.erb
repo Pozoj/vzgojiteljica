@@ -1,0 +1,126 @@
+<% invoice ||= @invoice %>
+<div class="invoice">
+  <header>
+    <%= image_tag "pozoj_logo-100w.png" %>
+    <p>
+      <strong><%= Entity.pozoj %></strong>
+    </p>
+    <p>
+      <%= Entity.pozoj.address %>
+      <br>
+      <%= Entity.pozoj.post %>
+      <br>
+      <%= Entity.pozoj.email %>
+    </p>
+    <p>
+      D. Št.: <%= Entity.pozoj.vat_id_formatted %>
+      <br>
+      Matična št.: <%= Entity.pozoj.registration_number %>
+      <br>
+      TRR: <%= Entity.pozoj.iban.prettify %>
+    </p>
+  </header>
+
+  <div class="recipient">
+    <p>
+      <strong><%= invoice.customer %></strong>
+      <br>
+      <%= invoice.customer.address %>
+      <br>
+      <%= invoice.customer.post %>
+    </p>
+  </div>
+
+  <div class="details">
+    <p>
+      <% if invoice.customer.vat_id? %>
+        D.Št./ID št. za DDV kupca: <strong><%= invoice.customer.vat_id_formatted %></strong>
+        <br>
+      <% end %>
+      Kraj izdaje: <strong>Velenje</strong>
+      <br>
+      Datume izdaje: <strong><%= l invoice.created_at.to_date, format: :simple %></strong>
+      <br>
+      Rok plačila: <strong><%= l invoice.due_at, format: :simple %></strong>
+    </p>
+  </div>
+
+  <h1>Račun <%= invoice.invoice_id %></h1>
+
+  <div class="items">
+    <table>
+      <thead>
+        <tr>
+          <th>Prejemnik</th>
+          <th>Artikel/Storitev</th>
+          <th>Kol.</th>
+          <th>EM</th>
+          <th>Cena</th>
+          <th>Popust</th>
+          <th>Cena s popustom</th>
+          <th>Skupaj brez DDV</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% invoice.line_items.each do |li| %>
+          <tr>
+            <td><%= li.entity_name %></td>
+            <td><%= li.product %></td>
+            <td><%= li.quantity %></td>
+            <td><%= li.unit %></td>
+            <td><%= number_to_currency li.price_per_item %></td>
+            <td><%= number_to_percentage li.discount_percent || 0 %></td>
+            <td><%= number_to_currency li.price_per_item_with_discount %></td>
+            <td><%= number_to_currency li.subtotal %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subtotals">
+    <table>
+      <thead>
+        <tr>
+          <th>Osnova za izračun davka</th>
+          <th>DDV stopnja</th>
+          <th>Davek</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= number_to_currency invoice.subtotal %>
+          </td>
+          <td><%= number_to_percentage invoice.tax_percent %></td>
+          <td>
+            <%= number_to_currency invoice.tax %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="totals">
+    <p>
+      Skupaj za plačilo:
+      <strong><%= number_to_currency invoice.total %></strong>
+    </p>
+  </div>
+
+  <div class="signature">
+    <%= image_tag "darja_sig.png" %>
+    <p>
+      <strong>Fakturirala:</strong>
+      <br>
+      Darja Slapničar
+    </p>
+  </div>
+
+  <div class="instructions">
+    <p>Račun plačajte na TRR: <strong><%= Entity.pozoj.iban.prettify %></strong>, odprt pri <%= Entity.pozoj.bank.name %></p>
+    <p>Pri plačilu računa se sklicujta na: <strong><%= invoice.payment_id_full %></strong>.</p>
+    <p>Po izteku roka za plačilo zaračunavamo z zakonom določene zamudne obresti.</p>
+    <p>Reklamacije upoštevamo, če so podane v 7 dneh od izstavitve računa.</p>
+  </div>
+</div>

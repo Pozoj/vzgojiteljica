@@ -47,9 +47,7 @@ class EInvoice
     hash = {
       NazivNaslovPodjetja: {
         VrstaPartnerja: entity_type,
-        NazivPartnerja: {
-          NazivPartnerja1: entity.title
-        },
+        NazivPartnerja: split_text(text: entity.title, key_name: 'NazivPartnerja', segment_length: 35),
         Ulica: {
           Ulica1: entity.address
         },
@@ -230,9 +228,7 @@ class EInvoice
         OpisiArtiklov: [
           {
             KodaOpisaArtikla: 'F',
-            OpisArtikla: {
-              OpisArtikla1: li.product.gsub('naročnina', 'naroč.')
-            }
+            OpisArtikla: split_text(text: li.product, segment_length: 35, key_name: 'OpisArtikla')
           },
           {
             OpisArtikla: {
@@ -409,22 +405,30 @@ class EInvoice
     )
   end
 
-  def text_hash(type: 'AAI', text_type: nil, text:, max_length: 280, max_segments: 4)
+  def text_hash(type: 'AAI', text_type: nil, text:, max_length: 280, segment_length: 70, key_name: 'Tekst')
     if text.length > max_length
       raise "Text too long."
     end
 
-    index = 2
-    texts = text_type ? { Tekst1: text_type } : {}
-    texts = text.chars.each_slice(70).inject(texts) do |hash, segment|
-      hash[:"Tekst#{index}"] = segment.join
+    {
+      VrstaBesedila: type,
+      Besedilo: split_text(text_type: text_type, text: text, segment_length: segment_length, key_name: key_name)
+    }
+  end
+
+  def split_text(text_type: nil, text:, segment_length: 70, key_name: 'Tekst')
+    texts = {}
+    index = 1
+    
+    if text_type
+      texts = { "#{key_name}1" => text_type }
+      index = 2
+    end
+      
+    texts = text.chars.each_slice(segment_length).inject(texts) do |hash, segment|
+      hash["#{key_name}#{index}"] = segment.join
       index += 1
       hash
     end
-
-    {
-      VrstaBesedila: type,
-      Besedilo: texts
-    }
   end
 end

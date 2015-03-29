@@ -1,4 +1,6 @@
 class Admin::InvoicesController < Admin::AdminController
+  skip_before_filter :authenticate, only: [:print]
+  
   def index
     @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
     @gte = Invoice.select(:reference_number).order(reference_number: :asc).first.try(:reference_number)

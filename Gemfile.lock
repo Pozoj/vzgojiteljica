@@ -260,6 +260,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    pdfcrowd (2.6.0)
     pg (0.18.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -378,6 +379,7 @@ DEPENDENCIES
   mt940_parser!
   nokogiri
   paperclip
+  pdfcrowd
   pg
   pry
   rails (~> 4.2.0)

@@ -1,5 +1,5 @@
 module Invoicing
-  TAX_PERCENT = 9.5
+  TAX_PERCENT = 0
 
   protected
 

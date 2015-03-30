@@ -84,28 +84,10 @@ class Invoice < ActiveRecord::Base
     pdf_generator.convert_url("http://www.vzgojiteljica.si/admin/invoices/#{id}/print")
   end
 
-  def store_to_s3(path, data)
-    s3_connection.directories.new(:key => AWS_S3['bucket']).files.create(
-      :key    => path,
-      :body   => data,
-      :public => false
-    )
-  end
-
-  def store_pdf; store_to_s3(pdf_path, pdf); pdf_path; end
-  def store_einvoice; store_to_s3(einvoice_path, einvoice_xml); einvoice_path; end
-  def store_eenvelope; store_to_s3(eenvelope_path, eenvelope_xml); eenvelope_path; end
-
-  def pdf_url
-    s3_connection.directories.new(:key => AWS_S3['bucket']).files.new(:key => pdf_path).url(1.hour.from_now)
-  end
-
-  def s3_connection
-    @s3_connection ||= Fog::Storage.new({
-      :provider                 => 'AWS',
-      :aws_access_key_id        => AWS_S3['access_key_id'],
-      :aws_secret_access_key    => AWS_S3['secret_access_key']
-    })
+  def pdf_idempotent
+    return pdf_url if pdf_stored?
+    store_pdf
+    pdf_url
   end
 
   def file_path(extension, prefix = "")
@@ -115,6 +97,46 @@ class Invoice < ActiveRecord::Base
   def pdf_path; file_path('pdf'); end
   def einvoice_path; file_path('xml'); end
   def eenvelope_path; file_path('xml', 'env_'); end
+
+  def store_to_s3(path, data)
+    s3_connection.directories.new(:key => AWS_S3['bucket']).files.create(
+      :key    => path,
+      :body   => data,
+      :public => false
+    )
+  end
+
+  def exists_on_s3?(path)
+    !!s3_connection.directories.new(:key => AWS_S3['bucket']).files.head(path)
+  end
+  def pdf_exists_on_s3?; exists_on_s3?(pdf_path); end
+  def einvoice_exists_on_s3?; exists_on_s3?(einvoice_path); end
+  def eenvelope_exists_on_s3?; exists_on_s3?(eenvelope_path); end
+
+  def store_pdf
+    store_to_s3(pdf_path, pdf)
+    self.pdf_stored = true
+    self.save
+    pdf_path
+  end
+  def store_einvoice; store_to_s3(einvoice_path, einvoice_xml); einvoice_path; end
+  def store_eenvelope; store_to_s3(eenvelope_path, eenvelope_xml); eenvelope_path; end
+
+  def s3_url(path)
+    s3_connection.directories.new(:key => AWS_S3['bucket']).files.new(:key => path).url(1.hour.from_now)
+  end
+  def pdf_url; s3_url(pdf_path); end
+  def einvoice_url; s3_url(einvoice_path); end
+  def eenvelope_url; s3_url(eenvelope_path); end
+
+  def s3_connection
+    @s3_connection ||= Fog::Storage.new({
+      :provider                 => 'AWS',
+      :aws_access_key_id        => AWS_S3['access_key_id'],
+      :aws_secret_access_key    => AWS_S3['secret_access_key']
+    })
+  end
+
 
   def einvoice
     EInvoice.new(invoice: self)
@@ -164,5 +186,9 @@ class Invoice < ActiveRecord::Base
     self.tax         = line_items.to_a.sum(&:tax)
     self.subtotal    = line_items.to_a.sum(&:subtotal)
     self.total       = line_items.to_a.sum(&:total)
+  end
+
+  def to_param
+    invoice_id
   end
 end

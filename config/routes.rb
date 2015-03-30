@@ -64,6 +64,8 @@ Web3::Application.routes.draw do
       get :print, on: :member
       get :print_all, on: :collection
       get :einvoice, on: :member
+      get :eenvelope, on: :member
+      get :pdf, on: :member
       post :build_for_subscription, on: :collection
     end
     resources :bank_statements do

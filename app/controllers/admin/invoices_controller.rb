@@ -33,6 +33,10 @@ class Admin::InvoicesController < Admin::AdminController
     redirect_to admin_invoices_path
   end
 
+  def pdf
+    redirect_to resource.pdf_idempotent
+  end
+
   def build_for_subscription
     subscription = Subscription.find(params[:subscription_id])
 
@@ -50,6 +54,13 @@ class Admin::InvoicesController < Admin::AdminController
     @einvoice = EInvoice.new(invoice: resource).generate
     respond_to do |format|
       format.xml { render layout: 'einvoice' }
+    end
+  end
+
+  def eenvelope
+    @eenvelope = EEnvelope.new(invoice: resource).generate
+    respond_to do |format|
+      format.xml { render layout: 'eenvelope' }
     end
   end
 
@@ -77,6 +88,6 @@ class Admin::InvoicesController < Admin::AdminController
   end
 
   def resource
-    @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.find_by(invoice_id: params[:id])
   end
 end

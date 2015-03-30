@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322165931) do
+ActiveRecord::Schema.define(version: 20150330041004) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20150322165931) do
     t.string   "payment_id"
     t.string   "invoice_id"
     t.integer  "year"
+    t.boolean  "pdf_stored"
   end
 
   add_index "invoices", ["bank_reference"], name: "index_invoices_on_bank_reference", unique: true

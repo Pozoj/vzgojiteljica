@@ -85,8 +85,8 @@ class EEnvelope
       ],
       receiver_identifier: entity.vat_id_formatted,
       receiver_eddress: {
-        sender_agent: UJP_BIC,
-        sender_mailbox: entity.account_number
+        receiver_agent: UJP_BIC,
+        receiver_mailbox: entity.account_number
       }
     }
   end

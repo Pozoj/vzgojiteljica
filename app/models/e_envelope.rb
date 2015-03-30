@@ -159,8 +159,8 @@ class EEnvelope
           entity.address,
           entity.post.to_s
         ],
-        creditor_agent: entity.bank.bic_elongated,
-        creditor_account: entity.account_number
+        debtor_agent: entity.bank.bic_elongated,
+        debtor_account: entity.account_number
       },
       requested_execution_date: invoice.due_at.strftime('%Y-%m-%d'),
       amount: invoice.total.to_f,

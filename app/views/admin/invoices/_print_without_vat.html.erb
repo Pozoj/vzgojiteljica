@@ -40,6 +40,9 @@
         D.Št./ID št. za DDV kupca: <strong><%= invoice.customer.vat_id_formatted %></strong>
         <br>
       <% end %>
+      DDV ni obračunan po 1. točki 94. člena ZDDV.
+      <br>
+      <br>
       Kraj izdaje: <strong>Velenje</strong>
       <br>
       Datume izdaje: <strong><%= l invoice.created_at.to_date, format: :simple %></strong>

@@ -84,6 +84,38 @@ class Invoice < ActiveRecord::Base
     pdf_generator.convert_url("http://www.vzgojiteljica.si/admin/invoices/#{id}/print")
   end
 
+  def store_to_s3(path, data)
+    s3_connection.directories.new(:key => AWS_S3['bucket']).files.create(
+      :key    => path,
+      :body   => data,
+      :public => false
+    )
+  end
+
+  def store_pdf; store_to_s3(pdf_path, pdf); pdf_path; end
+  def store_einvoice; store_to_s3(einvoice_path, einvoice_xml); einvoice_path; end
+  def store_eenvelope; store_to_s3(eenvelope_path, eenvelope_xml); eenvelope_path; end
+
+  def pdf_url
+    s3_connection.directories.new(:key => AWS_S3['bucket']).files.new(:key => pdf_path).url(1.hour.from_now)
+  end
+
+  def s3_connection
+    @s3_connection ||= Fog::Storage.new({
+      :provider                 => 'AWS',
+      :aws_access_key_id        => AWS_S3['access_key_id'],
+      :aws_secret_access_key    => AWS_S3['secret_access_key']
+    })
+  end
+
+  def file_path(extension, prefix = "")
+    "invoices/#{year}/#{prefix}#{invoice_id}.#{extension}"
+  end
+
+  def pdf_path; file_path('pdf'); end
+  def einvoice_path; file_path('xml'); end
+  def eenvelope_path; file_path('xml', 'env_'); end
+
   def einvoice
     EInvoice.new(invoice: self)
   end
@@ -94,6 +126,19 @@ class Invoice < ActiveRecord::Base
       '<IzdaniRacunEnostavni xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xds="http://uri.etsi.org/01903/v1.1.1#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.gzs.si/e-poslovanje/sheme/eSLOG_1-6_EnostavniRacun.xsd">',
       einvoice.generate,
       '</IzdaniRacunEnostavni>'
+    ].join("\n")
+  end
+
+  def eenvelope
+    EEnvelope.new(invoice: self)
+  end
+
+  def eenvelope_xml
+    [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<package xmlns="hal:icl:01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" pkg_type="einvoice">',
+      eenvelope.generate,
+      '</package>'
     ].join("\n")
   end
 

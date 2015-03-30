@@ -79,6 +79,24 @@ class Invoice < ActiveRecord::Base
     self.payment_id ||= "#{customer_id}-#{invoice_id}"
   end
 
+  def pdf
+    pdf_generator = PdfGenerator.new
+    pdf_generator.convert_url("http://www.vzgojiteljica.si/admin/invoices/#{id}/print")
+  end
+
+  def einvoice
+    EInvoice.new(invoice: self)
+  end
+
+  def einvoice_xml
+    [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<IzdaniRacunEnostavni xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xds="http://uri.etsi.org/01903/v1.1.1#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.gzs.si/e-poslovanje/sheme/eSLOG_1-6_EnostavniRacun.xsd">',
+      einvoice.generate,
+      '</IzdaniRacunEnostavni>'
+    ].join("\n")
+  end
+
   def payment_id_full
     "SI00#{payment_id}"
   end

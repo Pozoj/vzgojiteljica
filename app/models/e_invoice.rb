@@ -25,6 +25,7 @@ class EInvoice
         PostavkeRacuna: invoice_line_item_hashes,
         PovzetekDavkovRacuna: invoice_tax_hash,
         PoljubnoBesedilo: [
+          invoice_vat_exempt_hash,
           invoice_payment_shoutout_hash,
           invoice_invoicer_hash,
           invoice_foot_hash,
@@ -386,22 +387,30 @@ class EInvoice
 
   def invoice_payment_shoutout_hash
     text_hash(
-      # text_type: 'DODATNI_TEKST',
+      text_type: 'DODATNI_TEKST',
       text: "Račun plačajte na TRR: #{Entity.pozoj.account_number_formatted}, odprt pri #{Entity.pozoj.bank} Pri plačilu računa se sklicujte na: #{invoice.payment_id}. Po izteku roka za plačilo zaračunavamo zakonske zamudne obresti. Reklamacije upoštevamo, če so podane v 7 dneh od izstavitve računa."
     )
   end
 
   def invoice_foot_hash
     text_hash(
-      # text_type: 'NOGA_TEKST',
+      text_type: 'NOGA_TEKST',
       text: Entity.pozoj.string_description
     )
   end
 
   def invoice_invoicer_hash
     text_hash(
-      # text_type: 'FAKTURIST',
+      text_type: 'FAKTURIST',
       text: "Darja Slapničar"
+    )
+  end
+
+  def invoice_vat_exempt_hash
+    text_hash(
+      type: 'TXD',
+      text_type: 'DAVCNI_TEKST',
+      text: 'DDV ni obračunan po 1. točki 94. člena ZDDV.'
     )
   end
 

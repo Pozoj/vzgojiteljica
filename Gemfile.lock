@@ -365,6 +365,7 @@ DEPENDENCIES
   compass-rails!
   devise
   email_validator
+  fog
   gyoku (~> 1.0)
   haml
   has_scope

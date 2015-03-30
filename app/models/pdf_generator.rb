@@ -6,7 +6,7 @@ class PdfGenerator
   end
 
   def convert_url(url)
-    client.convertURI(url)
+    @client.convertURI(url)
   end
 
   def save_url_to_file(url, file_path)

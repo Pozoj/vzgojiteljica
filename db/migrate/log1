@@ -1,0 +1,1554 @@
+rails$ heroku run rake ebonitete:scrape -a vzgojiteljica
+Running `rake ebonitete:scrape` attached to terminal... up, run.2991
+Starting EBoniteteScraper for 371 customers without bank accounts
+VAT ID MISSING ALERT ALERT 1798 - Osnovna Šola Cirkulane-Zavrč
+Starting to search data for Knjižnica Brežice (60519690)
+[EBoniteteScraper] Initializing with 60519690
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 60519690
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=60519690
+[EBoniteteScraper] Opening url http://www.ebonitete.si/knjiznica-brezice/845449/
+{"registration_number"=>[nil, 5665094], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 9603 0370 135"]}
+
+Waiting 4s
+
+Starting to search data for Osnovna Šola Ljubno ob Savinji (67789943)
+[EBoniteteScraper] Initializing with 67789943
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 67789943
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=67789943
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-ljubno-ob-savinji/860578/
+{"registration_number"=>[nil, 5088941], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 2603 0665 522"]}
+
+Waiting 4s
+
+Starting to search data for Univerza v Ljubljani, Fakulteta za šport (96040289)
+[EBoniteteScraper] Initializing with 96040289
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 96040289
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=96040289
+[EBoniteteScraper] Opening url http://www.ebonitete.si/ul-fs/918674/
+{"registration_number"=>[nil, 1627040], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0708 477"]}
+
+Waiting 14s
+
+Starting to search data for Osnovna Šola Vransko - Tabor (65135482)
+[EBoniteteScraper] Initializing with 65135482
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 65135482
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=65135482
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-vransko-tabor/855088/
+{"registration_number"=>[nil, 5088526], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0138 9603 0686 847"]}
+
+Waiting 7s
+
+Starting to search data for Osnovna Šola Dr. Pavla Lunačka Šentrupert (79666981)
+[EBoniteteScraper] Initializing with 79666981
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 79666981
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=79666981
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-dr-pavla-lunacka-sentrupert/884984/
+{"registration_number"=>[nil, 5088089], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0141 1600 0000 013"]}
+
+Waiting 13s
+
+Starting to search data for Vrtec Borisa Pečeta (53089758)
+[EBoniteteScraper] Initializing with 53089758
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 53089758
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=53089758
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-borisa-peceta-maribor/830099/
+Skipping name change Vrtec Borisa Pečeta > VRTEC BORISA PEČETA MARIBOR
+{"registration_number"=>[nil, 5050308], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 0603 0638 261"]}
+
+Waiting 7s
+
+Starting to search data for Osnovna Šola Prežihovega Voranca Maribor (97870692)
+[EBoniteteScraper] Initializing with 97870692
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 97870692
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=97870692
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-prezihovega-voranca-maribor/922374/
+{"registration_number"=>[nil, 5085101], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 0603 0667 070"]}
+
+Waiting 14s
+
+Starting to search data for Pokrajinska in  Študijska Knjižnica (18974961)
+[EBoniteteScraper] Initializing with 18974961
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 18974961
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=18974961
+[EBoniteteScraper] Opening url http://www.ebonitete.si/pisk-murska-sobota/759772/
+Skipping name change Pokrajinska in  Študijska Knjižnica > POKRAJINSKA IN ŠTUDIJSKA KNJIŽNICA MURSKA SOBOTA
+{"registration_number"=>[nil, 5676274], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0128 0603 0373 058"]}
+
+Waiting 2s
+
+Starting to search data for Osnovna Šola Radeče - Marjana Nemca (93174705)
+[EBoniteteScraper] Initializing with 93174705
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 93174705
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=93174705
+[EBoniteteScraper] Opening url http://www.ebonitete.si/javni-zavod-osnovna-sola-marjana-nemca-radece/912767/
+Skipping name change Osnovna Šola Radeče - Marjana Nemca > JAVNI ZAVOD OSNOVNA ŠOLA MARJANA NEMCA RADEČE
+{"registration_number"=>[nil, 5924502], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0129 9603 0676 707"]}
+
+Waiting 3s
+
+VAT ID MISSING ALERT ALERT 2115 - Sergeja Zemljarič
+VAT ID MISSING ALERT ALERT 1926 - Vesna Oder
+VAT ID MISSING ALERT ALERT 2049 - Barbara Šater
+Starting to search data for Vrtec Škratek Svit Vodice (47230916)
+[EBoniteteScraper] Initializing with 47230916
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 47230916
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=47230916
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-skratek-svit-vodice/817844/
+{"registration_number"=>[nil, 3356884], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0133 8600 0000 583"]}
+
+Waiting 7s
+
+VAT ID MISSING ALERT ALERT 1786 - Vrtec Mavrica Trebnje
+VAT ID MISSING ALERT ALERT 2138 - Marija Hribar
+VAT ID MISSING ALERT ALERT 1908 - Kliping d.o.o.
+Starting to search data for VIZ OŠ Rogatec (98183443)
+[EBoniteteScraper] Initializing with 98183443
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 98183443
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=98183443
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vzgojno-izobrazevalni-zavod-osnovna-sola-rogatec/922998/
+{"title"=>["VIZ OŠ Rogatec", "VZGOJNO-IZOBRAŽEVALNI ZAVOD OSNOVNA ŠOLA ROGATEC"], "registration_number"=>[nil, 5087970], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0130 7603 0678 255"]}
+
+Waiting 2s
+
+Starting to search data for Osnovna Šola Raka (61576824)
+[EBoniteteScraper] Initializing with 61576824
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 61576824
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=61576824
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-raka/847660/
+{"registration_number"=>[nil, 5083281], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0030 772"]}
+
+Waiting 15s
+
+Starting to search data for Osnovna Šola Lovrenc na Pohorju (89983882)
+[EBoniteteScraper] Initializing with 89983882
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 89983882
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=89983882
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-lovrenc-na-pohorju/906187/
+{"registration_number"=>[nil, 5085179], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0136 7603 0666 682"]}
+
+Waiting 13s
+
+VAT ID MISSING ALERT ALERT 1939 - Mag. Marjeta Domicelj
+VAT ID MISSING ALERT ALERT 1876 - Srednja Šola Jesenice
+VAT ID MISSING ALERT ALERT 1964 - Mojca Dragar
+Starting to search data for Osnovna Šola Radlje ob Dravi (54093899)
+[EBoniteteScraper] Initializing with 54093899
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 54093899
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=54093899
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-radlje-ob-dravi/832139/
+{"registration_number"=>[nil, 5089271], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0130 1603 0677 094"]}
+
+Waiting 15s
+
+Starting to search data for Vrtec Ledina (34025561)
+[EBoniteteScraper] Initializing with 34025561
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 34025561
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=34025561
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-ledina/790616/
+{"registration_number"=>[nil, 1942905], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 1600 0000 476"]}
+
+Waiting 1s
+
+Starting to search data for Osnovna Šola Sečovlje (93348428)
+[EBoniteteScraper] Initializing with 93348428
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 93348428
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=93348428
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-secovlje/913087/
+Skipping name change Osnovna Šola Sečovlje > OSNOVNA ŠOLA SEČOVLJE SCUOLA ELEMENTARE SICCIOLE
+{"registration_number"=>[nil, 5086876], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0129 0603 0674 626"]}
+
+Waiting 6s
+
+Starting to search data for Osnovna Šola Pohorskega Odreda (48238112)
+[EBoniteteScraper] Initializing with 48238112
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 48238112
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=48238112
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-pohorskega-odreda-slovenska-bistrica/819925/
+Skipping name change Osnovna Šola Pohorskega Odreda > OSNOVNA ŠOLA POHORSKEGA ODREDA SLOVENSKA BISTRICA
+{"registration_number"=>[nil, 5087686], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0131 3603 0679 804"]}
+
+Waiting 15s
+
+Starting to search data for Osnovna Šola Šalovci (81487754)
+[EBoniteteScraper] Initializing with 81487754
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 81487754
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=81487754
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-salovci/888745/
+{"registration_number"=>[nil, 5085713], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0123 3603 0681 493"]}
+
+Waiting 10s
+
+Starting to search data for Osnovna Šola Ivan Tavčar (72397870)
+[EBoniteteScraper] Initializing with 72397870
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 72397870
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=72397870
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-ivana-tavcarja-gorenja-vas/870026/
+Skipping name change Osnovna Šola Ivan Tavčar > OSNOVNA ŠOLA IVANA TAVČARJA GORENJA VAS
+{"registration_number"=>[nil, 5087813], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0122 7603 0650 359"]}
+
+Waiting 14s
+
+Starting to search data for Osnovna Šola Odranci (21296626)
+[EBoniteteScraper] Initializing with 21296626
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 21296626
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=21296626
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-odranci/764647/
+{"registration_number"=>[nil, 5089743], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0128 6603 0673 464"]}
+
+Waiting 14s
+
+VAT ID MISSING ALERT ALERT 1901 - Osnovna Šola Toneta Pavčka
+Starting to search data for Osnovna Šola Voličina (60776641)
+[EBoniteteScraper] Initializing with 60776641
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 60776641
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=60776641
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-volicina/845981/
+{"registration_number"=>[nil, 5084008], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 8603 0660 286"]}
+
+Waiting 6s
+
+Starting to search data for Osnovna Šola Bistrica ob Sotli (71028951)
+[EBoniteteScraper] Initializing with 71028951
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 71028951
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=71028951
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-bistrica-ob-sotli/867272/
+{"registration_number"=>[nil, 5087902], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0134 9603 0644 090"]}
+
+Waiting 11s
+
+Starting to search data for Osnovna Šola Col (11095822)
+[EBoniteteScraper] Initializing with 11095822
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 11095822
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=11095822
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-col/743679/
+{"registration_number"=>[nil, 5082544], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 1603 0643 582"]}
+
+Waiting 3s
+
+Starting to search data for Osnovna Šola Dekani (18370071)
+[EBoniteteScraper] Initializing with 18370071
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 18370071
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=18370071
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-dekani/758537/
+{"registration_number"=>[nil, 5083834], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 0603 0656 216"]}
+
+Waiting 11s
+
+Starting to search data for Osnovna Šola Podčetrtek (96126043)
+[EBoniteteScraper] Initializing with 96126043
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 96126043
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=96126043
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-podcetrtek/918847/
+{"registration_number"=>[nil, 5087945], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0129 2603 0675 013"]}
+
+Waiting 12s
+
+Starting to search data for Osnovna Šola Mala Nedelja (36663417)
+[EBoniteteScraper] Initializing with 36663417
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 36663417
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=36663417
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-mala-nedelja/796094/
+{"registration_number"=>[nil, 5084610], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 3603 0665 764"]}
+
+Waiting 11s
+
+Starting to search data for Lavričeva Knjižnica Ajdovščina (16935870)
+[EBoniteteScraper] Initializing with 16935870
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 16935870
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=16935870
+[EBoniteteScraper] Opening url http://www.ebonitete.si/lavriceva-knjiznica-ajdovscina/755654/
+{"registration_number"=>[nil, 1434276], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 1300 0000 317"]}
+
+Waiting 6s
+
+VAT ID MISSING ALERT ALERT 1974 - Blaženka Bezovnik
+Starting to search data for Osnovna Šola Dr.Ivana Korošca Borovnica (27688836)
+[EBoniteteScraper] Initializing with 27688836
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 27688836
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=27688836
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-drivana-korosca-borovnica/777737/
+{"registration_number"=>[nil, 5088321], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 5603 0644 550"]}
+
+Waiting 4s
+
+Starting to search data for Iii. Gimnazija Maribor (86876651)
+[EBoniteteScraper] Initializing with 86876651
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 86876651
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=86876651
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iii-gimnazija-maribor/899898/
+{"registration_number"=>[nil, 5081297], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0695 091"]}
+
+Waiting 10s
+
+Starting to search data for Osnovna Šola Vodice (23124741)
+[EBoniteteScraper] Initializing with 23124741
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 23124741
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=23124741
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-vodice/768505/
+{"registration_number"=>[nil, 5084377], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0133 8603 0686 533"]}
+
+Waiting 12s
+
+Starting to search data for Osnovna Šola Janka Ribiča Cezanjevci (94576980)
+[EBoniteteScraper] Initializing with 94576980
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 94576980
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=94576980
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-janka-ribica-cezanjevci/915640/
+{"registration_number"=>[nil, 5084628], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 3603 0665 861"]}
+
+Waiting 7s
+
+Starting to search data for Osnovna Šola Toneta Tomšiča (46127356)
+[EBoniteteScraper] Initializing with 46127356
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 46127356
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=46127356
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-knezak/815606/
+Skipping name change Osnovna Šola Toneta Tomšiča > OSNOVNA ŠOLA TONETA TOMŠIČA KNEŽAK
+{"registration_number"=>[nil, 5083796], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0123 8603 0653 021"]}
+
+Waiting 7s
+
+VAT ID MISSING ALERT ALERT 2037 - Barbara Matjaž
+VAT ID MISSING ALERT ALERT 2021 - Darja Berce
+Starting to search data for Osnovna Šola Šmartno (76955052)
+[EBoniteteScraper] Initializing with 76955052
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 76955052
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=76955052
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-smartno/879351/
+{"registration_number"=>[nil, 5084083], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0139 4600 0000 070"]}
+
+Waiting 10s
+
+Starting to search data for Osnovna Šola Veliki Gaber (47660759)
+[EBoniteteScraper] Initializing with 47660759
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 47660759
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=47660759
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-veliki-gaber/818774/
+{"registration_number"=>[nil, 5088119], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0133 0603 0684 791"]}
+
+Waiting 9s
+
+VAT ID MISSING ALERT ALERT 1895 - Vrtec Čebelica
+VAT ID MISSING ALERT ALERT 2089 - Alenka Petelinc
+VAT ID MISSING ALERT ALERT 2004 - Mateja Dovnik
+VAT ID MISSING ALERT ALERT 2063 - Aleksandra Križanič
+Starting to search data for Vrtec Morje Lucija Giardino D'Infanzia Morje Lucia (68069987)
+[EBoniteteScraper] Initializing with 68069987
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 68069987
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=68069987
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-morje-lucija-scuola-dell-infanzia-morje-lucia/861169/
+Skipping name change Vrtec Morje Lucija Giardino D'Infanzia Morje Lucia > VRTEC MORJE LUCIJA - SCUOLA DELL' INFANZIA MORJE LUCIA
+{"registration_number"=>[nil, 5182140], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0129 0603 0640 482"]}
+
+Waiting 6s
+
+Starting to search data for Osnovna Šola Heroja Janeza Hribarja (58122982)
+[EBoniteteScraper] Initializing with 58122982
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 58122982
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=58122982
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-heroja-janeza-hribarja/840573/
+{"registration_number"=>[nil, 5089891], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 5603 0666 442"]}
+
+Waiting 8s
+
+Starting to search data for Marijin Vrtec Cerklje (15427757)
+[EBoniteteScraper] Initializing with 15427757
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 15427757
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=15427757
+[EBoniteteScraper] Opening url http://www.ebonitete.si/marijin-vrtec-cerklje/752488/
+{"registration_number"=>[nil, 5943060], "bank_id"=>[nil, 20], "account_number"=>[nil, "SI56 2440 0900 3983 119"]}
+
+Waiting 12s
+
+VAT ID MISSING ALERT ALERT 1941 - prof. dr. Robi Kroflič
+Starting to search data for Osnovna Šola 16. Decembra Mojstrana (39376699)
+[EBoniteteScraper] Initializing with 39376699
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 39376699
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=39376699
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-16-decembra-mojstrana/801761/
+{"registration_number"=>[nil, 5719054], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 3603 0658 494"]}
+
+Waiting 11s
+
+VAT ID MISSING ALERT ALERT 1912 - Poldika Praprotnik
+VAT ID MISSING ALERT ALERT 2018 - Simona Ferk Keršič
+VAT ID MISSING ALERT ALERT 1821 - Vzgojno Varstvena Organizacija Koroška Vrata
+VAT ID MISSING ALERT ALERT 1886 - Vrtec Galjevica
+Starting to search data for Miklavžev Vrtec-Župnijski Vrtec (99997851)
+[EBoniteteScraper] Initializing with 99997851
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 99997851
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=99997851
+[EBoniteteScraper] Opening url http://www.ebonitete.si/miklavzev-vrtec-zupnijski-vrtec/926734/
+{"registration_number"=>[nil, 5636426], "vat_exempt"=>[false, true], "bank_id"=>[nil, 10], "account_number"=>[nil, "SI56 1910 0001 0082 331"]}
+
+Waiting 11s
+
+VAT ID MISSING ALERT ALERT 1998 - Blanka Špur
+VAT ID MISSING ALERT ALERT 2091 - Stanka Plohl
+Starting to search data for Osnovna Šola Dr. Franja Žgeča (31182194)
+[EBoniteteScraper] Initializing with 31182194
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 31182194
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=31182194
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-dornava/784795/
+Skipping name change Osnovna Šola Dr. Franja Žgeča > OSNOVNA ŠOLA DR. FRANJA ŽGEČA DORNAVA
+{"registration_number"=>[nil, 5087015], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0122 4603 0649 827"]}
+
+Waiting 6s
+
+Starting to search data for Osnovna Šola Solkan (15978346)
+[EBoniteteScraper] Initializing with 15978346
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 15978346
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=15978346
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-solkan/753675/
+{"registration_number"=>[nil, 5089042], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0128 4603 0671 913"]}
+
+Waiting 15s
+
+Starting to search data for Osnovna Šola Stari trg ob Kolpi (11215526)
+[EBoniteteScraper] Initializing with 11215526
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 11215526
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=11215526
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-stari-trg-ob-kolpi/743943/
+{"registration_number"=>[nil, 5086477], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0121 7603 0648 036"]}
+
+Waiting 3s
+
+VAT ID MISSING ALERT ALERT 1916 - Aleš Vrbovšek
+Starting to search data for Giardino D\'Infancia Delfino Blu (42037123)
+[EBoniteteScraper] Initializing with 42037123
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 42037123
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=42037123
+[EBoniteteScraper] Opening url http://www.ebonitete.si/giardino-d-infanzia-delfino-blu-capodistria-vrtec-delfino-blu-koper/807235/
+Skipping name change Giardino D\'Infancia Delfino Blu > GIARDINO D INFANZIA DELFINO BLU, CAPODISTRIA VRTEC DELFINO BLU KOPER
+{"registration_number"=>[nil, 5816491], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 0603 0635 943"]}
+
+Waiting 9s
+
+Starting to search data for Osnovna Šola Krmelj (20318936)
+[EBoniteteScraper] Initializing with 20318936
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 20318936
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=20318936
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-krmelj/762569/
+{"registration_number"=>[nil, 5087520], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0131 0603 0679 175"]}
+
+Waiting 9s
+
+Starting to search data for Vrtec Otona Župančiča Slovenska Bistrica (22183876)
+[EBoniteteScraper] Initializing with 22183876
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 22183876
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=22183876
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-slovenska-bistrica/766544/
+{"registration_number"=>[nil, 5050685], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0131 3603 0641 683"]}
+
+Waiting 1s
+
+VAT ID MISSING ALERT ALERT 1956 - Stanka Blažič
+VAT ID MISSING ALERT ALERT 2113 - dr. Alenka Polak
+VAT ID MISSING ALERT ALERT 1878 - Zasebni Vrtec Sonček d.o.o.
+VAT ID MISSING ALERT ALERT 2128 - Nataša Špacapan
+Starting to search data for Osnovna Šola Koprivnica (10360077)
+[EBoniteteScraper] Initializing with 10360077
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 10360077
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=10360077
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-koprivnica/742123/
+{"registration_number"=>[nil, 5086043], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0030 481"]}
+
+Waiting 12s
+
+Starting to search data for Vrtec Najdihojca (13051571)
+[EBoniteteScraper] Initializing with 13051571
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 13051571
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=13051571
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-najdihojca/747658/
+{"registration_number"=>[nil, 5050219], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 1603 0637 635"]}
+
+Waiting 12s
+
+Starting to search data for Osnovna Šola Cerkno- Enota Vrtec (44292180)
+[EBoniteteScraper] Initializing with 44292180
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 44292180
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=44292180
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-cerkno/811865/
+Skipping name change Osnovna Šola Cerkno- Enota Vrtec > OSNOVNA ŠOLA CERKNO
+{"registration_number"=>[nil, 5082960], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0121 4603 0647 310"]}
+
+Waiting 11s
+
+Starting to search data for Osnovna Šola Metlika (25802925)
+[EBoniteteScraper] Initializing with 25802925
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 25802925
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=25802925
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-metlika/773904/
+{"registration_number"=>[nil, 5088925], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 3603 0669 736"]}
+
+Waiting 9s
+
+Starting to search data for Osnovna Šola Škofljica Enota Vrtec (59782820)
+[EBoniteteScraper] Initializing with 59782820
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 59782820
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=59782820
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-skofljica/843951/
+Skipping name change Osnovna Šola Škofljica Enota Vrtec > OSNOVNA ŠOLA ŠKOFLJICA
+{"registration_number"=>[nil, 5084482], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0132 3603 0683 097"]}
+
+Waiting 15s
+
+Starting to search data for Osnovna Šola Mirna Peč (57013357)
+[EBoniteteScraper] Initializing with 57013357
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 57013357
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=57013357
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-toneta-pavcka/838237/
+Skipping name change Osnovna Šola Mirna Peč > Osnovna šola Toneta Pavčka
+{"registration_number"=>[nil, 5086256], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0137 0603 0670 221"]}
+
+Waiting 11s
+
+VAT ID MISSING ALERT ALERT 1988 - Zavod RS za šolstvo
+VAT ID MISSING ALERT ALERT 1795 - Osnovna Šola Gorišnica
+Starting to search data for Osnovna Šola Milana Majcna Šentjanž (68625260)
+[EBoniteteScraper] Initializing with 68625260
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 68625260
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=68625260
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-milana-majcna-sentjanz/862309/
+{"registration_number"=>[nil, 5089328], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0131 0603 0678 884"]}
+
+Waiting 3s
+
+Starting to search data for Osnovna Šola Štore (24735779)
+[EBoniteteScraper] Initializing with 24735779
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 24735779
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=24735779
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-store/771763/
+{"registration_number"=>[nil, 5082676], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0014 088"]}
+
+Waiting 15s
+
+VAT ID MISSING ALERT ALERT 2001 - Bojana Vrviščar
+Starting to search data for Osnovna Šola Litija (17567734)
+[EBoniteteScraper] Initializing with 17567734
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 17567734
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=17567734
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-litija/756965/
+{"registration_number"=>[nil, 5689147], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 0603 0660 867"]}
+
+Waiting 8s
+
+VAT ID MISSING ALERT ALERT 1994 - Brigita Ličen
+Starting to search data for Osnovna Šola Orehek Kranj (72290480)
+[EBoniteteScraper] Initializing with 72290480
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 72290480
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=72290480
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-orehek-kranj/869813/
+{"registration_number"=>[nil, 1319841], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 2603 0658 349"]}
+
+Waiting 6s
+
+VAT ID MISSING ALERT ALERT 2118 - prof. dr. Bogdana Borota
+Starting to search data for Osnovna Šola Gornja Radgona (18671624)
+[EBoniteteScraper] Initializing with 18671624
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 18671624
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=18671624
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-gornja-radgona/759143/
+{"registration_number"=>[nil, 5083745], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0122 9603 0650 843"]}
+
+Waiting 14s
+
+VAT ID MISSING ALERT ALERT 2027 - Katja Bošnak
+VAT ID MISSING ALERT ALERT 2099 - Doc. Dr. Karmen Pižorn, UL, Pedagoška Fakulteta
+VAT ID MISSING ALERT ALERT 1930 - Estera Živič
+Starting to search data for Osnovna Šola Sv. Jurij ob Ščavnici (19644051)
+[EBoniteteScraper] Initializing with 19644051
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 19644051
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=19644051
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-sv-jurij-ob-scavnici/761206/
+{"registration_number"=>[nil, 5083753], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0037 659"]}
+
+Waiting 10s
+
+VAT ID MISSING ALERT ALERT 1968 - Dr. Justina Erčulj
+Starting to search data for Osnovna Šola Jurija Vege (11448750)
+[EBoniteteScraper] Initializing with 11448750
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 11448750
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=11448750
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-jurija-vege/744431/
+{"registration_number"=>[nil, 5082838], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 7603 0670 413"]}
+
+Waiting 11s
+
+Starting to search data for Osnovna Šola Rudolfa Maistra (62160559)
+[EBoniteteScraper] Initializing with 62160559
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 62160559
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=62160559
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-sentilj/848903/
+{"registration_number"=>[nil, 5086167], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0131 8603 0681 790"]}
+
+Waiting 12s
+
+Starting to search data for Vrtec Pobrežje Maribor (37248855)
+[EBoniteteScraper] Initializing with 37248855
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 37248855
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=37248855
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-pobrezje-maribor/797303/
+{"registration_number"=>[nil, 5055407], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 0603 0638 843"]}
+
+Waiting 5s
+
+VAT ID MISSING ALERT ALERT 1954 - Mirjam Senica - Zavod Rs za Šolstvo
+VAT ID MISSING ALERT ALERT 1978 - Dr. Barbara Japelj Pavešič, Pedagoški Inštitut
+VAT ID MISSING ALERT ALERT 2087 - Mirjan Kolbezen
+Starting to search data for Revija Vzgoja (64231160)
+[EBoniteteScraper] Initializing with 64231160
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 64231160
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=64231160
+[EBoniteteScraper] Opening url http://www.ebonitete.si/drustvo-katoliskih-pedagogov-slovenije/853242/
+{"title"=>["Revija Vzgoja", "DRUŠTVO KATOLIŠKIH PEDAGOGOV SLOVENIJE"], "registration_number"=>[nil, 1205234], "vat_exempt"=>[true, false], "bank_id"=>[nil, 20], "account_number"=>[nil, "SI56 2420 0900 3894 173"]}
+
+Waiting 15s
+
+Starting to search data for Osnovna Šola Črna na Koroškem (98266225)
+[EBoniteteScraper] Initializing with 98266225
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 98266225
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=98266225
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-crna-na-koroskem/923163/
+{"registration_number"=>[nil, 5087368], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0046 389"]}
+
+Waiting 12s
+
+Starting to search data for Osnovna Šola Horjul (99488493)
+[EBoniteteScraper] Initializing with 99488493
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 99488493
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=99488493
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-horjul/925682/
+{"registration_number"=>[nil, 5084423], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0136 2603 0652 086"]}
+
+Waiting 5s
+
+Starting to search data for Srednja Šola Veno Pilon Ajdovščina (13997360)
+[EBoniteteScraper] Initializing with 13997360
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 13997360
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=13997360
+[EBoniteteScraper] Opening url http://www.ebonitete.si/ss-ajdovscina/749574/
+{"registration_number"=>[nil, 5084997], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0696 449"]}
+
+Waiting 6s
+
+VAT ID MISSING ALERT ALERT 2120 - Metka Jezovšek
+Starting to search data for Osnovna Šola Veržej (32512864)
+[EBoniteteScraper] Initializing with 32512864
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 32512864
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=32512864
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-verzej/787512/
+{"registration_number"=>[nil, 5051215], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0719 535"]}
+
+Waiting 15s
+
+Starting to search data for Osnovna Šola Kostanjevica na Krki - Jožeta Gorjupa (47511788)
+[EBoniteteScraper] Initializing with 47511788
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 47511788
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=47511788
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-jozeta-gorjupa/818460/
+Skipping name change Osnovna Šola Kostanjevica na Krki - Jožeta Gorjupa > OSNOVNA ŠOLA JOŽETA GORJUPA KOSTANJEVICA NA KRKI
+{"registration_number"=>[nil, 5083958], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0139 7600 0000 020"]}
+
+Waiting 7s
+
+Starting to search data for Vrtec Ivančna Gorica (94144583)
+[EBoniteteScraper] Initializing with 94144583
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 94144583
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=94144583
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vvz-ivancna-gorica/914701/
+{"registration_number"=>[nil, 1125559], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0123 9603 0635 124"]}
+
+Waiting 4s
+
+Starting to search data for Osnovna Šola Miška Kranjca Velika Polana (29619904)
+[EBoniteteScraper] Initializing with 29619904
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 29619904
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=29619904
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-miska-kranjca-velika-polana/781648/
+{"registration_number"=>[nil, 5089760], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0138 7603 0685 975"]}
+
+Waiting 6s
+
+VAT ID MISSING ALERT ALERT 1819 - Cankarjeva Knjižnica Vrhnika
+Starting to search data for Osnovna Šola Frana Metelka Škocjan (70483345)
+[EBoniteteScraper] Initializing with 70483345
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 70483345
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=70483345
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-frana-metelka-skocjan/866101/
+{"registration_number"=>[nil, 5086388], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0132 1603 0682 613"]}
+
+Waiting 8s
+
+Starting to search data for Osnovna Šola Polzela (33941688)
+[EBoniteteScraper] Initializing with 33941688
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 33941688
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=33941688
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-polzela/790449/
+{"registration_number"=>[nil, 5088500], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0137 3603 0675 312"]}
+
+Waiting 10s
+
+Starting to search data for Gimnazija Celje - Center (44240562)
+[EBoniteteScraper] Initializing with 44240562
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 44240562
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=44240562
+[EBoniteteScraper] Opening url http://www.ebonitete.si/gimnazija-celje-center/811764/
+{"registration_number"=>[nil, 5082625], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0692 763"]}
+
+Waiting 5s
+
+Starting to search data for Osnovna Šola Brezno-Podvelka (42630142)
+[EBoniteteScraper] Initializing with 42630142
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 42630142
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=42630142
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-brezno-podvelka/808471/
+{"registration_number"=>[nil, 5089816], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0129 3603 0675 255"]}
+
+Waiting 5s
+
+Starting to search data for Dvojezična Osnovna Šola I Lendava (50448625)
+[EBoniteteScraper] Initializing with 50448625
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 50448625
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=50448625
+[EBoniteteScraper] Opening url http://www.ebonitete.si/dos-i-lendava/824521/
+Skipping name change Dvojezična Osnovna Šola I Lendava > DVOJEZIČNA OSNOVNA ŠOLA I LENDAVA I. SZ. LENDVAI KETNYELVU ALTALANOS ISKOLA
+{"registration_number"=>[nil, 5089727], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 9603 0660 334"]}
+
+Waiting 12s
+
+VAT ID MISSING ALERT ALERT 1897 - Zasebni Vrtec Zarja d.o.o.
+Starting to search data for Vrtec Medvode (55787738)
+[EBoniteteScraper] Initializing with 55787738
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 55787738
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=55787738
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-medvode/835630/
+{"registration_number"=>[nil, 5996503], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 1603 0639 376"]}
+
+Waiting 7s
+
+VAT ID MISSING ALERT ALERT 2130 - Milena Keber
+VAT ID MISSING ALERT ALERT 2008 - Andreja Križan Lipnik
+VAT ID MISSING ALERT ALERT 1842 - Osnovna Šola Frana Kocbeka Gornji Grad
+VAT ID MISSING ALERT ALERT 2039 - Žaklina Zahirović
+Starting to search data for Vzgojno Varstveni Zavod Tržič (14279673)
+[EBoniteteScraper] Initializing with 14279673
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 14279673
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=14279673
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-trzic/750154/
+{"title"=>["Vzgojno Varstveni Zavod Tržič", "Vrtec Tržič"], "registration_number"=>[nil, 5055881], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0133 1603 0642 741"]}
+
+Waiting 9s
+
+VAT ID MISSING ALERT ALERT 1782 - Vrtec Radenci - Radenski Mehurčki
+VAT ID MISSING ALERT ALERT 1910 - Klavdija Petrič
+Starting to search data for Osnovna Šola Bovec (61582476)
+[EBoniteteScraper] Initializing with 61582476
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 61582476
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=61582476
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-bovec/847672/
+{"registration_number"=>[nil, 5090091], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 6603 0644 695"]}
+
+Waiting 6s
+
+VAT ID MISSING ALERT ALERT 1823 - Osnovna Šola Koroški Jeklarji
+VAT ID MISSING ALERT ALERT 2095 - Dr. Zlatka Cugmas, UM, Pedagoška Fakulteta
+Starting to search data for OŠ Adama Bohoriča (38506467)
+[EBoniteteScraper] Initializing with 38506467
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 38506467
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=38506467
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-adama-bohorica/799919/
+Skipping name change OŠ Adama Bohoriča > OSNOVNA ŠOLA ADAMA BOHORIČA BRESTANICA
+{"registration_number"=>[nil, 5083940], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0030 384"]}
+
+Waiting 6s
+
+Starting to search data for Osnovna Šola Kobilje (48379611)
+[EBoniteteScraper] Initializing with 48379611
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 48379611
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=48379611
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-kobilje/820231/
+{"registration_number"=>[nil, 5089719], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0124 7603 0655 587"]}
+
+Waiting 12s
+
+Starting to search data for OŠ Šmartno na Pohorju (15317765)
+[EBoniteteScraper] Initializing with 15317765
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 15317765
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=15317765
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-smartno-na-pohorju/752276/
+Skipping name change OŠ Šmartno na Pohorju > OSNOVNA ŠOLA ŠMARTNO NA POHORJU
+{"registration_number"=>[nil, 5089425], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0131 3603 0680 580"]}
+
+Waiting 14s
+
+Starting to search data for Medobčinska Splošna Knjižnica Žalec (41123506)
+[EBoniteteScraper] Initializing with 41123506
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 41123506
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=41123506
+[EBoniteteScraper] Opening url http://www.ebonitete.si/medobcinska-splosna-knjiznica-zalec/805348/
+{"registration_number"=>[nil, 1708520], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0139 0603 3657 908"]}
+
+Waiting 10s
+
+Starting to search data for Knjižnica Šmarje (61028797)
+[EBoniteteScraper] Initializing with 61028797
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 61028797
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=61028797
+[EBoniteteScraper] Opening url http://www.ebonitete.si/knjiznica-smarje-pri-jelsah/846504/
+Skipping name change Knjižnica Šmarje > KNJIŽNICA ŠMARJE PRI JELŠAH
+{"registration_number"=>[nil, 1803794], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0132 4600 0000 105"]}
+
+Waiting 5s
+
+VAT ID MISSING ALERT ALERT 2071 - Jožica Pantar - Vrtec Šentvid
+Starting to search data for Vrtec Hrastnik (26285312)
+[EBoniteteScraper] Initializing with 26285312
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 26285312
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=26285312
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-hrastnik/774926/
+{"registration_number"=>[nil, 5050936], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0123 4603 0634 884"]}
+
+Waiting 3s
+
+VAT ID MISSING ALERT ALERT 2124 - Andreja Majcen
+VAT ID MISSING ALERT ALERT 2061 - Silvija Pavšič
+Starting to search data for Osnovna Šola Markovci (19017910)
+[EBoniteteScraper] Initializing with 19017910
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 19017910
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=19017910
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-markovci/759859/
+{"registration_number"=>[nil, 5087104], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0044 546"]}
+
+Waiting 10s
+
+Starting to search data for Gimnazija Franca Miklošiča (32934335)
+[EBoniteteScraper] Initializing with 32934335
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 32934335
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=32934335
+[EBoniteteScraper] Opening url http://www.ebonitete.si/gimnazija-ljutomer/788368/
+Skipping name change Gimnazija Franca Miklošiča > GIMNAZIJA FRANCA MIKLOŠIČA LJUTOMER
+{"registration_number"=>[nil, 5084652], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0694 703"]}
+
+Waiting 10s
+
+Starting to search data for Osnovna Šola Antona Žnideršiča Ilirska Bistrica (24128503)
+[EBoniteteScraper] Initializing with 24128503
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 24128503
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=24128503
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-antona-znidersica-ilirska-bistrica/770531/
+{"registration_number"=>[nil, 5624525], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0123 8603 0653 312"]}
+
+Waiting 3s
+
+VAT ID MISSING ALERT ALERT 2093 - prof. dr. Olga Denac
+Starting to search data for Osnovna Šola Josipa Vandota Kranjska Gora (65736290)
+[EBoniteteScraper] Initializing with 65736290
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 65736290
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=65736290
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-josipa-vandota-kranjska-gora/856364/
+{"registration_number"=>[nil, 5719038], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 3603 0658 591"]}
+
+Waiting 13s
+
+Starting to search data for Univerza na Primorskem - Universita della Primorska (71633065)
+[EBoniteteScraper] Initializing with 71633065
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 71633065
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=71633065
+[EBoniteteScraper] Opening url http://www.ebonitete.si/up/868493/
+Skipping name change Univerza na Primorskem - Universita della Primorska > UNIVERZA NA PRIMORSKEM UNIVERSITA DEL LITORALE
+{"registration_number"=>[nil, 1810014], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0001 866"]}
+
+Waiting 14s
+
+Starting to search data for Javni Vzgojno-Izobraževalni in Vzgojno-Varstveni Zavod OŠ in Vrtec Sv. Trojica (94208247)
+[EBoniteteScraper] Initializing with 94208247
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 94208247
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=94208247
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-vrtec-sv-trojica/914822/
+Skipping name change Javni Vzgojno-Izobraževalni in Vzgojno-Varstveni Zavod OŠ in Vrtec Sv. Trojica > Javni vzgojno-izobraževalni in vzgojno-varstveni zavod Osnovna šola in vrtec Sv. Trojica
+{"registration_number"=>[nil, 5084024], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0140 4600 0000 065"]}
+
+Waiting 11s
+
+VAT ID MISSING ALERT ALERT 2029 - Neja Kržišnik
+VAT ID MISSING ALERT ALERT 2025 - Tanja Klemenšek Rakun
+Starting to search data for Osnovna Šola Dr. Antona Debeljaka Loški Potok (58814515)
+[EBoniteteScraper] Initializing with 58814515
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 58814515
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=58814515
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-dr-antona-debeljaka-loski-potok/841993/
+{"registration_number"=>[nil, 5087422], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 6603 0666 587"]}
+
+Waiting 6s
+
+VAT ID MISSING ALERT ALERT 2057 - Dr. Tina Kavčič, Univ. na Primorskem, Pedagoška Fakulteta
+VAT ID MISSING ALERT ALERT 2081 - Maja Bizjak
+Starting to search data for Osnovna Šola Matije Valjavca Preddvor (75535211)
+[EBoniteteScraper] Initializing with 75535211
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 75535211
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=75535211
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-matije-valjavca-preddvor/876448/
+{"registration_number"=>[nil, 5083214], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0129 5603 0675 836"]}
+
+Waiting 9s
+
+Starting to search data for Osnovna Šola Dušana Muniha Most na Soči (59594063)
+[EBoniteteScraper] Initializing with 59594063
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 59594063
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=59594063
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-most-na-soci/843562/
+{"registration_number"=>[nil, 5089506], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0132 8603 0683 725"]}
+
+Waiting 9s
+
+Starting to search data for Osnovna Šola Šempas (76094693)
+[EBoniteteScraper] Initializing with 76094693
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 76094693
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=76094693
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-sempas/877582/
+{"registration_number"=>[nil, 5086353], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0128 4603 0672 010"]}
+
+Waiting 5s
+
+Starting to search data for Vrtec Ribnica (57441138)
+[EBoniteteScraper] Initializing with 57441138
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 57441138
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=57441138
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-ribnica/839130/
+{"registration_number"=>[nil, 5160910], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0130 4603 0641 154"]}
+
+Waiting 10s
+
+VAT ID MISSING ALERT ALERT 2136 - Milena Keber
+VAT ID MISSING ALERT ALERT 1903 - Mestna Knjižnica Ljubljana
+VAT ID MISSING ALERT ALERT 2067 - Prof.Dr. Dušan Krnel
+VAT ID MISSING ALERT ALERT 1966 - Angeli Močnik
+VAT ID MISSING ALERT ALERT 2065 - Simona Kreča
+VAT ID MISSING ALERT ALERT 2154 - Daša Tavčar
+Starting to search data for Osnovna Šola Poljane (95058354)
+[EBoniteteScraper] Initializing with 95058354
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 95058354
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=95058354
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-poljane-4223-poljane/916631/
+Skipping name change Osnovna Šola Poljane > OSNOVNA ŠOLA POLJANE, 4223 POLJANE
+{"registration_number"=>[nil, 1199498], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0122 7603 0650 456"]}
+
+Waiting 15s
+
+Starting to search data for Univerza v Ljubljani, Pedagoška Fakulteta (61412198)
+[EBoniteteScraper] Initializing with 61412198
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 61412198
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=61412198
+[EBoniteteScraper] Opening url http://www.ebonitete.si/ul-pef/847318/
+{"registration_number"=>[nil, 1627082], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0706 731"]}
+
+Waiting 1s
+
+Starting to search data for OŠ Janka Kersnika Brdo (50409484)
+[EBoniteteScraper] Initializing with 50409484
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 50409484
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=50409484
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-janka-kersnika-brdo/824454/
+Skipping name change OŠ Janka Kersnika Brdo > OSNOVNA ŠOLA JANKA KERSNIKA BRDO
+{"registration_number"=>[nil, 5082790], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 8603 0666 877"]}
+
+Waiting 7s
+
+Starting to search data for Osnovna Šola Mokronog (11475064)
+[EBoniteteScraper] Initializing with 11475064
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 11475064
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=11475064
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-mokronog/744488/
+{"registration_number"=>[nil, 5088062], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0036 786"]}
+
+Waiting 12s
+
+VAT ID MISSING ALERT ALERT 2069 - Darinka Amon
+Starting to search data for Osnovna Šola Predoslje Kranj (53580664)
+[EBoniteteScraper] Initializing with 53580664
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 53580664
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=53580664
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-predoslje-kranj/831099/
+{"registration_number"=>[nil, 5083222], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 2603 0658 058"]}
+
+Waiting 9s
+
+Starting to search data for Osnovna Šola Stara Cerkev (72111763)
+[EBoniteteScraper] Initializing with 72111763
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 72111763
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=72111763
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-stara-cerkev/869443/
+{"registration_number"=>[nil, 5621739], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0124 8603 0655 829"]}
+
+Waiting 11s
+
+Starting to search data for Osnovna Šola Tišina (56492987)
+[EBoniteteScraper] Initializing with 56492987
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 56492987
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=56492987
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-tisina/837089/
+{"registration_number"=>[nil, 5085721], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0121 0603 0683 687"]}
+
+Waiting 9s
+
+Starting to search data for Osnovna Šola Toneta Šraje Aljoše (22081453)
+[EBoniteteScraper] Initializing with 22081453
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 22081453
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=22081453
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-toneta-sraja-aljose/766322/
+Skipping name change Osnovna Šola Toneta Šraje Aljoše > OSNOVNA ŠOLA TONETA ŠRAJA ALJOŠE
+{"registration_number"=>[nil, 5082749], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0135 0603 0644 332"]}
+
+Waiting 3s
+
+Starting to search data for Osnovna Šola Sveta Ana (81069472)
+[EBoniteteScraper] Initializing with 81069472
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 81069472
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=81069472
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-sveta-ana/887879/
+{"registration_number"=>[nil, 5084865], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0036 883"]}
+
+Waiting 6s
+
+VAT ID MISSING ALERT ALERT 2047 - Dr. Marija Grginič
+Starting to search data for Vzgojnoizobraževalni Zavod Vrtec Mavrica (80676731)
+[EBoniteteScraper] Initializing with 80676731
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 80676731
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=80676731
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vzgojnoizobrazevalni-zavod-vrtec-mavrica-izola/887011/
+{"title"=>["Vzgojnoizobraževalni Zavod Vrtec Mavrica", "VZGOJNOIZOBRAŽEVALNI ZAVOD VRTEC MAVRICA IZOLA ENTE PUBBLICO DI EDUCAZIONE ED ISTRUZIONE ASILO MAVRICA ISOLA"], "registration_number"=>[nil, 5049733], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0124 0603 0635 269"]}
+
+Waiting 15s
+
+Starting to search data for Osnovna Šola Franca Lešnika-Vuka Slivnica pri Mariboru (69830835)
+[EBoniteteScraper] Initializing with 69830835
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 69830835
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=69830835
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-flv-slivnica/864776/
+{"registration_number"=>[nil, 5085306], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0136 0603 0651 990"]}
+
+Waiting 10s
+
+VAT ID MISSING ALERT ALERT 2031 - Sanja Nenadić
+VAT ID MISSING ALERT ALERT 2010 - Nataša Podlipec
+VAT ID MISSING ALERT ALERT 1935 - dr. Tomaž Zupančič
+Starting to search data for Dvojezična Osnovna Šola Dobrovnik (97102318)
+[EBoniteteScraper] Initializing with 97102318
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 97102318
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=97102318
+[EBoniteteScraper] Opening url http://www.ebonitete.si/dos-dobrovnik-kai-dobronak/920793/
+Skipping name change Dvojezična Osnovna Šola Dobrovnik > DVOJEZIČNA OSNOVNA ŠOLA DOBROVNIK KETNYELVU ALTALANOS ISKOLA DOBRONAK
+{"registration_number"=>[nil, 5086078], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0135 6603 0649 082"]}
+
+Waiting 5s
+
+Starting to search data for Osnovna Šola Mežica (93869126)
+[EBoniteteScraper] Initializing with 93869126
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 93869126
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=93869126
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-mezica/914132/
+{"registration_number"=>[nil, 5087376], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 4603 0669 978"]}
+
+Waiting 1s
+
+Starting to search data for Osnovna Šola Razkrižje (10804412)
+[EBoniteteScraper] Initializing with 10804412
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 10804412
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=10804412
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-razkrizje/743090/
+{"registration_number"=>[nil, 5089344], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0137 6603 0677 687"]}
+
+Waiting 8s
+
+Starting to search data for Vrtec Jelka Ljubljana (39675335)
+[EBoniteteScraper] Initializing with 39675335
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 39675335
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=39675335
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-jelka/802353/
+Skipping name change Vrtec Jelka Ljubljana > VRTEC JELKA
+{"registration_number"=>[nil, 5049946], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 1603 0636 956"]}
+
+Waiting 13s
+
+Starting to search data for Šolski Center Slovenj Gradec (73346276)
+[EBoniteteScraper] Initializing with 73346276
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 73346276
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=73346276
+[EBoniteteScraper] Opening url http://www.ebonitete.si/sc-slovenj-gradec/871962/
+{"registration_number"=>[nil, 5089417], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0705 082"]}
+
+Waiting 14s
+
+Starting to search data for Osnovna Šola Dr. Janeza Mencingerja, Bohinjska Bistrica (51576597)
+[EBoniteteScraper] Initializing with 51576597
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 51576597
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=51576597
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-dr-janeza-mencingerja-bohinjska-bistrica/826834/
+{"registration_number"=>[nil, 5087309], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 4603 0644 405"]}
+
+Waiting 1s
+
+Starting to search data for Srednja Vzgojiteljska Šola in Gimnazija Ljubljana (47364220)
+[EBoniteteScraper] Initializing with 47364220
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 47364220
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=47364220
+[EBoniteteScraper] Opening url http://www.ebonitete.si/svsgl/818152/
+{"registration_number"=>[nil, 5084903], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0694 509"]}
+
+Waiting 8s
+
+VAT ID MISSING ALERT ALERT 1982 - Dr. Nada Turnšek, UL, Pedagoška Fakulteta
+Starting to search data for Supra, d.o.o. (41291948)
+[EBoniteteScraper] Initializing with 41291948
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 41291948
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=41291948
+[EBoniteteScraper] Opening url http://www.ebonitete.si/supra-doo/805678/
+ERROR FINDING BANK FOR: [{:account_number=>"SI56 6100 0000 4388 530", :bank=>"DH d.d."}]
+{"title"=>["Supra, d.o.o.", "SUPRA družba za izobraževanje, svetovanje, založništvo, d.o.o."], "registration_number"=>[nil, 5521912]}
+
+Waiting 10s
+
+VAT ID MISSING ALERT ALERT 1922 - Neva Kosmina - Karner
+Starting to search data for OŠ Tomaž- Vrtec Ježek (70846057)
+[EBoniteteScraper] Initializing with 70846057
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 70846057
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=70846057
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-sveti-tomaz/866884/
+{"title"=>["OŠ Tomaž- Vrtec Ježek", "OSNOVNA ŠOLA SVETI TOMAŽ"], "registration_number"=>[nil, 5089166], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0034 652"]}
+
+Waiting 1s
+
+Starting to search data for Osnovna Šola Franceta Prešerna Kranj (94256454)
+[EBoniteteScraper] Initializing with 94256454
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 94256454
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=94256454
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-franceta-preserna-kranj/914943/
+{"registration_number"=>[nil, 5086035], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0125 2603 0657 670"]}
+
+Waiting 13s
+
+VAT ID MISSING ALERT ALERT 1943 - Irena Domanjko
+Starting to search data for OŠ Dobrova (13274546)
+[EBoniteteScraper] Initializing with 13274546
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 13274546
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=13274546
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-dobrova/748121/
+Skipping name change OŠ Dobrova > OSNOVNA ŠOLA DOBROVA
+{"registration_number"=>[nil, 5084415], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0122 1603 0648 907"]}
+
+Waiting 6s
+
+VAT ID MISSING ALERT ALERT 1970 - Dr. Karmen Erjavec, Fakulteta za Družbene Vede
+VAT ID MISSING ALERT ALERT 2075 - Dr. Alenka Lipovec
+Starting to search data for Šolski Center Novo Mesto (68565127)
+[EBoniteteScraper] Initializing with 68565127
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 68565127
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=68565127
+[EBoniteteScraper] Opening url http://www.ebonitete.si/sc-novo-mesto/862183/
+{"registration_number"=>[nil, 5258782], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0603 0703 433"]}
+
+Waiting 5s
+
+Starting to search data for Osnovna Šola Maksa Pleteršnika Pišece (77693809)
+[EBoniteteScraper] Initializing with 77693809
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 77693809
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=77693809
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-pisece/880888/
+{"registration_number"=>[nil, 5082595], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 9603 0645 712"]}
+
+Waiting 5s
+
+Starting to search data for OŠ Žirovnica (55702759)
+[EBoniteteScraper] Initializing with 55702759
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 55702759
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=55702759
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-zirovnica/835456/
+Skipping name change OŠ Žirovnica > OSNOVNA ŠOLA ŽIROVNICA
+{"registration_number"=>[nil, 5719062], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0139 2603 0688 446"]}
+
+Waiting 11s
+
+VAT ID MISSING ALERT ALERT 2077 - Maja Hmelak, Pedagoška Fakulteta
+Starting to search data for Osnovna  Šola Xiv. Divizije Senovo (26071240)
+[EBoniteteScraper] Initializing with 26071240
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 26071240
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=26071240
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-senovo/774503/
+{"registration_number"=>[nil, 5083966], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0030 287"]}
+
+Waiting 6s
+
+Starting to search data for Osnovna Šola Križevci pri Ljutomeru (93578253)
+[EBoniteteScraper] Initializing with 93578253
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 93578253
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=93578253
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-krizevci/913547/
+Skipping name change Osnovna Šola Križevci pri Ljutomeru > OSNOVNA ŠOLA KRIŽEVCI
+{"registration_number"=>[nil, 5084636], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0136 6603 0658 680"]}
+
+Waiting 9s
+
+VAT ID MISSING ALERT ALERT 1960 - Veronika Gorinšek
+Starting to search data for Knjižnica Logatec p.o. (97822825)
+[EBoniteteScraper] Initializing with 97822825
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 97822825
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=97822825
+[EBoniteteScraper] Opening url http://www.ebonitete.si/knjiznica-logatec/922273/
+Skipping name change Knjižnica Logatec p.o. > KNJIŽNICA LOGATEC
+{"registration_number"=>[nil, 5848083], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 4603 0372 678"]}
+
+Waiting 6s
+
+Starting to search data for Osnovna Šola Dobova (16691059)
+[EBoniteteScraper] Initializing with 16691059
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 16691059
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=16691059
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-dobova/755112/
+{"registration_number"=>[nil, 5082579], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 9603 0645 518"]}
+
+Waiting 10s
+
+Starting to search data for Osnovna Šola Šmarjeta (73055956)
+[EBoniteteScraper] Initializing with 73055956
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 73055956
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=73055956
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-smarjeta/871379/
+{"registration_number"=>[nil, 5086302], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0140 6600 0000 064"]}
+
+Waiting 2s
+
+VAT ID MISSING ALERT ALERT 1844 - Razvojni Zavod Gpi d.o.o.
+VAT ID MISSING ALERT ALERT 2045 - Fontura - Peter Rihtarič
+VAT ID MISSING ALERT ALERT 1933 - prof. dr. Ljubica Marjanovič Umek
+Starting to search data for Osnovna Šola Podgora (12391263)
+[EBoniteteScraper] Initializing with 12391263
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 12391263
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=12391263
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-kutezevo/746357/
+Skipping name change Osnovna Šola Podgora > OSNOVNA ŠOLA PODGORA KUTEŽEVO
+{"registration_number"=>[nil, 5086019], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0123 8603 0652 924"]}
+
+Waiting 12s
+
+VAT ID MISSING ALERT ALERT 2097 - prof. dr. Mojca Kovač Šebart
+VAT ID MISSING ALERT ALERT 2079 - Aleksander Vališer
+VAT ID MISSING ALERT ALERT 1082 - OŠ Dr. Ivan Prijatelj Sodražica
+Starting to search data for Osnovna Šola Slave Klavore (38028654)
+[EBoniteteScraper] Initializing with 38028654
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 38028654
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=38028654
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-slave-klavore-maribor/798901/
+Skipping name change Osnovna Šola Slave Klavore > OSNOVNA ŠOLA SLAVE KLAVORE MARIBOR
+{"registration_number"=>[nil, 5085322], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 0603 0667 555"]}
+
+Waiting 2s
+
+Starting to search data for Osnovna Šola  Vitanje (65089600)
+[EBoniteteScraper] Initializing with 65089600
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 65089600
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=65089600
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-vitanje/854991/
+{"registration_number"=>[nil, 5087724], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0133 7603 0686 485"]}
+
+Waiting 8s
+
+Starting to search data for Vrtec Ljutomer (49209124)
+[EBoniteteScraper] Initializing with 49209124
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 49209124
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=49209124
+[EBoniteteScraper] Opening url http://www.ebonitete.si/vrtec-ljutomer/822008/
+{"registration_number"=>[nil, 5051193], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0126 3603 0638 022"]}
+
+Waiting 15s
+
+VAT ID MISSING ALERT ALERT 1976 - Prof. Dr. Jože Trontelj, Sazu
+Starting to search data for Dvojezična Osnovna Šola Prosenjakovci (67749925)
+[EBoniteteScraper] Initializing with 67749925
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 67749925
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=67749925
+[EBoniteteScraper] Opening url http://www.ebonitete.si/dos-prosenjakovci-kai-partosfalva/860481/
+Skipping name change Dvojezična Osnovna Šola Prosenjakovci > DVOJEZIČNA OSNOVNA ŠOLA PROSENJAKOVCI KETNYELVU ALTALANOS ISKOLA PARTOSFALVA
+{"registration_number"=>[nil, 5243289], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 8603 0670 752"]}
+
+Waiting 10s
+
+Starting to search data for Osnovna Šola Franceta Prešerna (16814487)
+[EBoniteteScraper] Initializing with 16814487
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 16814487
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=16814487
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-franceta-preserna-crensovci/755384/
+Skipping name change Osnovna Šola Franceta Prešerna > OSNOVNA ŠOLA FRANCETA PREŠERNA ČRENŠOVCI
+{"registration_number"=>[nil, 5089697], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0121 5603 0647 649"]}
+
+Waiting 10s
+
+Starting to search data for Osnovna Šola Dobje (84077867)
+[EBoniteteScraper] Initializing with 84077867
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 84077867
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=84077867
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-dobje/894134/
+{"registration_number"=>[nil, 5582911], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0135 4603 0648 598"]}
+
+Waiting 9s
+
+Starting to search data for Osnovna Šola Dragatuš- Komandanta Staneta (83415394)
+[EBoniteteScraper] Initializing with 83415394
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 83415394
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=83415394
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-dragatus/892726/
+Skipping name change Osnovna Šola Dragatuš- Komandanta Staneta > OSNOVNA ŠOLA KOMANDANTA STANETA DRAGATUŠ
+{"registration_number"=>[nil, 5082773], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0121 7603 0647 939"]}
+
+Waiting 5s
+
+VAT ID MISSING ALERT ALERT 1880 - Vrtec Jurček d.o.o.
+Starting to search data for Osnovna Šola Pivka (42909872)
+[EBoniteteScraper] Initializing with 42909872
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 42909872
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=42909872
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-pivka/809066/
+{"registration_number"=>[nil, 5089212], "vat_exempt"=>[false, true], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0110 0600 0037 950"]}
+
+Waiting 9s
+
+VAT ID MISSING ALERT ALERT 1846 - Osnovna Šola Blanca
+VAT ID MISSING ALERT ALERT 2132 - Mateja Šojad
+Starting to search data for Osnovna Šola Prebold (81995270)
+[EBoniteteScraper] Initializing with 81995270
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 81995270
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=81995270
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-prebold/889760/
+{"registration_number"=>[nil, 5088518], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0137 4603 0675 748"]}
+
+Waiting 3s
+
+VAT ID MISSING ALERT ALERT 2055 - Tina Kvaternik
+Starting to search data for Osnovna Šola Vuzenica (64020673)
+[EBoniteteScraper] Initializing with 64020673
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 64020673
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=64020673
+[EBoniteteScraper] Opening url http://www.ebonitete.si/osnovna-sola-vuzenica/852816/
+{"registration_number"=>[nil, 5087279], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0134 1603 0687 162"]}
+
+Waiting 12s
+
+VAT ID MISSING ALERT ALERT 1840 - Hajsa-Posredovanje, trgovina, Svetovanje Karmen Hajsinger Potočnik s.p.
+Starting to search data for Osnovna Šola Sladki Vrh (74840959)
+[EBoniteteScraper] Initializing with 74840959
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 74840959
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=74840959
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-sladki-vrh/875000/
+{"registration_number"=>[nil, 5085144], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0131 8603 0681 887"]}
+
+Waiting 12s
+
+VAT ID MISSING ALERT ALERT 2041 - Alja Volaj
+Starting to search data for Osnovna Šola Janka Modra, Dol pri Ljubljani (63332248)
+[EBoniteteScraper] Initializing with 63332248
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 63332248
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=63332248
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-janka-modra-dol-pri-ljubljani/851363/
+{"registration_number"=>[nil, 5083354], "vat_exempt"=>[true, false], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0122 2603 0649 149"]}
+
+Waiting 3s
+
+VAT ID MISSING ALERT ALERT 1928 - prof. dr. Marcela Batistič - Zorec
+VAT ID MISSING ALERT ALERT 2103 - Univerza v Mariboru, Pedagoška Fakulteta
+Starting to search data for Otroški Vrtec Metlika (26699745)
+[EBoniteteScraper] Initializing with 26699745
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 26699745
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=26699745
+[EBoniteteScraper] Opening url http://www.ebonitete.si/otroski-vrtec-metlika/775745/
+{"registration_number"=>[nil, 5166420], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0127 3603 0639 569"]}
+
+Waiting 7s
+
+Starting to search data for Župnijski Vrtec Vrhnika (68435827)
+[EBoniteteScraper] Initializing with 68435827
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 68435827
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=68435827
+[EBoniteteScraper] Opening url http://www.ebonitete.si/zupnijski-vrtec-vrhnika/861923/
+{"registration_number"=>[nil, 5507278], "vat_exempt"=>[false, true], "bank_id"=>[nil, 17], "account_number"=>[nil, "SI56 0202 7025 6049 839"]}
+
+Waiting 1s
+
+VAT ID MISSING ALERT ALERT 2051 - Ana Gajevič
+VAT ID MISSING ALERT ALERT 1920 - Narodna in Univerzitetna Knjižnica
+Starting to search data for Osnovna Šola Vinica (75824973)
+[EBoniteteScraper] Initializing with 75824973
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 75824973
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=75824973
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-vinica/877043/
+{"registration_number"=>[nil, 5082781], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0121 7603 0648 133"]}
+
+Waiting 13s
+
+Starting to search data for Osnovna Šola Bizeljsko (92015930)
+[EBoniteteScraper] Initializing with 92015930
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 92015930
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=92015930
+[EBoniteteScraper] Opening url http://www.ebonitete.si/os-bizeljsko/910409/
+{"registration_number"=>[nil, 5088607], "bank_id"=>[nil, 6], "account_number"=>[nil, "SI56 0120 9603 0645 324"]}
+
+Waiting 13s
+
+VAT ID MISSING ALERT ALERT 1873 - Vrtec Jožefe Maslo Ilirska Bistrica
+Starting to search data for Društvo Ringa Raja (55513808)
+[EBoniteteScraper] Initializing with 55513808
+[EBoniteteScraper] Parsing ...
+[EBoniteteScraper] Searching for 55513808
+[EBoniteteScraper] Opening url http://www.ebonitete.si/iskalnik.aspx?q=55513808
+ERROR, entity mismatch
+[EBoniteteScraper] Opening url http://www.ebonitete.si/
+rake aborted!
+NoMethodError: undefined method `parent' for nil:NilClass
+/app/lib/ebonitete_scraper.rb:42:in `parse_bank_account'
+/app/lib/ebonitete_scraper.rb:68:in `parse'
+/app/lib/tasks/ebonitete_scrape.rake:14:in `block (3 levels) in <top (required)>'
+/app/lib/tasks/ebonitete_scrape.rake:7:in `each'
+/app/lib/tasks/ebonitete_scrape.rake:7:in `block (2 levels) in <top (required)>'
+Tasks: TOP => ebonitete:scrape
+(See full trace by running task with --trace)
+rails$ heroku run rake ebonitete:scrape -a vzgojiteljica
+Running `rake ebonitete:scrape` attached to terminal... up, run.6580

@@ -81,7 +81,7 @@ class Invoice < ActiveRecord::Base
 
   def pdf
     pdf_generator = PdfGenerator.new
-    pdf_generator.convert_url("http://www.vzgojiteljica.si/admin/invoices/#{id}/print")
+    pdf_generator.convert_url("http://www.vzgojiteljica.si/admin/invoices/#{to_param}/print")
   end
 
   def pdf_idempotent

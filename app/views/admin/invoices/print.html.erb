@@ -1,4 +1,6 @@
-<% if @invoice.tax > 0 %>
+<% invoice ||= @invoice %>
+
+<% if invoice.tax > 0 %>
   <%= render "print_with_vat" %>
 <% else %>
   <%= render "print_without_vat" %>

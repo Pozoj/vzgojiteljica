@@ -1,8 +1,8 @@
 <% invoice ||= @invoice %>
 
 <% if invoice.tax > 0 %>
-  <%= render "print_with_vat" %>
+  <%= render "print_with_vat", invoice: invoice %>
 <% else %>
-  <%= render "print_without_vat" %>
+  <%= render "print_without_vat", invoice: invoice %>
 <% end %>
 

@@ -48,6 +48,8 @@ Web3::Application.routes.draw do
     resources :entities
     resources :customers do
       post :new_from_order, on: :member
+      get :new_freerider, on: :collection
+      post :create_freerider, on: :collection
     end
     resources :labels, only: [:index, :show]
     resources :subscribers

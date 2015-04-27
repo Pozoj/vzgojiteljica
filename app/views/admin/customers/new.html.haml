@@ -1,7 +1,5 @@
 %h1 Nova stranka
 
-.row
-  .col-xs-8
-    = simple_form_for [:admin, @customer] do |f|
-      = f.error_notification
-      = render "form", f: f
+= simple_form_for [:admin, @customer] do |f|
+  = f.error_notification
+  = render "form", f: f

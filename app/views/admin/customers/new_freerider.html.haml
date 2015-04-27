@@ -1,0 +1,38 @@
+%h1 Dodaj novega brezplačnega prejemnika
+
+= simple_form_for [:admin, @customer], url: create_freerider_admin_customers_path do |f|
+  = f.error_notification
+  .row
+    .form-inputs.col-xs-8
+      = f.fields_for :remark, Remark.new do |fr|
+        = fr.input :remark, label: "Opomba - pojasnilo zakaj prejema brezplačno"
+      %hr
+      = f.input :title
+      = f.input :name
+      = f.input :address
+      = f.association :post
+
+    .form-inputs.col-xs-4
+      = f.fields_for :subscription, Subscription.new do |fs|
+        .panel.panel-default
+          .panel-heading 
+            %h3.panel-title Naročnina
+          .panel-body
+            = fs.input :quantity
+            %hr
+            = f.label "Brezplačno prejemanje velja"
+            %label.control-label
+              = fs.radio_button :free_type, 1
+              Do konca meseca
+            %br
+            %label.control-label
+              = fs.radio_button :free_type, 2
+              Do konca leta
+            %br
+            %label.control-label
+              = fs.radio_button :free_type, 3
+              Za nedoločen čas
+
+  .form-actions
+    %hr
+    = f.button :submit, "Shrani brezplačnika"

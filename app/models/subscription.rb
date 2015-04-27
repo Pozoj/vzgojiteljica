@@ -1,6 +1,8 @@
 class Subscription < ActiveRecord::Base
   include Invoicing
   
+  attr_accessor :free_type
+
   belongs_to :plan
   belongs_to :subscriber
   has_many :remarks, as: :remarkable, dependent: :destroy

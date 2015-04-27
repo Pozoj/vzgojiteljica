@@ -26,6 +26,10 @@ class Plan < ActiveRecord::Base
     Plan.where(billing_frequency: frequency).where('price_cents > 0').order(created_at: :desc).first
   end
 
+  def self.free
+    Plan.where(price_cents: 0).last
+  end
+
   def self.latest_yearly
     Plan.latest 1
   end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
+ruby '2.2.2'
 gem 'rails', '~> 4.2.0'
 
 # Gems used only for assets and not required
@@ -32,7 +32,6 @@ gem 'fog'
 gem 'haml'
 gem 'kaminari'
 gem 'has_scope'
-gem 'mt940_parser', github: 'mihar/mt940_parser', require: 'mt940'
 gem 'paperclip'
 gem 'money-rails', github: 'RubyMoney/money-rails', ref: '46660b70e5e25e02a0e67f30a4a46b0139aff1a7'
 gem 'gyoku', '~> 1.0'
@@ -42,10 +41,12 @@ gem 'nokogiri'
 gem 'levenshtein'
 gem 'rubyzip'
 gem 'rollbar'
+gem 'cmxl'
 
 group :development, :test do
   gem 'sqlite3'
   gem 'pry'
   gem 'web-console'
   gem 'letter_opener'
+  gem 'dotenv-rails'
 end

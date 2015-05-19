@@ -10,7 +10,7 @@ class BankStatement < ActiveRecord::Base
                     :s3_storage_class => :reduced_redundancy,
                     :path => "/bank_statements/:id/:style_:basename.:extension"
 
-  validates_attachment_content_type :statement, content_type: 'application/octet-stream'
+  validates_attachment_content_type :statement, content_type: 'text/plain'
 
   has_many :entries, class_name: 'StatementEntry', dependent: :destroy
 
@@ -20,36 +20,33 @@ class BankStatement < ActiveRecord::Base
   def parse!
     return unless parsed_mt940
 
-    parsed_mt940.each_with_index do |entry, index|
-      next unless entry.is_a?(MT940::StatementLine)
-      next if entry.funds_code != :credit
-      next if entry.reference == 'NONREF'
-      next unless entry_info = parsed_mt940[index+1]
-      next unless entry_info.is_a?(MT940::StatementLineInformation)
+    parsed_mt940.each do |statement|
+      statement.transactions.each do |entry|
+        next unless entry.credit?
 
-      # Uniqueness
-      next if StatementEntry.exists?(reference: entry.reference) # A pending statement entry exists.
-      next if Invoice.exists?(bank_reference: entry.reference) # An invoice has already been matched with this entry.
+        # Uniqueness
+        next if StatementEntry.exists?(reference: entry.reference) # A pending statement entry exists.
+        next if Invoice.exists?(bank_reference: entry.reference) # An invoice has already been matched with this entry.
 
-      statement_entry = entries.build
-      statement_entry.account_holder = entry_info.account_holder
-      statement_entry.account_number = entry_info.account_number
-      statement_entry.details = entry_info.details
-      statement_entry.amount = entry.amount
-      statement_entry.date = entry.date
-      statement_entry.reference = entry.reference
-      statement_entry.save!
+        statement_entry = entries.build
+        statement_entry.account_holder = entry.details.entity
+        statement_entry.account_number = entry.iban
+        statement_entry.amount = entry.amount
+        statement_entry.date = entry.date
+        statement_entry.reference = entry.details.reference
+        statement_entry.save!
+      end
     end
   end
 
   def parsed_mt940
     return unless parsed_statement?
-    @parsed_mt940 ||= MT940.parse(parsed_statement).first
+    @parsed_mt940 ||= Cmxl.parse(raw_statement)
   end
 
   def parse_statement(raw)
     return unless raw
-    raw.lines.reject { |line| line =~ /F01BACXSI22AXXX0000000000/ || line =~ /\-}/ }.join
+    raw.lines.reject { |line| line =~ /F01BACXSI22AXXX0000000000/ || line =~ /F21HALCOMXXXXXX0000000000/ || line =~ /\-}/ }.join
   end
 
   private

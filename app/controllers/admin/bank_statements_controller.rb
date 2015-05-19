@@ -11,13 +11,18 @@ class Admin::BankStatementsController < Admin::AdminController
   end
 
   def new
-    @statement = BankStatement.new
+    @statement ||= BankStatement.new
     respond_with resource
   end
 
   def create
-    @statement = BankStatement.create params[:bank_statement]
-    respond_with resource, location: -> { admin_bank_statement_path(@statement) }
+    @statement = BankStatement.new params[:bank_statement]
+
+    if @statement.save
+      respond_with resource, location: -> { admin_bank_statement_path(@statement) }
+    else
+      render action: 'new'
+    end
   end
 
   def parse

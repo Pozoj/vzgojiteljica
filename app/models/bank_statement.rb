@@ -34,7 +34,11 @@ class BankStatement < ActiveRecord::Base
         statement_entry.amount = entry.amount
         statement_entry.date = entry.date
         statement_entry.reference = entry.details.reference
-        statement_entry.save!
+        if statement_entry.valid?
+          statement_entry.save
+        else
+          Rails.logger.info "ERROR saving statement entry: #{statement_entry.inspect}"
+        end
       end
     end
   end

@@ -4,7 +4,7 @@ class Admin::StatementEntriesController < Admin::AdminController
   end
 
   def match
-    invoice = Invoice.find(params[:invoice_id])
+    invoice = Invoice.find_by(invoice_id: params[:invoice_id])
     invoice.paid_by!(resource)
     respond_with resource, location: -> { admin_invoice_path(invoice) }
   end

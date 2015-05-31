@@ -16,10 +16,14 @@ class StatementEntry < ActiveRecord::Base
     reference.strip.match(/^((\d{1,4})\-)?((\d{1,4})\-)(2014|2015|2016)$/)
   end
 
-  def exact_match
+  def reference_match
     query = Invoice.arel_table[:payment_id].eq(reference.strip)
     query = query.or(Invoice.arel_table[:invoice_id].eq(reference.strip))
     invoices = Invoice.where(query)
+  end
+
+  def exact_match
+    invoices = reference_match
     return unless invoices.length == 1
     return unless invoices.first.total == amount
     invoices.first
@@ -30,7 +34,14 @@ class StatementEntry < ActiveRecord::Base
       return [matched_invoice]
     end
 
+    if reference_match.any?
+      return reference_match
+    end
+
     name_title_matches = account_holder.split("\n")
+    if name_title_matches.length == 1
+      name_title_matches = account_holder.split(',')
+    end
 
     Invoice.unpaid.reject do |invoice|
       customer = invoice.customer
@@ -38,6 +49,8 @@ class StatementEntry < ActiveRecord::Base
 
       # Name and title match.
       name_title_matches.compact.each do |name_title_match|
+        next unless name_title_match.present?
+        
         if customer.name =~ Regexp.new(name_title_match.strip, 'gi')
           reject = false
         elsif customer.title =~ Regexp.new(name_title_match.strip, 'gi')
@@ -50,7 +63,7 @@ class StatementEntry < ActiveRecord::Base
       # Account number match.
       if customer.account_number =~ Regexp.new(account_number)
         reject = false
-      elsif details =~ Regexp.new(invoice.reference_number.to_s, 'gi')
+      elsif details =~ Regexp.new(invoice.invoice_id.to_s, 'gi')
         reject = false
       end
 
@@ -68,6 +81,26 @@ class StatementEntry < ActiveRecord::Base
     matched_invoice.bank_reference = self.bank_reference
     matched_invoice.save
     save
+  end
+
+  def account_holder_parts
+    account_holder? && account_holder.split(',')
+  end
+
+  def account_holder_title
+    entity_parts[0]
+  end
+
+  def account_holder_subtitle
+    entity_parts[1]
+  end
+
+  def account_holder_address
+    entity_parts[2]
+  end
+
+  def account_holder_country
+    entity_parts[3]
   end
 
   protected

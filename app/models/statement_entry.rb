@@ -22,6 +22,7 @@ class StatementEntry < ActiveRecord::Base
     invoices = Invoice.where(query)
     return unless invoices.length == 1
     return unless invoices.first.total == amount
+    invoices.first
   end
 
   def matches

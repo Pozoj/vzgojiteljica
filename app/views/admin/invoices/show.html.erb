@@ -97,18 +97,37 @@
           <h3 class="panel-title">Plačilo</h3>
         </div>
         <div class="panel-body">
-          <strong>Ref. št.:</strong>
-          <p>
-            <%= @invoice.bank_reference %>
-          </p>
-          <strong>Znesek:</strong>
-          <p>
-            <%= number_to_currency @invoice.paid_amount %>
-          </p>
-          <strong>Podatki:</strong>
-          <p>
-            <small><%= simple_format @invoice.bank_data %></small>
-          </p>
+          <% if @invoice.statement_entries.empty? %>
+            <strong>Ref. št.:</strong>
+            <p>
+              <%= @invoice.bank_reference %>
+            </p>
+            <strong>Znesek:</strong>
+            <p>
+              <%= number_to_currency @invoice.paid_amount %>
+            </p>
+            <% if @invoice.bank_data.present? %>
+              <strong>Podatki:</strong>
+              <p>
+                <small><%= simple_format @invoice.bank_data %></small>
+              </p>
+            <% end %>
+          <% else %>
+            <div class="statement-entry">
+              <% @invoice.statement_entries.each do |entry| %>
+                <p>
+                  <%= link_to [:admin, entry] do %>
+                    <code><%= entry.bank_reference %></code>
+                  <% end %>
+                  <%= l entry.date, format: :simple %>
+                  &mdash;
+                  <strong><%= number_to_currency entry.amount %></strong>
+                  <br>
+                  <small class="muted"><%= entry.account_holder %></small>
+                </p>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

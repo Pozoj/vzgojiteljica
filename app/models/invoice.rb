@@ -37,7 +37,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def paid?
-    paid_at? && paid_amount == total
+    paid_at? && paid_amount >= total
   end
 
   def due?

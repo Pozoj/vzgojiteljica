@@ -1,5 +1,6 @@
 class Admin::StatementEntriesController < Admin::AdminController
   def show
+    @unpaid_invoices = Invoice.unpaid.select(:id, :invoice_id).order(year: :desc, reference_number: :desc).map { |i| [i.invoice_id, i.invoice_id] }
     respond_with resource
   end
 

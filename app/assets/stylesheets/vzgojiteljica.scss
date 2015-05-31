@@ -555,6 +555,45 @@ br.clear {
   }
 }
 
+#pages-editorial_instructions {
+  .instructions {
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    section {
+      background: #f3f3f3;
+      margin: 25px 0;
+      padding: 25px;
+      border-radius: 5px;
+      &.half {
+        width: 375px;
+        height: 630px;
+      }
+      &.left {
+        float: left;
+      }
+      &.right {
+        float: right;
+      }
+      &.clear {
+        clear: both;
+      }
+      &.signature {
+        padding: 25px 200px;
+      }
+    }
+    p {
+      margin: 1em 0;
+      line-height: 1.4em;
+    }
+    ul, ol {
+      margin-left: 25px;
+      list-style: inside;
+    }
+  }
+}
+
 /*Aside*/
 
 #inquiries-index #inquiry, #search, .about {

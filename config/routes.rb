@@ -39,6 +39,7 @@ Web3::Application.routes.draw do
   end
 
   get '/avtorji-spletne-aplikacije', to: 'pages#authors'
+  get '/navodila', to: 'pages#editorial_instructions'
 
   namespace :admin do
     root to: 'admin#index'

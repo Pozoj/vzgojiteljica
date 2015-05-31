@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330041004) do
+ActiveRecord::Schema.define(version: 20150530215548) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -333,13 +333,19 @@ ActiveRecord::Schema.define(version: 20150330041004) do
     t.date     "date"
     t.string   "details"
     t.integer  "bank_statement_id"
-    t.string   "reference"
+    t.string   "bank_reference"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.integer  "invoice_id"
+    t.string   "reference"
+    t.boolean  "matched",           default: false
   end
 
+  add_index "statement_entries", ["bank_reference"], name: "index_statement_entries_on_bank_reference", unique: true
   add_index "statement_entries", ["bank_statement_id"], name: "index_statement_entries_on_bank_statement_id"
-  add_index "statement_entries", ["reference"], name: "index_statement_entries_on_reference", unique: true
+  add_index "statement_entries", ["invoice_id"], name: "index_statement_entries_on_invoice_id"
+  add_index "statement_entries", ["matched"], name: "index_statement_entries_on_matched"
+  add_index "statement_entries", ["reference"], name: "index_statement_entries_on_reference"
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "subscriber_id"

@@ -7,6 +7,7 @@ class Invoice < ActiveRecord::Base
   monetize :tax_cents
 
   belongs_to :customer
+  has_many :statement_entries
   has_many :issues, through: :line_items
   has_many :remarks, as: :remarkable
   has_many :line_items, dependent: :destroy
@@ -29,14 +30,6 @@ class Invoice < ActiveRecord::Base
   scope :unpaid, -> { where(paid_at: nil) }
   scope :paid,   -> { where.not(paid_at: nil) }
 
-  def self.match_to_statements!
-    Invoice.unpaid.each do |i|
-      next unless i.match_statement_entry
-      next unless i.match_statement_entry.amount == i.total
-      i.paid_by! i.match_statement_entry
-    end
-  end
-
   def self.years
     years = Invoice.select(:year).group(:year).map(&:year)
     years << DateTime.now.year
@@ -45,17 +38,6 @@ class Invoice < ActiveRecord::Base
 
   def paid?
     paid_at? && paid_amount == total
-  end
-
-  def paid_by!(statement)
-    self.paid_at = statement.date
-    self.paid_amount = statement.amount
-    self.bank_data = statement.details
-    self.bank_reference = statement.reference
-    save!
-
-    # We destroy statement entries that we process.
-    statement.destroy
   end
 
   def due?
@@ -166,11 +148,6 @@ class Invoice < ActiveRecord::Base
 
   def payment_id_full
     "SI00#{payment_id}"
-  end
-
-  def match_statement_entry
-    query = "%SI00#{reference_number}%"
-    @statement_entry ||= StatementEntry.where(StatementEntry.arel_table[:details].matches(query)).first
   end
 
   def parse_iban_from_bank_data

@@ -25,8 +25,9 @@ class BankStatement < ActiveRecord::Base
         next unless entry.credit?
 
         # Uniqueness
-        next if StatementEntry.exists?(reference: entry.reference) # A pending statement entry exists.
-        next if Invoice.exists?(bank_reference: entry.reference) # An invoice has already been matched with this entry.
+        bank_reference = entry.statement_line.reference
+        next if StatementEntry.exists?(bank_reference: bank_reference) # A pending statement entry exists.
+        next if Invoice.exists?(bank_reference: bank_reference) # An invoice has already been matched with this entry.
 
         statement_entry = entries.build
         statement_entry.account_holder = entry.details.entity
@@ -34,6 +35,7 @@ class BankStatement < ActiveRecord::Base
         statement_entry.amount = entry.amount
         statement_entry.date = entry.date
         statement_entry.reference = entry.details.reference
+        statement_entry.bank_reference = bank_reference
         if statement_entry.valid?
           statement_entry.save
         else

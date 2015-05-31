@@ -9,9 +9,15 @@
           <%= l @statement.created_at %>
         </p>
         <% if @statement.entries.any? %>
-          <strong>Neobdelanih vnosov:</strong>
+          <strong>Postavk:</strong>
           <p>
             <%= @statement.entries.count %>
+          </p>
+        <% end %>
+        <% if @statement.entries.unmatched.any? %>
+          <strong>Neobdelanih postavk:</strong>
+          <p>
+            <%= @statement.entries.unmatched.count %>
           </p>
         <% end %>
       </div>
@@ -28,7 +34,7 @@
       <th>Plačnik</th>
       <th>TRR</th>
       <th>Znesek</th>
-      <th>Podatki</th>
+      <th>Referenca</th>
     </tr>
   </thead>
   <tbody>
@@ -36,13 +42,13 @@
       <tr>
         <td>
           <%= link_to "", admin_statement_entry_path(entry) %>
-          <%= entry.reference %>
+          <%= entry.bank_reference %>
         </td>
         <td><%= l entry.date, format: :simple %></td>
         <td><%= simple_format entry.account_holder %></td>
         <td><%= entry.account_number %></td>
         <td><%= number_to_currency entry.amount %></td>
-        <td><%= simple_format entry.details %></td>
+        <td><%= entry.reference %></td>
       </tr>
     <% end %>
   </tbody>

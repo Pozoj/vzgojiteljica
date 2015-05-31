@@ -1,12 +1,12 @@
 class Admin::BankStatementsController < Admin::AdminController
   def index
     @statement = BankStatement.new
-    @entries = StatementEntry.all
+    @entries = StatementEntry.unmatched
     respond_with collection
   end
 
   def show
-    @entries = resource.entries
+    @entries = resource.entries.unmatched
     respond_with resource
   end
 

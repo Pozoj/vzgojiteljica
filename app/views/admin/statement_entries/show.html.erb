@@ -6,27 +6,31 @@
       <div class="panel-body">
         <strong>ID</strong>
         <p>
-          <%= @statement_entry.reference %>
+          <%= @statement_entry.bank_reference %>
         </p>
         <strong>Datum</strong>
         <p><%= l @statement_entry.date, format: :simple %></p>
         <strong>Plačnik</strong>
-        <p><%= simple_format @statement_entry.account_holder %></p>
+        <p><%= simple_format @statement_entry.account_holder.split(',').join("\n") %></p>
         <strong>TRR</strong>
         <p><%= @statement_entry.account_number %></p>
         <strong>Znesek</strong>
         <p><%= number_to_currency @statement_entry.amount %></p>
         <strong>Podatki</strong>
         <p><%= simple_format @statement_entry.details %></p>
+        <strong>Referenca</strong>
+        <p><%= @statement_entry.reference %></p>
       </div>
     </div>
   </div>
 </div>
 
+<h3>Podobni neplačani računi</h3>
 <table class="table rowlinks">
   <thead>
     <tr>
-      <th>Ref. št.</th>
+      <th>ID</th>
+      <th>Referenca</th>
       <th>Stranka</th>
       <th>Izdan</th>
       <th>Rok</th>
@@ -40,7 +44,8 @@
       <tr>
         <td>
           <%= link_to "", admin_invoice_path(invoice) %>
-          <%= invoice.reference_number %></td>
+          <%= invoice.invoice_id %></td>
+        <td><%= invoice.payment_id %></td>
         <td><%= invoice.customer %></td>
         <td><%= l invoice.created_at, format: :simple %></td>
         <td><%= l invoice.due_at, format: :simple %></td>

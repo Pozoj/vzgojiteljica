@@ -45,7 +45,13 @@
           <ul class="nav navbar-nav">
             <li><a href="<%= admin_entities_path %>">Naročniki</a></li>
             <li><a href="<%= admin_remarks_path %>">Opombe</a></li>
-            <li><a href="<%= admin_invoices_path %>">Računi</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Računi <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="<%= admin_invoices_path %>">Računi</a></li>
+                <li><a href="<%= unpaid_admin_invoices_path %>">Neplačni računi</a></li>
+              </ul>
+            </li>
             <li><a href="<%= admin_labels_path %>">Nalepke</a></li>
             <li><a href="<%= admin_bank_statements_path %>">Bančni izpiski</a></li>
             <li class="dropdown">

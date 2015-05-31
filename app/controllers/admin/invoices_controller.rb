@@ -19,6 +19,18 @@ class Admin::InvoicesController < Admin::AdminController
     respond_with collection
   end
 
+  def unpaid
+    @years = Invoice.years
+    @invoices = collection.unpaid
+    if params[:year]
+      @invoices = @invoices.where(year: params[:year])
+    elsif params[:all]
+    else
+      @invoices = @invoices.where(year: DateTime.now.year)
+    end
+    respond_with collection
+  end
+
   def show
     respond_with resource
   end

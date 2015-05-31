@@ -1,0 +1,47 @@
+<h2>
+  Neplačani računi
+  <% @years.each do |year| %>
+    <small>
+      <% if params[:year].to_i == year %>
+        <%= year %>
+      <% else %>
+        <%= link_to year, year: year %>
+      <% end %>
+      |
+    </small>
+  <% end %>
+  <small><%= link_to "Vsa leta", all: true %></small>
+</h2>
+<%= paginate @invoices %>
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Stranka</th>
+      <th>Izdan</th>
+      <th>Rok</th>
+      <th>Plačan</th>
+      <th>Znesek</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td>
+          <%= link_to "", admin_invoice_path(invoice) %>
+          <%= invoice.invoice_id %></td>
+        <td><%= invoice.customer %></td>
+        <td><%= l invoice.created_at, format: :simple %></td>
+        <td><%= l invoice.due_at, format: :simple %></td>
+        <td>
+          <% if invoice.paid? %>
+            <%= l invoice.paid_at, format: :simple %></td>
+          <% elsif invoice.due? %>
+            <span class="label label-danger"><%= invoice.late_days %> dni</span>
+          <% end %>
+        <td><%= number_to_currency invoice.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @invoices %>

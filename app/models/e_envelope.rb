@@ -194,7 +194,7 @@ class EEnvelope
     # </attachments>
 
     {
-      count: 3,
+      count: 2,
       attachment: [
         {
           filename: "#{invoice.invoice_id}.xml",

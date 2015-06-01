@@ -26,6 +26,7 @@ class Invoice < ActiveRecord::Base
   before_validation :generate_payment_id, unless: :payment_id?
 
   before_save :calculate_totals, on: :create
+  after_save :store_all_on_s3
 
   scope :unpaid, -> { where(paid_at: nil) }
   scope :paid,   -> { where.not(paid_at: nil) }
@@ -85,6 +86,10 @@ class Invoice < ActiveRecord::Base
   def pdf_path; file_path('pdf'); end
   def einvoice_path; file_path('xml'); end
   def eenvelope_path; file_path('xml', 'env_'); end
+
+  def store_all_on_s3
+    InvoiceS3StoreWorker.perform_async(id)
+  end
 
   def store_to_s3(path, data)
     s3_connection.directories.new(:key => AWS_S3['bucket']).files.create(

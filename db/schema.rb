@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601034229) do
+ActiveRecord::Schema.define(version: 20150601045308) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -360,9 +360,11 @@ ActiveRecord::Schema.define(version: 20150601034229) do
     t.datetime "updated_at"
     t.integer  "quantity"
     t.string   "order_form"
+    t.integer  "order_id"
   end
 
   add_index "subscriptions", ["end"], name: "index_subscriptions_on_end"
+  add_index "subscriptions", ["order_id"], name: "index_subscriptions_on_order_id"
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"
   add_index "subscriptions", ["start"], name: "index_subscriptions_on_start"
   add_index "subscriptions", ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"

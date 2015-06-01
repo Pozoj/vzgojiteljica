@@ -46,6 +46,8 @@ class Customer < Entity
     subscription = subscriber.subscriptions.new
     subscription.start = Date.today
     subscription.quantity = order.quantity
+    subscription.order = order
+    subscription.order_form = "Naročilo ##{order.id}"
     if order.plan_type
       subscription.plan = Plan.latest(order.plan_type)
     end

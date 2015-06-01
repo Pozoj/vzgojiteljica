@@ -50,7 +50,11 @@
         <% if @subscription.order_form %>
           <strong>Št. naročilnice:</strong>
           <p>
-            <%= @subscription.order_form %>
+            <% if @subscription.order %>
+              <%= link_to @subscription.order_form, @subscription.order %>
+            <% else %>
+              <%= @subscription.order_form %>
+            <% end %>
           </p>
         <% end %>
         <hr>

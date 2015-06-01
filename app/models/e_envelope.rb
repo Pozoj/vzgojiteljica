@@ -206,11 +206,11 @@ class EEnvelope
           type: 'pdf',
           description: 'Vizualizacija v PDF obliki'
         },
-        {
-          filename: "obvestilo.pdf",
-          type: 'pdf',
-          description: 'Obvestilo o racunu'
-        },
+        # {
+        #   filename: "obvestilo.pdf",
+        #   type: 'pdf',
+        #   description: 'Obvestilo o racunu'
+        # },
       ]
     }
   end

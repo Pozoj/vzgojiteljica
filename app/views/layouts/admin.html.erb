@@ -51,6 +51,19 @@
                 <li><a href="<%= admin_invoices_path %>">Računi</a></li>
                 <li><a href="<%= unpaid_admin_invoices_path %>">Neplačani računi</a></li>
                 <li><a href="<%= reversed_admin_invoices_path %>">Stornirani računi</a></li>
+                <li role="presentation" class="divider"></li>
+                <li>
+                  <a href="<%= wizard_admin_invoices_path %>">
+                    <i class="glyphicon glyphicon-asterisk"></i>                    
+                    Izdaja računov
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= print_wizard_admin_invoices_path %>">
+                    <i class="glyphicon glyphicon-print"></i>
+                    Tiskanje računov
+                  </a>
+                </li>
               </ul>
             </li>
             <li><a href="<%= admin_labels_path %>">Nalepke</a></li>

@@ -2,12 +2,8 @@ class Admin::InvoicesController < Admin::AdminController
   skip_before_filter :authenticate, only: [:print]
   
   def index
-    @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
-    @gte = Invoice.select(:reference_number).order(reference_number: :asc).first.try(:reference_number)
-    @lte = Invoice.select(:reference_number).order(reference_number: :desc).first.try(:reference_number)
-
     @years = Invoice.years
-    @all_invoices = Invoice.select(:id, :invoice_id).order(year: :desc, reference_number: :desc).map { |i| [i.invoice_id, i.id] }
+    @all_invoices = Invoice.select(:id, :invoice_id).order(year: :desc, reference_number: :desc).map { |i| [i.invoice_id, i.invoice_id] }
 
     @invoices = collection
     if params[:year]
@@ -50,6 +46,16 @@ class Admin::InvoicesController < Admin::AdminController
     @invoice.save
 
     respond_with resource, location: -> { admin_invoice_path(@invoice) }
+  end
+
+  def wizard
+    @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
+    @last = Invoice.select(:reference_number).order(year: :desc, reference_number: :desc).first.try(:reference_number)
+  end
+
+  def print_wizard
+    @gte = Invoice.select(:reference_number).order(:year, :reference_number).first.try(:reference_number)
+    @lte = Invoice.select(:reference_number).order(year: :desc, reference_number: :desc).first.try(:reference_number)    
   end
 
   def show
@@ -106,13 +112,14 @@ class Admin::InvoicesController < Admin::AdminController
 
   def print_all
     @invoices = Invoice.all
+    
     if lte = params[:lte]
-      @invoices = @invoices.where("reference_number <= #{lte}")
+      @invoices = @invoices.where("year = #{params[:year]} AND reference_number <= #{lte}")
     end
     if gte = params[:gte]
-      @invoices = @invoices.where("reference_number >= #{gte}")
+      @invoices = @invoices.where("year = #{params[:year]} AND reference_number >= #{gte}")
     end
-    @invoices = @invoices.order(:reference_number).reject { |i| i.customer.einvoice? }
+    @invoices = @invoices.order(:year, :reference_number).reject { |i| i.customer.einvoice? }
 
     render layout: 'print'
   end

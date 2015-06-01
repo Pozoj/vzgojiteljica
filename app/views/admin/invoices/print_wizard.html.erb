@@ -1,0 +1,21 @@
+<h2>
+  Tiskanje računov
+  <i class="glyphicon glyphicon-print"></i>
+</h2>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_tag print_all_admin_invoices_path, method: :get, class: 'form-inline print_invoices' do %>
+      <div class="form-group">
+        <%= number_field_tag :gte, @gte, {class: 'form-control', placeholder: 'Od Ref. Št.'} %>
+        &mdash;
+        <%= number_field_tag :lte, @lte, {class: 'form-control', placeholder: 'Do Ref. Št.'} %>
+        /
+        <%= number_field_tag :year, Time.now.year, {class: 'form-control', placeholder: 'Leto'} %>
+      </div>
+      <div class="form-group pull-right">
+        <%= submit_tag "Natisni", class: 'btn btn-default' %>
+      </div>
+    <% end %>
+  </div>
+</div>

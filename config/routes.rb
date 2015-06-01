@@ -67,6 +67,8 @@ Web3::Application.routes.draw do
     resources :batches
     resources :remarks
     resources :invoices do
+      get :wizard, on: :collection
+      get :print_wizard, on: :collection
       get :reversed, on: :collection
       get :unpaid, on: :collection
       get :print, on: :member

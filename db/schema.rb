@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601014659) do
+ActiveRecord::Schema.define(version: 20150601033902) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -353,7 +353,7 @@ ActiveRecord::Schema.define(version: 20150601014659) do
     t.integer  "subscriber_id"
     t.date     "start"
     t.date     "end"
-    t.integer  "discount"
+    t.decimal  "discount",      default: 0.0
     t.integer  "plan_id"
     t.datetime "created_at"
     t.datetime "updated_at"

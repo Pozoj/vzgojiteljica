@@ -26,7 +26,7 @@ class Invoice < ActiveRecord::Base
   before_validation :generate_payment_id, unless: :payment_id?
 
   before_save :calculate_totals, on: :create
-  after_save :store_all_on_s3
+  after_create :store_all_on_s3
 
   scope :unpaid, -> { where(paid_at: nil) }
   scope :paid,   -> { where.not(paid_at: nil) }

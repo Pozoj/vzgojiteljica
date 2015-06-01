@@ -5,6 +5,7 @@ class Subscription < ActiveRecord::Base
 
   belongs_to :plan
   belongs_to :subscriber
+  belongs_to :order
   has_many :remarks, as: :remarkable, dependent: :destroy
 
   scope :active, -> { where(arel_table[:start].lteq(Date.today).and(arel_table[:end].eq(nil).or(arel_table[:end].gteq(Date.today)))) }

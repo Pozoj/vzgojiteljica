@@ -8,6 +8,7 @@ class Order < ActiveRecord::Base
   validate  :validate_plan_type
 
   belongs_to :post
+  has_many :subscriptions
 
   def order_id
     "#{created_at.strftime('%Y')}-#{id}"

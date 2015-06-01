@@ -112,14 +112,18 @@ class Admin::InvoicesController < Admin::AdminController
 
   def print_all
     @invoices = Invoice.all
-    
+
     if lte = params[:lte]
       @invoices = @invoices.where("year = #{params[:year]} AND reference_number <= #{lte}")
     end
     if gte = params[:gte]
       @invoices = @invoices.where("year = #{params[:year]} AND reference_number >= #{gte}")
     end
-    @invoices = @invoices.order(:year, :reference_number).reject { |i| i.customer.einvoice? }
+    @invoices = @invoices.order(:year, :reference_number)
+
+    unless params[:include_einvoiced].present?
+      @invoices = @invoices.reject { |i| i.customer.einvoice? }
+    end
 
     render layout: 'print'
   end

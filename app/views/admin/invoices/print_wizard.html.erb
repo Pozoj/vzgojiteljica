@@ -13,6 +13,12 @@
         /
         <%= number_field_tag :year, Time.now.year, {class: 'form-control', placeholder: 'Leto'} %>
       </div>
+      <div class="form-group" style="margin-left: 25px;">
+        <label>
+          <%= check_box_tag :include_einvoiced %>
+          Vključi prejemnike e-računov
+        </label>
+      </div>
       <div class="form-group pull-right">
         <%= submit_tag "Natisni", class: 'btn btn-default' %>
       </div>

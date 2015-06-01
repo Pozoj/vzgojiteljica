@@ -27,8 +27,8 @@ class OrdersController < ApplicationController
 
     @order = Order.new params[:order]
     if @order.save
-      AdminMailer.new_order(@order.id).deliver
-      Mailer.order_submitted(@order.id).deliver
+      AdminMailer.delay.new_order(@order.id)
+      Mailer.delay.order_submitted(@order.id)
       redirect_to successful_orders_path
     else
       render action: :new

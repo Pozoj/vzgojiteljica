@@ -19,6 +19,7 @@ class Admin::BankStatementsController < Admin::AdminController
     @statement = BankStatement.new params[:bank_statement]
 
     if @statement.save
+      @statement.delay.parse!
       respond_with resource, location: -> { admin_bank_statement_path(@statement) }
     else
       render action: 'new'

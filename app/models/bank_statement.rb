@@ -15,7 +15,6 @@ class BankStatement < ActiveRecord::Base
   has_many :entries, class_name: 'StatementEntry', dependent: :destroy
 
   before_save :store_raw_statement
-  after_create :parse!
 
   def parse!
     return unless parsed_mt940

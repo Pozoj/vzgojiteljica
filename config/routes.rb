@@ -1,6 +1,9 @@
 Web3::Application.routes.draw do
-  resources :line_items
-
+  require 'sidekiq/web'
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+  
   devise_for :users
 
   scope :path_names => {:new => "novo", :edit => "uredi", :all => "vse", :search => "isci"} do

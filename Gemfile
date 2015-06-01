@@ -20,7 +20,6 @@ end
 
 group :production do
   gem 'pg'
-  gem 'unicorn'
   gem 'rails_12factor'
 end
 
@@ -42,6 +41,9 @@ gem 'levenshtein'
 gem 'rubyzip'
 gem 'rollbar'
 gem 'cmxl'
+gem 'sidekiq'
+gem 'sinatra', require: nil
+gem 'unicorn'
 
 group :development, :test do
   gem 'sqlite3'
@@ -49,4 +51,5 @@ group :development, :test do
   gem 'web-console'
   gem 'letter_opener'
   gem 'dotenv-rails'
+  gem 'foreman'
 end

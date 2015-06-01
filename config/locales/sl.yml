@@ -64,6 +64,7 @@ sl:
     start: Pričetek
     end: Konec
     discount: Popust
+    reverse_reason: Razlog za storniranje
 
   forms:
     submit:

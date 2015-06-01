@@ -67,6 +67,7 @@ Web3::Application.routes.draw do
     resources :batches
     resources :remarks
     resources :invoices do
+      get :reversed, on: :collection
       get :unpaid, on: :collection
       get :print, on: :member
       get :print_all, on: :collection
@@ -74,6 +75,7 @@ Web3::Application.routes.draw do
       get :eenvelope, on: :member
       get :pdf, on: :member
       post :build_for_subscription, on: :collection
+      put :reverse, on: :member
     end
     resources :bank_statements do
       post :parse, on: :member

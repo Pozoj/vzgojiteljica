@@ -82,3 +82,7 @@ td.subscriptions .subscription:last-child {
 .print_invoices .form-control {
   width: 100px;
 }
+
+#invoice_reverse_reason {
+  width: 400px;
+}

@@ -31,6 +31,27 @@ class Admin::InvoicesController < Admin::AdminController
     respond_with collection
   end
 
+  def reversed
+    @years = Invoice.years
+    @invoices = collection.reversed
+    if params[:year]
+      @invoices = @invoices.where(year: params[:year])
+    elsif params[:all]
+    else
+      @invoices = @invoices.where(year: DateTime.now.year)
+    end
+    respond_with collection
+  end
+
+  def reverse
+    @invoice = resource
+    @invoice.reversed_at = Time.now
+    @invoice.reverse_reason = params.require(:invoice).delete(:reverse_reason)
+    @invoice.save
+
+    respond_with resource, location: -> { admin_invoice_path(@invoice) }
+  end
+
   def show
     respond_with resource
   end

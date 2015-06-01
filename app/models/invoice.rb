@@ -29,6 +29,8 @@ class Invoice < ActiveRecord::Base
 
   scope :unpaid, -> { where(paid_at: nil) }
   scope :paid,   -> { where.not(paid_at: nil) }
+  scope :unreversed, -> { where(reversed_at: nil) }
+  scope :reversed,   -> { where.not(reversed_at: nil) }
 
   def self.years
     years = Invoice.select(:year).group(:year).map(&:year)
@@ -38,6 +40,10 @@ class Invoice < ActiveRecord::Base
 
   def paid?
     paid_at? && paid_amount >= total
+  end
+
+  def reversed?
+    reversed_at?
   end
 
   def due?
@@ -118,7 +124,6 @@ class Invoice < ActiveRecord::Base
       :aws_secret_access_key    => AWS_S3['secret_access_key']
     })
   end
-
 
   def einvoice
     EInvoice.new(invoice: self)

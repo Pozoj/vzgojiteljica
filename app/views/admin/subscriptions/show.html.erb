@@ -47,6 +47,12 @@
         <p>
           <%= @subscription.plan %>
         </p>
+        <% if @subscription.order_form %>
+          <strong>Št. naročilnice:</strong>
+          <p>
+            <%= @subscription.order_form %>
+          </p>
+        <% end %>
         <hr>
         <strong>Kreiran:</strong>
         <p>

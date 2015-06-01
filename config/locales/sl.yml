@@ -65,6 +65,7 @@ sl:
     end: Konec
     discount: Popust
     reverse_reason: Razlog za storniranje
+    order_form: Št. naročilnice
 
   forms:
     submit:

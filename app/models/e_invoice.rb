@@ -31,6 +31,7 @@ class EInvoice
           invoice_foot_hash,
         ],
         PovzetekZneskovRacuna: invoice_sum_hash,
+        ReferencniDokumenti: reference_documents_hash,
       }
     }
   end
@@ -72,6 +73,20 @@ class EInvoice
     end
 
     hash
+  end
+
+  # <ReferencniDokumenti VrstaDokumenta="ON">
+  # <StevilkaDokumenta>NAR-2012-512</StevilkaDokumenta>
+  # <DatumDokumenta>2012-02-25T00:00:00</DatumDokumenta>
+  def reference_documents_hash
+    return [] unless invoice.order_form
+
+    {
+      :@VrstaDokumenta => "ON", :content! => {
+        StevilkaDokumenta: invoice.order_form,
+      }
+      #DatumDokumenta>2012-02-25T00:00:00</DatumDokumenta>
+    }
   end
 
   def entity_contacts_hash(entity)

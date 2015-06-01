@@ -21,6 +21,8 @@ class Subscription < ActiveRecord::Base
   validates_numericality_of :quantity, greater_than: 0, only_integer: true
   validate :validate_end_after_start
 
+  before_save :fill_in_order_form, if: :order
+
   def customer
     subscriber.customer
   end
@@ -55,6 +57,10 @@ class Subscription < ActiveRecord::Base
   end
 
   private
+
+  def fill_in_order_form
+    self.order_form = "Naročilo ##{order_id}"
+  end
 
   def validate_end_after_start
     if self.end.present? && self.end <= self.start

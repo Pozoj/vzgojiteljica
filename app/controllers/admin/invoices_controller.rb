@@ -21,7 +21,7 @@ class Admin::InvoicesController < Admin::AdminController
 
   def unpaid
     @years = Invoice.years
-    @invoices = collection.unpaid
+    @invoices = collection.unpaid.unreversed
     if params[:year]
       @invoices = @invoices.where(year: params[:year])
     elsif params[:all]

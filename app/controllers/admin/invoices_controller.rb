@@ -77,10 +77,13 @@ class Admin::InvoicesController < Admin::AdminController
     unless subscription.plan.yearly?
       wizard.issue_id = Issue.order(published_at: :desc).first.id
     end
-    invoice = wizard.build_invoice_for_subscription subscription
-    invoice.save!
+    @invoice = wizard.build_invoice_for_subscription subscription
 
-    redirect_to admin_invoice_path(invoice)
+    unless @invoice.save
+      return render text: @invoice.errors.inspect
+    end
+
+    redirect_to admin_invoice_path(@invoice)
   end
 
   def einvoice

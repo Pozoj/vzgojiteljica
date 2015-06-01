@@ -7,7 +7,7 @@ class InvoiceWizard
 
   def reference_number
     return last_invoice_number.to_i if last_invoice_number.present?
-    last = Invoice.order(invoice_id: :asc).last
+    last = Invoice.order(:year, :reference_number).last
     return last.reference_number if last
     0
   end
@@ -41,6 +41,9 @@ class InvoiceWizard
     i = Invoice.new
     i.reference_number = next_reference_number
     i.customer = options[:customer] || options[:subscription].customer
+    if options[:subscription]
+      i.order_form = options[:subscription].order_form
+    end
     i.due_at = due_at
     i
   end

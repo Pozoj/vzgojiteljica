@@ -71,6 +71,7 @@ Web3::Application.routes.draw do
       get :print_wizard, on: :collection
       get :reversed, on: :collection
       get :unpaid, on: :collection
+      get :due, on: :collection
       get :print, on: :member
       get :print_all, on: :collection
       get :einvoice, on: :member

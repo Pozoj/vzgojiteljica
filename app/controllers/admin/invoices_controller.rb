@@ -27,6 +27,18 @@ class Admin::InvoicesController < Admin::AdminController
     respond_with collection
   end
 
+  def due
+    @years = Invoice.years
+    @invoices = collection.due.unpaid.unreversed
+    if params[:year]
+      @invoices = @invoices.where(year: params[:year])
+    elsif params[:all]
+    else
+      @invoices = @invoices.where(year: DateTime.now.year)
+    end
+    respond_with collection
+  end
+
   def reversed
     @years = Invoice.years
     @invoices = collection.reversed

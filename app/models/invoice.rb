@@ -28,6 +28,8 @@ class Invoice < ActiveRecord::Base
   before_save :calculate_totals, on: :create
   after_create :store_all_on_s3
 
+  scope :not_due, -> { where("invoices.due_at > '#{DateTime.now}'") }
+  scope :due, -> { where("invoices.due_at < '#{DateTime.now}'") }
   scope :unpaid, -> { where(paid_at: nil) }
   scope :paid,   -> { where.not(paid_at: nil) }
   scope :unreversed, -> { where(reversed_at: nil) }

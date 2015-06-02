@@ -5,8 +5,9 @@ class InvoiceS3StoreWorker
   def perform(invoice_id)
     return unless invoice = Invoice.find(invoice_id)
     invoice.store_pdf
-    return unless invoice.customer.einvoice?
+    sleep 0.5
     invoice.store_einvoice
+    return unless invoice.customer.einvoice?
     invoice.store_eenvelope
   end
 end

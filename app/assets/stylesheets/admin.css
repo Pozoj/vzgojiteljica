@@ -26,10 +26,15 @@
 
 #filter_global {
   width: 300px;
+  float: right;
 }
 
 #new_filter {
   position: relative;
+  width: 440px;
+}
+#hidden_search_btn {
+  width: 25px;
 }
 #new_filter .advanced {
   display: none;

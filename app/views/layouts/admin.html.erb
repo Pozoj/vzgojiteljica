@@ -80,7 +80,7 @@
           </ul>
 
           <%= form_for @filter, url: admin_entities_path, method: :get, html: {class: 'navbar-form navbar-left pull-right', role: :search} do |f| %>
-            <%= f.submit style: 'visibility: hidden' %>
+            <%= f.submit "S", style: 'visibility: hidden', id: 'hidden_search_btn' %>
             <span class="text-muted">Iskanje &nbsp;</span>
             <div class="form-group">
               <%= f.search_field :global, placeholder: 'Naziv, ime, naslov, davčna, ...', class: 'form-control' %>

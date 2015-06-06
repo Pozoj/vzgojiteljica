@@ -1,5 +1,18 @@
-<% @labels.in_groups_of(3) do |group_of_labels| %>
-  <div class="labels">
-    <%= render group_of_labels.compact %>
+<h2>
+  Tiskanje nalepk
+  <i class="glyphicon glyphicon-print"></i>
+</h2>
+<br>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_tag print_admin_labels_path, method: :get, class: 'form-inline print_labels' do %>
+      <div class="form-group">
+        <%= submit_tag "Natisni plačljive", class: 'btn btn-default', name: 'paid' %>
+        <%= submit_tag "Natisni brezplačnike", class: 'btn btn-default', name: 'freeriders' %>
+      </div>
+      <div class="form-group pull-right">
+        <%= submit_tag "Natisni vse nalepke", class: 'btn btn-primary', name: 'all' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

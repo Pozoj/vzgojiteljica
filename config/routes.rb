@@ -55,7 +55,9 @@ Web3::Application.routes.draw do
       get :new_freerider, on: :collection
       post :create_freerider, on: :collection
     end
-    resources :labels, only: [:index, :show]
+    resources :labels, only: [:index, :show] do
+      get :print, on: :collection
+    end
     resources :subscribers
     resources :posts
     resources :subscriptions do

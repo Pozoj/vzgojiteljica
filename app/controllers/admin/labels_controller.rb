@@ -1,6 +1,15 @@
 class Admin::LabelsController < Admin::AdminController
-  def index
-    @labels = Subscriber.active.map do |subscriber|
+  def print
+    @labels = Subscriber.active
+
+    if params[:paid].present?
+      @labels = @labels.paid
+    elsif params[:freeriders].present?
+      @labels = @labels.free
+    elsif params[:all].present?
+    end
+
+    @labels = @labels.map do |subscriber|
       label = Label.new
       label.subscriber = subscriber
       label.quantity = subscriber.subscriptions.active.sum(:quantity)
@@ -27,6 +36,6 @@ class Admin::LabelsController < Admin::AdminController
 
     @labels = [label]
 
-    render action: 'index', layout: 'print'
+    render action: 'print', layout: 'print'
   end
 end

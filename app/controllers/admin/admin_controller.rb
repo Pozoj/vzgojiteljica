@@ -28,7 +28,7 @@ class Admin::AdminController < ApplicationController
   end
 
   def freeriders
-    @freeriders = Subscription.free.active.order(:start)
+    @freeriders = Subscription.free.active.order(start: :desc)
   end
 
   def regional

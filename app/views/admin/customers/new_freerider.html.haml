@@ -1,3 +1,10 @@
+:javascript
+  $(function() {
+    $('#customer_remark_remark').focus();
+
+    $('#customer_post_id').chosen();
+  });
+
 %h1 Dodaj novega brezplačnega prejemnika
 
 = simple_form_for [:admin, @customer], url: create_freerider_admin_customers_path do |f|
@@ -31,6 +38,10 @@
             %br
             %label.control-label
               = fs.radio_button :free_type, 3
+              Za eno leto
+            %br
+            %label.control-label
+              = fs.radio_button :free_type, 4
               Za nedoločen čas
 
   .form-actions

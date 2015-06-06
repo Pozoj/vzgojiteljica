@@ -43,6 +43,8 @@ class Admin::CustomersController < Admin::AdminController
       elsif type == "2"
         DateTime.now.end_of_year
       elsif type == "3"
+        1.year.from_now.beginning_of_month
+      elsif type == "4"
         # No end for now.
       end
 

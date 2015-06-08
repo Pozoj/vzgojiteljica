@@ -79,7 +79,7 @@
         %th Rok
         %th Znesek
     %tbody
-      - @customer.invoices.each do |invoice|
+      - @customer.invoices.order(year: :desc, reference_number: :desc).each do |invoice|
         %tr
           %td
             = link_to "", admin_invoice_path(invoice)
@@ -87,5 +87,12 @@
           %td= invoice.issues.distinct.join(', ')
           %td= l invoice.created_at, format: :simple
           %td= l invoice.due_at, format: :simple
-          %td= number_to_currency invoice.total
-        </tr>
+          %td
+            - if invoice.paid?
+              .label.label-success
+                = number_to_currency invoice.total
+            - elsif invoice.due?
+              .label.label-danger
+                = number_to_currency invoice.total
+            - else
+              = number_to_currency invoice.total

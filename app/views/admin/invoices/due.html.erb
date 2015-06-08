@@ -43,5 +43,18 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <th>
+        <%= @invoices.count %>
+        računov
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th><%= number_to_currency @invoices.to_a.sum(&:total) %></th>
+    </tr>
+  </tfoot>
 </table>
 <%= paginate @invoices %>

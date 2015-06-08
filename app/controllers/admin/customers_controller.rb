@@ -9,10 +9,6 @@ class Admin::CustomersController < Admin::AdminController
     @customer = Customer.new
   end
 
-
-# "customer"=>{"remark"=>{"remark"=>"Znanstveni clanek"}, "title"=>"Simon", "name"=>"Talekov Simon", "address"=>"Ratatujeva 21", "post_id"=>"3320", "subscription"=>{"quantity"=>"1", "free_type"=>"1"}}
-
-
   def create_freerider
     @customer = Customer.new
     @subscriber = @customer.subscribers.build
@@ -92,6 +88,58 @@ class Admin::CustomersController < Admin::AdminController
   def destroy
     resource.destroy
     respond_with resource, location: -> { admin_entities_path }
+  end
+
+  # People
+
+  def add_person
+    @entity = case params[:person]
+    when 'contact'
+      ContactPerson
+    when 'billing'
+      BillingPerson
+    end.new
+
+    @customer = resource
+  end
+
+  def edit_person
+    @entity = Entity.find(params[:id])
+    @customer = @entity.entity
+  end
+
+  def update_person
+    @entity = Entity.find(params[:person_id])
+    @customer = @entity.entity
+
+    if params[:contact_person]
+      @entity.update_attributes(params[:contact_person])
+    elsif params[:billing_person]
+      @entity.update_attributes(params[:billing_person])
+    end
+
+    if @entity.valid?
+      respond_with resource, location: -> { admin_customer_path(@customer) }
+    else
+      render 'edit_person'
+    end
+  end
+
+  def create_person
+    @customer = resource
+    if params[:contact_person]
+      @entity = @customer.build_contact_person(params[:contact_person])
+    elsif params[:billing_person]
+      @entity = @customer.build_billing_person(params[:billing_person])
+    end
+
+    if @entity.valid?
+      @entity.save
+      @customer.save
+      respond_with resource, location: -> { admin_customer_path(@customer) }
+    else
+      render 'add_person'
+    end
   end
 
   private

@@ -1,0 +1,5 @@
+%h1 Nova oseba
+
+= simple_form_for [:admin, @entity], url: create_person_admin_customer_path(@customer) do |f|
+  = f.error_notification
+  = render "person_form", f: f

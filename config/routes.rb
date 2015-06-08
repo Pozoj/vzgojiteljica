@@ -54,6 +54,10 @@ Web3::Application.routes.draw do
       post :new_from_order, on: :member
       get :new_freerider, on: :collection
       post :create_freerider, on: :collection
+      get :add_person, on: :member
+      get :edit_person, on: :member
+      post :create_person, on: :member
+      put :update_person, on: :collection
     end
     resources :labels, only: [:index, :show] do
       get :print, on: :collection

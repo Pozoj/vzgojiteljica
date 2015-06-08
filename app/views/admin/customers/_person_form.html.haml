@@ -1,0 +1,15 @@
+:javascript
+  $(function() {
+    $('#entity_name').focus()
+  });
+
+.row
+  .form-inputs.col-xs-8
+    = f.input :name
+    = f.input :title
+    = f.input :phone
+    = f.input :email
+
+.form-actions
+  %hr
+  = f.button :submit

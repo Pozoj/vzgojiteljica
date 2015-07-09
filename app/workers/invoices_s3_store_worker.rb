@@ -6,7 +6,7 @@ class InvoicesS3StoreWorker
     invoice_ids.each do |invoice_id|
       next unless invoice = Invoice.find(invoice_id)
 
-      invoice.store_store_all_on_s3
+      invoice.store_all_on_s3
       sleep 2
     end
   end

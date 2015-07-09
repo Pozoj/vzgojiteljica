@@ -96,10 +96,10 @@ class Invoice < ActiveRecord::Base
   end
 
   def store_all_on_s3
-    invoice.store_pdf
-    invoice.store_einvoice
-    return unless invoice.customer.einvoice?
-    invoice.store_eenvelope
+    store_pdf
+    store_einvoice
+    return unless customer.einvoice?
+    store_eenvelope
     end
 
   def store_to_s3(path, data)

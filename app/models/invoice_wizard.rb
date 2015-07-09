@@ -39,6 +39,7 @@ class InvoiceWizard
 
   def build_invoice options
     i = Invoice.new
+    i.skip_s3 = true
     i.reference_number = next_reference_number
     i.customer = options[:customer] || options[:subscription].customer
     if options[:subscription]
@@ -69,7 +70,7 @@ class InvoiceWizard
   end
 
   def create_invoices
-    Customer.all.each do |c|
+    Customer.all.map do |c|
       subscriptions = c.subscriptions.paid.active
       next unless subscriptions.any?
 
@@ -88,12 +89,16 @@ class InvoiceWizard
         raise "Invoice should not be 0."
       end
 
+      # Save.
       i.save!
+
+      # Return invoice in array.
+      i
     end
   end
 
   def create_yearly_invoices
-    Customer.all.each do |c|
+    Customer.all.map do |c|
       subscriptions = c.subscriptions.yearly.paid.active
       next unless subscriptions.any?
 
@@ -112,12 +117,16 @@ class InvoiceWizard
         raise "Invoice should not be 0."
       end
 
+      # Save.
       i.save!
+
+      # Return invoice in array.
+      i
     end
   end
 
   def create_per_issue_invoices
-    Customer.all.each do |c|
+    Customer.all.map do |c|
       subscriptions = c.subscriptions.per_issue.paid.active
       next unless subscriptions.any?
 
@@ -136,7 +145,11 @@ class InvoiceWizard
         raise "Invoice should not be 0."
       end
 
+      # Save.
       i.save!
+
+      # Return invoice in array.
+      i
     end
   end
 end

@@ -1,7 +1,7 @@
 class Invoice < ActiveRecord::Base
   include Invoicing
 
-  attr_accessor :skip_s3?
+  attr_accessor :skip_s3
 
   monetize :subtotal_cents
   monetize :total_cents
@@ -28,7 +28,7 @@ class Invoice < ActiveRecord::Base
   before_validation :generate_payment_id, unless: :payment_id?
 
   before_save :calculate_totals, on: :create
-  after_create :store_all_on_s3_async, unless: :skip_s3?
+  after_create :store_all_on_s3_async, unless: :skip_s3
 
   scope :not_due, -> { where("invoices.due_at > '#{DateTime.now}'") }
   scope :due, -> { where("invoices.due_at < '#{DateTime.now}'") }

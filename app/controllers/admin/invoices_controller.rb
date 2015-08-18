@@ -75,17 +75,8 @@ class Admin::InvoicesController < Admin::AdminController
   end
 
   def create
-    @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
-    @collection = if params[:invoice_wizard][:include_yearly] == "1"
-      invoices = @invoice_wizard.create_invoices
-    else
-      invoices = @invoice_wizard.create_per_issue_invoices
-    end
-
-    # Queue S3 uploads.
-    InvoicesS3StoreWorker.perform_async(invoices.compact.uniq.map(&:id))
-
-    redirect_to admin_invoices_path
+    InvoicesWizardWorker.perform_async(params[:invoice_wizard])
+    redirect_to admin_invoices_path, notice: "Ustvarjam račune"
   end
 
   def pdf

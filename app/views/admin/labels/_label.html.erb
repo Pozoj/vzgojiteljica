@@ -1,8 +1,8 @@
 <div class="label">
   <div class="logo">
     <p><%= image_tag "pozoj_logo-100w.png" %></p>
-    <p><strong>POZOJ, Darja Slapničar s.p.</strong></p>
-    <p>Cesta talcev 12<br>3320 Velenje</p>
+    <p><strong><%= Entity.pozoj %></strong></p>
+    <p><%= Entity.pozoj.address %><br><%= Entity.pozoj.post %></p>
   </div>
   <div class="address">
     <p>
@@ -21,7 +21,7 @@
     <p>
       Poštnina plačana pri
       <br>
-      pošti 3320 Velenje
+      pošti <%= Entity.pozoj.post %>
     </p>
   </div>
   <div class="classification">NDP</div>

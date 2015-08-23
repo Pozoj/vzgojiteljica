@@ -54,12 +54,12 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def new_from_order
-    @customer = Customer.new_from_order(params[:order_id])
-    if @customer.try(:persisted?)
+    begin
+      @customer = Customer.new_from_order(params[:order_id])
       redirect_to admin_customer_path(@customer)
-    else
-      redirect_to orders_path(error: @customer.errors.join(', ').inspect)
-    end
+    rescue CustomerFromOrderError => e
+      redirect_to orders_path(error: e.inspect)
+    end 
   end
 
   def new

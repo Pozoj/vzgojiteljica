@@ -89,18 +89,20 @@
             E-ovojnica
           <% end %>
         </p>
-        <p>
-          <%= link_to email_admin_invoice_path(@invoice), method: :post, class: 'btn btn-default', "data-confirm": "Ali ste prepričani da želite poslati račun na #{@invoice.customer.billing_email}?" do %>
-            <i class="glyphicon glyphicon-envelope"></i>
-            Pošlji račun
-          <% end %>
-          <% if @invoice.due? %>
-            <%= link_to email_due_admin_invoice_path(@invoice), method: :post, class: 'btn btn-default', "data-confirm": "Ali ste prepričani da želite poslati opomin na #{@invoice.customer.billing_email}?" do %>
+        <% if @invoice.customer.billing_email %>
+          <p>
+            <%= link_to email_admin_invoice_path(@invoice), method: :post, class: 'btn btn-default', "data-confirm": "Ali ste prepričani da želite poslati račun na #{@invoice.customer.billing_email}?" do %>
               <i class="glyphicon glyphicon-envelope"></i>
-              Pošlji opomin
+              Pošlji račun
             <% end %>
-         <% end %> 
-        </p>
+            <% if @invoice.due? %>
+              <%= link_to email_due_admin_invoice_path(@invoice), method: :post, class: 'btn btn-default', "data-confirm": "Ali ste prepričani da želite poslati opomin na #{@invoice.customer.billing_email}?" do %>
+                <i class="glyphicon glyphicon-envelope"></i>
+                Pošlji opomin
+              <% end %>
+           <% end %> 
+          </p>
+        <% end %>
         <% if @invoice.events.any? %>
           <hr>
           <%= render 'events/events', events: @invoice.events %>

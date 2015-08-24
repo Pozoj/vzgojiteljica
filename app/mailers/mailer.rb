@@ -15,6 +15,6 @@ class Mailer < ActionMailer::Base
   def inquiry_answer(inquiry_id)
     return unless @inquiry = Inquiry.find(inquiry_id)
     return unless @inquiry.email?
-    mail(to: @inquiry.email, bcc: ENV['DEFAULT_ADMIN_EMAIL'], subject: "Odgovor na vprašanje ##{@inquiry.id}")
+    mail(to: @inquiry.email, subject: "Odgovor na vprašanje ##{@inquiry.id}")
   end
 end

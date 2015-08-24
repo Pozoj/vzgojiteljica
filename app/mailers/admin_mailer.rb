@@ -10,7 +10,7 @@ class AdminMailer < ActionMailer::Base
 
   def new_inquiry(inquiry_id)
     return unless @inquiry = Inquiry.find(inquiry_id)
-    mail(to: ADMIN_EMAIL, subject: "Novo vprašanje ##{@inquiry.id}: #{@inquiry.subject}")
+    mail(to: ADMIN_EMAIL, cc: EDITOR_EMAIL, subject: "Novo vprašanje ##{@inquiry.id}: #{@inquiry.subject}")
   end
 
   def invoices_due

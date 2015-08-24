@@ -1,7 +1,7 @@
 class Inquiry < ActiveRecord::Base
   attr_accessor :helmet
   validates_presence_of :subject, :question
-  validates :email, email: true, presence: true, if: Proc.new { |inquiry| inquiry.created_at < Time.parse("2015-08-24 03:44:08 +0000") }
+  validates :email, email: true, presence: true, if: Proc.new { |inquiry| inquiry.created_at > Time.parse("2015-08-24 03:44:08 +0000") }
 
   scope :published, -> { where(published: true) }
   

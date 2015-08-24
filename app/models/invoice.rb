@@ -12,6 +12,7 @@ class Invoice < ActiveRecord::Base
   has_many :statement_entries
   has_many :issues, through: :line_items
   has_many :remarks, as: :remarkable
+  has_many :events, as: :eventable
   has_many :line_items, dependent: :destroy
 
   validates_presence_of :customer

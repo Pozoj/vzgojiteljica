@@ -34,10 +34,6 @@ class Entity < ActiveRecord::Base
 
   def customer?; self.is_a? Customer; end
   def subscriber?; self.is_a? Subscriber; end
-  def person?
-    self.is_a?(ContactPerson) ||
-    self.is_a?(BillingPerson)
-  end
 
   def self.pozoj
     where(email: 'info@pozoj.si').first

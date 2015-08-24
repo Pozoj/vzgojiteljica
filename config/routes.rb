@@ -84,6 +84,8 @@ Web3::Application.routes.draw do
       get :einvoice, on: :member
       get :eenvelope, on: :member
       get :pdf, on: :member
+      post :email, on: :member
+      post :email_due, on: :member
       post :build_for_subscription, on: :collection
       put :reverse, on: :member
     end

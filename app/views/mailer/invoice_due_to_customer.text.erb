@@ -1,0 +1,13 @@
+Spoštovani,
+
+Pošiljamo vam račun <%= @invoice.invoice_id %> za revijo Vzgojiteljica, ki je zapadel v plačilo pred <%= @invoice.late_days %> dnevi.
+
+Rok plačila računa je bil: <%= l @invoice.due_at.to_date, format: :simple %>.
+
+Prosimo, če lahko račun poravnate v najkrajšem možnem času.
+
+Če ste račun v vmesnem času že poravnali, smatrajte to obvestilo kot brezpredmetno.
+
+Lep pozdrav,
+
+- kolektiv revije Vzgojiteljica

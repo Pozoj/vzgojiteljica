@@ -91,3 +91,9 @@ td.subscriptions .subscription:last-child {
 #invoice_reverse_reason {
   width: 400px;
 }
+.table.events {
+  font-size: 10px;
+}
+.table.events tr:first-child td {
+  border: 0;
+}

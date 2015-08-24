@@ -79,6 +79,32 @@ class Admin::InvoicesController < Admin::AdminController
     redirect_to admin_invoices_path, notice: "Ustvarjam račune"
   end
 
+  def email
+    customer = resource.customer
+
+    unless customer.billing_email.present?
+      return redirect_to(admin_invoice_path, notice: "Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila")
+    end
+
+    Mailer.delay.invoice_to_customer(resource.id)
+    redirect_to admin_invoice_path, notice: "Račun poslan na #{customer.billing_email}"
+  end
+
+  def email_due
+    unless resource.due?
+      return redirect_to(admin_invoice_path, notice: "Račun še ni zapadel, zato ne bomo poslali opomina.")
+    end
+
+    customer = resource.customer
+
+    unless customer.billing_email.present?
+      return redirect_to(admin_invoice_path, notice: "Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila")
+    end
+
+    Mailer.delay.invoice_due_to_customer(resource.id)
+    redirect_to admin_invoice_path, notice: "Opomin poslan na #{customer.billing_email}"
+  end
+
   def pdf
     redirect_to resource.pdf_idempotent
   end

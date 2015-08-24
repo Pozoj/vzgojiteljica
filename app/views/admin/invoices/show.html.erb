@@ -76,7 +76,7 @@
             <i class="glyphicon glyphicon-export"></i>
             PDF
           <% end %>
-          <%= link_to einvoice_admin_invoice_path(@invoice, format: :xml), class: 'btn btn-default' do %>
+          <% link_to einvoice_admin_invoice_path(@invoice, format: :xml), class: 'btn btn-default' do %>
             <i class="glyphicon glyphicon-indent-left"></i>
             E-Račun XML
           <% end %>
@@ -89,6 +89,22 @@
             E-ovojnica
           <% end %>
         </p>
+        <p>
+          <%= link_to email_admin_invoice_path(@invoice), method: :post, class: 'btn btn-default', "data-confirm": "Ali ste prepričani da želite poslati račun na #{@invoice.customer.billing_email}?" do %>
+            <i class="glyphicon glyphicon-envelope"></i>
+            Pošlji račun
+          <% end %>
+          <% if @invoice.due? %>
+            <%= link_to email_due_admin_invoice_path(@invoice), method: :post, class: 'btn btn-default', "data-confirm": "Ali ste prepričani da želite poslati opomin na #{@invoice.customer.billing_email}?" do %>
+              <i class="glyphicon glyphicon-envelope"></i>
+              Pošlji opomin
+            <% end %>
+         <% end %> 
+        </p>
+        <% if @invoice.events.any? %>
+          <hr>
+          <%= render 'events/events', events: @invoice.events %>
+        <% end %>
       </div>
     </div>
   </div>

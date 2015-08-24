@@ -9,6 +9,22 @@ class Customer < Entity
     subscriptions.active.inject(0) { |sum, s| sum += s.quantity }
   end
 
+  def billing_name
+    if person?
+      name
+    else
+      billing_person.try(:name)
+    end
+  end
+
+  def billing_email
+    if person?
+      email
+    else
+      billing_person.try(:email)
+    end
+  end
+
   def self.active_count
     Subscription.active.group_by { |subscription| subscription.try(:subscriber).try(:customer_id) }.count
   end

@@ -108,16 +108,16 @@
 
     <div class="container" id="container">
       <% if flash[:notice] %>
-        <div id="flash" class="notice"><%= flash[:notice] %></div>
+        <div id="flash" class="alert alert-info"><%= flash[:notice] %></div>
       <% end %>
       <% if flash[:warning] %>
-        <div id="flash" class="warning"><%= flash[:warning] %></div>
+        <div id="flash" class="alert alert-warning"><%= flash[:warning] %></div>
       <% end %>
       <% if flash[:error] %>
-        <div id="flash" class="error"><%= flash[:error] %></div>
+        <div id="flash" class="alert alert-danger"><%= flash[:error] %></div>
       <% end %>
       <% if flash[:alert] %>
-        <div id="flash" class="alert"><%= flash[:alert] %></div>
+        <div id="flash" class="alert alert-warning"><%= flash[:alert] %></div>
       <% end %>
 
       <%= yield %>

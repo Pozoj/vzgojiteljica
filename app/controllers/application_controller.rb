@@ -29,11 +29,6 @@ class ApplicationController < ActionController::Base
     { :class => body_class, :id => body_id }
   end
 
-  def get_recent_shouts
-    @shouts = Shout.recent
-    @shoutbox_nickname = session[:shoutbox_nickname]
-  end
-
   def authenticate
     return if signed_in?
     return if devise_controller?

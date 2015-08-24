@@ -1,0 +1,6 @@
+#config/schedule.yml
+
+invoices_due:
+  cron: "0 16 * * *"
+  class: "InvoicesDueEmailerWorker"
+  queue: default 

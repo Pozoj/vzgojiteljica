@@ -42,6 +42,7 @@ gem 'rubyzip'
 gem 'rollbar'
 gem 'cmxl'
 gem 'sidekiq'
+gem 'sidekiq-cron'
 gem 'sinatra', require: nil
 gem 'unicorn'
 

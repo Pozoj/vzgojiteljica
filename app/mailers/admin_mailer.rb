@@ -12,4 +12,10 @@ class AdminMailer < ActionMailer::Base
     return unless @inquiry = Inquiry.find(inquiry_id)
     mail(to: ADMIN_EMAIL, subject: "Novo vprašanje ##{@inquiry.id}: #{@inquiry.subject}")
   end
+
+  def invoices_due
+    @invoices = Invoice.due.unpaid.unreversed
+    return unless @invoices.any?
+    mail(to: ADMIN_EMAIL, subject: "Zapadli računi na dan #{Date.today.to_s} - #{@invoices.count} računov")
+  end
 end

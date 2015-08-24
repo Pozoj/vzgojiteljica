@@ -1,6 +1,6 @@
 class Inquiry < ActiveRecord::Base
   attr_accessor :helmet
-  validates_presence_of :subject, :question
+  validates_presence_of :subject, :question, :email
   validates :email, email: true
 
   scope :published, -> { where(published: true) }

@@ -27,4 +27,6 @@ Web3::Application.configure do
 
   # Use letter opener.
   config.action_mailer.delivery_method = :letter_opener
+
+  config.action_mailer.default_url_options = { host: "localhost:5000" }
 end

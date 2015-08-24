@@ -17,12 +17,4 @@ class Mailer < ActionMailer::Base
     return unless @inquiry.email?
     mail(to: @inquiry.email, bcc: ENV['DEFAULT_ADMIN_EMAIL'], subject: "Odgovor na vprašanje ##{@inquiry.id}")
   end
-
-  def default_url_options
-    if Rails.env.development?
-      { host: 'localhost:5000' }
-    else
-      { host: 'www.vzgojiteljica.si' }
-    end
-  end
 end

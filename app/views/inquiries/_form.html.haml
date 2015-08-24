@@ -1,10 +1,10 @@
 = simple_form_for @inquiry do |f|
-  = f.input :name
-  = f.input :email
-  = f.input :phone
+  = f.input :name, label: "Ime in priimek"
+  = f.input :institution
+  = f.input :email, required: true
   = f.input :subject
   = f.input :question
   = f.input :helmet, wrapper_html: { class: 'the_helmet' }
   - if signed_in?
     = f.input :published, label: "Objavljeno na Vzgojiteljica.si"
-  .submit= f.submit
+  .submit= f.submit "Postavite vprašanje"

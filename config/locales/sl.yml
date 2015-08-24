@@ -44,8 +44,8 @@ sl:
     vat_id: ID št. za DDV
     registration_number: Matična številka
     quantity: Količina
-    institution_id: Institucija
-    institution: Institucija
+    institution_id: Organizacija
+    institution: Organizacija
     question: Vprašanje
     answer: Odgovor
     subject: Zadeva

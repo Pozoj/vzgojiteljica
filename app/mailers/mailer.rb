@@ -30,12 +30,16 @@ class Mailer < ActionMailer::Base
     recipient = "#{@customer.billing_name} <#{@customer.billing_email}>"
 
     # Attach invoice PDF.
-    invoice_file = open(@invoice.pdf_idempotent)
-    attachments["#{@invoice.invoice_id}.pdf"] = invoice_file.read
+    begin
+      invoice_file = open(@invoice.pdf_idempotent)
+      attachments["#{@invoice.invoice_id}.pdf"] = invoice_file.read
 
-    @invoice.events.create!(event: 'invoice_sent', details: recipient)
+      @invoice.events.create!(event: 'invoice_sent', details: recipient)
 
-    mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Račun #{@invoice.invoice_id} za revijo Vzgojiteljica")
+      mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Račun #{@invoice.invoice_id} za revijo Vzgojiteljica")
+    rescue StandardError => e
+      @invoice.events.create!(event: 'invoice_send_error', details: e.inspect)
+    end
   end
 
   def invoice_due_to_customer(invoice_id)
@@ -50,11 +54,15 @@ class Mailer < ActionMailer::Base
     recipient = "#{@customer.billing_name} <#{@customer.billing_email}>"
 
     # Attach invoice PDF.
-    invoice_file = open(@invoice.pdf_idempotent)
-    attachments["#{@invoice.invoice_id}.pdf"] = invoice_file.read
+    begin
+      invoice_file = open(@invoice.pdf_idempotent)
+      attachments["#{@invoice.invoice_id}.pdf"] = invoice_file.read
 
-    @invoice.events.create!(event: 'invoice_due_sent', details: recipient)
+      @invoice.events.create!(event: 'invoice_due_sent', details: recipient)
 
-    mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Opomin: Račun #{@invoice.invoice_id} za revijo Vzgojiteljica")
+      mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Opomin: Račun #{@invoice.invoice_id} za revijo Vzgojiteljica")
+    rescue StandardError => e
+      @invoice.events.create!(event: 'invoice_send_error', details: e.inspect)
+    end
   end
 end

@@ -17,9 +17,7 @@
 
 
 <div id="question">
-  <p>
-    <span>&ldquo;</span><%= @inquiry.question %><span>&rdquo;</span>
-  </p>
+  <%= simple_format @inquiry.question %>
   <p class='author'>
     &mdash;
     <%= @inquiry.name %>
@@ -30,12 +28,15 @@
 </div>
 
 <div id="answer">
-  <p>Odgovor:</p>
-  <p>
-    <% if @inquiry.answer? %>
-      <strong><%= @inquiry.answer %></strong>
-    <% else %>
+  <% if @inquiry.answer? %>
+    <p>
+      Odgovor
+      <span class="date"><%= l @inquiry.updated_at, format: :simple %></span>
+    </p>
+    <strong><%= simple_format @inquiry.answer %></strong>
+  <% else %>
+    <p>
       To vprašanje še ni odgovorjeno.
-    <% end %>
-  </p>
+    </p>
+  <% end %>
 </div>

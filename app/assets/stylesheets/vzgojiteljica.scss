@@ -1049,13 +1049,22 @@ label.boolean {
   }
 }
 #inquiries-show #answer {
-  max-width: 500px;
-  padding: 5px;
+  max-width: 600px;
+  padding: 15px;
   background: rgba(210, 208, 202, 0.3);
   border-radius: 5px;
   border: 4px solid rgba(255, 255, 255, 0.68);
   box-shadow: 0px 1px 7px 0px rgba(127, 127, 127, 0.4);
-  margin-top: 20px;
+  margin-top: 50px;
+
+  p {
+    margin: 10px 0;
+  }
+
+  .date {
+    float: right;
+    color: #999;
+  }
 }
 
 #inquiries-answer_question {

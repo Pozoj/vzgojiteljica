@@ -967,6 +967,9 @@ label.boolean {
 
 /*_________________________________ Inquiry Page _________________________________*/
 
+.inquiries .the_helmet {
+  display: none;
+}
 #inquiries-index {
   #container {
     min-height: 840px;
@@ -979,9 +982,6 @@ label.boolean {
     position: absolute;
     top: 90px;
     right: 40px;
-  }
-  .the_helmet {
-    display: none;
   }
   #new_inquiry {
     margin: 20px;

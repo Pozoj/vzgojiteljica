@@ -1,0 +1,22 @@
+Novo vprašanje Vzgojiteljica!
+
+<% if @inquiry.name? %>
+  Ime: <%= @inquiry.name %>
+<% end %>
+<% if @inquiry.institution? %>
+  Institucija: <%= @inquiry.institution %>
+<% end %>
+<% if @inquiry.phone? %>
+  Telefon: <%= @inquiry.phone %>
+<% end %>
+<% if @inquiry.email? %>
+  Email: <%= @inquiry.email %>
+<% end %>
+
+
+<% if @inquiry.subject? %>
+  Subjekt: <%= @inquiry.subject %>
+<% end %>
+<% if @inquiry.question? %>
+  Vprašanje: <%= @inquiry.question %>
+<% end %>

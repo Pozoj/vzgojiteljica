@@ -9,6 +9,7 @@
 
 <%= simple_form_for @inquiry, url: answer_inquiry_path(@inquiry) do |f| %>
   <%= f.input :answer %>
+  <%= f.input :published, label: "Odgovor naj bo viden na Vzgojiteljica.si" %>
   <div class="submit">
     <%= f.submit %>
   </div>

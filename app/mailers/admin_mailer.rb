@@ -3,8 +3,13 @@ class AdminMailer < ActionMailer::Base
   EDITOR_EMAIL = ENV['DEFAULT_EDITOR_EMAIL']
   default from:  ENV['DEFAULT_EMAIL_FROM']
 
-  def new_order order_id
+  def new_order(order_id)
     return unless @order = Order.find(order_id)
-    mail(to: ADMIN_EMAIL, subject: "Novo naročilo ##{@order.id}")
+    mail(to: ADMIN_EMAIL, subject: "Novo naročilo ##{@order.order_id}")
+  end
+
+  def new_inquiry(inquiry_id)
+    return unless @inquiry = Inquiry.find(inquiry_id)
+    mail(to: ADMIN_EMAIL, subject: "Novo vprašanje ##{@inquiry.id}: #{@inquiry.subject}")
   end
 end

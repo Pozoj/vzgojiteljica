@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601045308) do
+ActiveRecord::Schema.define(version: 20150824002043) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -146,7 +146,10 @@ ActiveRecord::Schema.define(version: 20150601045308) do
     t.text     "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "published",               default: false
   end
+
+  add_index "inquiries", ["published"], name: "index_inquiries_on_published"
 
   create_table "institutions", force: :cascade do |t|
     t.string   "name",       limit: 255

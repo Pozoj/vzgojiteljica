@@ -3,6 +3,7 @@ class InquiriesController < ApplicationController
 
   def index
     @inquiry = Inquiry.new
+    @inquiries = Inquiry.published
     respond_with collection
   end
 
@@ -20,8 +21,14 @@ class InquiriesController < ApplicationController
       return
     end
 
-    @inquiry = Inquiry.create resource_params
-    respond_with resource
+    @inquiry = Inquiry.new(resource_params)
+    if @inquiry.save
+      AdminMailer.delay.new_inquiry(@inquiry.id)
+      Mailer.delay.inquiry_submitted(@inquiry.id)
+      respond_with resource
+    else
+      render action: :new, notice: "Napaka pri postavljanju vprašanja!"
+    end
   end
 
   def edit
@@ -43,14 +50,17 @@ class InquiriesController < ApplicationController
   end
 
   def answer
-    resource.update_attributes params.require(:inquiry).permit(:answer)
+    if resource.update_attributes params.require(:inquiry).permit(:answer, :published)
+      Mailer.delay.inquiry_answer(resource.id)
+    end
     respond_with resource
   end
 
   private
 
   def collection
-    @inquiries = Inquiry.all.page(params[:page]).order(created_at: :desc)
+    @inquiries ||= Inquiry.all
+    @inquiries = @inquiries.order(created_at: :desc).page(params[:page])
   end
 
   def resource

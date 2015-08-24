@@ -20,9 +20,13 @@
   <%= simple_format @inquiry.question %>
   <p class='author'>
     &mdash;
-    <%= @inquiry.name %>
-    <% if @inquiry.institution.present? %>
-      (<%= @inquiry.institution %>)
+    <% if @inquiry.name.present? || @inquiry.institution.present? %>
+      <%= @inquiry.name %>
+      <% if @inquiry.institution.present? %>
+        (<%= @inquiry.institution %>)
+      <% end %>
+    <% else %>
+      Anonimen uporabnik
     <% end %>
   </p>
 </div>

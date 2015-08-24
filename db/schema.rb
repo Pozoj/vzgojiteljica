@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824002043) do
+ActiveRecord::Schema.define(version: 20150824022934) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
@@ -134,6 +134,21 @@ ActiveRecord::Schema.define(version: 20150824002043) do
   add_index "entities", ["registration_number"], name: "index_entities_on_registration_number", unique: true
   add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id"
   add_index "entities", ["vat_id"], name: "index_entities_on_vat_id", unique: true
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "event"
+    t.text     "details"
+    t.string   "eventable_type"
+    t.integer  "eventable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["event"], name: "index_events_on_event"
+  add_index "events", ["eventable_id"], name: "index_events_on_eventable_id"
+  add_index "events", ["eventable_type"], name: "index_events_on_eventable_type"
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "inquiries", force: :cascade do |t|
     t.string   "name",        limit: 255

@@ -81,6 +81,20 @@ a {
   }
 }
 
+.admin span {
+  font-size: 0.8em;
+  font-weight: 800;
+  color: #333;
+  display: table;
+  padding: 5px;
+  border: 2px solid #ccc;
+  background: #eee;
+  float: right;
+  margin-left: 10px;
+  border-radius: 5px;
+  line-height: 1em;
+}
+
 #container > .admin {
   position: absolute;
   top: 30px;

@@ -4,7 +4,17 @@
   <%= link_to "Odstrani", @inquiry, method: :delete, data: { confirm: 'Ste prepričani?' } %>
   <%= link_to "Uredi", edit_inquiry_path(@inquiry) %>
   <%= link_to "Odgovori vprašanje", answer_question_inquiry_path(@inquiry) %>
+  <% if signed_in? %>
+    <span class="published_status">
+      <% if @inquiry.published? %>
+        Vprašanje je vidno
+      <% else %>
+        Vprašanje ni vidno
+      <% end %>
+    </span>
+  <% end %>
 <% end %>
+
 
 <div id="question">
   <p>

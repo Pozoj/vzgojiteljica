@@ -68,6 +68,10 @@ class InquiriesController < ApplicationController
   end
 
   def resource_params
-    params.require(:inquiry).permit(:name, :institution, :email, :phone, :subject, :question, :helmet)
+    if signed_in?
+      params.require(:inquiry).permit(:name, :institution, :email, :phone, :subject, :question, :helmet, :published)
+    else
+      params.require(:inquiry).permit(:name, :institution, :email, :phone, :subject, :question, :helmet)
+    end
   end
 end

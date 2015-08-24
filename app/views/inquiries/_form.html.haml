@@ -5,4 +5,6 @@
   = f.input :subject
   = f.input :question
   = f.input :helmet, wrapper_html: { class: 'the_helmet' }
+  - if signed_in?
+    = f.input :published, label: "Objavljeno na Vzgojiteljica.si"
   .submit= f.submit

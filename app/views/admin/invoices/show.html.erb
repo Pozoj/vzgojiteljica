@@ -1,5 +1,5 @@
 <h1>
-  Račun <%= @invoice.reference_number %>/ REV /<%= @invoice.created_at.strftime("%Y") %>
+  Račun <%= @invoice.invoice_id %>
   <small class="muted">
     za <%= link_to @invoice.customer, [:admin, @invoice.customer] %>
   </small>

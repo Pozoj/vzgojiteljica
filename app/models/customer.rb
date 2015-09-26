@@ -70,8 +70,8 @@ class Customer < Entity
       end
       raise CustomerFromOrderError.new("Can't save subscription") unless subscription.save
 
-      order.processed = true
       order.save!
+      order.processed!
 
       customer
     end

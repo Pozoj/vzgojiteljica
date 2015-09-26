@@ -51,7 +51,7 @@
           <strong>Št. naročilnice:</strong>
           <p>
             <% if @subscription.order %>
-              <%= link_to @subscription.order_form, @subscription.order %>
+              <%= link_to @subscription.order_form, admin_order_path(@subscription.order) %>
             <% else %>
               <%= @subscription.order_form %>
             <% end %>

@@ -1,0 +1,131 @@
+<script type="text/javascript">
+  $(function() {
+    $('#subscriber_id').chosen({
+      search_contains: true
+    });
+  });
+</script>
+
+<h1>
+  Naročilo #<%= @order.id %>
+  <% if @order.processed? %>
+    <small class="label label-success pull-right">Sprocesirano</small>
+  <% else %>
+    <small class="label label-danger pull-right">Odprto</small>
+  <% end %>
+</h1>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong>Naziv:</strong>
+        <p>
+          <%= @order.title %>
+        </p>
+        <strong>Ime in priimek:</strong>
+        <p>
+          <%= @order.name %>
+        </p>
+        <strong>Naslov:</strong>
+        <p>
+          <%= @order.address %>
+          <br>
+          <%= @order.post %>
+        </p>
+        <strong>Email:</strong>
+        <p>
+          <%= @order.email %>
+        </p>
+        <% if @order.vat_id? %>
+          <strong>ID št. za DDV:</strong>
+          <p>
+            <%= @order.vat_id %>
+          </p>
+        <% end %>
+        <% if @order.phone? %>
+          <strong>Telefon:</strong>
+          <p>
+            <%= @order.phone %>
+          </p>
+        <% end %>
+        <strong>Količina:</strong>
+        <p><%= @order.quantity %> izvod(ov)</p>
+        <strong>Plan plačila:</strong>
+        <p><%= @order.plan_type_string %></p>
+        <% if @order.comments.present? %>
+          <hr>
+          <strong>Opombe:</strong>
+          <p><%= @order.comments %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <%= render "admin/remarks/form", resource: @order %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <% if @order.subscriptions.any? %>
+          <% @order.subscriptions.each do |subscription| %>
+            <strong>Naročnine:</strong>
+            <p>
+              <%= link_to "Naročnina ##{subscription.id}", admin_subscription_path(subscription) %>
+              <br>
+              <%= subscription %>
+              <% if subscription.active? %>
+                <small class="label label-success">Aktivna</small>
+              <% else %>
+                <small class="label label-danger">Neaktivna</small>
+              <% end %> 
+            </p>
+          <% end %>
+          <hr>
+        <% end %>
+        <strong>Ustvarjeno:</strong>
+        <p>
+          <%= l @order.created_at %>
+        </p>
+        <% unless @order.created_at == @order.updated_at %>
+          <strong>Osveženo:</strong>
+          <p>
+            <%= l @order.updated_at %>
+          </p>
+        <% end %>
+        <% if @order.events.any? %>
+          <hr>
+          <%= render 'events/events', events: @order.events %>
+        <% end %>
+        <% if @order.ip? %>
+          <strong>IP:</strong>
+          <p><%= @order.ip %></p>
+        <% end %>
+        <% unless @order.processed? %>
+          <hr>
+          <p>
+            <%= link_to new_from_order_admin_customers_path(order_id: @order.id), method: :post, class: 'btn btn-default' do %>
+              <i class="glyphicon glyphicon-asterisk"></i>
+              Obdelaj kot novo stranko
+            <% end %>
+            <%= link_to mark_processed_admin_order_path(@order), method: :put, class: 'btn btn-default' do %>
+              <i class="glyphicon glyphicon-check"></i>
+              Označi kot obdelano
+            <% end %>
+          </p>
+          <hr>
+          <strong>Dodaj k obstoječemu prejemniku</strong>
+          <p>
+          <%= form_tag new_from_order_admin_subscriptions_path(order_id: @order.id), method: :post, class: 'form' do %>
+              <div class="form-group">
+                <%= select_tag :subscriber_id, grouped_options_for_select(@all_subscribers), {class: 'form-control', id: 'subscriber_id', placeholder: 'ID prejemnika', prompt: ""} %>
+              </div>
+              <%= button_tag class: 'btn btn-default' do %>
+                <i class="glyphicon glyphicon-envelope"></i>
+                Aktiviraj na prejemniku
+              <% end %>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<h2>
+  Naročila
+  <small>
+    <% if params[:all] == 'true' %>
+      <%= link_to "Neobdelana", admin_orders_path %> | Vsa naročila
+    <% else %>
+      Neobdelana | <%= link_to "Vsa naročila", all: true %>
+    <% end %>
+  </small>
+</h2>
+
+<%= paginate @orders %>
+
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>Naziv</th>
+      <th>Ime in priimek</th>
+      <th>Naslov</th>
+      <th>Pošta</th>
+      <th>Kol.</th>
+      <th>Plan</th>
+      <th>Ustvarjeno</th>
+      <th>Procesirano</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= link_to order.title, admin_order_path(order) %></td>
+        <td><%= order.name %></td>
+        <td><%= order.address %></td>
+        <td><%= order.post %></td>
+        <td><%= order.quantity %></td>
+        <td>
+          <% if order.plan_type == 1 %>
+            let
+          <% elsif order.plan_type == 6 %>
+            št
+          <% end %>
+        </td>
+        <td><%=l order.created_at %></td>
+        <td>
+          <% if order.processed? %>
+            &#10003;
+          <% else %>
+            &#10007;
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @orders %>

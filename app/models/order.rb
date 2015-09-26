@@ -9,9 +9,22 @@ class Order < ActiveRecord::Base
 
   belongs_to :post
   has_many :subscriptions
+  has_many :remarks, as: :remarkable, dependent: :destroy
+  has_many :events, as: :eventable, dependent: :destroy
+
+
+  scope :processed, -> { where(processed: true) }
+  scope :not_processed, -> { where(processed: false) }
 
   def order_id
     "#{created_at.strftime('%Y')}-#{id}"
+  end
+
+  def processed!(user_id)
+    self.processed = true
+    if save
+      events.create event: :order_processed, user_id: user_id
+    end
   end
 
   def plan_type_string

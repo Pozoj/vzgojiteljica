@@ -33,8 +33,7 @@ Web3::Application.routes.draw do
         patch :document
       end
     end
-    resources :orders, path: 'narocila' do
-      put :mark_processed, on: :member
+    resources :orders, path: 'narocila', only: [:new, :create] do
       get :successful, on: :collection, path: 'uspesno'
     end
     resources :copies, path: 'besedila'
@@ -52,7 +51,7 @@ Web3::Application.routes.draw do
     get :regional, to: 'admin#regional'
     resources :entities
     resources :customers do
-      post :new_from_order, on: :member
+      post :new_from_order, on: :collection
       get :new_freerider, on: :collection
       post :create_freerider, on: :collection
       get :add_person, on: :member
@@ -69,10 +68,14 @@ Web3::Application.routes.draw do
       put :end_now, on: :member
       put :end_by_end_of_year, on: :member
       put :reinstate, on: :member
+      post :new_from_order, on: :collection
     end
     resources :plans
     resources :batches
     resources :remarks
+    resources :orders do
+      put :mark_processed, on: :member
+    end
     resources :invoices do
       get :wizard, on: :collection
       get :print_wizard, on: :collection

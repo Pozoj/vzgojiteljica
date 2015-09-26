@@ -87,8 +87,23 @@ td.subscriptions .subscription:last-child {
 .print_invoices .form-control {
   width: 100px;
 }
+.panel.remarks table td.remark {
+  width: 78%;
+}
+.panel.remarks table small {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+}
+.panel.remarks table small a {
+  color: #ccc;
+}
+.panel.remarks table small a:hover {
+  background: #ccc;
+  color: #333;
+}
 
-#invoice_reverse_reason {
+#invoice_reverse_reason, #remark_remark {
   width: 400px;
 }
 .table.events {

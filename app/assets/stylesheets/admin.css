@@ -90,13 +90,17 @@ td.subscriptions .subscription:last-child {
 .panel.remarks table td.remark {
   width: 78%;
 }
-.panel.remarks table small {
-  display: block;
+.panel.remarks .table tr:first-child td {
+  border: 0;
+}
+.panel.remarks table .date {
   text-align: right;
   font-size: 11px;
 }
 .panel.remarks table small a {
   color: #ccc;
+  display: inline-block;
+  padding: 0 5px;
 }
 .panel.remarks table small a:hover {
   background: #ccc;

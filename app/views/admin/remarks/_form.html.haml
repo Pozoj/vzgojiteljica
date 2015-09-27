@@ -2,12 +2,12 @@
   .panel-heading 
     %h3.panel-title Opombe
   .panel-body
-    %table
+    %table.table
       %tbody
         - resource.remarks.order(created_at: :desc).each do |r|
           %tr
-            %td.remark= r.remark
-            %td
+            %td.remark= simple_format r.remark
+            %td.date
               %small.muted
                 = link_to "x", [:admin, r], method: :delete, :"data-confirm" => "Ste prepričani?"
                 = r.user

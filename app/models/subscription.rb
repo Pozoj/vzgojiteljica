@@ -63,6 +63,9 @@ class Subscription < ActiveRecord::Base
       subscription.quantity = order.quantity
       subscription.order = order
       subscription.order_form = "Naročilo ##{order.id}"
+      if order.comments.present?
+        subscription.remarks.create remark: "Opomba naročnika: \"#{order.comments}\""
+      end
       if order.plan_type
         subscription.plan = Plan.latest(order.plan_type)
       end

@@ -93,6 +93,7 @@
         <% end %>
         <% if @order.events.any? %>
           <hr>
+          <strong>Dogodki:</strong>
           <%= render 'events/events', events: @order.events %>
         <% end %>
         <% if @order.ip? %>

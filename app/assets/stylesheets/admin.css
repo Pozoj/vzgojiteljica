@@ -112,3 +112,6 @@ td.subscriptions .subscription:last-child {
 .table.events tr:first-child td {
   border: 0;
 }
+.table.events tr:first-child td.date {
+  text-align: right;
+}

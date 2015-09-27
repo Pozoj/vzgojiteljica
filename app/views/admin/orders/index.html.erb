@@ -15,7 +15,6 @@
   <thead>
     <tr>
       <th>Naziv</th>
-      <th>Ime in priimek</th>
       <th>Naslov</th>
       <th>Pošta</th>
       <th>Kol.</th>
@@ -27,8 +26,18 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= link_to order.title, admin_order_path(order) %></td>
-        <td><%= order.name %></td>
+        <td>
+          <%= link_to "", admin_order_path(order) %>
+          <% if order.title? %>
+            <%= order.title %>
+            <% if order.name? %>
+              <br>
+              <span class="muted"><%= order.name %></span>
+            <% end %>
+          <% else %>
+            <%= order.name %>
+          <% end %>
+        </td>
         <td><%= order.address %></td>
         <td><%= order.post %></td>
         <td><%= order.quantity %></td>

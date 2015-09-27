@@ -3,7 +3,7 @@
     <tr>
       <td><code><%= event.event %></code></td>
       <td><%= event.details %></td>
-      <td><%= l event.created_at, format: :simple %></td>
+      <td class="date"><%= l event.created_at, format: :simple %></td>
     </tr>
   <% end %>
 </table>

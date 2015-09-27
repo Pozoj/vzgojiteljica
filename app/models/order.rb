@@ -35,6 +35,10 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def to_s
+    "Naročilo ##{id} (#{title || name})"
+  end
+
   private
 
   def validate_plan_type

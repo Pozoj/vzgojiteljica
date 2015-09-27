@@ -31,4 +31,11 @@ class Admin::OrdersController < Admin::AdminController
       ]
     end
   end
+
+  def destroy
+    order = Order.find(params[:id])
+    if order.destroy
+      redirect_to admin_orders_path, notice: "Naročilo uspešno izbrisano"
+    end
+  end
 end

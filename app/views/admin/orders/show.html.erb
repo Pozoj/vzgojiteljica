@@ -113,6 +113,10 @@
               <i class="glyphicon glyphicon-check"></i>
               Označi kot obdelano
             <% end %>
+            <%= link_to admin_order_path(@order), method: :delete, class: 'btn btn-danger pull-right', :"data-confirm" => 'Ste prepričani?' do %>
+              <i class="glyphicon glyphicon-trash"></i>
+              Izbriši
+            <% end %>
           </p>
           <hr>
           <strong>Dodaj k obstoječemu prejemniku</strong>

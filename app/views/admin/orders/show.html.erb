@@ -118,19 +118,21 @@
               Izbriši
             <% end %>
           </p>
-          <hr>
-          <strong>Dodaj k obstoječemu prejemniku</strong>
-          <p>
-          <%= form_tag new_from_order_admin_subscriptions_path(order_id: @order.id), method: :post, class: 'form' do %>
-              <div class="form-group">
-                <%= select_tag :subscriber_id, grouped_options_for_select(@all_subscribers), {class: 'form-control', id: 'subscriber_id', placeholder: 'ID prejemnika', prompt: ""} %>
-              </div>
-              <%= button_tag class: 'btn btn-default' do %>
-                <i class="glyphicon glyphicon-envelope"></i>
-                Aktiviraj na prejemniku
+          <% if @all_subscribers.any? %>
+            <hr>
+            <strong>Dodaj k obstoječemu prejemniku</strong>
+            <p>
+              <%= form_tag new_from_order_admin_subscriptions_path(order_id: @order.id), method: :post, class: 'form' do %>
+                <div class="form-group">
+                  <%= select_tag :subscriber_id, grouped_options_for_select(@all_subscribers), {class: 'form-control', id: 'subscriber_id', placeholder: 'ID prejemnika', prompt: ""} %>
+                </div>
+                <%= button_tag class: 'btn btn-default' do %>
+                  <i class="glyphicon glyphicon-envelope"></i>
+                  Aktiviraj na prejemniku
+                <% end %>
               <% end %>
-            <% end %>
-          </p>
+            </p>
+          <% end %>
         <% end %>
       </div>
     </div>

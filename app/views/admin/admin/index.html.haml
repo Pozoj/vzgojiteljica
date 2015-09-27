@@ -12,6 +12,9 @@
     %h3
       = Customer.paid_count
       %small plačljivih naročnikov
+    %h3
+      = Order.not_processed.count
+      %small neobdelanih naročil
     %hr
     %h2
       = Subscription.active.sum(:quantity)
@@ -24,8 +27,25 @@
       %small brezplačnih izvodov
     %hr
     %h2
-      = @last_issue
+      = @invoices.count
+      %small izdanih računov
+    %h3
+      = number_to_currency @invoices.paid.to_a.sum(&:total)
+      %small
+        znesek
+        = @invoices.paid.count
+        plačanih računov 
+    %h3
+      = number_to_currency @invoices.unpaid.to_a.sum(&:total)
+      %small 
+        znesek 
+        = @invoices.unpaid.count
+        neplačanih računov
+    %hr
+    %h2
+      = Issue.last
       %small zadnja številka
+
 
   .col-xs-4.pull-right
     .panel.panel-default

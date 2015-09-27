@@ -3,7 +3,7 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   def index
-    @last_issue = Issue.last
+    @invoices = Invoice.where(year: 2015)
   end
 
   def quantities

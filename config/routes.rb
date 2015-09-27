@@ -90,6 +90,7 @@ Web3::Application.routes.draw do
       post :email, on: :member
       post :email_due, on: :member
       post :build_for_subscription, on: :collection
+      post :build_partial_for_subscription, on: :collection
       put :reverse, on: :member
     end
     resources :bank_statements do

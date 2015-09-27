@@ -64,6 +64,28 @@ class InvoiceWizard
     i
   end
 
+  def build_partial_invoice_for_subscription(subscription, issues_left)
+    i = build_invoice subscription: subscription
+    plan = Plan.latest_per_issue
+    issues_left = Integer(issues_left)
+
+    # 6 per year
+    start_issue = 6 - issues_left
+
+    issues_left.times do |x|
+      li = i.line_items.new
+      li.entity_name = subscription.subscriber.to_s
+      li.product = "Revija Vzgojiteljica #{start_issue + x + 1}/#{Date.today.year}"
+      li.price_per_item = plan.price
+      li.price_per_item_with_discount = plan.price
+      li.quantity = subscription.quantity
+      li.unit = plan.quantity_unit_abbr
+      li.calculate
+    end
+
+    i
+  end
+
   def create_invoice_for_subscription subscription
     i = build_invoice_for_subscription(subscription)
     i.save!

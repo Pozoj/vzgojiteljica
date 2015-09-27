@@ -125,6 +125,24 @@ class Admin::InvoicesController < Admin::AdminController
     redirect_to admin_invoice_path(@invoice)
   end
 
+  def build_partial_for_subscription
+    subscription = Subscription.find(params[:subscription_id])
+    issues_left = params[:issues_left]
+
+    unless issues_left.present?
+      return redirect_to :back, notice: "Please provide issues left"
+    end
+
+    wizard = InvoiceWizard.new
+    @invoice = wizard.build_partial_invoice_for_subscription(subscription, issues_left)
+
+    unless @invoice.save
+      return render text: @invoice.errors.inspect
+    end
+
+    render json: {invoice_id: @invoice.id, redirect: admin_invoice_path(@invoice)}
+  end
+
   def einvoice
     @einvoice = EInvoice.new(invoice: resource).generate
     respond_to do |format|

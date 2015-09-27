@@ -36,11 +36,17 @@
         = @invoices.paid.count
         plačanih računov 
     %h3
-      = number_to_currency @invoices.unpaid.to_a.sum(&:total)
+      = number_to_currency @invoices.unpaid.unreversed.to_a.sum(&:total)
       %small 
         znesek 
-        = @invoices.unpaid.count
+        = @invoices.unpaid.unreversed.count
         neplačanih računov
+    %h3
+      = number_to_currency @invoices.reversed.to_a.sum(&:total)
+      %small 
+        znesek 
+        = @invoices.reversed.count
+        storniranih računov
     %hr
     %h2
       = Issue.last

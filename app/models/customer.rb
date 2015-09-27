@@ -102,5 +102,13 @@ class Customer < Entity
     end.join(',')
   end
 
+  def to_s
+    if title.present?
+      title
+    else
+      name
+    end
+  end
+
   class FromOrderError < StandardError; end
 end

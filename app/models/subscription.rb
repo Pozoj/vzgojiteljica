@@ -56,6 +56,23 @@ class Subscription < ActiveRecord::Base
     "#{plan} za #{subscriber}"
   end
 
+  def self.new_from_order(subscriber, order)
+    Subscription.transaction do
+      subscription = subscriber.subscriptions.new
+      subscription.start = Date.today
+      subscription.quantity = order.quantity
+      subscription.order = order
+      subscription.order_form = "Naročilo ##{order.id}"
+      if order.plan_type
+        subscription.plan = Plan.latest(order.plan_type)
+      end
+
+      raise FromOrderError("Can't save subscription") unless subscription.save
+
+      subscription
+    end
+  end
+
   private
 
   def fill_in_order_form
@@ -67,4 +84,6 @@ class Subscription < ActiveRecord::Base
       errors.add :end, "mora biti kasneje od pričetka"
     end
   end
+
+  class FromOrderError < StandardError; end
 end

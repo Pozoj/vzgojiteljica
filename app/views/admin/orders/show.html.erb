@@ -6,6 +6,8 @@
   });
 </script>
 
+<% if params[:error] %><%= debug params[:error] %><% end %>
+
 <h1>
   Naročilo #<%= @order.id %>
   <% if @order.processed? %>

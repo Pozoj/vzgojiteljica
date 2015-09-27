@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   attr_accessor :desire
 
-  validates_presence_of :name
+  validates_presence_of :name, :address, :post_id
   validates :quantity, presence: true, numericality: {greater_than: 0, only_integer: true}
   validates :email, presence: true, email: true
   validates :plan_type, presence: true, inclusion: { in: [1, 6] }

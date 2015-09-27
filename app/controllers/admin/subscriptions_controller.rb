@@ -31,6 +31,18 @@ class Admin::SubscriptionsController < Admin::AdminController
     respond_with resource, location: -> { admin_subscription_path(@subscription) }
   end
 
+  def new_from_order
+    order = Order.find(params[:order_id])
+    subscriber = Subscriber.find(params[:subscriber_id])
+    begin
+      subscription = Subscription.new_from_order(subscriber, order)
+      order.processed!(current_user.id)
+      redirect_to admin_subscription_path(subscription), notice: "Naročnina ##{subscription.id} ustvarjena iz naročila ##{order.id}."
+    rescue Subscription::FromOrderError => e
+      redirect_to admin_order_path(order), notice: "Napaka pri ustvarjanju naročnine iz naročila #{e.inspect}"
+    end
+  end
+
   def end_now
     resource.end = DateTime.now
     resource.save

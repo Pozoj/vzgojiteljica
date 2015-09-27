@@ -18,7 +18,13 @@ class Admin::OrdersController < Admin::AdminController
 
   def show
     @order = Order.find(params[:id])
-    @all_subscribers = Customer.all.order(:title, :name).map do |c|
+
+    customers = Customer.all.order(:title, :name)
+    if @order.post_id
+      customers = customers.where(post_id: @order.post_id)
+    end
+    
+    @all_subscribers = customers.map do |c|
       [
         c.to_s,
         c.subscribers.select(:id, :title, :name).order(:title, :name).map { |s| ["#{s}", s.id] }

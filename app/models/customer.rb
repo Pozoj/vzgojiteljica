@@ -33,9 +33,7 @@ class Customer < Entity
     Subscription.active.paid.group_by { |subscription| subscription.subscriber.customer_id }.count
   end
 
-  def self.new_from_order(order_id)
-    order = Order.find(order_id)
-
+  def self.new_from_order(order)
     Customer.transaction do
       customer = self.new
       customer.title = order.title
@@ -45,7 +43,7 @@ class Customer < Entity
       customer.phone = order.phone
       customer.email = order.email
       customer.vat_id = order.vat_id.gsub(/[^0-9]/, '')
-      raise CustomerFromOrderError.new("Can't save customer") unless customer.save
+      raise FromOrderError.new("Can't save customer: #{customer.errors.inspect}") unless customer.save
 
       customer.remarks.create remark: "Naročnik ustvarjen avtomatsko iz naročila ##{order.id} na spletni strani."
 
@@ -54,7 +52,7 @@ class Customer < Entity
       subscriber.name = order.name
       subscriber.address = order.address
       subscriber.post_id = order.post_id
-      raise CustomerFromOrderError.new("Can't save subscriber") unless subscriber.save
+      raise FromOrderError.new("Can't save subscriber: #{subscriber.errors.inspect}") unless subscriber.save
 
       if order.comments.present?
         subscriber.remarks.create remark: "Opomba naročnika: \"#{order.comments}\""
@@ -68,10 +66,7 @@ class Customer < Entity
       if order.plan_type
         subscription.plan = Plan.latest(order.plan_type)
       end
-      raise CustomerFromOrderError.new("Can't save subscription") unless subscription.save
-
-      order.save!
-      order.processed!
+      raise FromOrderError.new("Can't save subscription: #{subscription.errors.inspect}") unless subscription.save
 
       customer
     end
@@ -107,5 +102,5 @@ class Customer < Entity
     end.join(',')
   end
 
-  class CustomerFromOrderError < StandardError; end
+  class FromOrderError < StandardError; end
 end

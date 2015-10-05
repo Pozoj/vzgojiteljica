@@ -24,5 +24,7 @@ module Web3
     config.autoload_paths << Rails.root.join('lib')
 
     config.action_controller.permit_all_parameters = true
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

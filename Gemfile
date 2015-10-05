@@ -19,10 +19,10 @@ group :assets do
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
+gem 'pg'
 gem 'pdfcrowd'
 gem 'devise'
 gem 'simple_form'
@@ -47,7 +47,6 @@ gem 'sinatra', require: nil
 gem 'unicorn'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'pry'
   gem 'web-console'
   gem 'letter_opener'

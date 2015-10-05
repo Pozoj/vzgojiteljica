@@ -1,0 +1,7 @@
+db:
+  image: postgres
+  net: host
+
+redis:
+  image: redis
+  net: host

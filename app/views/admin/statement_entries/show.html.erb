@@ -38,62 +38,84 @@
     </div>
   </div>
 
-  <div class="col-xs-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Ročno poveži</h3>
-      </div>
-      <div class="panel-body">
-        <%= form_tag match_admin_statement_entry_path(@statement_entry), method: :post, class: 'form-inline' do %>
-          <div class="form-group">
-            <%= select_tag :invoice_id, options_for_select(@unpaid_invoices), {class: 'form-control', id: 'invoice_id', placeholder: 'ID računa', prompt: ""} %>
-            &nbsp;
-            <%= submit_tag "Poveži", class: 'btn btn-primary btn-xs' %>
-          </div>
-        <% end %>
+  <% if @statement_entry.invoice %>
+    <div class="col-xs-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Račun</h3>
+        </div>
+        <div class="panel-body">
+          <strong>Račun</strong>
+          <p><%= link_to @statement_entry.invoice.invoice_id, admin_invoice_path(@statement_entry.invoice) %></p>
+          <strong>Naročnik</strong>
+          <p><%= link_to @statement_entry.invoice.customer, admin_customer_path(@statement_entry.invoice.customer) %></p>
+          <strong>Izdan</strong>
+          <p><%= l @statement_entry.invoice.created_at, format: :simple %></p>
+          <strong>Rok</strong>
+          <p><%= l @statement_entry.invoice.due_at, format: :simple %></p>
+        </div>
       </div>
     </div>
-  </div>
+  <% else %>
+    <div class="col-xs-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Ročno poveži</h3>
+        </div>
+        <div class="panel-body">
+          <%= form_tag match_admin_statement_entry_path(@statement_entry), method: :post, class: 'form-inline' do %>
+            <div class="form-group">
+              <%= select_tag :invoice_id, options_for_select(@unpaid_invoices), {class: 'form-control', id: 'invoice_id', placeholder: 'ID računa', prompt: ""} %>
+              &nbsp;
+              <%= submit_tag "Poveži", class: 'btn btn-primary btn-xs' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
-<h3>Podobni neplačani računi</h3>
-<table class="table rowlinks">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Referenca</th>
-      <th>Stranka</th>
-      <th>Izdan</th>
-      <th>Rok</th>
-      <th>Plačan</th>
-      <th>Znesek</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @statement_entry.matches.each do |invoice| %>
+<% unless @statement_entry.invoice %>
+  <h3>Podobni neplačani računi</h3>
+  <table class="table rowlinks">
+    <thead>
       <tr>
-        <td>
-          <%= link_to "", admin_invoice_path(invoice) %>
-          <%= invoice.invoice_id %></td>
-        <td><%= invoice.payment_id %></td>
-        <td><%= invoice.customer %></td>
-        <td><%= l invoice.created_at, format: :simple %></td>
-        <td><%= l invoice.due_at, format: :simple %></td>
-        <td>
-          <% if invoice.paid? %>
-            <%= l invoice.paid_at, format: :simple %></td>
-          <% elsif invoice.due? %>
-            <span class="label label-danger"><%= invoice.late_days %> dni</span>
-          <% end %>
-        <td><%= number_to_currency invoice.total %></td>
-        <td>
-          <%= button_to match_admin_statement_entry_path(@statement_entry, invoice_id: invoice), method: :post, class: 'btn btn-success btn-xs' do %>
-            <i class="glyphicon glyphicon-link"></i>
-            Združi
-          <% end %>
-        </td>
+        <th>ID</th>
+        <th>Referenca</th>
+        <th>Stranka</th>
+        <th>Izdan</th>
+        <th>Rok</th>
+        <th>Plačan</th>
+        <th>Znesek</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @statement_entry.matches.each do |invoice| %>
+        <tr>
+          <td>
+            <%= link_to "", admin_invoice_path(invoice) %>
+            <%= invoice.invoice_id %></td>
+          <td><%= invoice.payment_id %></td>
+          <td><%= invoice.customer %></td>
+          <td><%= l invoice.created_at, format: :simple %></td>
+          <td><%= l invoice.due_at, format: :simple %></td>
+          <td>
+            <% if invoice.paid? %>
+              <%= l invoice.paid_at, format: :simple %></td>
+            <% elsif invoice.due? %>
+              <span class="label label-danger"><%= invoice.late_days %> dni</span>
+            <% end %>
+          <td><%= number_to_currency invoice.total %></td>
+          <td>
+            <%= button_to match_admin_statement_entry_path(@statement_entry, invoice_id: invoice), method: :post, class: 'btn btn-success btn-xs' do %>
+              <i class="glyphicon glyphicon-link"></i>
+              Združi
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

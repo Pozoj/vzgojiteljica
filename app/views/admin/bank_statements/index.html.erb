@@ -28,8 +28,9 @@
       <th>ID</th>
       <th>Datoteka</th>
       <th>Naloženo</th>
-      <th>Sprocesirano</th>
       <th>Št. postavk</th>
+      <th>Št. obdelanih</th>
+      <th>Št. neobdelanih</th>
     </tr>
   </thead>
   <tbody>
@@ -40,14 +41,9 @@
           <%= statement.id %></td>
         <td><%= statement.statement_file_name %></td>
         <td><%= l statement.created_at, format: :simple %></td>
-        <td>
-          <% if statement.processed_at? %>
-            <%= l statement.processed_at, format: :simple %>
-          <% else %>
-            &mdash;
-          <% end %>
-        </td>
         <td><%= statement.entries.count %></td>
+        <td><%= statement.entries.matched.count %></td>
+        <td><%= statement.entries.unmatched.count %></td>
       </tr>
     <% end %>
   </tbody>

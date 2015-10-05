@@ -6,7 +6,7 @@ class Admin::BankStatementsController < Admin::AdminController
   end
 
   def show
-    @entries = resource.entries.unmatched
+    @entries = resource.entries
     respond_with resource
   end
 

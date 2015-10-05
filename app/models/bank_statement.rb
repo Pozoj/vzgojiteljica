@@ -13,10 +13,11 @@ class BankStatement < ActiveRecord::Base
   validates_attachment_content_type :statement, content_type: 'text/plain'
 
   has_many :entries, class_name: 'StatementEntry', dependent: :destroy
+  has_many :events, as: :eventable
 
   before_save :store_raw_statement
 
-  def parse!
+  def parse!(return_problem = false)
     return unless parsed_mt940
 
     parsed_mt940.each do |statement|
@@ -36,9 +37,14 @@ class BankStatement < ActiveRecord::Base
         statement_entry.reference = entry.details.reference
         statement_entry.bank_reference = bank_reference
         if statement_entry.valid?
-          statement_entry.save
+          statement_entry.save!
         else
-          Rails.logger.info "ERROR saving statement entry: #{statement_entry.inspect}"
+          if return_problem
+            return [entry, statement_entry]
+          end
+          
+          Rails.logger.info "ERROR saving statement entry: #{statement_entry.to_json}"
+          events.create event: :statement_entry_invalid, details: "Entry: #{entry.to_json}, errors: #{statement_entry.errors.to_json}"
         end
       end
     end

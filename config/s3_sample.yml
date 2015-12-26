@@ -1,11 +1,12 @@
 development:
+  cdn: 'foo.cloudfront.net'
   bucket: 'vzgojiteljica-dev'
   access_key_id: ''
   secret_access_key: ''
 
-test: development  
-  
-production: 
+test: development
+
+production:
   bucket: 'vzgojiteljica'
   access_key_id: ''
   secret_access_key: ''

@@ -8,8 +8,9 @@ class BankStatement < ActiveRecord::Base
                       :secret_access_key => AWS_S3['secret_access_key']
                     },
                     :s3_storage_class => :reduced_redundancy,
-                    :s3_host_alias => 'assets.cdn.vzgojiteljica.si',
-                    :path => "/bank_statements/:id/:style_:basename.:extension"
+                    :s3_host_alias => AWS_S3['cdn'],
+                    :path => "/bank_statements/:id/:style_:basename.:extension",
+                    :url => ":s3_alias_url"
 
   validates_attachment_content_type :statement, content_type: 'text/plain'
 

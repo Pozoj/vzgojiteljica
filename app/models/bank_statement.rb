@@ -8,6 +8,7 @@ class BankStatement < ActiveRecord::Base
                       :secret_access_key => AWS_S3['secret_access_key']
                     },
                     :s3_storage_class => :reduced_redundancy,
+                    :s3_host_alias => 'assets.cdn.vzgojiteljica.si',
                     :path => "/bank_statements/:id/:style_:basename.:extension"
 
   validates_attachment_content_type :statement, content_type: 'text/plain'
@@ -42,7 +43,7 @@ class BankStatement < ActiveRecord::Base
           if return_problem
             return [entry, statement_entry]
           end
-          
+
           Rails.logger.info "ERROR saving statement entry: #{statement_entry.to_json}"
           events.create event: :statement_entry_invalid, details: "Entry: #{entry.to_json}, errors: #{statement_entry.errors.to_json}"
         end
@@ -68,7 +69,7 @@ class BankStatement < ActiveRecord::Base
 
     # Store raw statement
     self.raw_statement = Paperclip.io_adapters.for(statement).read
-      
+
     # Parse if we have the raw statement now
     return unless raw_statement
     self.parsed_statement = parse_statement(raw_statement)

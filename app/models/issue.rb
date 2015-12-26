@@ -19,6 +19,7 @@ class Issue < ActiveRecord::Base
                       'Cache-Control' => 'public, max-age=31557600',
                       'Expires' => 'Wed, 15 Apr 2020 13:37:00 GMT'
                     },
+                    :s3_host_alias => 'assets.cdn.vzgojiteljica.si',
                     :s3_storage_class => :reduced_redundancy,
                     :path => "/assets/issues/:id/document/:style_:basename.:extension"
 
@@ -27,7 +28,7 @@ class Issue < ActiveRecord::Base
                       :medium => ["180x180>", :jpg],
                       :original => ["960x720>", :jpg]
                     },
-                    :default_url => '/assets/cover_missing.jpg',
+                    :default_url => 'http://cdn.vzgojiteljica.si/assets/cover_missing.jpg',
                     :convert_options => { :all => "-strip -quality 75"},
                     :whiny => false,
                     :storage => :s3,
@@ -40,6 +41,7 @@ class Issue < ActiveRecord::Base
                       'Cache-Control' => 'public, max-age=31557600',
                       'Expires' => 'Wed, 15 Apr 2020 13:37:00 GMT'
                     },
+                    :s3_host_alias => 'assets.cdn.vzgojiteljica.si',
                     :s3_storage_class => :reduced_redundancy,
                     :path => "/assets/issues/:id/cover/:style_:basename.:extension"
 

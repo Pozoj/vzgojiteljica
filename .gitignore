@@ -25,3 +25,4 @@ devbackup.sqlite3
 *.py
 .env
 TODO
+*.sql

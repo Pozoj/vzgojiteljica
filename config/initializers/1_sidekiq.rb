@@ -1,10 +1,10 @@
 if Rails.env.development?
   Sidekiq.configure_server do |config|
-    config.redis = { url: 'redis://docker/sidekiq' }
+    config.redis = { url: 'redis://boot2docker/sidekiq' }
   end
 
   Sidekiq.configure_client do |config|
-    config.redis = { url: 'redis://docker/sidekiq' }
+    config.redis = { url: 'redis://boot2docker/sidekiq' }
   end
 end
 

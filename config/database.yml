@@ -2,10 +2,10 @@ development:
   adapter: postgresql
   database: vzgojiteljica-development
   username: postgres
-  host: docker
+  host: boot2docker
 
 test:
   adapter: postgresql
   database: vzgojiteljica-test
   username: postgres
-  host: docker
+  host: boot2docker

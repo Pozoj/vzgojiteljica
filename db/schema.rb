@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150824022934) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "articles", force: :cascade do |t|
     t.integer  "section_id"
     t.integer  "issue_id"
@@ -26,8 +29,8 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.string   "keywords_string",       limit: 255
   end
 
-  add_index "articles", ["issue_id"], name: "index_articles_on_issue_id"
-  add_index "articles", ["section_id"], name: "index_articles_on_section_id"
+  add_index "articles", ["issue_id"], name: "index_articles_on_issue_id", using: :btree
+  add_index "articles", ["section_id"], name: "index_articles_on_section_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name",     limit: 255
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.datetime "updated_at"
   end
 
-  add_index "authors", ["institution_id"], name: "index_authors_on_institution_id"
-  add_index "authors", ["post_id"], name: "index_authors_on_post_id"
+  add_index "authors", ["institution_id"], name: "index_authors_on_institution_id", using: :btree
+  add_index "authors", ["post_id"], name: "index_authors_on_post_id", using: :btree
 
   create_table "authorships", force: :cascade do |t|
     t.integer  "article_id"
@@ -55,9 +58,9 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.datetime "updated_at"
   end
 
-  add_index "authorships", ["article_id"], name: "index_authorships_on_article_id"
-  add_index "authorships", ["author_id", "article_id"], name: "index_authorships_on_author_id_and_article_id", unique: true
-  add_index "authorships", ["author_id"], name: "index_authorships_on_author_id"
+  add_index "authorships", ["article_id"], name: "index_authorships_on_article_id", using: :btree
+  add_index "authorships", ["author_id", "article_id"], name: "index_authorships_on_author_id_and_article_id", unique: true, using: :btree
+  add_index "authorships", ["author_id"], name: "index_authorships_on_author_id", using: :btree
 
   create_table "bank_statements", force: :cascade do |t|
     t.datetime "created_at",             null: false
@@ -81,14 +84,15 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.string   "account_number"
   end
 
-  add_index "banks", ["bic"], name: "index_banks_on_bic", unique: true
+  add_index "banks", ["bic"], name: "index_banks_on_bic", unique: true, using: :btree
 
   create_table "batches", force: :cascade do |t|
     t.string   "name",            limit: 255
-    t.decimal  "price"
     t.integer  "issues_per_year"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "price_cents",                 default: 0,     null: false
+    t.string   "price_currency",              default: "EUR", null: false
   end
 
   create_table "copies", force: :cascade do |t|
@@ -100,17 +104,17 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.string   "title",      limit: 255
   end
 
-  add_index "copies", ["page_code"], name: "index_copies_on_page_code"
+  add_index "copies", ["page_code"], name: "index_copies_on_page_code", using: :btree
 
   create_table "entities", force: :cascade do |t|
     t.string   "title",               limit: 255
     t.string   "name",                limit: 255
     t.string   "address",             limit: 255
-    t.integer  "post_id",             limit: 4
+    t.integer  "post_id"
     t.string   "city",                limit: 255
     t.string   "phone",               limit: 255
     t.string   "email",               limit: 255
-    t.integer  "vat_id",              limit: 255
+    t.integer  "vat_id",              limit: 8
     t.boolean  "vat_exempt"
     t.string   "type",                limit: 255
     t.integer  "entity_id"
@@ -121,19 +125,20 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.string   "account_number"
     t.boolean  "einvoice"
     t.integer  "bank_id"
-    t.integer  "registration_number"
+    t.integer  "registration_number", limit: 8
     t.integer  "entity_type"
   end
 
-  add_index "entities", ["bank_id"], name: "index_entities_on_bank_id"
-  add_index "entities", ["customer_id"], name: "index_entities_on_customer_id"
-  add_index "entities", ["einvoice"], name: "index_entities_on_einvoice"
-  add_index "entities", ["entity_id"], name: "index_entities_on_entity_id"
-  add_index "entities", ["entity_type"], name: "index_entities_on_entity_type"
-  add_index "entities", ["post_id"], name: "index_entities_on_post_id"
-  add_index "entities", ["registration_number"], name: "index_entities_on_registration_number", unique: true
-  add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id"
-  add_index "entities", ["vat_id"], name: "index_entities_on_vat_id", unique: true
+  add_index "entities", ["account_number"], name: "index_entities_on_account_number", using: :btree
+  add_index "entities", ["bank_id"], name: "index_entities_on_bank_id", using: :btree
+  add_index "entities", ["customer_id"], name: "index_entities_on_customer_id", using: :btree
+  add_index "entities", ["einvoice"], name: "index_entities_on_einvoice", using: :btree
+  add_index "entities", ["entity_id"], name: "index_entities_on_entity_id", using: :btree
+  add_index "entities", ["entity_type"], name: "index_entities_on_entity_type", using: :btree
+  add_index "entities", ["post_id"], name: "index_entities_on_post_id", using: :btree
+  add_index "entities", ["registration_number"], name: "index_entities_on_registration_number", unique: true, using: :btree
+  add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id", using: :btree
+  add_index "entities", ["vat_id"], name: "index_entities_on_vat_id", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
     t.integer  "user_id"
@@ -145,10 +150,10 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.datetime "updated_at"
   end
 
-  add_index "events", ["event"], name: "index_events_on_event"
-  add_index "events", ["eventable_id"], name: "index_events_on_eventable_id"
-  add_index "events", ["eventable_type"], name: "index_events_on_eventable_type"
-  add_index "events", ["user_id"], name: "index_events_on_user_id"
+  add_index "events", ["event"], name: "index_events_on_event", using: :btree
+  add_index "events", ["eventable_id"], name: "index_events_on_eventable_id", using: :btree
+  add_index "events", ["eventable_type"], name: "index_events_on_eventable_type", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "inquiries", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -164,7 +169,7 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.boolean  "published",               default: false
   end
 
-  add_index "inquiries", ["published"], name: "index_inquiries_on_published"
+  add_index "inquiries", ["published"], name: "index_inquiries_on_published", using: :btree
 
   create_table "institutions", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -199,13 +204,13 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.string   "order_form"
   end
 
-  add_index "invoices", ["bank_reference"], name: "index_invoices_on_bank_reference", unique: true
-  add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id"
-  add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", unique: true
-  add_index "invoices", ["paid_at"], name: "index_invoices_on_paid_at"
-  add_index "invoices", ["payment_id"], name: "index_invoices_on_payment_id", unique: true
-  add_index "invoices", ["reference_number"], name: "index_invoices_on_reference_number"
-  add_index "invoices", ["year"], name: "index_invoices_on_year"
+  add_index "invoices", ["bank_reference"], name: "index_invoices_on_bank_reference", unique: true, using: :btree
+  add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id", using: :btree
+  add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", unique: true, using: :btree
+  add_index "invoices", ["paid_at"], name: "index_invoices_on_paid_at", using: :btree
+  add_index "invoices", ["payment_id"], name: "index_invoices_on_payment_id", unique: true, using: :btree
+  add_index "invoices", ["reference_number"], name: "index_invoices_on_reference_number", using: :btree
+  add_index "invoices", ["year"], name: "index_invoices_on_year", using: :btree
 
   create_table "issues", force: :cascade do |t|
     t.integer  "year"
@@ -224,9 +229,9 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.integer  "batch_id"
   end
 
-  add_index "issues", ["batch_id"], name: "index_issues_on_batch_id"
-  add_index "issues", ["issue"], name: "index_issues_on_issue"
-  add_index "issues", ["year"], name: "index_issues_on_year"
+  add_index "issues", ["batch_id"], name: "index_issues_on_batch_id", using: :btree
+  add_index "issues", ["issue"], name: "index_issues_on_issue", using: :btree
+  add_index "issues", ["year"], name: "index_issues_on_year", using: :btree
 
   create_table "keywordables", force: :cascade do |t|
     t.integer  "keyword_id"
@@ -235,10 +240,10 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.datetime "updated_at"
   end
 
-  add_index "keywordables", ["article_id", "keyword_id"], name: "index_keywordables_on_article_id_and_keyword_id", unique: true
-  add_index "keywordables", ["article_id"], name: "index_keywordables_on_article_id"
-  add_index "keywordables", ["keyword_id", "article_id"], name: "index_keywordables_on_keyword_id_and_article_id", unique: true
-  add_index "keywordables", ["keyword_id"], name: "index_keywordables_on_keyword_id"
+  add_index "keywordables", ["article_id", "keyword_id"], name: "index_keywordables_on_article_id_and_keyword_id", unique: true, using: :btree
+  add_index "keywordables", ["article_id"], name: "index_keywordables_on_article_id", using: :btree
+  add_index "keywordables", ["keyword_id", "article_id"], name: "index_keywordables_on_keyword_id_and_article_id", unique: true, using: :btree
+  add_index "keywordables", ["keyword_id"], name: "index_keywordables_on_keyword_id", using: :btree
 
   create_table "keywords", force: :cascade do |t|
     t.string   "keyword",    limit: 255
@@ -246,32 +251,32 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.datetime "updated_at"
   end
 
-  add_index "keywords", ["keyword"], name: "index_keywords_on_keyword", unique: true
+  add_index "keywords", ["keyword"], name: "index_keywords_on_keyword", unique: true, using: :btree
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "invoice_id"
-    t.string   "entity_name",                           limit: 255
-    t.string   "product",                               limit: 255
+    t.text     "entity_name"
+    t.text     "product"
     t.integer  "quantity"
-    t.string   "unit",                                  limit: 255
+    t.text     "unit"
     t.decimal  "discount_percent"
     t.decimal  "tax_percent"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "issue_id"
-    t.integer  "subtotal_cents",                                    default: 0,     null: false
-    t.string   "subtotal_currency",                                 default: "EUR", null: false
-    t.integer  "total_cents",                                       default: 0,     null: false
-    t.string   "total_currency",                                    default: "EUR", null: false
-    t.integer  "price_per_item_cents",                              default: 0,     null: false
-    t.string   "price_per_item_currency",                           default: "EUR", null: false
-    t.integer  "price_per_item_with_discount_cents",                default: 0,     null: false
-    t.string   "price_per_item_with_discount_currency",             default: "EUR", null: false
-    t.integer  "tax_cents",                                         default: 0,     null: false
-    t.string   "tax_currency",                                      default: "EUR", null: false
+    t.integer  "subtotal_cents",                        default: 0,     null: false
+    t.string   "subtotal_currency",                     default: "EUR", null: false
+    t.integer  "total_cents",                           default: 0,     null: false
+    t.string   "total_currency",                        default: "EUR", null: false
+    t.integer  "price_per_item_cents",                  default: 0,     null: false
+    t.string   "price_per_item_currency",               default: "EUR", null: false
+    t.integer  "price_per_item_with_discount_cents",    default: 0,     null: false
+    t.string   "price_per_item_with_discount_currency", default: "EUR", null: false
+    t.integer  "tax_cents",                             default: 0,     null: false
+    t.string   "tax_currency",                          default: "EUR", null: false
   end
 
-  add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id"
+  add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
 
   create_table "news", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -322,9 +327,9 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.integer  "master_id"
   end
 
-  add_index "posts", ["id"], name: "index_posts_on_id"
-  add_index "posts", ["master_id"], name: "index_posts_on_master_id"
-  add_index "posts", ["regional_master"], name: "index_posts_on_regional_master"
+  add_index "posts", ["id"], name: "index_posts_on_id", using: :btree
+  add_index "posts", ["master_id"], name: "index_posts_on_master_id", using: :btree
+  add_index "posts", ["regional_master"], name: "index_posts_on_regional_master", using: :btree
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "user_id"
@@ -335,9 +340,9 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.datetime "updated_at"
   end
 
-  add_index "remarks", ["remarkable_id"], name: "index_remarks_on_remarkable_id"
-  add_index "remarks", ["remarkable_type"], name: "index_remarks_on_remarkable_type"
-  add_index "remarks", ["user_id"], name: "index_remarks_on_user_id"
+  add_index "remarks", ["remarkable_id"], name: "index_remarks_on_remarkable_id", using: :btree
+  add_index "remarks", ["remarkable_type"], name: "index_remarks_on_remarkable_type", using: :btree
+  add_index "remarks", ["user_id"], name: "index_remarks_on_user_id", using: :btree
 
   create_table "sections", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -362,11 +367,11 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.boolean  "matched",           default: false
   end
 
-  add_index "statement_entries", ["bank_reference"], name: "index_statement_entries_on_bank_reference", unique: true
-  add_index "statement_entries", ["bank_statement_id"], name: "index_statement_entries_on_bank_statement_id"
-  add_index "statement_entries", ["invoice_id"], name: "index_statement_entries_on_invoice_id"
-  add_index "statement_entries", ["matched"], name: "index_statement_entries_on_matched"
-  add_index "statement_entries", ["reference"], name: "index_statement_entries_on_reference"
+  add_index "statement_entries", ["bank_reference"], name: "index_statement_entries_on_bank_reference", unique: true, using: :btree
+  add_index "statement_entries", ["bank_statement_id"], name: "index_statement_entries_on_bank_statement_id", using: :btree
+  add_index "statement_entries", ["invoice_id"], name: "index_statement_entries_on_invoice_id", using: :btree
+  add_index "statement_entries", ["matched"], name: "index_statement_entries_on_matched", using: :btree
+  add_index "statement_entries", ["reference"], name: "index_statement_entries_on_reference", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "subscriber_id"
@@ -381,11 +386,11 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.integer  "order_id"
   end
 
-  add_index "subscriptions", ["end"], name: "index_subscriptions_on_end"
-  add_index "subscriptions", ["order_id"], name: "index_subscriptions_on_order_id"
-  add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"
-  add_index "subscriptions", ["start"], name: "index_subscriptions_on_start"
-  add_index "subscriptions", ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
+  add_index "subscriptions", ["end"], name: "index_subscriptions_on_end", using: :btree
+  add_index "subscriptions", ["order_id"], name: "index_subscriptions_on_order_id", using: :btree
+  add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
+  add_index "subscriptions", ["start"], name: "index_subscriptions_on_start", using: :btree
+  add_index "subscriptions", ["subscriber_id"], name: "index_subscriptions_on_subscriber_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255
@@ -404,8 +409,8 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.integer  "entity_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["entity_id"], name: "index_users_on_entity_id"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["entity_id"], name: "index_users_on_entity_id", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

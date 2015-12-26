@@ -9,7 +9,6 @@ group :assets do
   gem 'sass-rails',   '~> 5.0.1'
   gem 'coffee-rails', '~> 4.1.0'
   gem 'uglifier', '>= 2.7.0'
-  gem 'asset_sync'
   gem 'chosen-rails'
   gem 'compass-rails', github: 'Compass/compass-rails'
   gem 'jquery-rails', '~> 4.0.3'

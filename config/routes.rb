@@ -4,7 +4,7 @@ Web3::Application.routes.draw do
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
   end
-  
+
   devise_for :users
 
   scope :path_names => {:new => "novo", :edit => "uredi", :all => "vse", :search => "isci"} do
@@ -49,6 +49,9 @@ Web3::Application.routes.draw do
     get :quantities, to: 'admin#quantities'
     get :freeriders, to: 'admin#freeriders'
     get :regional, to: 'admin#regional'
+    resources :duplicates, only: [:index] do
+      post :merge, on: :member
+    end
     resources :entities
     resources :customers do
       post :new_from_order, on: :collection
@@ -58,6 +61,7 @@ Web3::Application.routes.draw do
       get :edit_person, on: :member
       post :create_person, on: :member
       put :update_person, on: :collection
+      post :merge_in, on: :member
     end
     resources :labels, only: [:index, :show] do
       get :print, on: :collection

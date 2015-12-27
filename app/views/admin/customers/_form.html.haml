@@ -2,6 +2,16 @@
   $(function() {
     $('#customer_post_id').chosen()
     $('#customer_bank_id').chosen()
+
+    $('#other_customer_id').chosen({
+      search_contains: true
+    }).on('change', function() {
+      var id = $(this).val();
+      var name = $(this).find('option:selected').text();
+      name = name.substr(0, name.indexOf('--'));
+      $('#merge_customers').attr('href', window.location.href.toString().replace('edit', 'merge_in?other_customer_id=' + id)).text('Združi ' + name);
+      $('#merge_customers_preview').removeClass('hide').attr('href', '/admin/customers/' + id).text('Poglej ' + name);
+    });
   });
 
 .row
@@ -14,29 +24,43 @@
     = f.input :phone
     = f.input :email
   .form-inputs.col-xs-4
-    - if @customer.company?
+    - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
       .panel.panel-default
-        .panel-heading 
+        .panel-heading
           %h3.panel-title Šifre
-        .panel-body        
+        .panel-body
           = f.input :registration_number
           = f.input :vat_id
           = f.input :vat_exempt
-        
+
     .panel.panel-default
-      .panel-heading 
+      .panel-heading
         %h3.panel-title Napredno
       .panel-body
         .form-group.select.optional.customer_entity_type
           = f.label :entity_type
           = f.select :entity_type, [['', ''], ['Podjetje', Entity::ENTITY_COMPANY], ['Fizična oseba', Entity::ENTITY_PERSON]], {}, class: 'form-control'
-        - if @customer.company?
+        - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
           = f.input :einvoice
-    - if @customer.company?
+
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Pridruži
+      .panel-body
+        .form-group.select.optional.customer_entity_type
+          = select_tag :other_customer_id, options_for_select(@all_customers), {class: 'form-control', id: 'other_customer_id', placeholder: 'ID stranke', prompt: ""}
+          %br
+          %br
+          = link_to "Pridruži", merge_in_admin_customer_path(@customer), :"data-method" => "post", id: 'merge_customers', class: 'btn btn-danger btn-sm'
+          %br
+          %small
+            = link_to "Poglej", "", id: 'merge_customers_preview', class: 'hide'
+
+    - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
       .panel.panel-default
-        .panel-heading 
+        .panel-heading
           %h3.panel-title Banka
-        .panel-body        
+        .panel-body
           = f.association :bank
           = f.input :account_number
 

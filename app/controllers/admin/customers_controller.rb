@@ -9,44 +9,56 @@ class Admin::CustomersController < Admin::AdminController
     @customer = Customer.new
   end
 
-  def create_freerider
-    @customer = Customer.new
-    @subscriber = @customer.subscribers.build
-    customer_params = params.require(:customer)
-    @customer.title   = @subscriber.title   = customer_params[:title]
-    @customer.name    = @subscriber.name    = customer_params[:name]
-    @customer.address = @subscriber.address = customer_params[:address]
-    @customer.post_id = @subscriber.post_id = customer_params[:post_id]
+  def merge
+    @customer = Customer.find(params[:id])
+  end
 
-    @customer.save
-    @subscriber.save
+  def merge_in
+    @customer = Customer.find(params[:id])
+    other_customer = Customer.find(params[:other_customer_id])
 
-    # Remarks
-    if customer_params[:remark] && customer_params[:remark][:remark].present?
-      @customer.remarks.create remark: customer_params[:remark][:remark]
+    if @customer && other_customer
+      @customer.merge_in(other_customer)
     end
 
-    # Subscription
-    if customer_params[:subscription]
-      @subscription = @subscriber.subscriptions.build
-      @subscription.plan = Plan.free
-      @subscription.start = DateTime.now
-      @subscription.quantity = customer_params[:subscription][:quantity]
-      # Type
-      type = customer_params[:subscription][:free_type]
-      @subscription.end = if type == "1"
-        DateTime.now.end_of_month
-      elsif type == "2"
-        DateTime.now.end_of_year
-      elsif type == "3"
-        1.year.from_now.beginning_of_month
-      elsif type == "4"
-        # No end for now.
-      end
+    redirect_to admin_customer_path(@customer), notice: "Pridružil #{other_customer.id} k #{@customer.id}"
+  end
 
-      if @subscription.save
-        redirect_to admin_subscription_path(@subscription)
-        return
+  def create_freerider
+    Customer.transaction do
+      @customer = Customer.new
+      @subscriber = @customer.subscribers.build
+      customer_params = params.require(:customer)
+      @customer.title   = @subscriber.title   = customer_params[:title]
+      @customer.name    = @subscriber.name    = customer_params[:name]
+      @customer.address = @subscriber.address = customer_params[:address]
+      @customer.post_id = @subscriber.post_id = customer_params[:post_id]
+
+      @customer.save
+      @subscriber.save
+
+      # Subscription
+      if customer_params[:subscription]
+        @subscription = @subscriber.subscriptions.build
+        @subscription.plan = Plan.free
+        @subscription.start = DateTime.now
+        @subscription.quantity = customer_params[:subscription][:quantity]
+        # Type
+        type = customer_params[:subscription][:free_type]
+        @subscription.end = if type == "1"
+          DateTime.now.end_of_month
+        elsif type == "2"
+          DateTime.now.end_of_year
+        elsif type == "3"
+          1.year.from_now.beginning_of_month
+        elsif type == "4"
+          # No end for now.
+        end
+
+        if @subscription.save
+          redirect_to admin_subscription_path(@subscription)
+          return
+        end
       end
     end
 
@@ -61,7 +73,7 @@ class Admin::CustomersController < Admin::AdminController
       redirect_to admin_customer_path(customer), notice: "Stranka uspešno ustvarjena iz naročila ##{order.id}"
     rescue Customer::FromOrderError => e
       redirect_to admin_order_path(order, error: e.inspect)
-    end 
+    end
   end
 
   def new
@@ -75,7 +87,8 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def edit
-    respond_with resource, location: -> { admin_customer_path(@customer) }
+    @all_customers = Customer.all.select(:id, :name, :title).where.not(id: resource.id).sort_by { |c| c.to_s }.map { |c| ["#{c.to_s} -- #{c.id}", c.id] }
+    respond_with resource, location: -> { admin_customer_path(resource) }
   end
 
   def update

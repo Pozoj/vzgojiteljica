@@ -1,0 +1,10 @@
+<h2>Podvojeni podatki</h2>
+
+<p>
+<% @report.each do |r| %>
+  <%= r %>
+  <br>
+<% end %>
+</p>
+
+<%= link_to "Nazaj", admin_duplicates_path %>

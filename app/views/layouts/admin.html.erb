@@ -55,7 +55,7 @@
                 <li role="presentation" class="divider"></li>
                 <li>
                   <a href="<%= wizard_admin_invoices_path %>">
-                    <i class="glyphicon glyphicon-asterisk"></i>                    
+                    <i class="glyphicon glyphicon-asterisk"></i>
                     Izdaja računov
                   </a>
                 </li>
@@ -68,14 +68,20 @@
               </ul>
             </li>
             <li><a href="<%= admin_labels_path %>">Nalepke</a></li>
-            <li><a href="<%= admin_bank_statements_path %>">Bančni izpiski</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Poročila <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="<%= admin_quantities_path %>">Količine</a></li>
+                <li><a href="<%= admin_freeriders_path %>">Brezplačniki</a></li>
+                <li><a href="<%= admin_regional_path %>">Po regijah</a></li>
+              </ul>
+            </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ostalo <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<%= admin_orders_path %>">Naročila</a></li>
-                <li><a href="<%= admin_quantities_path %>">Količine</a></li>
-                <li><a href="<%= admin_freeriders_path %>">Brezplačniki</a></li>
-                <li><a href="<%= admin_regional_path %>">Po regijah</a></li>
+                <li><a href="<%= admin_bank_statements_path %>">Bančni izpiski</a></li>
+                <li><a href="<%= admin_duplicates_path %>">Podvojeni</a></li>
               </ul>
             </li>
           </ul>

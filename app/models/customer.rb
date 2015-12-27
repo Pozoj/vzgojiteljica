@@ -2,8 +2,8 @@ class Customer < Entity
   has_many :subscriptions, through: :subscribers
   has_many :subscribers, dependent: :destroy
   has_many :invoices
-  has_one :contact_person, foreign_key: :entity_id
-  has_one :billing_person, foreign_key: :entity_id
+  has_one :contact_person, foreign_key: :entity_id, dependent: :destroy
+  has_one :billing_person, foreign_key: :entity_id, dependent: :destroy
 
   def quantity
     subscriptions.active.inject(0) { |sum, s| sum += s.quantity }
@@ -15,6 +15,17 @@ class Customer < Entity
     else
       billing_person.try(:name)
     end
+  end
+
+  def merge_in(other_customer)
+    return unless other_customer
+    return if id == other_customer.id
+
+    other_customer.subscribers.update_all(customer_id: id)
+    other_customer.invoices.update_all(customer_id: id)
+    other_customer.remarks.update_all(remarkable_id: id)
+    other_customer.reload # Reload to not destroy cached relations, which now belong to other entities.
+    other_customer.destroy
   end
 
   def billing_email
@@ -93,7 +104,7 @@ class Customer < Entity
       '',
       vat_id_formatted.to_s,
       'SI'
-    ].map do |el| 
+    ].map do |el|
       if el.is_a?(String)
         '"' + el + '"'
       else

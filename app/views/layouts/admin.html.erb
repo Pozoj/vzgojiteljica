@@ -29,7 +29,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body id="<%= body_id %>" class="<%= body_class %>">
     <header id="header" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -91,27 +91,40 @@
             <span class="text-muted">Iskanje &nbsp;</span>
             <div class="form-group">
               <%= f.search_field :global, placeholder: 'Naziv, ime, naslov, davčna, ...', class: 'form-control' %>
-              <div class="advanced">
-                <%= f.text_field :title, placeholder: 'Naziv', class: 'form-control' %>
-                <br>
-                <%= f.text_field :name, placeholder: 'Ime in priimek', class: 'form-control' %>
-                <br>
-                <%= f.text_field :address, placeholder: 'Naslov', class: 'form-control' %>
-                <br>
-                <%= f.text_field :vat_id, placeholder: 'Davčna', class: 'form-control' %>
-                <br>
-                <%= f.select :einvoice, [['E-račun?', ''], ['Da', 't'], ['Ne', 'f']], {}, class: 'form-control' %>
-                <br>
-                <%= f.select :entity_type, [['Tip entitete', ''], ['Podjetje', Entity::ENTITY_COMPANY], ['Oseba', Entity::ENTITY_PERSON]], {}, class: 'form-control' %>
-                <br><br>
-                <%= f.submit :"Išči" %>
-              </div>
             </div>
+            <%= f.hidden_field :title %>
+            <%= f.hidden_field :name %>
+            <%= f.hidden_field :address %>
+            <%= f.hidden_field :vat_id %>
+            <%= f.hidden_field :einvoice %>
+            <%= f.hidden_field :entity_type %>
+            <%= f.hidden_field :type %>
           <% end %>
         </div>
         <!--/.nav-collapse -->
       </div>
     </header>
+
+    <% if @entities %>
+      <div id="advanced_search_container">
+        <%= form_for @filter, url: admin_entities_path, method: :get, html: {class: 'form-inline container', id: 'advanced_search'} do |f| %>
+          <div class="form-group">
+            <%= f.text_field :title, placeholder: 'Naziv', class: 'form-control' %>
+            <%= f.text_field :name, placeholder: 'Ime in priimek', class: 'form-control' %>
+            <%= f.text_field :vat_id, placeholder: 'Davčna', class: 'form-control' %>
+            <%= f.select :einvoice, [['E-račun?', ''], ['Da', 't'], ['Ne', 'f']], {}, class: 'form-control' %>
+            <%= f.select :entity_type, [['Oba tipa', ''], ['Podjetje', Entity::ENTITY_COMPANY], ['Oseba', Entity::ENTITY_PERSON]], {}, class: 'form-control' %>
+            <%= f.select :type, [['Vse vrste', ''], ['Naročnik', Customer], ['Prejemnik', Subscriber], ['Oseba', ContactPerson]], {}, class: 'form-control' %>
+          </div>
+          <%= f.hidden_field :global %>
+          <%= f.submit :"Išči", class: 'btn btn-primary pull-right' %>
+          <div class="pull-right results">
+            <%= @entities_count %>
+            rezultatov
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 
     <div class="container" id="container">
       <% if flash[:notice] %>

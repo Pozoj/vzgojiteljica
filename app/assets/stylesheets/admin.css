@@ -19,6 +19,19 @@
 #container > h1 {
   padding-bottom: 25px;
 }
+body.entities #container {
+  padding: 0;
+}
+
+#advanced_search_container {
+  background: #efefef;
+  padding: 15px 0;
+  margin-top: 50px;
+}
+#advanced_search .results {
+  line-height: 34px;
+  margin-right: 25px;
+}
 
 .muted {
   color: #999;
@@ -30,23 +43,7 @@
 }
 
 #new_filter {
-  position: relative;
-  width: 440px;
-}
-#hidden_search_btn {
-  width: 25px;
-}
-#new_filter .advanced {
-  display: none;
-  position: absolute;
-  top: 40px;
-  right: 0px;
-  background: #222;
-  white-space: nowrap;
-  padding: 10px 12px 15px 15px;
-}
-#new_filter .advanced input {
-  margin-bottom: 10px;
+  padding: 0;
 }
 
 #header:hover .advanced {

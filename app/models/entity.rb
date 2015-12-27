@@ -69,7 +69,12 @@ class Entity < ActiveRecord::Base
         end
         query = query.or(Entity.arel_table[filter].matches("%#{filters[:global]}%"))
       end
-      entities = entities.where query
+
+      # Special handling for posts.
+      query = query.or(Entity.arel_table[:post_id].eq(filters[:global]))
+      query = query.or(Post.arel_table[:name].matches("%#{filters[:global]}%"))
+
+      entities = entities.joins(:post).where query
     end
 
     entities
@@ -91,7 +96,7 @@ class Entity < ActiveRecord::Base
 
   def vat_id_formatted
     if company? && !vat_exempt?
-      "SI#{vat_id}" 
+      "SI#{vat_id}"
     else
       vat_id
     end
@@ -172,7 +177,7 @@ class Entity < ActiveRecord::Base
     end
 
     return unless account_number?
-    
+
     unless IBANTools::IBAN.valid?(account_number)
       errors.add :account_number, 'ni v IBAN obliki'
     end

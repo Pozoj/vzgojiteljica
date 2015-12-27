@@ -29,4 +29,8 @@ class Admin::RemarksController < Admin::AdminController
   def collection
     @remarks ||= Remark.all.order(created_at: :desc).page(params[:page]).per(25)
   end
+
+  def set_page_title
+    @page_title = 'Opombe'
+  end
 end

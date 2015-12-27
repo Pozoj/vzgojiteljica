@@ -15,4 +15,8 @@ class Admin::StatementEntriesController < Admin::AdminController
   def resource
     @statement_entry ||= StatementEntry.find(params[:id])
   end
+
+  def set_page_title
+    @page_title = 'Postavke izpiska'
+  end
 end

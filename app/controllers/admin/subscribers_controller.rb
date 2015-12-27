@@ -49,4 +49,8 @@ class Admin::SubscribersController < Admin::AdminController
   def resource_params
     params.require(:subscriber)
   end
+
+  def set_page_title
+    @page_title = 'Prejemniki'
+  end
 end

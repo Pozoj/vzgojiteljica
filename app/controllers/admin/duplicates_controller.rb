@@ -30,4 +30,10 @@ class Admin::DuplicatesController < Admin::AdminController
       @report << "Destroyed #{duplicate} (#{duplicate.id}) in favor of #{root_duplicate} (#{root_duplicate.id})"
     end
   end
+
+  private
+
+  def set_page_title
+    @page_title = 'Podvojeni'
+  end
 end

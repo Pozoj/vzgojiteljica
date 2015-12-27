@@ -40,4 +40,8 @@ class Admin::BankStatementsController < Admin::AdminController
   def collection
     @statements ||= BankStatement.order(id: :desc).page(params[:page])
   end
+
+  def set_page_title
+    @page_title = 'Bančni izpiski'
+  end
 end

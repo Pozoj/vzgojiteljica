@@ -73,4 +73,8 @@ class Admin::SubscriptionsController < Admin::AdminController
   def resource_params
     params.require(:subscription)
   end
+
+  def set_page_title
+    @page_title = 'Naročnine'
+  end
 end

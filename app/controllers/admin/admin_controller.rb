@@ -1,5 +1,5 @@
 class Admin::AdminController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate, :try_set_page_title
   layout "admin"
 
   def index
@@ -7,6 +7,8 @@ class Admin::AdminController < ApplicationController
   end
 
   def quantities
+    @page_title = 'Količine po prejemnikih'
+
     @paid = params[:only_paid] == 'true'
 
     @which = params[:which]
@@ -28,10 +30,12 @@ class Admin::AdminController < ApplicationController
   end
 
   def freeriders
+    @page_title = 'Brezplačniki'
     @freeriders = Subscription.free.active.order(start: :desc)
   end
 
   def regional
+    @page_title = 'Količine po regijah'
     customers = Customer.all.order(:post_id).reject do |customer|
       subscriptions = customer.subscriptions.active.empty?
     end
@@ -39,9 +43,9 @@ class Admin::AdminController < ApplicationController
     @total_customers = 0
     @total_quantity = 0
 
-    @regional = customers.group_by do |customer| 
+    @regional = customers.group_by do |customer|
       customer.post.try(:master)
-    end.reject do |region, customers| 
+    end.reject do |region, customers|
       region.nil?
     end.map do |region, customers|
       customers_count = customers.count
@@ -57,5 +61,15 @@ class Admin::AdminController < ApplicationController
 
     @total_customers = customers.count
     @total_quantity = Subscription.active.sum(:quantity)
+  end
+
+  private
+
+  def try_set_page_title
+    if respond_to?(:resource, true) && resource.present?
+      @page_title = resource.to_s
+    elsif respond_to?(:set_page_title, true)
+      set_page_title
+    end
   end
 end

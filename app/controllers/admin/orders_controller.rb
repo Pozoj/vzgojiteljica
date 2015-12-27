@@ -23,7 +23,7 @@ class Admin::OrdersController < Admin::AdminController
     if @order.post_id
       customers = customers.where(post_id: @order.post_id)
     end
-    
+
     @all_subscribers = customers.map do |c|
       [
         c.to_s,
@@ -37,5 +37,11 @@ class Admin::OrdersController < Admin::AdminController
     if order.destroy
       redirect_to admin_orders_path, notice: "Naročilo uspešno izbrisano"
     end
+  end
+
+  private
+
+  def set_page_title
+    @page_title = 'Naročila'
   end
 end

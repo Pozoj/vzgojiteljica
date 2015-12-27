@@ -166,4 +166,8 @@ class Admin::CustomersController < Admin::AdminController
   def resource_params
     params.require(:customer)
   end
+
+  def set_page_title
+    @page_title = 'Naročniki'
+  end
 end

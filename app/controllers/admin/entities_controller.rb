@@ -8,4 +8,10 @@ class Admin::EntitiesController < Admin::AdminController
     page(params[:page]).
     per(params[:per_page] || 20)
   end
+
+  private
+
+  def set_page_title
+    @page_title = 'Entitete'
+  end
 end

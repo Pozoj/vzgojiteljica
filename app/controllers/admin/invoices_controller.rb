@@ -1,6 +1,6 @@
 class Admin::InvoicesController < Admin::AdminController
   skip_before_filter :authenticate, only: [:print]
-  
+
   def index
     @years = Invoice.years
     @all_invoices = Invoice.select(:id, :invoice_id).order(year: :desc, reference_number: :desc).map { |i| [i.invoice_id, i.invoice_id] }
@@ -67,7 +67,7 @@ class Admin::InvoicesController < Admin::AdminController
 
   def print_wizard
     @gte = Invoice.select(:reference_number).order(:year, :reference_number).first.try(:reference_number)
-    @lte = Invoice.select(:reference_number).order(year: :desc, reference_number: :desc).first.try(:reference_number)    
+    @lte = Invoice.select(:reference_number).order(year: :desc, reference_number: :desc).first.try(:reference_number)
   end
 
   def show
@@ -187,5 +187,9 @@ class Admin::InvoicesController < Admin::AdminController
 
   def resource
     @invoice = Invoice.find_by(invoice_id: params[:id])
+  end
+
+  def set_page_title
+    @page_title = 'Računi'
   end
 end

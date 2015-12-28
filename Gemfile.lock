@@ -304,6 +304,7 @@ GEM
       i18n (>= 0.6.4, <= 0.7.0)
     multi_json (1.11.2)
     nenv (0.2.0)
+    newrelic_rpm (3.14.1.311)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
     notiffany (0.0.8)
@@ -482,6 +483,7 @@ DEPENDENCIES
   letter_opener
   levenshtein
   money-rails!
+  newrelic_rpm
   nokogiri
   paperclip
   pdfcrowd

@@ -37,11 +37,19 @@ class Customer < Entity
   end
 
   def self.active_count
-    Subscription.active.group_by { |subscription| subscription.try(:subscriber).try(:customer_id) }.count
+    Subscriber.select(:customer_id).
+    joins(:subscriptions).
+    merge(Subscription.active).
+    group(:customer_id).
+    to_a.count
   end
 
   def self.paid_count
-    Subscription.active.paid.group_by { |subscription| subscription.subscriber.customer_id }.count
+    Subscriber.select(:customer_id).
+    joins(:subscriptions).
+    merge(Subscription.paid).merge(Subscription.active).
+    group(:customer_id).
+    to_a.count
   end
 
   def self.new_from_order(order)

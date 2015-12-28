@@ -45,10 +45,21 @@ gem 'sidekiq-cron'
 gem 'sinatra', require: nil
 gem 'unicorn'
 
+group :development do
+  gem 'web-console'
+  gem 'foreman'
+end
+
 group :development, :test do
   gem 'pry'
-  gem 'web-console'
   gem 'letter_opener'
   gem 'dotenv-rails'
-  gem 'foreman'
+  gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring-commands-rspec'
+
+  # Use rspec
+  gem 'rspec-rails'
+  gem 'guard-rspec', require: false
+  gem 'factory_girl'
+  gem 'timecop'
 end

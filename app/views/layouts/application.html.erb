@@ -16,9 +16,9 @@
       <% end %>
     </title>
   </head>
-  
+
   <body id="<%= body_id %>" class="<%= body_class %>">
-    <div id="backdoor"><%= link_to "", new_user_session_path %></div>
+    <div id="backdoor"><%= link_to "", (signed_in? ? admin_root_path : new_user_session_path) %></div>
     <header>
       <div class="inner">
           <div class="animate">
@@ -43,7 +43,7 @@
         </nav>
       </div>
     </header>
-    
+
     <% if flash[:notice] %>
       <div id="flash" class="notice"><%= flash[:notice] %></div>
     <% end %>
@@ -60,28 +60,28 @@
     <div id="container">
       <%= yield %>
     </div>
-    
+
     <footer>
       <div id="pozoj">
-        <p><strong><%= Entity.pozoj %></strong></p> 
+        <p><strong><%= Entity.pozoj %></strong></p>
         <p>E: <%= link_to Entity.pozoj.email, "mailto:#{Entity.pozoj.email}" %></p>
         <p>W: <%= link_to "http://pozoj.si", "http://pozoj.si" %></p>
       </div>
       <div id="lower_menu">
         <p>
-          <%= link_to 'Predstavitev', root_path %>  | 
-          <%= link_to 'Številke', issues_path %>  | 
-          <%= link_to 'Članki', articles_path %>  | 
-          <%= link_to 'Vprašanja', inquiries_path %>  | 
-          <%= link_to 'PD Vzgojiteljica', news_index_path %> | 
-          <%= link_to 'Naročila', new_order_path %> | 
+          <%= link_to 'Predstavitev', root_path %>  |
+          <%= link_to 'Številke', issues_path %>  |
+          <%= link_to 'Članki', articles_path %>  |
+          <%= link_to 'Vprašanja', inquiries_path %>  |
+          <%= link_to 'PD Vzgojiteljica', news_index_path %> |
+          <%= link_to 'Naročila', new_order_path %> |
           <%= link_to 'Avtorji', '/avtorji-spletne-aplikacije' %>
         </p>
         <% if signed_in? %>
           <p>
-            <%= link_to 'Rubrike', sections_path %>  | 
-            <%= link_to 'Avtorji', authors_path %>  | 
-            <%= link_to 'Institucije', institutions_path %>  | 
+            <%= link_to 'Rubrike', sections_path %>  |
+            <%= link_to 'Avtorji', authors_path %>  |
+            <%= link_to 'Institucije', institutions_path %>  |
             <%= link_to 'Ključne besede', keywords_path %>
           </p>
         <% end %>
@@ -92,7 +92,7 @@
             (<%= link_to 'Odjava', destroy_user_session_path, method: :delete, data: { confirm: 'Ste prepričani da se želite odjaviti?' } %>)
           <% end %>
         </div>
-      </div> 
+      </div>
     </footer>
   </body>
 </html>

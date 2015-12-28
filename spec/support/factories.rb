@@ -5,6 +5,14 @@ FactoryGirl.define do
     start { 1.year.ago }
     self.end { 1.year.from_now }
     quantity 1
+
+    trait :inactive do
+      self.end { 1.month.ago }
+    end
+
+    trait :without_ending do
+      self.end nil
+    end
   end
 
   factory :plan do

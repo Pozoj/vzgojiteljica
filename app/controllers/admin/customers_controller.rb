@@ -15,7 +15,7 @@ class Admin::CustomersController < Admin::AdminController
     else
       @subscribers = @subscribers.active
     end
-    @subscribers = @subscribers.order(:id)
+    @subscribers = @subscribers.order(:id).to_a
 
     respond_with resource
   end

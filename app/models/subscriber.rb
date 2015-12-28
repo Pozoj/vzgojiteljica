@@ -4,8 +4,8 @@ class Subscriber < Entity
   has_one :contact_person, foreign_key: :entity_id
   has_one :billing_person, foreign_key: :entity_id
 
-  scope :active, -> { joins(:subscriptions).merge(Subscription.active) }
-  scope :inactive, -> { joins(:subscriptions).merge(Subscription.inactive) }
-  scope :paid,   -> { joins(:subscriptions).merge(Subscription.paid) }
-  scope :free,   -> { joins(:subscriptions).merge(Subscription.free) }
+  scope :active, -> { joins(:subscriptions).merge(Subscription.active).group('entities.id') }
+  scope :inactive, -> { joins(:subscriptions).merge(Subscription.inactive).group('entities.id') }
+  scope :paid,   -> { joins(:subscriptions).merge(Subscription.paid).group('entities.id') }
+  scope :free,   -> { joins(:subscriptions).merge(Subscription.free).group('entities.id') }
 end

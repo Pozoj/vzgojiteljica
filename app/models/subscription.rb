@@ -1,6 +1,6 @@
 class Subscription < ActiveRecord::Base
   include Invoicing
-  
+
   attr_accessor :free_type
 
   belongs_to :plan
@@ -9,7 +9,7 @@ class Subscription < ActiveRecord::Base
   has_many :remarks, as: :remarkable, dependent: :destroy
 
   scope :active, -> { where(arel_table[:start].lteq(Date.today).and(arel_table[:end].eq(nil).or(arel_table[:end].gteq(Date.today)))) }
-  scope :inactive, -> { where(arel_table[:end].not_eq(nil).or(arel_table[:end].lteq(Date.today).or(arel_table[:start].gteq(Date.today)))) }
+  scope :inactive, -> { where(arel_table[:end].not_eq(nil).and(arel_table[:end].lteq(Date.today).or(arel_table[:start].gteq(Date.today)))) }
   scope :yearly, -> { joins(:plan).where(plans: {billing_frequency: 1}) }
   scope :per_issue, -> { joins(:plan).where.not(plans: {billing_frequency: 1}) }
   scope :paid, -> { joins(:plan).where.not(plans: {price_cents: 0}) }

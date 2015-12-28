@@ -42,6 +42,7 @@ class InstitutionsController < ApplicationController
   end
 
   def resource
+    return unless params[:id]
     @institution ||= Institution.find(params[:id])
   end
 

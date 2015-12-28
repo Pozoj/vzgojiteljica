@@ -42,6 +42,7 @@ class KeywordsController < ApplicationController
   end
 
   def resource
+    return unless params[:id]
     @keyword ||= Keyword.find(params[:id])
   end
 

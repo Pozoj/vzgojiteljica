@@ -13,6 +13,7 @@ class Admin::StatementEntriesController < Admin::AdminController
   private
 
   def resource
+    return unless params[:id]
     @statement_entry ||= StatementEntry.find(params[:id])
   end
 

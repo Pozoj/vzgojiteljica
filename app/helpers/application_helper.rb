@@ -6,6 +6,31 @@ module ApplicationHelper
     end
   end
 
+  def conditional_filtering_link(text, options = {})
+    param = options[:param]
+
+    if options[:default]
+      active = !params.find { |k, v| k =~ /filter/ }
+    elsif options[:param_value]
+      active = params[param].to_s == options[:param_value].to_s
+    else
+      active = !!params[param]
+    end
+
+    if active
+      content_tag :span, text
+    else
+      if options[:default]
+        url = options[:route]
+      else
+        url = {}
+        url[param] = options[:param_value] || true
+      end
+
+      link_to text, url
+    end
+  end
+
   def menu_item _title, url, section
     klass = controller_name == section.to_s ? "current" : nil
     content_tag :li, link_to(_title, url), :class => klass

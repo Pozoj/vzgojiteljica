@@ -41,6 +41,7 @@ class NewsController < ApplicationController
   end
 
   def resource
+    return unless params[:id]
     @news ||= News.find(params[:id])
   end
 

@@ -34,6 +34,7 @@ class Admin::BankStatementsController < Admin::AdminController
   private
 
   def resource
+    return unless params[:id]
     @statement ||= BankStatement.find(params[:id])
   end
 

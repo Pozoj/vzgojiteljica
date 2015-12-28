@@ -44,6 +44,7 @@ class AuthorsController < ApplicationController
   end
 
   def resource
+    return unless params[:id]
     @author ||= Author.find(params[:id])
   end
 

@@ -64,6 +64,7 @@ class InquiriesController < ApplicationController
   end
 
   def resource
+    return unless params[:id]
     @inquiry ||= Inquiry.find(params[:id])
   end
 

@@ -2,6 +2,21 @@ class Admin::CustomersController < Admin::AdminController
   has_scope :page, :default => 1
 
   def show
+    @subscribers = resource.subscribers
+    @subscribers_total_count = @subscribers.count
+
+    if params[:filter_subscribers_all]
+    elsif params[:filter_subscribers_only_inactive]
+      @subscribers = @subscribers.inactive
+    elsif params[:filter_subscribers_only_paid]
+      @subscribers = @subscribers.paid
+    elsif params[:filter_subscribers_only_free]
+      @subscribers = @subscribers.free
+    else
+      @subscribers = @subscribers.active
+    end
+    @subscribers = @subscribers.order(:id)
+
     respond_with resource
   end
 
@@ -160,6 +175,7 @@ class Admin::CustomersController < Admin::AdminController
   private
 
   def resource
+    return unless params[:id]
     @customer ||= Customer.find(params[:id])
   end
 

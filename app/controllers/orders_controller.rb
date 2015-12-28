@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
   private
 
   def resource
+    return unless params[:id]
     @order ||= Order.find(params[:id])
   end
 end

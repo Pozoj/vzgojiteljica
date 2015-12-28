@@ -30,15 +30,17 @@
   Izdani računi
   <% @years.each do |year| %>
     <small>
-      <% if params[:year].to_i == year %>
-        <%= year %>
-      <% else %>
-        <%= link_to year, year: year %>
-      <% end %>
+      <%= conditional_filtering_link(year,
+            default: year == @year_now,
+            param: :filter_year,
+            param_value: year,
+            route: admin_invoices_path
+      ) %>
       |
     </small>
   <% end %>
-  <small><%= link_to "Vsa leta", all: true %></small>
+
+  <small><%= conditional_filtering_link "Vsa leta", param: :filter_year_all %></small>
 </h2>
 <%= paginate @invoices %>
 <table class="table rowlinks">

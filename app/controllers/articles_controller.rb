@@ -55,6 +55,7 @@ class ArticlesController < ApplicationController
   end
 
   def resource
+    return unless params[:id]
     @article ||= Article.find params[:id]
   end
 

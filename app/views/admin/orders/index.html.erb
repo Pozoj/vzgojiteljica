@@ -1,11 +1,9 @@
 <h2>
   Naročila
   <small>
-    <% if params[:all] == 'true' %>
-      <%= link_to "Neobdelana", admin_orders_path %> | Vsa naročila
-    <% else %>
-      Neobdelana | <%= link_to "Vsa naročila", all: true %>
-    <% end %>
+    <%= conditional_filtering_link "Neobdelana", default: true, route: admin_orders_path %>
+    |
+    <%= conditional_filtering_link "Vsa naročila", param: :filter_all %>
   </small>
 </h2>
 

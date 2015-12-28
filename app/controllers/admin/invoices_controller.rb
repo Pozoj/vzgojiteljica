@@ -3,14 +3,15 @@ class Admin::InvoicesController < Admin::AdminController
 
   def index
     @years = Invoice.years
+    @year_now = DateTime.now.year
     @all_invoices = Invoice.select(:id, :invoice_id).order(year: :desc, reference_number: :desc).map { |i| [i.invoice_id, i.invoice_id] }
 
     @invoices = collection
-    if params[:year]
-      @invoices = @invoices.where(year: params[:year])
-    elsif params[:all]
+    if params[:filter_year]
+      @invoices = @invoices.where(year: params[:filter_year])
+    elsif params[:filter_year_all]
     else
-      @invoices = @invoices.where(year: DateTime.now.year)
+      @invoices = @invoices.where(year: @year_now)
     end
     respond_with collection
   end
@@ -186,6 +187,7 @@ class Admin::InvoicesController < Admin::AdminController
   end
 
   def resource
+    return unless params[:id]
     @invoice = Invoice.find_by(invoice_id: params[:id])
   end
 

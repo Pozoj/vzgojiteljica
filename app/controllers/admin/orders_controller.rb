@@ -1,7 +1,7 @@
 class Admin::OrdersController < Admin::AdminController
   def index
     @orders = Order.all.order(created_at: :desc).page(params[:page]).per(20)
-    if params[:all] != 'true'
+    if params[:filter_all] != 'true'
       @orders = @orders.not_processed
     end
   end

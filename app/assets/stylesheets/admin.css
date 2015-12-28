@@ -55,7 +55,7 @@ body.entities #container {
   max-height: 300px;
 }
 
-.rowlinks tr:hover td {
+.rowlinks tbody tr:hover td {
   cursor: pointer;
   background: #efefef;
 }

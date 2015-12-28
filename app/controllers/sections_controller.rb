@@ -42,6 +42,7 @@ class SectionsController < ApplicationController
   end
 
   def resource
+    return unless params[:id]
     @section ||= Section.find(params[:id])
   end
 

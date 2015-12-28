@@ -23,6 +23,7 @@ class Admin::RemarksController < Admin::AdminController
   private
 
   def resource
+    return unless params[:id]
     @remark ||= Remark.find(params[:id])
   end
 

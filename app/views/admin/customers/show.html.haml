@@ -16,7 +16,7 @@
 
         - if @customer.company?
           %hr
-          %h4 
+          %h4
             Kontaktna oseba
             - if @customer.contact_person
               = link_to edit_person_admin_customer_path(@customer.contact_person), class: 'btn btn-xs btn-default' do
@@ -31,7 +31,7 @@
             = render "admin/people/fields", resource: @customer.contact_person
 
           %hr
-          %h4 
+          %h4
             Plačilni kontakt
             - if @customer.billing_person
               = link_to edit_person_admin_customer_path(@customer.billing_person), class: 'btn btn-xs btn-default' do
@@ -50,6 +50,14 @@
   .panel-heading
     %h3.panel-title
       Prejemniki
+
+      %small
+        = conditional_filtering_link("Aktivni", default: true, url: admin_customer_path(@customer))
+        = conditional_filtering_link("Neaktivni", param: :filter_subscribers_only_inactive)
+        = conditional_filtering_link("Plačljivi", param: :filter_subscribers_only_paid)
+        = conditional_filtering_link("Brezplačni", param: :filter_subscribers_only_free)
+        = conditional_filtering_link("Vsi", param: :filter_subscribers_all)
+
       = link_to new_admin_subscriber_path(customer_id: @customer.id), class: 'btn btn-default btn-xs pull-right' do
         %i.glyphicon.glyphicon-plus
         Ustvari
@@ -67,7 +75,7 @@
         %th Količina
         %th Naročnina
     %tbody
-      - @customer.subscribers.each do |s|
+      - @subscribers.each do |s|
         %tr
           %td
             = link_to "", admin_subscriber_path(s)
@@ -86,9 +94,19 @@
                   %small.label.label-success= l subscription.start
                 - if subscription.end?
                   %small.label.label-danger= l subscription.end
+    - if @subscribers.count < @subscribers_total_count
+      %tfoot
+        %tr
+          %td{colspan: 99}
+            %small.muted
+              = @subscribers_total_count - @subscribers.count
+              prejemnikov je skritih zaradi filtriranja
+              &mdash;
+              = link_to "Prikaži vse", admin_customer_path(@customer, subscribers_all: true)
+
 
 .panel.panel-default
-  .panel-heading 
+  .panel-heading
     %h3.panel-title Izdani računi
 
   %table.table.rowlinks

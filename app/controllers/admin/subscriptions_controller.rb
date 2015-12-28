@@ -67,6 +67,7 @@ class Admin::SubscriptionsController < Admin::AdminController
   private
 
   def resource
+    return unless params[:id]
     @subscription ||= Subscription.find(params[:id])
   end
 

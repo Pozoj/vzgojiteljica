@@ -51,9 +51,9 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'pry'
   gem 'letter_opener'
-  gem 'dotenv-rails'
   gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring-commands-rspec'
 

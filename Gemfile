@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# ruby '2.3.0'
+ruby '2.3.0'
 gem 'rails', '4.2.5'
 
 # Gems used only for assets and not required
@@ -25,7 +25,7 @@ gem 'pg'
 gem 'pdfcrowd'
 gem 'devise'
 gem 'simple_form'
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 gem 'fog'
 gem 'haml'
 gem 'kaminari'

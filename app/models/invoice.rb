@@ -44,6 +44,10 @@ class Invoice < ActiveRecord::Base
     years.sort.reverse.uniq
   end
 
+  def balance
+    total - paid_amount
+  end
+
   def paid?
     paid_at? && paid_amount >= total
   end
@@ -185,6 +189,15 @@ class Invoice < ActiveRecord::Base
     self.tax         = line_items.to_a.sum(&:tax)
     self.subtotal    = line_items.to_a.sum(&:subtotal)
     self.total       = line_items.to_a.sum(&:total)
+  end
+
+  def to_s
+    s = "Račun #{invoice_id} "
+    if paid?
+      return s + "(plačan)"
+    else
+      return s + "(neplačan)"
+    end
   end
 
   def to_param

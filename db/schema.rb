@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824022934) do
+ActiveRecord::Schema.define(version: 20160117194832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,41 +177,6 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.datetime "updated_at"
   end
 
-  create_table "invoices", force: :cascade do |t|
-    t.integer  "customer_id"
-    t.date     "due_at"
-    t.decimal  "tax_percent"
-    t.integer  "reference_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.date     "paid_at"
-    t.text     "bank_data"
-    t.string   "bank_reference"
-    t.integer  "subtotal_cents",       default: 0,     null: false
-    t.string   "subtotal_currency",    default: "EUR", null: false
-    t.integer  "total_cents",          default: 0,     null: false
-    t.string   "total_currency",       default: "EUR", null: false
-    t.integer  "paid_amount_cents",    default: 0,     null: false
-    t.string   "paid_amount_currency", default: "EUR", null: false
-    t.integer  "tax_cents",            default: 0,     null: false
-    t.string   "tax_currency",         default: "EUR", null: false
-    t.string   "payment_id"
-    t.string   "invoice_id"
-    t.integer  "year"
-    t.boolean  "pdf_stored"
-    t.datetime "reversed_at"
-    t.string   "reverse_reason"
-    t.string   "order_form"
-  end
-
-  add_index "invoices", ["bank_reference"], name: "index_invoices_on_bank_reference", unique: true, using: :btree
-  add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id", using: :btree
-  add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", unique: true, using: :btree
-  add_index "invoices", ["paid_at"], name: "index_invoices_on_paid_at", using: :btree
-  add_index "invoices", ["payment_id"], name: "index_invoices_on_payment_id", unique: true, using: :btree
-  add_index "invoices", ["reference_number"], name: "index_invoices_on_reference_number", using: :btree
-  add_index "invoices", ["year"], name: "index_invoices_on_year", using: :btree
-
   create_table "issues", force: :cascade do |t|
     t.integer  "year"
     t.integer  "issue"
@@ -254,7 +219,7 @@ ActiveRecord::Schema.define(version: 20150824022934) do
   add_index "keywords", ["keyword"], name: "index_keywords_on_keyword", unique: true, using: :btree
 
   create_table "line_items", force: :cascade do |t|
-    t.integer  "invoice_id"
+    t.integer  "receipt_id"
     t.text     "entity_name"
     t.text     "product"
     t.integer  "quantity"
@@ -276,7 +241,7 @@ ActiveRecord::Schema.define(version: 20150824022934) do
     t.string   "tax_currency",                          default: "EUR", null: false
   end
 
-  add_index "line_items", ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
+  add_index "line_items", ["receipt_id"], name: "index_line_items_on_receipt_id", using: :btree
 
   create_table "news", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -330,6 +295,43 @@ ActiveRecord::Schema.define(version: 20150824022934) do
   add_index "posts", ["id"], name: "index_posts_on_id", using: :btree
   add_index "posts", ["master_id"], name: "index_posts_on_master_id", using: :btree
   add_index "posts", ["regional_master"], name: "index_posts_on_regional_master", using: :btree
+
+  create_table "receipts", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.date     "due_at"
+    t.decimal  "tax_percent"
+    t.integer  "reference_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "paid_at"
+    t.text     "bank_data"
+    t.string   "bank_reference"
+    t.integer  "subtotal_cents",       default: 0,     null: false
+    t.string   "subtotal_currency",    default: "EUR", null: false
+    t.integer  "total_cents",          default: 0,     null: false
+    t.string   "total_currency",       default: "EUR", null: false
+    t.integer  "paid_amount_cents",    default: 0,     null: false
+    t.string   "paid_amount_currency", default: "EUR", null: false
+    t.integer  "tax_cents",            default: 0,     null: false
+    t.string   "tax_currency",         default: "EUR", null: false
+    t.string   "payment_id"
+    t.string   "receipt_id"
+    t.integer  "year"
+    t.boolean  "pdf_stored"
+    t.datetime "reversed_at"
+    t.string   "reverse_reason"
+    t.string   "order_form"
+    t.string   "type",                                 null: false
+  end
+
+  add_index "receipts", ["bank_reference"], name: "index_receipts_on_bank_reference", unique: true, using: :btree
+  add_index "receipts", ["customer_id"], name: "index_receipts_on_customer_id", using: :btree
+  add_index "receipts", ["paid_at"], name: "index_receipts_on_paid_at", using: :btree
+  add_index "receipts", ["payment_id"], name: "index_receipts_on_payment_id", unique: true, using: :btree
+  add_index "receipts", ["receipt_id"], name: "index_receipts_on_receipt_id", unique: true, using: :btree
+  add_index "receipts", ["reference_number"], name: "index_receipts_on_reference_number", using: :btree
+  add_index "receipts", ["type"], name: "index_receipts_on_type", using: :btree
+  add_index "receipts", ["year"], name: "index_receipts_on_year", using: :btree
 
   create_table "remarks", force: :cascade do |t|
     t.integer  "user_id"

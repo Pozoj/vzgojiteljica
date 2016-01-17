@@ -49,7 +49,7 @@
         </div>
         <div class="panel-body">
           <strong>Račun</strong>
-          <p><%= link_to @statement_entry.invoice.invoice_id, admin_invoice_path(@statement_entry.invoice) %></p>
+          <p><%= link_to @statement_entry.invoice.receipt_id, admin_invoice_path(@statement_entry.invoice) %></p>
           <strong>Naročnik</strong>
           <p><%= link_to @statement_entry.invoice.customer, admin_customer_path(@statement_entry.invoice.customer) %></p>
           <strong>Izdan</strong>
@@ -99,7 +99,7 @@
         <tr>
           <td>
             <%= link_to "", admin_invoice_path(invoice) %>
-            <%= invoice.invoice_id %></td>
+            <%= invoice.receipt_id %></td>
           <td><%= invoice.payment_id %></td>
           <td><%= invoice.customer %></td>
           <td><%= l invoice.created_at, format: :simple %></td>

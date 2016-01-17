@@ -10,7 +10,7 @@ class EInvoice
   end
 
   def generate
-    Gyoku.xml(hash, { :key_converter => :camelcase })  
+    Gyoku.xml(hash, { :key_converter => :camelcase })
   end
 
   def hash
@@ -38,7 +38,7 @@ class EInvoice
 
   def entity_hash(entity, entity_type)
     # Order is important here:
-    # 
+    #
     # <xs:sequence>
     #   <xs:element ref="NazivNaslovPodjetja"/>
     #   <xs:element ref="FinancniPodatkiPodjetja" minOccurs="0" maxOccurs="unbounded"/>
@@ -63,7 +63,7 @@ class EInvoice
     # Append bank hash if present.
     bank_hash = entity_bank_hash(entity)
     hash.merge!(bank_hash) if bank_hash
-    
+
     hash.merge!(ReferencniPodatkiPodjetja: entity_reference_numbers_hash(entity))
 
     # Append contacts hash if this is POZOJ.
@@ -170,7 +170,7 @@ class EInvoice
 
   def customer_hashes
     [
-      customer_hash(ENTITY_TYPE_CUSTOMER), 
+      customer_hash(ENTITY_TYPE_CUSTOMER),
       customer_hash(ENTITY_TYPE_RECEIVER),
     ]
   end
@@ -182,7 +182,7 @@ class EInvoice
   def invoice_head_hash
     {
       VrstaRacuna: 380,
-      StevilkaRacuna: invoice.invoice_id,
+      StevilkaRacuna: invoice.receipt_id,
       FunkcijaRacuna: 9,
       NacinPlacila: 0,
       KodaNamena: 'SUBS'
@@ -193,14 +193,14 @@ class EInvoice
     {
       VrstaValuteRacuna: 2,
       KodaValute: 'EUR'
-    } 
+    }
   end
 
   def invoice_location_hash
     {
       VrstaLokacije: 91,
       NazivLokacije: 'Velenje'
-    } 
+    }
   end
 
   def invoice_date_hashes
@@ -443,12 +443,12 @@ class EInvoice
   def split_text(text_type: nil, text:, segment_length: 70, key_name: 'Tekst')
     texts = {}
     index = 1
-    
+
     if text_type
       texts = { "#{key_name}1" => text_type }
       index = 2
     end
-      
+
     texts = text.chars.each_slice(segment_length).inject(texts) do |hash, segment|
       hash["#{key_name}#{index}"] = segment.join
       index += 1

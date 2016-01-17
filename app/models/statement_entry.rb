@@ -18,7 +18,7 @@ class StatementEntry < ActiveRecord::Base
 
   def reference_match
     query = Invoice.arel_table[:payment_id].eq(reference.strip)
-    query = query.or(Invoice.arel_table[:invoice_id].eq(reference.strip))
+    query = query.or(Invoice.arel_table[:receipt_id].eq(reference.strip))
     invoices = Invoice.where(query)
   end
 
@@ -50,7 +50,7 @@ class StatementEntry < ActiveRecord::Base
       # Name and title match.
       name_title_matches.compact.each do |name_title_match|
         next unless name_title_match.present?
-        
+
         if customer.name =~ Regexp.new(name_title_match.strip, 'gi')
           reject = false
         elsif customer.title =~ Regexp.new(name_title_match.strip, 'gi')
@@ -63,7 +63,7 @@ class StatementEntry < ActiveRecord::Base
       # Account number match.
       if customer.account_number =~ Regexp.new(account_number)
         reject = false
-      elsif details =~ Regexp.new(invoice.invoice_id.to_s, 'gi')
+      elsif details =~ Regexp.new(invoice.receipt_id.to_s, 'gi')
         reject = false
       end
 

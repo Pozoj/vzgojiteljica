@@ -4,7 +4,7 @@ class Admin::InvoicesController < Admin::AdminController
   def index
     @years = Invoice.years
     @year_now = DateTime.now.year
-    @all_invoices = Invoice.select(:id, :invoice_id).order(year: :desc, reference_number: :desc).map { |i| [i.invoice_id, i.invoice_id] }
+    @all_invoices = Invoice.select(:id, :receipt_id).order(year: :desc, reference_number: :desc).map { |i| [i.receipt_id, i.receipt_id] }
 
     @invoices = collection
     if params[:filter_year]
@@ -141,7 +141,7 @@ class Admin::InvoicesController < Admin::AdminController
       return render text: @invoice.errors.inspect
     end
 
-    render json: {invoice_id: @invoice.id, redirect: admin_invoice_path(@invoice)}
+    render json: {receipt_id: @invoice.id, redirect: admin_invoice_path(@invoice)}
   end
 
   def einvoice
@@ -188,7 +188,7 @@ class Admin::InvoicesController < Admin::AdminController
 
   def resource
     return unless params[:id]
-    @invoice = Invoice.find_by(invoice_id: params[:id])
+    @invoice = Invoice.find_by(receipt_id: params[:id])
   end
 
   def set_page_title

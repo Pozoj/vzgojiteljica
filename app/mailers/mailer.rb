@@ -32,11 +32,11 @@ class Mailer < ActionMailer::Base
     # Attach invoice PDF.
     begin
       invoice_file = open(@invoice.pdf_idempotent)
-      attachments["#{@invoice.invoice_id}.pdf"] = invoice_file.read
+      attachments["#{@invoice.receipt_id}.pdf"] = invoice_file.read
 
       @invoice.events.create!(event: 'invoice_sent', details: recipient)
 
-      mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Račun #{@invoice.invoice_id} za revijo Vzgojiteljica")
+      mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Račun #{@invoice.receipt_id} za revijo Vzgojiteljica")
     rescue StandardError => e
       @invoice.events.create!(event: 'invoice_send_error', details: e.inspect)
     end
@@ -56,11 +56,11 @@ class Mailer < ActionMailer::Base
     # Attach invoice PDF.
     begin
       invoice_file = open(@invoice.pdf_idempotent)
-      attachments["#{@invoice.invoice_id}.pdf"] = invoice_file.read
+      attachments["#{@invoice.receipt_id}.pdf"] = invoice_file.read
 
       @invoice.events.create!(event: 'invoice_due_sent', details: recipient)
 
-      mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Opomin: Račun #{@invoice.invoice_id} za revijo Vzgojiteljica")
+      mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Opomin: Račun #{@invoice.receipt_id} za revijo Vzgojiteljica")
     rescue StandardError => e
       @invoice.events.create!(event: 'invoice_send_error', details: e.inspect)
     end

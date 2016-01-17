@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(function() {
-    $('#invoice_id').chosen({
+    $('#receipt_id').chosen({
       search_contains: true
     }).on('change', function() {
       window.location.href = $(this).parents('form').attr('action') + '/' + $(this).val();
@@ -19,7 +19,7 @@
     <div class="panel-body">
       <%= form_tag admin_invoices_path, method: :get, class: 'form-inline print_invoices' do %>
         <div class="form-group">
-          <%= select_tag :id, options_for_select(@all_invoices), {class: 'form-control', id: 'invoice_id', placeholder: 'ID računa', prompt: ""} %>
+          <%= select_tag :id, options_for_select(@all_invoices), {class: 'form-control', id: 'receipt_id', placeholder: 'ID računa', prompt: ""} %>
         </div>
       <% end %>
     </div>
@@ -59,7 +59,7 @@
       <tr>
         <td>
           <%= link_to "", admin_invoice_path(invoice) %>
-          <%= invoice.invoice_id %></td>
+          <%= invoice.receipt_id %></td>
         <td><%= invoice.customer %></td>
         <td><%= l invoice.created_at, format: :simple %></td>
         <td><%= l invoice.due_at, format: :simple %></td>

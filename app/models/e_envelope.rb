@@ -15,7 +15,7 @@ class EEnvelope
           'xsi:noNamespaceSchemaLocation' => 'icl_eb_envelope_einvoice.xsd'
         }
       }
-    )  
+    )
   end
 
   def hash
@@ -94,7 +94,7 @@ class EEnvelope
   def doc_data_hash
     # <doc_data>
     #   <doc_type>0002</doc_type>
-    #   <doc_type_ver>01</doc_type_ver> 
+    #   <doc_type_ver>01</doc_type_ver>
     #   <external_doc_id>1-2015</external_doc_id>
     #   <timestamp>2015-03-29T17:45:12.000</timestamp>
     # </doc_data>
@@ -102,7 +102,7 @@ class EEnvelope
     {
       doc_type: '0002',
       doc_type_ver: '01',
-      external_doc_id: invoice.invoice_id,
+      external_doc_id: invoice.receipt_id,
       timestamp: DateTime.now
     }
   end
@@ -197,12 +197,12 @@ class EEnvelope
       count: 2,
       attachment: [
         {
-          filename: "#{invoice.invoice_id}.xml",
+          filename: "#{invoice.receipt_id}.xml",
           type: 'xml',
           description: 'Racun v e-Slog XML obliki'
         },
         {
-          filename: "#{invoice.invoice_id}.pdf",
+          filename: "#{invoice.receipt_id}.pdf",
           type: 'pdf',
           description: 'Vizualizacija v PDF obliki'
         },

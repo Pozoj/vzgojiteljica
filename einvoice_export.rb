@@ -8,11 +8,11 @@ FileUtils.mkdir_p directory
 Invoice.where('id >= 1771').each do |invoice|
   next unless invoice.customer.einvoice?
 
-  xml_filename = "#{invoice.invoice_id}.xml"
+  xml_filename = "#{invoice.receipt_id}.xml"
   File.open("#{directory}/#{xml_filename}", 'w') { |f| f.write(invoice.einvoice_xml) }
   files << xml_filename
 
-  pdf_filename = "#{invoice.invoice_id}.pdf"
+  pdf_filename = "#{invoice.receipt_id}.pdf"
   File.open("#{directory}/#{xml_filename}", 'w') { |f| f.write(invoice.pdf) }
   files << pdf_filename
 end;0

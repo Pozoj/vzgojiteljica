@@ -48,13 +48,13 @@
       Rok plačila: <strong><%= l invoice.due_at, format: :simple %></strong>
       <% if invoice.order_form %>
         <br>
-        Št. naročilnice: 
+        Št. naročilnice:
         <strong><%= invoice.order_form %></strong>
       <% end %>
     </p>
   </div>
 
-  <h1>Račun <%= invoice.invoice_id %></h1>
+  <h1>Račun <%= invoice.receipt_id %></h1>
 
   <div class="items">
     <table>

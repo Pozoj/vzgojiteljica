@@ -43,7 +43,13 @@
         <td><%= l statement.created_at, format: :simple %></td>
         <td><%= statement.entries.count %></td>
         <td><%= statement.entries.matched.count %></td>
-        <td><%= statement.entries.unmatched.count %></td>
+        <td>
+          <% if statement.entries.unmatched.count > 0 %>
+            <span class="label label-danger"><%= statement.entries.unmatched.count %></span>
+          <% else %>
+            <%= statement.entries.unmatched.count %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

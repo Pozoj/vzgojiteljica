@@ -48,7 +48,7 @@ class Receipt < ActiveRecord::Base
 
   def pdf
     pdf_generator = PdfGenerator.new
-    pdf_generator.convert_url("http://www.vzgojiteljica.si/admin/invoices/#{to_param}/print")
+    pdf_generator.convert_url("http://www.vzgojiteljica.si/admin/#{type.downcase.pluralize}/#{to_param}/print")
   end
 
   def pdf_idempotent

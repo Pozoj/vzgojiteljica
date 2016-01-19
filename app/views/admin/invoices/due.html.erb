@@ -29,7 +29,7 @@
       <tr>
         <td>
           <%= link_to "", admin_invoice_path(invoice) %>
-          <%= invoice.invoice_id %></td>
+          <%= invoice.receipt_id %></td>
         <td><%= invoice.customer %></td>
         <td><%= l invoice.created_at, format: :simple %></td>
         <td><%= l invoice.due_at, format: :simple %></td>

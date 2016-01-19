@@ -97,6 +97,15 @@ Web3::Application.routes.draw do
       post :build_partial_for_subscription, on: :collection
       put :reverse, on: :member
     end
+    resources :offers do
+      get :wizard, on: :collection
+      get :print_wizard, on: :collection
+      get :print, on: :member
+      get :print_all, on: :collection
+      get :pdf, on: :member
+      post :email, on: :member
+      post :email_due, on: :member
+    end
     resources :bank_statements do
       post :parse, on: :member
     end

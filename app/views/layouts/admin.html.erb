@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 
     <%= stylesheet_link_tag "admin" %>
     <%= javascript_include_tag "admin" %>
@@ -46,24 +46,54 @@
             <li><a href="<%= admin_entities_path %>">Naročniki</a></li>
             <li><a href="<%= admin_remarks_path %>">Opombe</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Računi <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Računovodstvo <span class="caret"></span>
+              </a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<%= admin_invoices_path %>">Računi</a></li>
-                <li><a href="<%= due_admin_invoices_path %>">Zapadli računi</a></li>
-                <li><a href="<%= unpaid_admin_invoices_path %>">Neplačani računi</a></li>
-                <li><a href="<%= reversed_admin_invoices_path %>">Stornirani računi</a></li>
-                <li role="presentation" class="divider"></li>
-                <li>
-                  <a href="<%= wizard_admin_invoices_path %>">
-                    <i class="glyphicon glyphicon-asterisk"></i>
-                    Izdaja računov
+                <li><a href="<%= admin_invoices_path %>"><strong>Računi</strong></a></li>
+                <li class="dropdown-submenu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    Ostalo
                   </a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="<%= due_admin_invoices_path %>">Zapadli računi</a></li>
+                    <li><a href="<%= unpaid_admin_invoices_path %>">Neplačani računi</a></li>
+                    <li><a href="<%= reversed_admin_invoices_path %>">Stornirani računi</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li>
+                      <a href="<%= wizard_admin_invoices_path %>">
+                        <i class="glyphicon glyphicon-asterisk"></i>
+                        Izdaja računov
+                      </a>
+                    </li>
+                    <li>
+                      <a href="<%= print_wizard_admin_invoices_path %>">
+                        <i class="glyphicon glyphicon-print"></i>
+                        Tiskanje računov
+                      </a>
+                    </li>
+                  </ul>
                 </li>
-                <li>
-                  <a href="<%= print_wizard_admin_invoices_path %>">
-                    <i class="glyphicon glyphicon-print"></i>
-                    Tiskanje računov
+                <li role="presentation" class="divider"></li>
+                <li><a href="<%= admin_offers_path %>"><strong>Ponudbe</strong></a></li>
+                <li class="dropdown-submenu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    Ostalo
                   </a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <a href="<%= wizard_admin_offers_path %>">
+                        <i class="glyphicon glyphicon-asterisk"></i>
+                        Izdaja ponudb
+                      </a>
+                    </li>
+                    <li>
+                      <a href="<%= print_wizard_admin_offers_path %>">
+                        <i class="glyphicon glyphicon-print"></i>
+                        Tiskanje ponudb
+                      </a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>
@@ -144,6 +174,6 @@
     </div>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </body>
 </html>

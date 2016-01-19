@@ -1,6 +1,4 @@
-class Admin::InvoicesController < Admin::AdminController
-  skip_before_filter :authenticate, only: [:print]
-
+class Admin::InvoicesController < Admin::ReceiptsController
   def index
     @years = Invoice.years
     @year_now = DateTime.now.year
@@ -62,7 +60,7 @@ class Admin::InvoicesController < Admin::AdminController
   end
 
   def wizard
-    @invoice_wizard = InvoiceWizard.new params[:invoice_wizard]
+    @wizard = ReceiptWizard.new(wizard_params)
     @last = Invoice.select(:reference_number).order(year: :desc, reference_number: :desc).first.try(:reference_number)
   end
 
@@ -71,12 +69,9 @@ class Admin::InvoicesController < Admin::AdminController
     @lte = Invoice.select(:reference_number).order(year: :desc, reference_number: :desc).first.try(:reference_number)
   end
 
-  def show
-    respond_with resource
-  end
-
   def create
-    InvoicesWizardWorker.perform_async(params[:invoice_wizard])
+    ReceiptWizardWorker.perform_async(wizard_params)
+
     redirect_to admin_invoices_path, notice: "Ustvarjam račune"
   end
 
@@ -106,18 +101,14 @@ class Admin::InvoicesController < Admin::AdminController
     redirect_to admin_invoice_path, notice: "Opomin poslan na #{customer.billing_email}"
   end
 
-  def pdf
-    redirect_to resource.pdf_idempotent
-  end
-
   def build_for_subscription
     subscription = Subscription.find(params[:subscription_id])
 
-    wizard = InvoiceWizard.new
+    wizard = ReceiptWizard.new(wizard_params)
     unless subscription.plan.yearly?
       wizard.issue_id = Issue.order(published_at: :desc).first.id
     end
-    @invoice = wizard.build_invoice_for_subscription subscription
+    @invoice = wizard.build_receipt_for_subscription subscription
 
     unless @invoice.save
       return render text: @invoice.errors.inspect
@@ -134,8 +125,8 @@ class Admin::InvoicesController < Admin::AdminController
       return redirect_to :back, notice: "Please provide issues left"
     end
 
-    wizard = InvoiceWizard.new
-    @invoice = wizard.build_partial_invoice_for_subscription(subscription, issues_left)
+    wizard = ReceiptWizard.new(wizard_params)
+    @invoice = wizard.build_partial_receipt_for_subscription(subscription, issues_left)
 
     unless @invoice.save
       return render text: @invoice.errors.inspect
@@ -156,10 +147,6 @@ class Admin::InvoicesController < Admin::AdminController
     respond_to do |format|
       format.xml { render layout: 'eenvelope' }
     end
-  end
-
-  def print
-    respond_with resource, layout: 'print'
   end
 
   def print_all
@@ -193,5 +180,11 @@ class Admin::InvoicesController < Admin::AdminController
 
   def set_page_title
     @page_title = 'Računi'
+  end
+
+  def wizard_params
+    return @wizard_params if @wizard_params
+    @wizard_params = params[:receipt_wizard] || {}
+    @wizard_params.merge!(type: :invoice)
   end
 end

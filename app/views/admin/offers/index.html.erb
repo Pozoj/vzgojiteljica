@@ -13,13 +13,13 @@
     <div class="panel-heading">
       <h3 class="panel-title">
         <i class="glyphicon glyphicon-search"></i>
-        Pojdi na račun
+        Pojdi na ponudbo
       </h3>
     </div>
     <div class="panel-body">
-      <%= form_tag admin_invoices_path, method: :get, class: 'form-inline print_receipts' do %>
+      <%= form_tag admin_offers_path, method: :get, class: 'form-inline print_offers' do %>
         <div class="form-group">
-          <%= select_tag :id, options_for_select(@all_invoices), {class: 'form-control', id: 'receipt_id', placeholder: 'ID računa', prompt: ""} %>
+          <%= select_tag :id, options_for_select(@all_offers), {class: 'form-control', id: 'receipt_id', placeholder: 'ID ponudbe', prompt: ""} %>
         </div>
       <% end %>
     </div>
@@ -27,14 +27,14 @@
 </div>
 
 <h2>
-  Izdani računi
+  Izdane ponudbe
   <% @years.each do |year| %>
     <small>
       <%= conditional_filtering_link(year,
             default: year == @year_now,
             param: :filter_year,
             param_value: year,
-            route: admin_invoices_path
+            route: admin_offers_path
       ) %>
       |
     </small>
@@ -42,37 +42,27 @@
 
   <small><%= conditional_filtering_link "Vsa leta", param: :filter_year_all %></small>
 </h2>
-<%= paginate @invoices %>
+<%= paginate @offers %>
 <table class="table rowlinks">
   <thead>
     <tr>
       <th>ID</th>
       <th>Stranka</th>
-      <th>Izdan</th>
-      <th>Rok</th>
-      <th>Plačan</th>
+      <th>Izdana</th>
       <th>Znesek</th>
     </tr>
   </thead>
   <tbody>
-    <% @invoices.each do |invoice| %>
+    <% @offers.each do |offer| %>
       <tr>
         <td>
-          <%= link_to "", admin_invoice_path(invoice) %>
-          <%= invoice.receipt_id %></td>
-        <td><%= invoice.customer %></td>
-        <td><%= l invoice.created_at, format: :simple %></td>
-        <td><%= l invoice.due_at, format: :simple %></td>
-        <td>
-          <% if invoice.paid? %>
-            <%= l invoice.paid_at, format: :simple %>
-          <% elsif invoice.due? %>
-            <span class="label label-danger"><%= invoice.late_days %> dni</span>
-          <% end %>
-        </td>
-        <td><%= number_to_currency invoice.total %></td>
+          <%= link_to "", admin_offer_path(offer) %>
+          <%= offer.receipt_id %></td>
+        <td><%= offer.customer %></td>
+        <td><%= l offer.created_at, format: :simple %></td>
+        <td><%= number_to_currency offer.total %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= paginate @invoices %>
+<%= paginate @offers %>

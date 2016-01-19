@@ -103,6 +103,7 @@ Web3::Application.routes.draw do
       get :print, on: :member
       get :print_all, on: :collection
       get :pdf, on: :member
+      post :create_for_customer, on: :collection
       post :email, on: :member
       post :email_due, on: :member
     end

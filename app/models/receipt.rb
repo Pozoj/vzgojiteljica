@@ -12,6 +12,7 @@ class Receipt < ActiveRecord::Base
   has_many :remarks, as: :remarkable
   has_many :events, as: :eventable
   has_many :line_items, dependent: :destroy
+  has_many :issues, through: :line_items
 
   validates_presence_of :customer
   validates :year, presence: true, numericality: { only_integer: true, greater_than: 0 }

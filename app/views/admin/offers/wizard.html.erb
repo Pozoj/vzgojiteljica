@@ -1,18 +1,18 @@
 <h2>
-  Izdaja računov
+  Izdaja ponudb
   <i class="glyphicon glyphicon-asterisk"></i>
 </h2>
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= form_for @wizard, url: admin_invoices_path, method: :post do |f| %>
+    <%= form_for @wizard, url: admin_offers_path, method: :post do |f| %>
       <div class="form-group">
         <%= f.label :issue_id, "Številka" %>
         <%= f.collection_select :issue_id, Issue.order(year: :desc, issue: :desc, published_at: :desc), :id, :to_s, {}, {class: 'form-control'} %>
       </div>
       <div class="form-group">
-        <%= f.label :last_receipt_number, "Zadnja št. računa" %>
-        <%= f.text_field :last_receipt_number, placeholder: "#{@last} - računi od #{@last} naprej", class: 'form-control' %>
+        <%= f.label :last_receipt_number, "Zadnja št. ponudbe" %>
+        <%= f.text_field :last_receipt_number, placeholder: "#{@last} - ponudbe od #{@last} naprej", class: 'form-control' %>
       </div>
       <div class="form-group">
         <%= f.label :include_yearly do %>
@@ -21,7 +21,7 @@
         <% end %>
       </div>
       <div class="form-group">
-        <%= f.submit "Ustvari račune", class: 'btn btn-default' %>
+        <%= f.submit "Ustvari ponudbe", class: 'btn btn-default' %>
       </div>
     <% end %>
   </div>

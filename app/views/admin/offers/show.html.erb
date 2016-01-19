@@ -1,0 +1,116 @@
+<h1>
+  Ponudba <%= @offer.receipt_id %>
+  <small class="muted">
+    za <%= link_to @offer.customer, [:admin, @offer.customer] %>
+  </small>
+</h1>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong>Skupaj brez DDV:</strong>
+        <p>
+          <%= number_to_currency @offer.subtotal %>
+        </p>
+        <strong>DDV:</strong>
+        <p>
+          <%= number_to_percentage @offer.tax_percent %>
+        </p>
+        <strong>Davek:</strong>
+        <p>
+          <%= number_to_currency @offer.tax %>
+        </p>
+        <strong>Skupaj za plačilo:</strong>
+        <p>
+          <%= number_to_currency @offer.total %>
+        </p>
+        <hr>
+        <strong>Kreirana:</strong>
+        <p>
+          <%= l @offer.created_at %>
+        </p>
+        <strong>Osvežena:</strong>
+        <p>
+          <%= l @offer.updated_at %>
+        </p>
+        <hr>
+        <p>
+          <%= link_to print_admin_offer_path(@offer), class: 'btn btn-default' do %>
+            <i class="glyphicon glyphicon-print"></i>
+            Natisni
+          <% end %>
+          <%= link_to pdf_admin_offer_path(@offer), class: 'btn btn-default' do %>
+            <i class="glyphicon glyphicon-export"></i>
+            PDF
+          <% end %>
+          <% if @offer.customer.billing_email %>
+            <%= link_to email_admin_offer_path(@offer), method: :post, class: 'btn btn-default pull-right', "data-confirm": "Ali ste prepričani da želite poslati račun na #{@offer.customer.billing_email}?" do %>
+              <i class="glyphicon glyphicon-envelope"></i>
+              Pošlji ponudbo
+            <% end %>
+          <% end %>
+        </p>
+        <% if @offer.events.any? %>
+          <hr>
+          <%= render 'events/events', events: @offer.events %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Naročnik</h3>
+      </div>
+      <div class="panel-body">
+        <%= render "admin/customers/fields", resource: @offer.customer %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default" style="margin-bottom: 150px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">Postavke</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Entiteta</th>
+          <th>Produkt</th>
+          <th>Revija</th>
+          <th>Kol.</th>
+          <th>ME</th>
+          <th>Cena</th>
+          <th>Pop. %</th>
+          <th>Cena s pop.</th>
+          <th>Znesek</th>
+          <th>Davek %</th>
+          <th>Davek</th>
+          <th>Za plačilo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @offer.line_items.each do |li| %>
+          <tr>
+            <td><%= li.entity_name %></td>
+            <td><%= li.product %></td>
+            <td><%= li.issue %></td>
+            <td><%= li.quantity %></td>
+            <td><%= li.unit %></td>
+            <td><%= number_to_currency li.price_per_item %></td>
+            <td><%= number_to_percentage li.discount_percent || 0 %></td>
+            <td><%= number_to_currency li.price_per_item_with_discount %></td>
+            <td><%= number_to_currency li.subtotal %></td>
+            <td><%= number_to_percentage li.tax_percent %></td>
+            <td><%= number_to_currency li.tax %></td>
+            <td><%= number_to_currency li.total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

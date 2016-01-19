@@ -81,7 +81,7 @@ td.subscriptions .subscription:last-child {
   margin-top: 40px;
 }
 
-.print_invoices .form-control {
+.print_receipts .form-control {
   width: 100px;
 }
 .panel.remarks table td.remark {

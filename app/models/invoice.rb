@@ -1,6 +1,5 @@
 class Invoice < Receipt
   has_many :statement_entries
-  has_many :issues, through: :line_items
 
   validates :payment_id, presence: true, uniqueness: true
 

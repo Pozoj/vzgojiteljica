@@ -1,10 +1,16 @@
 class Customer < Entity
+  TOKEN_LENGTH = 6
+
   has_many :subscriptions, through: :subscribers
   has_many :subscribers, dependent: :destroy
   has_many :invoices
   has_many :offers
   has_one :contact_person, foreign_key: :entity_id, dependent: :destroy
   has_one :billing_person, foreign_key: :entity_id, dependent: :destroy
+
+  before_validation :generate_token, on: :create
+
+  validates :token, presence: true, length: {is: TOKEN_LENGTH}
 
   def quantity
     subscriptions.active.inject(0) { |sum, s| sum += s.quantity }
@@ -127,6 +133,17 @@ class Customer < Entity
       title
     else
       name
+    end
+  end
+
+  private
+
+  def generate_token
+    fund = ('A'..'Z').to_a
+
+    self.token = ''
+    TOKEN_LENGTH.times do
+      self.token += fund[(SecureRandom.random_number(fund.length - 1))]
     end
   end
 

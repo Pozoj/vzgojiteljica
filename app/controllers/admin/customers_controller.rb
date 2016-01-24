@@ -1,6 +1,8 @@
 class Admin::CustomersController < Admin::AdminController
   has_scope :page, :default => 1
 
+  skip_before_filter :authenticate, only: :public_show
+
   def show
     @subscribers = resource.subscribers
     @subscribers_total_count = @subscribers.count
@@ -18,6 +20,20 @@ class Admin::CustomersController < Admin::AdminController
     @subscribers = @subscribers.to_a.sort_by { |s| s.id }
 
     respond_with resource
+  end
+
+  ###
+  ### UNAUTHENTICATED
+  ###
+  def public_show
+    token = params[:token].upcase
+    @customer = Customer.find_by(token: token)
+    unless @customer
+      return redirect_to root_path
+    end
+
+    @page_title = @customer.to_s
+    render layout: 'public'
   end
 
   def new_freerider

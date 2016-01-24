@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117194832) do
+ActiveRecord::Schema.define(version: 20160124154425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20160117194832) do
     t.integer  "bank_id"
     t.integer  "registration_number", limit: 8
     t.integer  "entity_type"
+    t.string   "token"
   end
 
   add_index "entities", ["account_number"], name: "index_entities_on_account_number", using: :btree
@@ -138,6 +139,7 @@ ActiveRecord::Schema.define(version: 20160117194832) do
   add_index "entities", ["post_id"], name: "index_entities_on_post_id", using: :btree
   add_index "entities", ["registration_number"], name: "index_entities_on_registration_number", unique: true, using: :btree
   add_index "entities", ["subscription_id"], name: "index_entities_on_subscription_id", using: :btree
+  add_index "entities", ["token"], name: "index_entities_on_token", unique: true, using: :btree
   add_index "entities", ["vat_id"], name: "index_entities_on_vat_id", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|

@@ -1,0 +1,55 @@
+%h1= @customer
+
+- if @customer.invoices.any?
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title Izdani računi
+
+    %table.table
+      %thead
+        %tr
+          %th Ref. št.
+          %th Številka
+          %th Izdan
+          %th Rok
+          %th Znesek
+          %th Plačan
+      %tbody
+        - @customer.invoices.order(year: :desc, reference_number: :desc).each do |invoice|
+          %tr
+            %td= invoice.reference_number
+            %td= invoice.issues.distinct.join(', ')
+            %td= l invoice.created_at, format: :simple
+            %td= l invoice.due_at, format: :simple
+            - if invoice.paid?
+              %td= number_to_currency invoice.total
+              %td
+                %strong{style: 'color: green'} plačan
+                = l invoice.paid_at, format: :simple
+            - elsif invoice.due?
+              %td= number_to_currency invoice.total
+              %td
+                %strong{style: 'color: red'} zapadel
+                v plačilo pred
+                = pluralize_days(invoice.late_days)
+            - else
+              %td= number_to_currency invoice.total
+              %td &mdash;
+
+- if @customer.offers.any?
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title
+        Izdane ponudbe
+    %table.table
+      %thead
+        %tr
+          %th Ref. št.
+          %th Izdana
+          %th Znesek
+      %tbody
+        - @customer.offers.order(year: :desc, reference_number: :desc).each do |offer|
+          %tr
+            %td= offer.reference_number
+            %td= l offer.created_at, format: :simple
+            %td= number_to_currency offer.total

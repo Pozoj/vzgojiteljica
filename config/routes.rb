@@ -115,6 +115,9 @@ Web3::Application.routes.draw do
     end
   end
 
+  # Public token route
+  get '/:token', to: 'admin/customers#public_show'
+
   # You can have the root of your site routed with "root"
   # root to: 'copies#show', id: 'pages#index'
   root to: 'pages#index'

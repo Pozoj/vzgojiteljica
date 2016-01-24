@@ -13,6 +13,9 @@
     .details.panel.panel-default
       .panel-body
         = render "fields", resource: @customer
+        %hr
+        %strong Javni dostop
+        %p= link_to token_url(@customer.token), token_url(@customer.token)
 
         - if @customer.company?
           %hr

@@ -8,13 +8,15 @@ class Order < ActiveRecord::Base
   validate  :validate_plan_type
 
   belongs_to :post
-  has_many :subscriptions
+  has_many :subscriptions # TODO: remove after migration
   has_many :remarks, as: :remarkable, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
-
+  has_one :order_form
 
   scope :processed, -> { where(processed: true) }
   scope :not_processed, -> { where(processed: false) }
+
+  after_create :create_order_form
 
   def order_id
     "#{created_at.strftime('%Y')}-#{id}"
@@ -22,7 +24,8 @@ class Order < ActiveRecord::Base
 
   def processed!(user_id)
     self.processed = true
-    if save
+    order_form.processed_at = DateTime.now
+    if order_form.save && save
       events.create event: :order_processed, user_id: user_id
     end
   end
@@ -47,5 +50,12 @@ class Order < ActiveRecord::Base
     if quantity == 1 && plan_type == 6
       errors.add :plan_type, "za plačevanje po posamezni številki mora biti naročena količina vsaj 2"
     end
+  end
+
+  def create_order_form
+    order_form = build_order_form
+    order_form.issued_at = created_at
+    order_form.form_id = "Naročilo ##{id}"
+    order_form.save
   end
 end

@@ -7,6 +7,7 @@ class BankStatement < ActiveRecord::Base
                       :access_key_id => AWS_S3['access_key_id'],
                       :secret_access_key => AWS_S3['secret_access_key']
                     },
+                    :s3_permissions => :private,
                     :s3_storage_class => :reduced_redundancy,
                     :path => "/bank_statements/:id/:style_:basename.:extension"
 

@@ -5,7 +5,8 @@ class Subscription < ActiveRecord::Base
 
   belongs_to :plan
   belongs_to :subscriber
-  belongs_to :order
+  belongs_to :order_form
+  belongs_to :order # TODO: remove after migration
   has_many :remarks, as: :remarkable, dependent: :destroy
 
   scope :active, -> { where(arel_table[:start].lteq(Date.today).and(arel_table[:end].eq(nil).or(arel_table[:end].gteq(Date.today)))) }
@@ -20,8 +21,6 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :subscriber
   validates_numericality_of :quantity, greater_than: 0, only_integer: true
   validate :validate_end_after_start
-
-  before_save :fill_in_order_form, if: :order
 
   def customer
     subscriber.customer
@@ -61,8 +60,7 @@ class Subscription < ActiveRecord::Base
       subscription = subscriber.subscriptions.new
       subscription.start = Date.today
       subscription.quantity = order.quantity
-      subscription.order = order
-      subscription.order_form = "Naročilo ##{order.id}"
+      subscription.order_form = order.order_form
       if order.comments.present?
         subscription.remarks.create remark: "Opomba naročnika: \"#{order.comments}\""
       end
@@ -77,10 +75,6 @@ class Subscription < ActiveRecord::Base
   end
 
   private
-
-  def fill_in_order_form
-    self.order_form = "Naročilo ##{order_id}"
-  end
 
   def validate_end_after_start
     if self.end.present? && self.end <= self.start

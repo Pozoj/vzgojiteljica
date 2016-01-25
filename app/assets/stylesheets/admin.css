@@ -158,3 +158,9 @@ td.subscriptions .subscription:last-child {
     -moz-border-radius:6px 0 6px 6px;
     border-radius:6px 0 6px 6px;
 }
+
+.preview img {
+  display: block;
+  border: 2px solid #f0f0f0;
+  margin: 1em 0;
+}

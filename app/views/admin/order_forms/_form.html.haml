@@ -1,0 +1,8 @@
+.row
+  .form-inputs.col-xs-8
+    = f.input :form_id
+    = f.input :authorizer
+    = f.input :issued_at, include_blank: true
+    = f.input :processed_at, include_blank: true
+    = f.input :document
+    = f.submit

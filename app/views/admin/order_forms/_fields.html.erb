@@ -1,0 +1,38 @@
+<strong>ID naročilnice:</strong>
+<p>
+  <%= order_form.form_id %>
+</p>
+<% if order_form.authorizer? %>
+  <strong>Avtoriziral:</strong>
+  <p>
+    <%= order_form.authorizer %>
+  </p>
+<% end %>
+<% if order_form.issued_at %>
+  <strong>Izdana:</strong>
+  <p>
+    <%= l order_form.issued_at %>
+  </p>
+<% end %>
+<% if order_form.processed_at %>
+  <strong>Procesirana:</strong>
+  <p>
+    <%= l order_form.processed_at %>
+  </p>
+<% end %>
+<% if order_form.order %>
+  <strong>Naročilo:</strong>
+  <p>
+    <%= link_to order_form.order, admin_order_path(order_form.order) %>
+  </p>
+<% end %>
+<% if order_form.document.file? %>
+  <hr>
+  <strong>Dokument:</strong>
+  <p class="preview">
+    <%= link_to download_admin_order_form_path(order_form) do %>
+      <%= image_tag order_form.document.url(:preview) %>
+    <% end %>
+    <%= link_to order_form.document_file_name, download_admin_order_form_path(order_form) %>
+  </p>
+<% end %>

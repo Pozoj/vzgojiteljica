@@ -47,16 +47,6 @@
         <p>
           <%= @subscription.plan %>
         </p>
-        <% if @subscription.order_form %>
-          <strong>Št. naročilnice:</strong>
-          <p>
-            <% if @subscription.order %>
-              <%= link_to @subscription.order_form, admin_order_path(@subscription.order) %>
-            <% else %>
-              <%= @subscription.order_form %>
-            <% end %>
-          </p>
-        <% end %>
         <hr>
         <strong>Kreiran:</strong>
         <p>
@@ -66,15 +56,7 @@
         <p>
           <%= l @subscription.updated_at %>
         </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-xs-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Orodja za naročnino</h3>
-      </div>
-      <div class="panel-body">
+        <hr>
         <p>
           <% unless @subscription.plan.free? %>
             <%= link_to build_for_subscription_admin_invoices_path(subscription_id: @subscription), class: 'btn btn-sm btn-success', method: :post do %>
@@ -117,9 +99,23 @@
         <% end %>
       </div>
     </div>
-
+    <% if @subscription.order_form %>
+      <% order_form = @subscription.order_form %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Naročilnica
+            <%= link_to "Uredi", edit_admin_order_form_path(order_form), class: 'btn btn-default btn-xs pull-right' %>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <%= render 'admin/order_forms/fields', order_form: @subscription.order_form %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-xs-6">
     <%= render "admin/remarks/form", resource: @subscription %>
-
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Naročnik</h3>

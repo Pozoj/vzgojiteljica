@@ -1,5 +1,49 @@
 %h1= @customer
 
+.row
+  .col-xs-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Naročnine
+      %table.table
+        %thead
+          %tr
+            %th Št. naročilnice
+            %th Prejemnik
+            %th Plan
+            %th Količina
+            %th Pričetek
+            %th Konec
+        %tbody
+          - @customer.subscriptions.active.paid.each do |subscription|
+            %tr
+              %td= subscription.order_form
+              %td= subscription.subscriber
+              %td
+                - if subscription.plan.yearly?
+                  Letna naročnina
+                  %em== (#{number_to_currency(subscription.plan.price_with_tax)} na leto)
+                - else
+                  Mesečna naročnina
+                  %em== (#{number_to_currency(subscription.plan.price_with_tax)} na mesec)
+              %td= subscription.quantity
+              %td= l subscription.start, format: :simple
+              %td
+                - if subscription.end
+                  = l subscription.end, format: :simple
+                - else
+                  &mdash;
+        %tfoot
+          %tr
+            %td
+              %strong Skupaj
+            %td
+            %td
+            %td
+              %strong= @customer.subscriptions.active.sum(:quantity)
+            %td
+            %td
+
 - if @customer.invoices.any?
   .panel.panel-default
     .panel-heading

@@ -1,0 +1,78 @@
+<script type="text/javascript">
+  $(function() {
+    $('#receipt_id').chosen({
+      search_contains: true
+    }).on('change', function() {
+      window.location.href = $(this).parents('form').attr('action') + '/' + $(this).val();
+    });
+  });
+</script>
+
+<div class="col-xs-3 pull-right" style="margin-top: 20px;">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <i class="glyphicon glyphicon-search"></i>
+        Pojdi na račun
+      </h3>
+    </div>
+    <div class="panel-body">
+      <%= form_tag admin_order_forms_path, method: :get, class: 'form-inline print_receipts' do %>
+        <div class="form-group">
+          <%= select_tag :id, options_for_select(@all_order_forms), {class: 'form-control', id: 'receipt_id', placeholder: 'ID računa', prompt: ""} %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<h2>
+  Naročilnice
+  <% @years.each do |year| %>
+    <small>
+      <%= conditional_filtering_link(year,
+            default: year == @year_now,
+            param: :filter_year,
+            param_value: year,
+            route: admin_order_forms_path
+      ) %>
+      |
+    </small>
+  <% end %>
+
+  <small><%= conditional_filtering_link "Vsa leta", param: :filter_year_all %></small>
+</h2>
+<%= paginate @order_forms %>
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Št. nar.</th>
+      <th>Stranka</th>
+      <th>Izdana</th>
+      <th>Procesirana</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order_forms.each do |order_form| %>
+      <tr>
+        <td>
+          <%= link_to "", admin_order_form_path(order_form) %>
+          <%= order_form.id %></td>
+        <td><%= order_form.form_id %></td>
+        <td><%= order_form.customer %></td>
+        <td>
+          <% if order_form.issued_at %>
+            <%= l order_form.issued_at, format: :simple %>
+          <% end %>
+        </td>
+        <td>
+          <% if order_form.processed_at %>
+            <%= l order_form.processed_at, format: :simple %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @order_forms %>

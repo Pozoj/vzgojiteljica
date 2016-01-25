@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124154425) do
+ActiveRecord::Schema.define(version: 20160125151154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,6 +254,28 @@ ActiveRecord::Schema.define(version: 20160124154425) do
     t.datetime "updated_at"
   end
 
+  create_table "order_forms", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.string   "form_id",               null: false
+    t.string   "authorizer"
+    t.datetime "issued_at"
+    t.datetime "processed_at"
+    t.integer  "order_id"
+    t.integer  "offer_id"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "year"
+  end
+
+  add_index "order_forms", ["customer_id"], name: "index_order_forms_on_customer_id", using: :btree
+  add_index "order_forms", ["form_id"], name: "index_order_forms_on_form_id", using: :btree
+  add_index "order_forms", ["order_id"], name: "index_order_forms_on_order_id", using: :btree
+  add_index "order_forms", ["year"], name: "index_order_forms_on_year", using: :btree
+
   create_table "orders", force: :cascade do |t|
     t.string   "title",          limit: 255
     t.string   "name",           limit: 255
@@ -386,12 +408,11 @@ ActiveRecord::Schema.define(version: 20160124154425) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quantity"
-    t.string   "order_form"
-    t.integer  "order_id"
+    t.integer  "order_form_id"
   end
 
   add_index "subscriptions", ["end"], name: "index_subscriptions_on_end", using: :btree
-  add_index "subscriptions", ["order_id"], name: "index_subscriptions_on_order_id", using: :btree
+  add_index "subscriptions", ["order_form_id"], name: "index_subscriptions_on_order_form_id", using: :btree
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
   add_index "subscriptions", ["start"], name: "index_subscriptions_on_start", using: :btree
   add_index "subscriptions", ["subscriber_id"], name: "index_subscriptions_on_subscriber_id", using: :btree

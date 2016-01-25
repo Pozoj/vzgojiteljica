@@ -29,9 +29,7 @@ class Receipt < ActiveRecord::Base
   after_create :store_all_on_s3_async, unless: :skip_s3
 
   def self.years
-    years = Invoice.select(:year).group(:year).map(&:year)
-    years << DateTime.now.year
-    years.sort.reverse.uniq
+    self.distinct(:year).order(year: :desc).pluck(:year)
   end
 
   def generate_year

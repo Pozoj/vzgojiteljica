@@ -8,6 +8,19 @@
     <%= order_form.authorizer %>
   </p>
 <% end %>
+<% if order_form.start %>
+  <strong>Velja od:</strong>
+  <p>
+    <%= l order_form.start %>
+  </p>
+<% end %>
+<% if order_form.end %>
+  <strong>Velja do:</strong>
+  <p>
+    <%= l order_form.end %>
+  </p>
+<% end %>
+<hr>
 <% if order_form.issued_at %>
   <strong>Izdana:</strong>
   <p>

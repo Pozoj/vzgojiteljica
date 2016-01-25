@@ -5,6 +5,7 @@ class Customer < Entity
   has_many :subscribers, dependent: :destroy
   has_many :invoices
   has_many :offers
+  has_many :order_forms
   has_one :contact_person, foreign_key: :entity_id, dependent: :destroy
   has_one :billing_person, foreign_key: :entity_id, dependent: :destroy
 

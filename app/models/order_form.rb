@@ -29,6 +29,8 @@ class OrderForm < ActiveRecord::Base
   belongs_to :order
   belongs_to :offer
   has_many :subscriptions
+  has_many :remarks, as: :remarkable, dependent: :destroy
+  has_many :events, as: :eventable, dependent: :destroy
 
   before_save :set_year, if: :issued_at?
 
@@ -38,6 +40,18 @@ class OrderForm < ActiveRecord::Base
 
   def self.years
     self.distinct(:year).order(year: :desc).pluck(:year).compact
+  end
+
+  def processed!(user_id)
+    OrderForm.transaction do
+      self.processed_at = DateTime.now
+      save!
+      events.create event: :order_form_processed, user_id: user_id
+    end
+  end
+
+  def processed?
+    processed_at && processed_at <= DateTime.now
   end
 
   private

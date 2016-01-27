@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
 
   VALID_EVENTS = %w{
     invoice_sent invoice_due_sent invoice_send_error
-    order_processed
+    order_form_processed
     statement_entry_invalid
   }
 

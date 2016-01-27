@@ -1,0 +1,39 @@
+<strong>Naziv:</strong>
+<p>
+  <%= order.title %>
+</p>
+<strong>Ime in priimek:</strong>
+<p>
+  <%= order.name %>
+</p>
+<strong>Naslov:</strong>
+<p>
+  <%= order.address %>
+  <br>
+  <%= order.post %>
+</p>
+<strong>Email:</strong>
+<p>
+  <%= order.email %>
+</p>
+<% if order.vat_id? %>
+  <strong>ID št. za DDV:</strong>
+  <p>
+    <%= order.vat_id %>
+  </p>
+<% end %>
+<% if order.phone? %>
+  <strong>Telefon:</strong>
+  <p>
+    <%= order.phone %>
+  </p>
+<% end %>
+<strong>Količina:</strong>
+<p><%= order.quantity %> izvod(ov)</p>
+<strong>Plan plačila:</strong>
+<p><%= order.plan_type_string %></p>
+<% if order.comments.present? %>
+  <hr>
+  <strong>Opombe:</strong>
+  <p><%= order.comments %></p>
+<% end %>

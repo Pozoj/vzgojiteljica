@@ -2,7 +2,7 @@ class Admin::OrderFormsController < Admin::AdminController
   def index
     @years = OrderForm.years
     @year_now = DateTime.now.year
-    @all_order_forms = OrderForm.select(:id, :form_id).order(issued_at: :desc).map { |i| [i.form_id, i.form_id] }
+    @all_order_forms = OrderForm.select(:id, :form_id).order(issued_at: :desc).map { |i| [i.id, i.form_id] }
 
     @order_forms = collection
     if params[:filter_year]
@@ -15,17 +15,27 @@ class Admin::OrderFormsController < Admin::AdminController
   end
 
   def mark_processed
-    # order = Order.find(params[:id])
-    # order.processed!(current_user.id)
-    # if order.reload.processed?
-    #   redirect_to admin_order_path(order), notice: "Označeno kot sprocesirano"
-    # else
-    #   redirect_to admin_order_path(order)
-    # end
+    resource.processed!(current_user.id)
+    if resource.reload.processed?
+      redirect_to admin_order_form_path(resource), notice: "Označeno kot sprocesirano"
+    else
+      redirect_to admin_order_form_path(resource)
+    end
   end
 
   def show
     @order_form = resource
+
+    customers = Customer.all.order(:title, :name)
+    if resource.order.post_id
+      customers = customers.where(post_id: resource.order.post_id)
+    end
+    @all_subscribers = customers.map do |c|
+      [
+        c.to_s,
+        c.subscribers.select(:id, :title, :name).order(:title, :name).map { |s| ["#{s}", s.id] }
+      ]
+    end
   end
 
   def edit

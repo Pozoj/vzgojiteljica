@@ -22,50 +22,11 @@
   <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-body">
-        <strong>Naziv:</strong>
-        <p>
-          <%= @order.title %>
-        </p>
-        <strong>Ime in priimek:</strong>
-        <p>
-          <%= @order.name %>
-        </p>
-        <strong>Naslov:</strong>
-        <p>
-          <%= @order.address %>
-          <br>
-          <%= @order.post %>
-        </p>
-        <strong>Email:</strong>
-        <p>
-          <%= @order.email %>
-        </p>
-        <% if @order.vat_id? %>
-          <strong>ID št. za DDV:</strong>
-          <p>
-            <%= @order.vat_id %>
-          </p>
-        <% end %>
-        <% if @order.phone? %>
-          <strong>Telefon:</strong>
-          <p>
-            <%= @order.phone %>
-          </p>
-        <% end %>
-        <strong>Količina:</strong>
-        <p><%= @order.quantity %> izvod(ov)</p>
-        <strong>Plan plačila:</strong>
-        <p><%= @order.plan_type_string %></p>
-        <% if @order.comments.present? %>
-          <hr>
-          <strong>Opombe:</strong>
-          <p><%= @order.comments %></p>
-        <% end %>
+        <%= render 'admin/orders/fields', order: @order %>
       </div>
     </div>
   </div>
   <div class="col-xs-6">
-    <%= render "admin/remarks/form", resource: @order %>
     <div class="panel panel-default">
       <div class="panel-body">
         <% if @order.order_form %>
@@ -85,46 +46,13 @@
             <%= l @order.updated_at %>
           </p>
         <% end %>
+        <% if @order.ip? %>
+          <p><strong>IP:</strong> <%= @order.ip %></p>
+        <% end %>
         <% if @order.events.any? %>
           <hr>
           <strong>Dogodki:</strong>
           <%= render 'events/events', events: @order.events %>
-        <% end %>
-        <% if @order.ip? %>
-          <strong>IP:</strong>
-          <p><%= @order.ip %></p>
-        <% end %>
-        <% unless @order.processed? %>
-          <hr>
-          <p>
-            <%= link_to new_from_order_admin_customers_path(order_id: @order.id), method: :post, class: 'btn btn-default' do %>
-              <i class="glyphicon glyphicon-asterisk"></i>
-              Obdelaj kot novo stranko
-            <% end %>
-            <%= link_to mark_processed_admin_order_path(@order), method: :put, class: 'btn btn-default' do %>
-              <i class="glyphicon glyphicon-check"></i>
-              Označi kot obdelano
-            <% end %>
-            <%= link_to admin_order_path(@order), method: :delete, class: 'btn btn-danger pull-right', :"data-confirm" => 'Ste prepričani?' do %>
-              <i class="glyphicon glyphicon-trash"></i>
-              Izbriši
-            <% end %>
-          </p>
-          <% if @all_subscribers.any? %>
-            <hr>
-            <strong>Dodaj k obstoječemu prejemniku</strong>
-            <p>
-              <%= form_tag new_from_order_admin_subscriptions_path(order_id: @order.id), method: :post, class: 'form' do %>
-                <div class="form-group">
-                  <%= select_tag :subscriber_id, grouped_options_for_select(@all_subscribers), {class: 'form-control', id: 'subscriber_id', placeholder: 'ID prejemnika', prompt: ""} %>
-                </div>
-                <%= button_tag class: 'btn btn-default' do %>
-                  <i class="glyphicon glyphicon-envelope"></i>
-                  Aktiviraj na prejemniku
-                <% end %>
-              <% end %>
-            </p>
-          <% end %>
         <% end %>
       </div>
     </div>

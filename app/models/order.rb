@@ -13,21 +13,10 @@ class Order < ActiveRecord::Base
   has_many :events, as: :eventable, dependent: :destroy
   has_one :order_form
 
-  scope :processed, -> { where(processed: true) }
-  scope :not_processed, -> { where(processed: false) }
-
   after_create :create_order_form
 
   def order_id
     "#{created_at.strftime('%Y')}-#{id}"
-  end
-
-  def processed!(user_id)
-    self.processed = true
-    order_form.processed_at = DateTime.now
-    if order_form.save && save
-      events.create event: :order_processed, user_id: user_id
-    end
   end
 
   def plan_type_string

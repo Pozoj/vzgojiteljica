@@ -77,11 +77,10 @@ Web3::Application.routes.draw do
     resources :plans
     resources :batches
     resources :remarks
-    resources :orders do
-      put :mark_processed, on: :member
-    end
+    resources :orders, only: [:index, :show]
     resources :order_forms do
       get :download, on: :member
+      put :mark_processed, on: :member
     end
     resources :invoices do
       get :wizard, on: :collection

@@ -33,12 +33,6 @@
     <%= l order_form.processed_at %>
   </p>
 <% end %>
-<% if order_form.order %>
-  <strong>Naročilo:</strong>
-  <p>
-    <%= link_to order_form.order, admin_order_path(order_form.order) %>
-  </p>
-<% end %>
 <% if order_form.document.file? %>
   <hr>
   <strong>Dokument:</strong>

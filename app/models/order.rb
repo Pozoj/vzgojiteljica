@@ -39,7 +39,14 @@ class Order < ActiveRecord::Base
   end
 
   def to_s
-    "Naročilo ##{id} (#{title || name})"
+    base = "Naročilo ##{id}"
+    if title.present?
+      return "#{base} (#{title})"
+    elsif name.present?
+      return "#{base} (#{name})"
+    end
+
+    base
   end
 
   private

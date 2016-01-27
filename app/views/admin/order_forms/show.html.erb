@@ -1,5 +1,6 @@
 <h1>
-  <%= @order_form %>
+  Naročilnica
+  &quot;<%= @order_form %>&quot;
   <small class="muted">
     Naročnik
     <%= link_to @order_form.customer, [:admin, @order_form.customer] %>
@@ -31,6 +32,7 @@
     <table class="table rowlinks">
       <thead>
         <tr>
+          <th></th>
           <th>ID</th>
           <th>Pričetek</th>
           <th>Konec</th>
@@ -42,6 +44,13 @@
       <tbody>
         <% @order_form.subscriptions.each do |s| %>
           <tr>
+            <td>
+              <% if s.active? %>
+                <small class="label label-success">Aktivna</small>
+              <% else %>
+                <small class="label label-danger">Neaktivna</small>
+              <% end %>
+            </td>
             <td>
               <%= link_to "", admin_subscription_path(s) %>
               <%= s.id %>

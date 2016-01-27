@@ -10,6 +10,7 @@
 
 <h1>
   Naročilo #<%= @order.id %>
+  <small class="muted">iz spletne strani</small>
   <% if @order.processed? %>
     <small class="label label-success pull-right">Sprocesirano</small>
   <% else %>
@@ -67,20 +68,11 @@
     <%= render "admin/remarks/form", resource: @order %>
     <div class="panel panel-default">
       <div class="panel-body">
-        <% if @order.subscriptions.any? %>
-          <% @order.subscriptions.each do |subscription| %>
-            <strong>Naročnine:</strong>
-            <p>
-              <%= link_to "Naročnina ##{subscription.id}", admin_subscription_path(subscription) %>
-              <br>
-              <%= subscription %>
-              <% if subscription.active? %>
-                <small class="label label-success">Aktivna</small>
-              <% else %>
-                <small class="label label-danger">Neaktivna</small>
-              <% end %> 
-            </p>
-          <% end %>
+        <% if @order.order_form %>
+          <strong>Naročilnica:</strong>
+          <p>
+            <%= link_to @order.order_form, admin_order_form_path(@order.order_form) %>
+          </p>
           <hr>
         <% end %>
         <strong>Ustvarjeno:</strong>

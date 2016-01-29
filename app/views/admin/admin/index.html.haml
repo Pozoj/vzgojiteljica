@@ -1,5 +1,5 @@
 .jumbotron
-  %h1 
+  %h1
     Vzgojiteljica
     %br
     %small= l Time.now
@@ -13,8 +13,8 @@
       = Customer.paid_count
       %small plačljivih naročnikov
     %h3
-      = Order.not_processed.count
-      %small neobdelanih naročil
+      = OrderForm.not_processed.count
+      %small neobdelanih naročilnic
     %hr
     %h2
       = Subscription.active.sum(:quantity)
@@ -34,17 +34,17 @@
       %small
         znesek
         = @invoices.paid.count
-        plačanih računov 
+        plačanih računov
     %h3
       = number_to_currency @invoices.unpaid.unreversed.to_a.sum(&:total)
-      %small 
-        znesek 
+      %small
+        znesek
         = @invoices.unpaid.unreversed.count
         neplačanih računov
     %h3
       = number_to_currency @invoices.reversed.to_a.sum(&:total)
-      %small 
-        znesek 
+      %small
+        znesek
         = @invoices.reversed.count
         storniranih računov
     %hr
@@ -55,18 +55,18 @@
 
   .col-xs-4.pull-right
     .panel.panel-default
-      .panel-heading 
+      .panel-heading
         %h3.panel-title Ustvari novo
       .panel-body
         = link_to new_admin_customer_path, class: 'btn btn-success' do
           %i.glyphicon.glyphicon-home
-          Stranko     
+          Stranko
 
 %br
 %br
 
 .panel.panel-default
-  .panel-heading 
+  .panel-heading
     %h3.panel-title Zadnje opombe
   %table.table
     %tbody

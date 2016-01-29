@@ -32,6 +32,8 @@ class OrderForm < ActiveRecord::Base
   has_many :remarks, as: :remarkable, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
 
+  scope :not_processed, -> { where(processed_at: nil) }
+
   before_save :set_year, if: :issued_at?
 
   def to_s

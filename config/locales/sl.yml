@@ -68,8 +68,8 @@ sl:
     order_form: Št. naročilnice
     form_id: Št. naročilnice
     authorizer: Podpisnik
-    issued_at: Izdano na
-    processed_at: Obdelano na
+    issued_at: Datum izdaje
+    processed_at: Datum obdelave
     document: Dokument
 
   forms:
@@ -166,6 +166,9 @@ sl:
         authors: Avtor
       news:
         body_html: 'Vsebina'
+      order_forms:
+        customer_id: Naročnik
+        customer: Naročnik
 
     errors:
       messages:

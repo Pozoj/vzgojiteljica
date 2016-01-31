@@ -4,3 +4,4 @@
 //= require bootstrap-datepicker
 //= require flash
 //= require rowlinks
+//= require datepicker

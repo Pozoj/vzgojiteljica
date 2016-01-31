@@ -22,13 +22,13 @@
 <% end %>
 <hr>
 <% if order_form.issued_at %>
-  <strong>Izdana:</strong>
+  <strong>Datum izdaje:</strong>
   <p>
     <%= l order_form.issued_at.to_date, format: :simple %>
   </p>
 <% end %>
 <% if order_form.processed_at %>
-  <strong>Procesirana:</strong>
+  <strong>Datum obdelave:</strong>
   <p>
     <%= l order_form.processed_at, format: :simple %>
   </p>

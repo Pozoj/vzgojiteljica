@@ -1,4 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
 <script type="text/javascript">
   $(function() {
     if ($('.has-error').length) {
@@ -7,14 +6,9 @@
     else {
       $('#order_form_form_id').focus();
     }
-
     $('#order_form_customer_id').chosen({
       no_results_text: '<%= I18n.t('chosen.no_results_text') %>',
       placeholder_text_single: '<%= I18n.t('chosen.placeholder_text_single') %>'
-    });
-
-    $('.input-group.date, .input-daterange').datepicker({
-      format: "dd/mm/yyyy"
     });
   });
 </script>
@@ -23,21 +17,11 @@
   <div class="form-inputs col-xs-8">
     <%= f.input :form_id %>
     <%= f.input :authorizer %>
-    <%= f.association :customer, collection: Customer.all.order(:name, :title), label_method: :to_s, value_method: :id %>
-    <div class="form-group">
-      <%= f.label :issued_at %>
-      <div class="input-group date">
-        <%= f.text_field :issued_at, class: 'form-control' %>
-        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :processed_at %>
-      <div class="input-group date">
-        <%= f.text_field :processed_at, class: 'form-control' %>
-        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-      </div>
-    </div>
+    <%= f.association :customer, label: 'Naročnik', collection: Customer.all.order(:name, :title), label_method: :to_s, value_method: :id %>
+    <%= render 'shared/datepicker_field', f: f, label: :issued_at, field: :issued_at %>
+    <% if f.object.persisted? %>
+      <%= render 'shared/datepicker_field', f: f, label: :processed_at, field: :processed_at %>
+    <% end %>
 
     <div class="form-group">
       <%= f.label "Veljavnost od - do" %>

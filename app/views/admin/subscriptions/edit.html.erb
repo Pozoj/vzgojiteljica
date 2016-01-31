@@ -1,3 +1,12 @@
+<script type="text/javascript">
+  $(function() {
+    $('#subscription_order_form_id').chosen({
+      no_results_text: '<%= I18n.t('chosen.no_results_text') %>',
+      placeholder_text_single: '<%= I18n.t('chosen.placeholder_text_single') %>'
+    });
+  });
+</script>
+
 <h1>
   Naročnina
   <small class="muted">
@@ -8,11 +17,25 @@
   </small>
 </h1>
 
-<%= simple_form_for [:admin, @subscription] do |f| %>
-  <%= f.input :start %>
-  <%= f.input :end, include_blank: true %>
-  <%= f.association :plan %>
-  <%= f.input :discount %>
-  <%= f.input :order_form %>
-  <%= f.submit %>
-<% end %>
+<div class="row">
+  <div class="col-xs-8">
+    <%= simple_form_for [:admin, @subscription] do |f| %>
+      <div class="form-group">
+        <%= f.label "Veljavnost od - do" %>
+        <div class="input-daterange input-group">
+          <%= f.text_field :start, class: 'form-control input-sm', placeholder: 'Pričetek' %>
+          <span class="input-group-addon">do</span>
+          <%= f.text_field :end, class: 'form-control input-sm', placeholder: 'Konec' %>
+        </div>
+      </div>
+      <%= f.association :plan %>
+      <%= f.input :discount %>
+      <%= f.association :order_form %>
+
+      <div class="form-actions">
+        <hr>
+        <%= f.button :submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

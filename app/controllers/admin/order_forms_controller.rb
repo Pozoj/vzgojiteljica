@@ -43,7 +43,7 @@ class Admin::OrderFormsController < Admin::AdminController
   end
 
   def create
-    order_form_params = params.require(:order_form).permit(:form_id, :authorizer, :issued_at, :processed_at, :document)
+    order_form_params = params.require(:order_form).permit(:form_id, :authorizer, :customer_id, :issued_at, :processed_at, :start, :end, :document)
     @order_form = OrderForm.new(order_form_params)
 
     if @order_form.save

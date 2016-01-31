@@ -79,7 +79,7 @@ module ApplicationHelper
 
     columns ||= klass.column_names if klass
 
-    haml_tag :table do
+    haml_tag :table, class: 'table' do
       haml_tag :thead do
         haml_tag :tr do
           columns.each do |column|

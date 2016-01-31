@@ -62,6 +62,8 @@ Web3::Application.routes.draw do
       post :create_person, on: :member
       put :update_person, on: :collection
       post :merge_in, on: :member
+      get :email_ingestion, on: :collection
+      get :email_ingestion_next, on: :collection
     end
     resources :labels, only: [:index, :show] do
       get :print, on: :collection

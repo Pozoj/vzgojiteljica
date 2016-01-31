@@ -22,20 +22,6 @@ class Admin::CustomersController < Admin::AdminController
     respond_with resource
   end
 
-  ###
-  ### UNAUTHENTICATED
-  ###
-  def public_show
-    token = params[:token].upcase
-    @customer = Customer.find_by(token: token)
-    unless @customer
-      return redirect_to root_path
-    end
-
-    @page_title = @customer.to_s
-    render layout: 'public'
-  end
-
   def new_freerider
     @customer = Customer.new
   end
@@ -187,6 +173,32 @@ class Admin::CustomersController < Admin::AdminController
     else
       render 'add_person'
     end
+  end
+
+  ### EMAIL INGESTION
+  def email_ingestion
+    query = Customer.arel_table[:email].eq(nil).or(Customer.arel_table[:email].eq(''))
+    @customers = Customer.where(query).order(:id)
+  end
+
+  def email_ingestion_next
+    query = Customer.arel_table[:email].eq(nil).or(Customer.arel_table[:email].eq(''))
+    customer = Customer.where(query).order(:id).first
+    redirect_to edit_admin_customer_path(customer)
+  end
+
+  ###
+  ### UNAUTHENTICATED
+  ###
+  def public_show
+    token = params[:token].upcase
+    @customer = Customer.find_by(token: token)
+    unless @customer
+      return redirect_to root_path
+    end
+
+    @page_title = @customer.to_s
+    render layout: 'public'
   end
 
   private

@@ -1,6 +1,7 @@
 %h1= @customer
 
 .admin_actions
+  = link_to 'Naslednji brez e-mail-a', email_ingestion_next_admin_customers_path, class: 'btn btn-small btn-primary'
   = link_to admin_customer_path(@customer), class: 'btn btn-danger', method: :delete, data: { confirm: 'Ali ste popolnoma prepričani?' } do
     %i.glyphicon.glyphicon-trash
     Izbriši

@@ -27,7 +27,7 @@ class Admin::OrderFormsController < Admin::AdminController
     @order_form = resource
 
     customers = Customer.all.order(:title, :name)
-    if resource.order.post_id
+    if resource.order && resource.order.post_id
       customers = customers.where(post_id: resource.order.post_id)
     end
     @all_subscribers = customers.map do |c|
@@ -35,6 +35,21 @@ class Admin::OrderFormsController < Admin::AdminController
         c.to_s,
         c.subscribers.select(:id, :title, :name).order(:title, :name).map { |s| ["#{s}", s.id] }
       ]
+    end
+  end
+
+  def new
+    @order_form = OrderForm.new
+  end
+
+  def create
+    order_form_params = params.require(:order_form).permit(:form_id, :authorizer, :issued_at, :processed_at, :document)
+    @order_form = OrderForm.new(order_form_params)
+
+    if @order_form.save
+      redirect_to admin_order_form_path(@order_form)
+    else
+      render 'new'
     end
   end
 

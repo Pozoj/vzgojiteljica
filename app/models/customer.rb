@@ -132,8 +132,10 @@ class Customer < Entity
   def to_s
     if title.present?
       title
-    else
+    elsif name.present?
       name
+    else
+      "Naročnik ##{id}"
     end
   end
 

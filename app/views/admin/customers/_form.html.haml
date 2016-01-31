@@ -43,18 +43,19 @@
         - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
           = f.input :einvoice
 
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title Pridruži
-      .panel-body
-        .form-group.select.optional.customer_entity_type
-          = select_tag :other_customer_id, options_for_select(@all_customers), {class: 'form-control', id: 'other_customer_id', placeholder: 'ID stranke', prompt: ""}
-          %br
-          %br
-          = link_to "Pridruži", merge_in_admin_customer_path(@customer), :"data-method" => "post", id: 'merge_customers', class: 'btn btn-danger btn-sm'
-          %br
-          %small
-            = link_to "Poglej", "", id: 'merge_customers_preview', class: 'hide'
+    - if @all_customers.any? && @customer.persisted?
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Pridruži
+        .panel-body
+          .form-group.select.optional.customer_entity_type
+            = select_tag :other_customer_id, options_for_select(@all_customers), {class: 'form-control', id: 'other_customer_id', placeholder: 'ID stranke', prompt: ""}
+            %br
+            %br
+            = link_to "Pridruži", merge_in_admin_customer_path(@customer), :"data-method" => "post", id: 'merge_customers', class: 'btn btn-danger btn-sm'
+            %br
+            %small
+              = link_to "Poglej", "", id: 'merge_customers_preview', class: 'hide'
 
     - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
       .panel.panel-default

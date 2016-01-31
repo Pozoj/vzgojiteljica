@@ -10,6 +10,7 @@
  *
  *= require admin.scss
  *= require chosen
+ *= require bootstrap-datepicker3
  */
 
 #container {

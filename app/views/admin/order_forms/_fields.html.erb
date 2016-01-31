@@ -24,13 +24,13 @@
 <% if order_form.issued_at %>
   <strong>Izdana:</strong>
   <p>
-    <%= l order_form.issued_at %>
+    <%= l order_form.issued_at.to_date, format: :simple %>
   </p>
 <% end %>
 <% if order_form.processed_at %>
   <strong>Procesirana:</strong>
   <p>
-    <%= l order_form.processed_at %>
+    <%= l order_form.processed_at, format: :simple %>
   </p>
 <% end %>
 <% if order_form.document.file? %>

@@ -108,6 +108,7 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def new
+    @all_customers = []
     @customer = Customer.new
     respond_with resource
   end

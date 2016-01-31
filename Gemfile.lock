@@ -8,6 +8,13 @@ GIT
       sprockets (< 4.0)
 
 GIT
+  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: 9610a491d8f88c7fac34bc200dfbd248051be9bc
+  specs:
+    bootstrap-datepicker-rails (1.5.0)
+      railties (>= 3.0)
+
+GIT
   remote: git://github.com/RubyMoney/money-rails.git
   revision: 46660b70e5e25e02a0e67f30a4a46b0139aff1a7
   ref: 46660b70e5e25e02a0e67f30a4a46b0139aff1a7
@@ -459,6 +466,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk (< 2.0)
+  bootstrap-datepicker-rails!
   chosen-rails
   cmxl
   coffee-rails (~> 4.1.0)

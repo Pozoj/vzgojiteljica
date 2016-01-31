@@ -66,6 +66,11 @@ sl:
     discount: Popust
     reverse_reason: Razlog za storniranje
     order_form: Št. naročilnice
+    form_id: Št. naročilnice
+    authorizer: Podpisnik
+    issued_at: Izdano na
+    processed_at: Obdelano na
+    document: Dokument
 
   forms:
     submit:
@@ -131,6 +136,7 @@ sl:
       copy: Besedilo
       article: Članek
       news: Novica
+      order_form: Naročilnica
 
     attributes:
       issue:

@@ -1,10 +1,12 @@
 <h1>
   Naročilnica
   &quot;<%= @order_form %>&quot;
-  <small class="muted">
-    Naročnik
-    <%= link_to @order_form.customer, [:admin, @order_form.customer] %>
-  </small>
+  <% if @order_form.customer %>
+    <small class="muted">
+      Naročnik
+      <%= link_to @order_form.customer, [:admin, @order_form.customer] %>
+    </small>
+  <% end %>
 </h1>
 
 <div class="admin_actions">

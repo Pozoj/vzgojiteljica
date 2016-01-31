@@ -1,0 +1,5 @@
+%h1 Vnos naročilnice
+
+= simple_form_for [:admin, @order_form], html: {multipart: true} do |f|
+  = f.error_notification
+  = render "form", f: f

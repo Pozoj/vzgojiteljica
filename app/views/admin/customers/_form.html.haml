@@ -43,7 +43,7 @@
         - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
           = f.input :einvoice
 
-    - if @all_customers.any? && @customer.persisted?
+    - if @all_customers && @all_customers.any? && @customer.persisted?
       .panel.panel-default
         .panel-heading
           %h3.panel-title Pridruži

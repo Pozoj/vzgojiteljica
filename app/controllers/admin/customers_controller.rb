@@ -110,7 +110,7 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def update
-    resource.update_attributes resource_params
+    resource.update_attributes(resource_params)
     if resource.valid?
       respond_with resource, location: -> { admin_customer_path(@customer) }
     else

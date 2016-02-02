@@ -11,7 +11,7 @@ class Customer < Entity
 
   before_validation :generate_token, on: :create
 
-  validates :token, presence: true, length: {is: TOKEN_LENGTH}
+  # validates :token, presence: true, length: {is: TOKEN_LENGTH}
 
   def quantity
     subscriptions.active.inject(0) { |sum, s| sum += s.quantity }

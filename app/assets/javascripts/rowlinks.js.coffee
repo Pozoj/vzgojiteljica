@@ -1,4 +1,9 @@
 $ ->
   $('.rowlinks').on 'click', 'tbody tr', (e) ->
     e.stopPropagation()
-    window.location.href = $(this).find('a').first().attr('href')
+    url = $(this).find('a').first().attr('href')
+
+    if event.metaKey
+      window.open(url)
+    else
+      window.location.href = url

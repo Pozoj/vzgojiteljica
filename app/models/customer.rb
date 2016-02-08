@@ -38,11 +38,11 @@ class Customer < Entity
   end
 
   def billing_email
-    if person?
-      email
-    else
-      billing_person.try(:email)
+    if billing_person && billing_person.email?
+      return billing_person.try(:email)
     end
+
+    email
   end
 
   def self.active_count

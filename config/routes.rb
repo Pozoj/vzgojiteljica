@@ -60,7 +60,7 @@ Web3::Application.routes.draw do
       get :add_person, on: :member
       get :edit_person, on: :member
       post :create_person, on: :member
-      put :update_person, on: :collection
+      patch :update_person, on: :member
       post :merge_in, on: :member
       get :email_ingestion, on: :collection
       get :email_ingestion_next, on: :collection

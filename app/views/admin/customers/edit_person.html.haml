@@ -1,5 +1,5 @@
 %h1 Uredi osebo
 
-= simple_form_for @entity, url: update_person_admin_customers_path(@customer) do |f|
+= simple_form_for @entity, url: update_person_admin_customer_path(@customer, person_id: @entity.id) do |f|
   = f.error_notification
   = render "person_form", f: f

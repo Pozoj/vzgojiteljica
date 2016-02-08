@@ -137,13 +137,11 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def edit_person
-    @entity = Entity.find(params[:id])
-    @customer = @entity.entity
+    @entity = @customer.send("#{params[:person]}_person")
   end
 
   def update_person
     @entity = Entity.find(params[:person_id])
-    @customer = @entity.entity
 
     if params[:contact_person]
       @entity.update_attributes(params[:contact_person])

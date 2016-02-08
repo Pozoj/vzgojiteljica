@@ -24,7 +24,7 @@
           %h4
             Kontaktna oseba
             - if @customer.contact_person
-              = link_to edit_person_admin_customer_path(@customer.contact_person), class: 'btn btn-xs btn-default' do
+              = link_to edit_person_admin_customer_path(@customer, person: :contact), class: 'btn btn-xs btn-default' do
                 %i.glyphicon.glyphicon-user
                 Uredi
             - else
@@ -39,7 +39,7 @@
           %h4
             Plačilni kontakt
             - if @customer.billing_person
-              = link_to edit_person_admin_customer_path(@customer.billing_person), class: 'btn btn-xs btn-default' do
+              = link_to edit_person_admin_customer_path(@customer, person: :billing), class: 'btn btn-xs btn-default' do
                 %i.glyphicon.glyphicon-user
                 Uredi
             - else

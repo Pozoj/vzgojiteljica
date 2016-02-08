@@ -1,2 +1,15 @@
 %h1 Partnerji brez emaila
-- generate_table @customers, [:id, :title, :name, :email], [:edit], :admin
+%table.table.rowlinks
+  %thead
+    %th ID
+    %th Naziv
+    %th Ime in priimek
+  %tbody
+    - @customers.each do |customer|
+      %tr
+        %td
+          = link_to "", admin_customer_path(customer)
+          = customer.id
+        %td= customer.title
+        %td= customer.name
+        %td= link_to "Uredi", edit_admin_customer_path(customer)

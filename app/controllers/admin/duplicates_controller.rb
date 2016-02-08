@@ -1,6 +1,19 @@
 class Admin::DuplicatesController < Admin::AdminController
   def index
-    @duplicates = Customer.all.group_by { |c| c.to_s }.reject { |k, v| v.length < 2 }
+    @duplicates = {}
+    Customer.all.order(:id).each do |customer|
+      @duplicates[customer.to_s] ||= []
+      @duplicates[customer.to_s].push(customer)
+      if customer.name? && customer.name != customer.to_s
+        @duplicates[customer.name] ||= []
+        @duplicates[customer.name].push(customer)
+      end
+      if customer.title? && customer.title != customer.to_s
+        @duplicates[customer.title] ||= []
+        @duplicates[customer.title].push(customer)
+      end
+    end
+    @duplicates = @duplicates.reject { |k, v| v.length < 2 }
   end
 
   def merge

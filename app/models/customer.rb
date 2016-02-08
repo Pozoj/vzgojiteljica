@@ -1,4 +1,5 @@
 class Customer < Entity
+  extend DuplicateFinder
   TOKEN_LENGTH = 6
 
   has_many :subscriptions, through: :subscribers

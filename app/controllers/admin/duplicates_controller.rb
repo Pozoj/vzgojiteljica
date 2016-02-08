@@ -1,18 +1,21 @@
+require 'set'
+
 class Admin::DuplicatesController < Admin::AdminController
   def index
     @duplicates = {}
-    Customer.all.order(:id).each do |customer|
-      @duplicates[customer.to_s] ||= []
-      @duplicates[customer.to_s].push(customer)
-      if customer.name? && customer.name != customer.to_s
-        @duplicates[customer.name] ||= []
-        @duplicates[customer.name].push(customer)
-      end
-      if customer.title? && customer.title != customer.to_s
-        @duplicates[customer.title] ||= []
-        @duplicates[customer.title].push(customer)
-      end
+    all_customers = Customer.all.order(:id)
+    all_customers.each do |customer|
+      @duplicates[customer.to_s] ||= Set.new
+      @duplicates[customer.name] ||= Set.new
+      @duplicates[customer.title] ||= Set.new
     end
+
+    all_customers.each do |customer|
+      @duplicates[customer.to_s].add(customer)
+      @duplicates[customer.name].add(customer) if customer.name?
+      @duplicates[customer.title].add(customer) if customer.title?
+    end
+
     @duplicates = @duplicates.reject { |k, v| v.length < 2 }
   end
 

@@ -15,9 +15,9 @@ class Admin::OrderFormsController < Admin::AdminController
   end
 
   def mark_processed
-    resource.processed!(current_user.id)
+    resource.processed!(user_id: current_user.id)
     if resource.reload.processed?
-      redirect_to admin_order_form_path(resource), notice: "Označeno kot sprocesirano"
+      redirect_to admin_order_form_path(resource), notice: "Označeno kot obdelano"
     else
       redirect_to admin_order_form_path(resource)
     end

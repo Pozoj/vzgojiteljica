@@ -55,20 +55,25 @@ class Subscription < ActiveRecord::Base
     "#{plan} za #{subscriber}"
   end
 
-  def self.new_from_order(subscriber, order)
+  def self.new_from_order(subscriber:, order:)
     Subscription.transaction do
       subscription = subscriber.subscriptions.new
       subscription.start = Date.today
       subscription.quantity = order.quantity
       subscription.order_form = order.order_form
-      if order.comments.present?
-        subscription.remarks.create remark: "Opomba naročnika: \"#{order.comments}\""
-      end
+
       if order.plan_type
         subscription.plan = Plan.latest(order.plan_type)
       end
 
-      raise FromOrderError("Can't save subscription") unless subscription.save
+      raise FromOrderError.new("Can't save subscription: #{subscription.errors.inspect}") unless subscription.save
+
+      if order.comments.present?
+        subscription.remarks.create remark: "Opomba naročnika: \"#{order.comments}\""
+      end
+
+      order.order_form.customer = subscriber.customer
+      order.save!
 
       subscription
     end

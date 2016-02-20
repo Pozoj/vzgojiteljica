@@ -42,7 +42,7 @@
             <hr>
             <strong>Dodaj k obstoječemu prejemniku</strong>
             <p>
-              <%= form_tag new_from_order_admin_subscriptions_path(order_id: @order_form.id), method: :post, class: 'form' do %>
+              <%= form_tag new_from_order_admin_subscriptions_path(order_id: @order_form.order.id), method: :post, class: 'form' do %>
                 <div class="form-group">
                   <%= select_tag :subscriber_id, grouped_options_for_select(@all_subscribers), {class: 'form-control', id: 'subscriber_id', placeholder: 'ID prejemnika', prompt: ""} %>
                 </div>

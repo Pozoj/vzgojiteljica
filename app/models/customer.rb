@@ -61,7 +61,7 @@ class Customer < Entity
     to_a.count
   end
 
-  def self.new_from_order(order:, admin_user: nil)
+  def self.new_from_order(order:)
     Customer.transaction do
       customer = self.new
       customer.title = order.title
@@ -98,7 +98,7 @@ class Customer < Entity
       raise FromOrderError.new("Can't save subscription: #{subscription.errors.inspect}") unless subscription.save
 
       order.order_form.customer = customer
-      order.order_form.processed!(user_id: admin_user.try(:id))
+      order.order_form.save!
 
       customer
     end

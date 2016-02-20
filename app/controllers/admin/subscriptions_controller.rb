@@ -35,11 +35,11 @@ class Admin::SubscriptionsController < Admin::AdminController
     order = Order.find(params[:order_id])
     subscriber = Subscriber.find(params[:subscriber_id])
     begin
-      subscription = Subscription.new_from_order(subscriber, order)
-      order.processed!(current_user.id)
-      redirect_to admin_subscription_path(subscription), notice: "Naročnina ##{subscription.id} ustvarjena iz naročila ##{order.id}."
+      subscription = Subscription.new_from_order(subscriber: subscriber, order: order)
+      order.order_form.processed!(user_id: current_user.id)
+      redirect_to admin_subscription_path(subscription), notice: "Naročnina uspešno ustvarjena iz naročila ##{order.id}"
     rescue Subscription::FromOrderError => e
-      redirect_to admin_order_path(order), notice: "Napaka pri ustvarjanju naročnine iz naročila #{e.inspect}"
+      redirect_to admin_order_path(order), error: "Napaka pri ustvarjanju naročnine iz naročila #{e.inspect}"
     end
   end
 

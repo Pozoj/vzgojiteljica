@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe Subscription do
+  let!(:plan) { create :plan, billing_frequency: 6, price: 10 }
   subject! { create :subscription }
 
   it { should be_valid }
@@ -40,6 +41,35 @@ describe Subscription do
       subject.save
       expect(Subscription.active.count).to eq(0)
       expect(Subscription.inactive.count).to eq(1)
+    end
+  end
+
+  describe '#new_from_order' do
+    it 'creates a new subscription from an order' do
+      order = create(:order,
+        title: 'Talibaum d.o.o.',
+        name: 'Salibassim Naranissim',
+        address: 'Tontoronto 16a',
+        post_id: 3320,
+        quantity: 2,
+        plan_type: 6
+      )
+
+      subscriber = subject.subscriber
+
+      subscription = nil
+      expect {
+        subscription = Subscription.new_from_order(subscriber: subscriber, order: order)
+      }.to change(Subscription, :count).by(1)
+
+      expect(subscription).to be_active
+      expect(subscription.plan.billing_frequency).to eq(6)
+      expect(subscription.start).to eq(Date.today)
+      expect(subscription.order_form).to eq(order.order_form)
+      expect(subscription.quantity).to eq(order.quantity)
+      expect(subscription.subscriber).to eq(subscriber)
+
+      expect(order.order_form.customer).to eq(subscriber.customer)
     end
   end
 end

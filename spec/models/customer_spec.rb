@@ -40,7 +40,6 @@ describe Customer do
 
       order_form = order.order_form
       expect(order_form.customer).to eq(customer)
-      expect(order_form).to be_processed
     end
   end
 end

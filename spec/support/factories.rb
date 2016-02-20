@@ -28,4 +28,19 @@ FactoryGirl.define do
   factory :customer do
     name "Customar Ipsam"
   end
+
+  factory :order do
+    quantity 1
+    plan_type 1
+    name "Loram Ipsam"
+    email "loram@ipsam.com"
+    address "8 Buchanan St"
+    post_id 1000
+  end
+
+  factory :order_form do
+    order
+    customer
+    form_id "Naročilnica #1000"
+  end
 end

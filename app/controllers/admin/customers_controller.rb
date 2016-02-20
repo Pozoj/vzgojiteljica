@@ -85,8 +85,7 @@ class Admin::CustomersController < Admin::AdminController
   def new_from_order
     begin
       order = Order.find(params[:order_id])
-      customer = Customer.new_from_order(order)
-      order.processed!(current_user.id)
+      customer = Customer.new_from_order(order: order, admin_user: current_user)
       redirect_to admin_customer_path(customer), notice: "Stranka uspešno ustvarjena iz naročila ##{order.id}"
     rescue Customer::FromOrderError => e
       redirect_to admin_order_path(order, error: e.inspect)

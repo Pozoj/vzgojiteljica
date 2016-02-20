@@ -61,7 +61,7 @@ class Customer < Entity
     to_a.count
   end
 
-  def self.new_from_order(order)
+  def self.new_from_order(order:, admin_user: nil)
     Customer.transaction do
       customer = self.new
       customer.title = order.title
@@ -70,7 +70,9 @@ class Customer < Entity
       customer.post_id = order.post_id
       customer.phone = order.phone
       customer.email = order.email
-      customer.vat_id = order.vat_id.gsub(/[^0-9]/, '')
+      if order.vat_id?
+        customer.vat_id = order.vat_id.gsub(/[^0-9]/, '')
+      end
       raise FromOrderError.new("Can't save customer: #{customer.errors.inspect}") unless customer.save
 
       customer.remarks.create remark: "Naročnik ustvarjen avtomatsko iz naročila ##{order.id} na spletni strani."
@@ -89,12 +91,14 @@ class Customer < Entity
       subscription = subscriber.subscriptions.new
       subscription.start = Date.today
       subscription.quantity = order.quantity
-      subscription.order = order
-      subscription.order_form = "Naročilo ##{order.id}"
+      subscription.order_form = order.order_form
       if order.plan_type
         subscription.plan = Plan.latest(order.plan_type)
       end
       raise FromOrderError.new("Can't save subscription: #{subscription.errors.inspect}") unless subscription.save
+
+      order.order_form.customer = customer
+      order.order_form.processed!(user_id: admin_user.try(:id))
 
       customer
     end

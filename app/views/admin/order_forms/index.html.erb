@@ -62,7 +62,13 @@
           <%= link_to "", admin_order_form_path(order_form) %>
           <%= order_form.id %></td>
         <td><%= order_form.form_id %></td>
-        <td><%= order_form.customer %></td>
+        <td>
+          <% if order_form.customer %>
+            <%= order_form.customer %>
+          <% elsif order_form.order %>
+            <%= order_form.order.title || order_form.order.name %>
+          <% end %>
+        </td>
         <td>
           <% if order_form.issued_at %>
             <%= l order_form.issued_at, format: :simple %>

@@ -44,7 +44,7 @@ class OrderForm < ActiveRecord::Base
     self.distinct(:year).order(year: :desc).pluck(:year).compact
   end
 
-  def processed!(user_id)
+  def processed!(user_id: nil)
     OrderForm.transaction do
       self.processed_at = DateTime.now
       save!

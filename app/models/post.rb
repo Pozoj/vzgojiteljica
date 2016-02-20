@@ -9,4 +9,8 @@ class Post < ActiveRecord::Base
   def to_s
     "#{id} #{name}"
   end
+
+  def full_with_zip
+    "#{name} (#{id})"
+  end
 end

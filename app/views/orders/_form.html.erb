@@ -25,16 +25,16 @@
     <legend>Kontaktni podatki</legend>
     <%= f.input :name %>
     <%= f.input :address %>
-    <%= f.association :post %>
+    <%= f.association :post, label_method: :full_with_zip %>
     <%= f.input :phone %>
     <%= f.input :email %>
   </fieldset>
   <fieldset>
     <legend>Naročilo</legend>
     <%= f.input :quantity, hint: 'Število revij, ki jih naročam(o). Primer: količina 3, pomeni da vsake dva meseca, ko izide nova številka, prejmete 3 izvode' %>
-    <%= f.input :plan_type, label: "Naročnina", 
+    <%= f.input :plan_type, label: "Naročnina",
         collection: [
-          ["Letna naročnina 
+          ["Letna naročnina
             (#{number_to_currency Plan.latest_yearly.price_with_tax}/naroč./izvod)", 1],
           ["Vsaka številka posamezno
             (#{number_to_currency Plan.latest_per_issue.price_with_tax}/izvod)", 6]

@@ -24,20 +24,22 @@
 
         <% unless @order_form.processed? %>
           <hr>
-          <p>
-            <%= link_to new_from_order_admin_customers_path(order_id: @order_form.order.id), method: :post, class: 'btn btn-default' do %>
-              <i class="glyphicon glyphicon-asterisk"></i>
-              Obdelaj kot novo stranko
-            <% end %>
-            <%= link_to mark_processed_admin_order_form_path(@order_form), method: :put, class: 'btn btn-default' do %>
-              <i class="glyphicon glyphicon-check"></i>
-              Označi kot obdelano
-            <% end %>
-            <%= link_to admin_order_path(@order_form), method: :delete, class: 'btn btn-danger pull-right', :"data-confirm" => 'Ste prepričani?' do %>
-              <i class="glyphicon glyphicon-trash"></i>
-              Izbriši
-            <% end %>
-          </p>
+          <% if @order_form.order %>
+            <p>
+              <%= link_to new_from_order_admin_customers_path(order_id: @order_form.order.id), method: :post, class: 'btn btn-default' do %>
+                <i class="glyphicon glyphicon-asterisk"></i>
+                Obdelaj kot novo stranko
+              <% end %>
+              <%= link_to mark_processed_admin_order_form_path(@order_form), method: :put, class: 'btn btn-default' do %>
+                <i class="glyphicon glyphicon-check"></i>
+                Označi kot obdelano
+              <% end %>
+              <%= link_to admin_order_path(@order_form), method: :delete, class: 'btn btn-danger pull-right', :"data-confirm" => 'Ste prepričani?' do %>
+                <i class="glyphicon glyphicon-trash"></i>
+                Izbriši
+              <% end %>
+            </p>
+          <% end %>
           <% if @all_subscribers.any? %>
             <hr>
             <strong>Dodaj k obstoječemu prejemniku</strong>

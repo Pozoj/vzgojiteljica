@@ -3,6 +3,12 @@ class Mailer < ActionMailer::Base
   EDITOR_EMAIL = ENV['DEFAULT_EDITOR_EMAIL']
   default from: ENV['DEFAULT_EMAIL_FROM']
 
+  def customer_order_form_needed(customer_id)
+    return unless @customer = Customer.find(customer_id)
+    return unless @customer.billing_email
+    mail(to: @customer.billing_email, subject: "Naročilnica za revijo Vzgojiteljica")
+  end
+
   def order_submitted(order_id)
     return unless @order = Order.find(order_id)
     mail(to: @order.email, subject: "Naročilo ##{@order.order_id} na revijo Vzgojiteljica sprejeto")

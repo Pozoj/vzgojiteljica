@@ -9,8 +9,8 @@ class Receipt < ActiveRecord::Base
   monetize :tax_cents
 
   belongs_to :customer
-  has_many :remarks, as: :remarkable
-  has_many :events, as: :eventable
+  has_many :remarks, as: :remarkable, dependent: :destroy
+  has_many :events, as: :eventable, dependent: :destroy
   has_many :line_items, dependent: :destroy
   has_many :issues, through: :line_items
 

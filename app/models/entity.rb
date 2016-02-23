@@ -9,6 +9,7 @@ class Entity < ActiveRecord::Base
   belongs_to :post
   belongs_to :bank
   has_many :remarks, as: :remarkable, dependent: :destroy
+  has_many :events, as: :eventable, dependent: :destroy
 
   before_validation :format_account_number, if: :account_number?
   validates :vat_id, presence: true, if: :company?
@@ -18,6 +19,7 @@ class Entity < ActiveRecord::Base
   validate :validate_account_number
   validates :registration_number, uniqueness: {allow_nil: true}, numericality: {allow_nil: true, only_integer: true, greater_than: 0}
   validates :email, :email => true, if: :email?
+
 
   scope :person,      -> { where(entity_type: ENTITY_PERSON) }
   scope :not_person,  -> { where.not(entity_type: ENTITY_PERSON) }

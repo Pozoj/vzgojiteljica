@@ -14,7 +14,7 @@ class BankStatement < ActiveRecord::Base
   validates_attachment_content_type :statement, content_type: 'text/plain'
 
   has_many :entries, class_name: 'StatementEntry', dependent: :destroy
-  has_many :events, as: :eventable
+  has_many :events, as: :eventable, dependent: :destroy
 
   before_save :store_raw_statement
 

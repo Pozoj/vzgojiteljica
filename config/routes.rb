@@ -120,7 +120,8 @@ Web3::Application.routes.draw do
   end
 
   # Public token route
-  get '/:token', to: 'admin/customers#public_show', as: :token
+  get '/:token', to: 'customers#public_show', as: :token
+  post '/oddaja_narocilnice', to: 'customers#ingest_order_form', as: :ingest_order_form
 
   # You can have the root of your site routed with "root"
   # root to: 'copies#show', id: 'pages#index'

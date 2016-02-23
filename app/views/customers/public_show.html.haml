@@ -1,0 +1,104 @@
+%h1= @customer
+
+- if @order_forms.empty?
+  .panel.panel-danger
+    .panel-heading
+      %h3.panel-title
+        %i.glyphicon.glyphicon-exclamation-sign
+        Manjkajoča naročilnica
+    .panel-body
+      %p
+        %strong Za letošnje leto nam še niste posredovali številke naročilnice.
+        %br
+        Od 1. januarja 2016 dalje ne smemo izdajati e-računov brez številke naročilnice.
+      %hr
+      = simple_form_for @order_form, url: ingest_order_form_path(@customer.token) do |f|
+        %p Prosimo vpišite številko naročilnice in podpisnika:
+
+        .form-group
+          %label
+            Številka naročilnice
+            %small.muted npr. Dobavnica 15/2016
+          = f.input :form_id, {label: false, placeholder: "Št. naročilnice", style: 'width: 250px', class: 'form-control'}
+
+        .form-group
+          %label
+            Ime in priimek
+            %small.muted Oseba ki je odobrila/podpisala naročilo
+          = f.input :authorizer, {label: false, placeholder: "Ime in priimek", style: 'width: 350px', class: 'form-control'}
+
+        = hidden_field_tag :token, @customer.token
+        %input.btn.btn-default{type: 'submit', value: 'Oddaj naročilnico'}
+
+  %br
+
+%h3 Naročnina
+- if @subscriptions.any?
+  %p
+    Trenutno imate sklenjeno naročnino za
+    %strong= pluralize_quantity @subscriptions.sum(:quantity)
+    revije Vzgojiteljica.
+  %p
+    %ul
+      - @subscriptions.each do |subscription|
+        %li
+          %strong== #{subscription.subscriber},
+          == #{subscription.subscriber.address},
+          = subscription.subscriber.post
+          %em.muted== (#{pluralize_quantity subscription.quantity})
+          %br
+          %small
+            Pričetek naročnine:
+            = l subscription.start.to_date
+          - if subscription.end?
+            %small
+              %br
+              = l subscription.end.to_date
+  %p
+    Če želite naročiti dodatne izvode, lahko oddate naročilo
+    = link_to 'tukaj.', new_order_path
+- else
+  %p
+    Trenutno nimate nobene aktivne naročnine. Naročite se na Revijo Vzgojiteljica
+    = link_to 'tukaj.', new_order_path
+
+%hr
+
+%h3 Računi
+- if @invoices.any?
+  - if @invoices.unpaid.any?
+    %p
+      Na vašem računu imate
+      %strong= pluralize_unpaid_invoices(@invoices.unpaid.count)
+      v skupnem znesku
+      == #{number_to_currency @invoices.unpaid.to_a.sum(&:total)}.
+    %p
+      %ul
+        - @invoices.unpaid.each do |invoice|
+          %li
+            %strong
+              Račun
+              = invoice.receipt_id
+            v znesku
+            = number_to_currency invoice.total
+            je bil izdan
+            = l invoice.created_at.to_date
+            z rokom plačila
+            == #{l invoice.due_at.to_date}
+            - if invoice.due?
+              %br
+              %strong{style: 'color: red'}
+                Račun je zapadel v plačilo pred
+                == #{pluralize_days(invoice.late_days)}!
+  - else
+    Zadnji račun, ki smo vam ga izdali je bil
+    %strong
+      Račun
+      = @last_paid_invoice.receipt_id
+    plačan dne
+    %strong= l @last_paid_invoice.paid_at.to_date
+    v znesku
+    %strong= number_to_currency @last_paid_invoice.total
+
+- else
+  %p Izdali vam nismo še nobenega računa.

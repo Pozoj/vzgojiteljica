@@ -1,6 +1,6 @@
 Spoštovani,
 
-Pošiljamo vam račun <%= @invoice.receipt_id %> za revijo Vzgojiteljica, ki je zapadel v plačilo pred <%= @invoice.late_days %> dnevi.
+Pošiljamo vam račun <%= @invoice.receipt_id %> za revijo Vzgojiteljica, ki je zapadel v plačilo pred <%= pluralize_days(@invoice.late_days) %>.
 
 Rok plačila računa je bil: <%= l @invoice.due_at.to_date, format: :simple %>.
 

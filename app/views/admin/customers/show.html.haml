@@ -1,7 +1,6 @@
 %h1= @customer
 
 .admin_actions
-  = link_to 'Naslednji brez e-mail-a', email_ingestion_next_admin_customers_path, class: 'btn btn-small btn-primary'
   = link_to admin_customer_path(@customer), class: 'btn btn-danger', method: :delete, data: { confirm: 'Ali ste popolnoma prepričani?' } do
     %i.glyphicon.glyphicon-trash
     Izbriši
@@ -109,58 +108,59 @@
               &mdash;
               = link_to "Prikaži vse", admin_customer_path(@customer, filter_subscribers_all: true)
 
+- if @customer.invoices.any?
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title Izdani računi
 
-.panel.panel-default
-  .panel-heading
-    %h3.panel-title Izdani računi
-
-  %table.table.rowlinks
-    %thead
-      %tr
-        %th Ref. št.
-        %th Številka
-        %th Izdan
-        %th Rok
-        %th Znesek
-    %tbody
-      - @customer.invoices.order(year: :desc, reference_number: :desc).each do |invoice|
+    %table.table.rowlinks
+      %thead
         %tr
-          %td
-            = link_to "", admin_invoice_path(invoice)
-            = invoice.reference_number
-          %td= invoice.issues.distinct.join(', ')
-          %td= l invoice.created_at, format: :simple
-          %td= l invoice.due_at, format: :simple
-          %td
-            - if invoice.paid?
-              .label.label-success
+          %th Ref. št.
+          %th Številka
+          %th Izdan
+          %th Rok
+          %th Znesek
+      %tbody
+        - @customer.invoices.order(year: :desc, reference_number: :desc).each do |invoice|
+          %tr
+            %td
+              = link_to "", admin_invoice_path(invoice)
+              = invoice.reference_number
+            %td= invoice.issues.distinct.join(', ')
+            %td= l invoice.created_at, format: :simple
+            %td= l invoice.due_at, format: :simple
+            %td
+              - if invoice.paid?
+                .label.label-success
+                  = number_to_currency invoice.total
+              - elsif invoice.due?
+                .label.label-danger
+                  = number_to_currency invoice.total
+              - else
                 = number_to_currency invoice.total
-            - elsif invoice.due?
-              .label.label-danger
-                = number_to_currency invoice.total
-            - else
-              = number_to_currency invoice.total
 
-.panel.panel-default
-  .panel-heading
-    %h3.panel-title
-      Izdane ponudbe
+- if @customer.offers.any?
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title
+        Izdane ponudbe
 
-      = link_to create_for_customer_admin_offers_path(customer_id: @customer.id), class: 'btn btn-default btn-xs pull-right', :"data-method" => :post do
-        %i.glyphicon.glyphicon-plus
-        Ustvari
+        = link_to create_for_customer_admin_offers_path(customer_id: @customer.id), class: 'btn btn-default btn-xs pull-right', :"data-method" => :post do
+          %i.glyphicon.glyphicon-plus
+          Ustvari
 
-  %table.table.rowlinks
-    %thead
-      %tr
-        %th Ref. št.
-        %th Izdana
-        %th Znesek
-    %tbody
-      - @customer.offers.order(year: :desc, reference_number: :desc).each do |offer|
+    %table.table.rowlinks
+      %thead
         %tr
-          %td
-            = link_to "", admin_offer_path(offer)
-            = offer.reference_number
-          %td= l offer.created_at, format: :simple
-          %td= number_to_currency offer.total
+          %th Ref. št.
+          %th Izdana
+          %th Znesek
+      %tbody
+        - @customer.offers.order(year: :desc, reference_number: :desc).each do |offer|
+          %tr
+            %td
+              = link_to "", admin_offer_path(offer)
+              = offer.reference_number
+            %td= l offer.created_at, format: :simple
+            %td= number_to_currency offer.total

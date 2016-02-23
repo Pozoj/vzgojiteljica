@@ -15,6 +15,8 @@ class Subscription < ActiveRecord::Base
   scope :per_issue, -> { joins(:plan).where.not(plans: {billing_frequency: 1}) }
   scope :paid, -> { joins(:plan).where.not(plans: {price_cents: 0}) }
   scope :free, -> { joins(:plan).where(plans: {price_cents: 0}) }
+  scope :without_order_form, -> { where(order_form_id: nil) }
+  scope :with_order_form, -> { where.not(order_form_id: nil) }
 
   validates_presence_of :quantity
   validates_presence_of :plan

@@ -19,13 +19,13 @@
           %label
             Številka naročilnice
             %small.muted npr. Dobavnica 15/2016
-          = f.input :form_id, {label: false, placeholder: "Št. naročilnice", style: 'width: 250px', class: 'form-control'}
+          = f.input :form_id, {label: false, placeholder: "Št. naročilnice", class: 'form-control', input_html: {style: 'width: 250px'}}
 
         .form-group
           %label
             Ime in priimek
             %small.muted Oseba ki je odobrila/podpisala naročilo
-          = f.input :authorizer, {label: false, placeholder: "Ime in priimek", style: 'width: 350px', class: 'form-control'}
+          = f.input :authorizer, {label: false, placeholder: "Ime in priimek", class: 'form-control', input_html: {style: 'width: 350px'}}
 
         = hidden_field_tag :token, @customer.token
         %input.btn.btn-default{type: 'submit', value: 'Oddaj naročilnico'}

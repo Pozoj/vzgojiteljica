@@ -1,34 +1,36 @@
 %h1= @customer
 
 - if @order_forms.empty?
-  .panel.panel-danger
-    .panel-heading
-      %h3.panel-title
-        %i.glyphicon.glyphicon-exclamation-sign
-        Manjkajoča naročilnica
-    .panel-body
-      %p
-        %strong Za letošnje leto nam še niste posredovali številke naročilnice.
-        %br
-        Od 1. januarja 2016 dalje ne smemo izdajati e-računov brez številke naročilnice.
-      %hr
-      = simple_form_for @order_form, url: ingest_order_form_path(@customer.token) do |f|
-        %p Prosimo vpišite številko naročilnice in podpisnika:
+  .row
+    .col-xs-8
+      .panel.panel-danger
+        .panel-heading
+          %h3.panel-title
+            %i.glyphicon.glyphicon-exclamation-sign
+            Manjkajoča naročilnica
+        .panel-body
+          %p
+            %strong Za letošnje leto nam še niste posredovali številke naročilnice.
+            %br
+            Od 1. januarja 2016 dalje ne smemo izdajati e-računov brez številke naročilnice.
+          %hr
+          = simple_form_for @order_form, url: ingest_order_form_path(@customer.token) do |f|
+            %p Prosimo vpišite številko naročilnice in podpisnika:
 
-        .form-group
-          %label
-            Številka naročilnice
-            %small.muted npr. Dobavnica 15/2016
-          = f.input :form_id, {label: false, placeholder: "Št. naročilnice", class: 'form-control', input_html: {style: 'width: 250px'}}
+            .form-group
+              %label
+                Številka naročilnice
+                %small.muted npr. Dobavnica 15/2016
+              = f.input :form_id, {label: false, placeholder: "Št. naročilnice", class: 'form-control', input_html: {style: 'width: 250px'}}
 
-        .form-group
-          %label
-            Ime in priimek
-            %small.muted Oseba ki je odobrila/podpisala naročilo
-          = f.input :authorizer, {label: false, placeholder: "Ime in priimek", class: 'form-control', input_html: {style: 'width: 350px'}}
+            .form-group
+              %label
+                Ime in priimek
+                %small.muted Oseba ki je odobrila/podpisala naročilo
+              = f.input :authorizer, {label: false, placeholder: "Ime in priimek", class: 'form-control', input_html: {style: 'width: 350px'}}
 
-        = hidden_field_tag :token, @customer.token
-        %input.btn.btn-default{type: 'submit', value: 'Oddaj naročilnico'}
+            = hidden_field_tag :token, @customer.token
+            %input.btn.btn-default{type: 'submit', value: 'Oddaj naročilnico'}
 
   %br
 

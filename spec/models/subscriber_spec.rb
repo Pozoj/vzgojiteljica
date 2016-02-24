@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Subscriber do
+RSpec.describe Subscriber do
   subject! { create :subscriber }
 
   it { should be_valid }

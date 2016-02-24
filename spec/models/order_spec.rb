@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Order do
+RSpec.describe Order do
   subject { create :order }
 
   it { should be_valid }

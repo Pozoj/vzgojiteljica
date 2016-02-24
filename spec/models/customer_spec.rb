@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Customer do
+RSpec.describe Customer do
   let!(:plan) { create :plan, billing_frequency: 6, price: 10 }
   subject { create :customer }
 

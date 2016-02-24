@@ -38,7 +38,7 @@ gem 'iban-tools'
 gem 'email_validator'
 gem 'nokogiri'
 gem 'rubyzip'
-gem 'rollbar'
+gem 'rollbar', '2.8.0'
 gem 'cmxl'
 gem 'sidekiq'
 gem 'sidekiq-cron'
@@ -63,4 +63,5 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'factory_girl'
   gem 'timecop'
+  gem 'capybara', '2.6.2'
 end

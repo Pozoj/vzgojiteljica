@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe OrderForm do
+RSpec.describe OrderForm do
   subject { create :order_form }
 
   it { should be_valid }

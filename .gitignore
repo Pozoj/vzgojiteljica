@@ -26,3 +26,4 @@ devbackup.sqlite3
 .env
 TODO
 *.sql
+spec/examples.txt

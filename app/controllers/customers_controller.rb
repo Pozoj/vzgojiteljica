@@ -22,9 +22,17 @@ class CustomersController < Admin::AdminController
   end
 
   def ingest_order_form
+    unless params[:token].present?
+      return redirect_to root_path
+    end
+
     token = params[:token].upcase
     @customer = Customer.find_by(token: token)
     unless @customer
+      return redirect_to root_path
+    end
+
+    if !params[:order_form] || (params[:order_form] && !params[:order_form].any?)
       return redirect_to root_path
     end
 

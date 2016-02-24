@@ -48,6 +48,10 @@
           - if @customer.billing_person
             = render "admin/people/fields", resource: @customer.billing_person
 
+        - if @customer.events.any?
+          %hr
+          = render 'events/events', events: @customer.events
+
   .col-xs-6= render "admin/remarks/form", resource: @customer
 
 .panel.panel-default

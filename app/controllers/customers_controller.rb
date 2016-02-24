@@ -1,4 +1,5 @@
 class CustomersController < Admin::AdminController
+  skip_before_filter :authenticate, only: [:public_show, :ingest_order_form]
   layout 'public'
 
   ###

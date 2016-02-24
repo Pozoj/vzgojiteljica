@@ -3,7 +3,12 @@ class PublicCustomersEmailerWorker
   sidekiq_options :retry => false
 
   def perform
-    Customer.where(einvoice: true).each do |customer|
+    Customer.active_and_paid.each do |customer|
+      unless customer.einvoice?
+        puts "Customer is not an e-invoice customer"
+        next
+      end
+
       unless customer.billing_email
         puts "Customer #{customer.id} has no email to send to"
         next

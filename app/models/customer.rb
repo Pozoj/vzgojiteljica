@@ -12,6 +12,9 @@ class Customer < Entity
 
   before_validation :generate_token, on: :create
 
+  scope :einvoiced, -> { where(einvoice: true) }
+  scope :not_einvoiced, -> { where(einvoice: false) }
+
   # validates :token, presence: true, length: {is: TOKEN_LENGTH}
 
   def quantity
@@ -43,6 +46,24 @@ class Customer < Entity
     end
 
     email
+  end
+
+  def self.active
+    Subscriber.select(:customer_id).
+    joins(:subscriptions).
+    merge(Subscription.active).
+    includes(:customer).
+    group(:customer_id).
+    map(&:customer)
+  end
+
+  def self.active_and_paid
+    Subscriber.select(:customer_id).
+    joins(:subscriptions).
+    merge(Subscription.active.paid).
+    includes(:customer).
+    group(:customer_id).
+    map(&:customer)
   end
 
   def self.active_count

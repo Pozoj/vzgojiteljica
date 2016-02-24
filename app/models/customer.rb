@@ -15,7 +15,7 @@ class Customer < Entity
   scope :einvoiced, -> { where(einvoice: true) }
   scope :not_einvoiced, -> { where(einvoice: false) }
 
-  # validates :token, presence: true, length: {is: TOKEN_LENGTH}
+  validates :token, presence: true, length: {is: TOKEN_LENGTH}, uniqueness: true
 
   def quantity
     subscriptions.active.inject(0) { |sum, s| sum += s.quantity }

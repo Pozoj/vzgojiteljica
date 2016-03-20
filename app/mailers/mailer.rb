@@ -6,7 +6,7 @@ class Mailer < ActionMailer::Base
   def customer_order_form_needed(customer_id)
     return unless @customer = Customer.find(customer_id)
     return unless @customer.billing_email
-    mail(to: @customer.billing_email, subject: "Naročilnica za revijo Vzgojiteljica")
+    mail(to: @customer.billing_email, subject: "Naročilnica za revijo Vzgojiteljica - #{@customer}")
   end
 
   def order_submitted(order_id)

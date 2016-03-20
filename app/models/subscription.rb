@@ -7,7 +7,8 @@ class Subscription < ActiveRecord::Base
   belongs_to :subscriber
   belongs_to :order_form
   belongs_to :order # TODO: remove after migration
-  has_many :remarks, as: :remarkable, dependent: :destroy
+  has_many :remarks, as: :remarkable, dependent: :delete_all
+  has_many :events, as: :eventable, dependent: :delete_all
 
   scope :active, -> { where(arel_table[:start].lteq(Date.today).and(arel_table[:end].eq(nil).or(arel_table[:end].gteq(Date.today)))) }
   scope :inactive, -> { where(arel_table[:end].not_eq(nil).and(arel_table[:end].lteq(Date.today).or(arel_table[:start].gteq(Date.today)))) }

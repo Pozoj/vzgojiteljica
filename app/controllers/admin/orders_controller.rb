@@ -1,6 +1,11 @@
 class Admin::OrdersController < Admin::AdminController
   def index
     @orders = Order.all.order(created_at: :desc).page(params[:page]).per(20)
+    if params[:filter_all]
+      return
+    end
+
+    @orders = @orders.not_processed
   end
 
   def show

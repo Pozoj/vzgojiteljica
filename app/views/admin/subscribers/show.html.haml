@@ -20,11 +20,11 @@
     .details.panel.panel-default
       .panel-body= render "fields", resource: @subscriber
 
-  .col-xs-6= render "admin/remarks/form", resource: @subscriber
+  .col-xs-6= render "admin/remarks/form", resource: @subscriber, remarks: @remarks
 
 .panel.panel-default
-  .panel-heading 
-    %h3.panel-title 
+  .panel-heading
+    %h3.panel-title
       Naročnine
       = link_to new_admin_subscription_path(subscriber_id: @subscriber.id), class: 'btn btn-default btn-xs pull-right' do
         %i.glyphicon.glyphicon-plus

@@ -7,6 +7,8 @@ class Event < ActiveRecord::Base
     invoice_sent invoice_due_sent invoice_send_error
     order_form_processed
     statement_entry_invalid
+    subscription_auto_canceled subscription_from_order_form
+    magazine_dispatched
   }
 
   validates :event, presence: true, inclusion: { in: VALID_EVENTS }

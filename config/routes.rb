@@ -83,6 +83,7 @@ Web3::Application.routes.draw do
     resources :order_forms do
       get :download, on: :member
       put :mark_processed, on: :member
+      put :process_it, on: :member
     end
     resources :invoices do
       get :wizard, on: :collection

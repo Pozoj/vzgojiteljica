@@ -1,24 +1,35 @@
 .panel.panel-default.remarks
-  .panel-heading 
+  .panel-heading
     %h3.panel-title Opombe
   .panel-body
-    %table.table
-      %tbody
-        - resource.remarks.order(created_at: :desc).each do |r|
-          %tr
-            %td.remark= simple_format r.remark
-            %td.date
-              %small.muted
-                = link_to "x", [:admin, r], method: :delete, :"data-confirm" => "Ste prepričani?"
-                = r.user
-                %br
-                - if r.created_at > 1.day.ago
-                  pred
-                  = distance_of_time_in_words_to_now r.created_at
-                - else
-                  = l r.created_at, format: :short
-    - if resource.remarks.any?
+    - remarks ||= resource.remarks
+    - if remarks.any?
+      .remarks_table
+        %table.table
+          %tbody
+            - remarks.order(created_at: :desc).each do |r|
+              %tr
+                %td.remark= simple_format r.remark
+                %td.date
+                  %small.muted
+                    - if r.created_at > 1.day.ago
+                      pred
+                      = distance_of_time_in_words_to_now r.created_at
+                    - else
+                      = l r.created_at, format: :short
+
+                    = link_to "x", [:admin, r], class: 'delete', method: :delete, :"data-confirm" => "Ste prepričani?"
+
+                    - if r.user
+                      %br
+                      = r.user
+
+                    - if r.remarkable != resource
+                      %br
+                      = link_to resource, polymorphic_url([:admin, r.remarkable])
+
       %hr
+
     = simple_form_for [:admin, resource.remarks.build(user: current_user)], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
       = f.hidden_field :user_id
       = f.hidden_field :remarkable_id

@@ -13,6 +13,9 @@ class Order < ActiveRecord::Base
   has_many :events, as: :eventable, dependent: :destroy
   has_one :order_form
 
+  scope :processed, -> { where(processed: true) }
+  scope :not_processed, -> { where(processed: false) }
+
   after_create :create_order_form
 
   def order_id

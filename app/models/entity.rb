@@ -8,8 +8,8 @@ class Entity < ActiveRecord::Base
 
   belongs_to :post
   belongs_to :bank
-  has_many :remarks, as: :remarkable, dependent: :destroy
-  has_many :events, as: :eventable, dependent: :destroy
+  has_many :remarks, as: :remarkable, dependent: :delete_all
+  has_many :events, as: :eventable, dependent: :delete_all
 
   before_validation :format_account_number, if: :account_number?
   validates :vat_id, presence: true, if: :company?

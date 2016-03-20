@@ -52,7 +52,7 @@
           %hr
           = render 'events/events', events: @customer.events
 
-  .col-xs-6= render "admin/remarks/form", resource: @customer
+  .col-xs-6= render "admin/remarks/form", resource: @customer, remarks: @remarks
 
 .panel.panel-default
   .panel-heading

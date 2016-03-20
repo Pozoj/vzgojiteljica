@@ -17,6 +17,15 @@ class Customer < Entity
 
   validates :token, presence: true, length: {is: TOKEN_LENGTH}, uniqueness: true
 
+  def global_remarks
+    tbl = Remark.arel_table
+    query = tbl[:remarkable_id].eq(id).and(tbl[:remarkable_type].eq('Entity'))
+    query = query.or(tbl[:remarkable_id].in(subscriber_ids).and(tbl[:remarkable_type].eq('Entity')))
+    query = query.or(tbl[:remarkable_id].in(subscriptions.map(&:id)).and(tbl[:remarkable_type].eq('Subscription')))
+    query = query.or(tbl[:remarkable_id].in(invoice_ids).and(tbl[:remarkable_type].eq('Invoice')))
+    Remark.where(query)
+  end
+
   def quantity
     subscriptions.active.inject(0) { |sum, s| sum += s.quantity }
   end

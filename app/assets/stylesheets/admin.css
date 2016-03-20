@@ -85,22 +85,37 @@ td.subscriptions .subscription:last-child {
 .print_receipts .form-control {
   width: 100px;
 }
-.panel.remarks table td.remark {
-  width: 78%;
+.panel.remarks .remarks_table {
+  font-size: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.panel.remarks table td {
+  border-top-color: #eee;
+}
+.panel.remarks table .remark {
+  width: 75%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.panel.remarks table td p:last-child {
+  margin: 0;
 }
 .panel.remarks .table tr:first-child td {
   border: 0;
 }
 .panel.remarks table .date {
   text-align: right;
-  font-size: 11px;
+  font-size: 10px;
+  padding-left: 0;
+  padding-right: 0;
 }
-.panel.remarks table small a {
+.panel.remarks table small a.delete {
   color: #ccc;
   display: inline-block;
-  padding: 0 5px;
+  padding-left: 10px;
 }
-.panel.remarks table small a:hover {
+.panel.remarks table small a.delete:hover {
   background: #ccc;
   color: #333;
 }

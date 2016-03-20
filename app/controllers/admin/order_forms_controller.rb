@@ -11,7 +11,19 @@ class Admin::OrderFormsController < Admin::AdminController
     else
       @order_forms = @order_forms.where(year: @year_now)
     end
+
     respond_with collection
+  end
+
+  def process_it
+    case params[:kind]
+    when 'attach'
+      resource.process_attach!(user_id: current_user.id)
+    when 'renew'
+      resource.process_renew!(user_id: current_user.id)
+    end
+
+    redirect_to admin_order_form_path(resource)
   end
 
   def mark_processed

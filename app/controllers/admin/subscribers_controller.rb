@@ -2,6 +2,7 @@ class Admin::SubscribersController < Admin::AdminController
   has_scope :page, :default => 1
 
   def show
+    @remarks = resource.global_remarks
     respond_with resource
   end
 

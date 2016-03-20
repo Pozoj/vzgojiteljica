@@ -62,10 +62,78 @@ class OrderForm < ActiveRecord::Base
     self.distinct(:year).order(year: :desc).pluck(:year).compact
   end
 
+  def able_to_process_attach?
+    return unless customer
+    subs = customer.subscriptions.active.paid
+    return unless subs.any?
+
+    subs.none? { |subscription| subscription.order_form }
+  end
+  def process_attach!(user_id: nil)
+    return unless able_to_process_attach?
+
+    OrderForm.transaction do
+      customer.subscriptions.active.paid.each do |subscription|
+        next if subscription.order_form
+        subscription.order_form = self
+        subscription.save!
+      end
+
+      processed!(user_id: user_id)
+    end
+  end
+
+  def able_to_process_renew?
+    return unless customer
+    subs = customer.subscriptions.active.paid
+    return unless subs.any?
+
+    return unless subs.none? { |subscription| subscription.order_form === self }
+    subs.any? { |subscription| subscription.order_form }
+  end
+  def process_renew!(user_id: nil)
+    return unless able_to_process_renew?
+
+    OrderForm.transaction do
+      customer.subscribers.each do |subscriber|
+        subs = subscriber.subscriptions.active.paid
+        total_quantity = subs.sum(:quantity)
+
+        # End all existing subscriptions.
+        subs.each do |subscription|
+          subscription.end = 1.year.ago.end_of_year
+          subscription.events.create(event: :subscription_auto_canceled, details: self.id)
+          subscription.remarks.create(remark: "Naročnina avtomatsko prekinjena zaradi procesiranja naročilnice ID #{self.id} (#{form_id})")
+          subscription.save!
+        end
+
+        # Create a new subscription with combined quantity.
+        new_sub = subs.first.dup
+        new_sub.start = self.start || self.issued_at
+        new_sub.end = self.end if self.end?
+        new_sub.quantity = total_quantity
+        new_sub.order_form = self
+        new_sub.save!
+
+        new_sub.events.create(event: :subscription_from_order_form, details: self.id)
+        new_sub.remarks.create(remark: "Nova naročnina avtomatsko ustvarjena zaradi procesiranja naročilnice ID #{self.id} (#{form_id})")
+        processed!(user_id: user_id)
+
+        return new_sub
+      end
+    end
+  end
+
   def processed!(user_id: nil)
     OrderForm.transaction do
       self.processed_at = DateTime.now
       save!
+
+      if order && !order.processed?
+        order.processed = true
+        order.save!
+      end
+
       events.create event: :order_form_processed, user_id: user_id
     end
   end

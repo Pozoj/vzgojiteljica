@@ -17,6 +17,8 @@ class Admin::CustomersController < Admin::AdminController
     end
     @subscribers = @subscribers.to_a.sort_by { |s| s.id }
 
+    @remarks = resource.global_remarks
+
     respond_with resource
   end
 

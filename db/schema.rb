@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125153054) do
+ActiveRecord::Schema.define(version: 20160314160349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -262,13 +262,13 @@ ActiveRecord::Schema.define(version: 20160125153054) do
     t.datetime "processed_at"
     t.integer  "order_id"
     t.integer  "offer_id"
+    t.integer  "year"
     t.string   "document_file_name"
     t.string   "document_content_type"
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.integer  "year"
     t.date     "start"
     t.date     "end"
   end
@@ -353,8 +353,8 @@ ActiveRecord::Schema.define(version: 20160125153054) do
   add_index "receipts", ["bank_reference"], name: "index_receipts_on_bank_reference", unique: true, using: :btree
   add_index "receipts", ["customer_id"], name: "index_receipts_on_customer_id", using: :btree
   add_index "receipts", ["paid_at"], name: "index_receipts_on_paid_at", using: :btree
-  add_index "receipts", ["payment_id"], name: "index_receipts_on_payment_id", unique: true, using: :btree
-  add_index "receipts", ["receipt_id"], name: "index_receipts_on_receipt_id", unique: true, using: :btree
+  add_index "receipts", ["payment_id", "type"], name: "index_receipts_on_payment_id_and_type", unique: true, using: :btree
+  add_index "receipts", ["receipt_id", "type"], name: "index_receipts_on_receipt_id_and_type", unique: true, using: :btree
   add_index "receipts", ["reference_number"], name: "index_receipts_on_reference_number", using: :btree
   add_index "receipts", ["type"], name: "index_receipts_on_type", using: :btree
   add_index "receipts", ["year"], name: "index_receipts_on_year", using: :btree

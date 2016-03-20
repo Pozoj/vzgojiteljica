@@ -22,7 +22,7 @@ class ReceiptWizard
   def reference_number
     return last_receipt_number.to_i if last_receipt_number.present?
 
-    last = model.order(:year, :reference_number).last
+    last = model.where(year: Date.today.year).order(:year, :reference_number).last
     return last.reference_number if last
 
     0

@@ -43,4 +43,16 @@ FactoryGirl.define do
     customer
     form_id "Naročilnica #1000"
   end
+
+  factory :receipt do
+    customer
+    reference_number 1
+    type 'Invoice'
+    total 10
+    subtotal 9
+    tax 1
+  end
+
+  factory :invoice, parent: :receipt, class: 'Invoice'
+  factory :offer, parent: :receipt, class: 'Offer'
 end

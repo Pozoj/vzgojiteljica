@@ -3,6 +3,8 @@ class ReceiptsS3StoreWorker
   sidekiq_options :retry => false
 
   def perform(receipt_ids)
+    return if Rails.env.test?
+
     receipt_ids.each do |receipt_id|
       next unless receipt = Receipt.find(receipt_id)
 

@@ -17,7 +17,7 @@ class Receipt < ActiveRecord::Base
   validates_presence_of :customer
   validates :year, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :reference_number, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :receipt_id, presence: true, uniqueness: true
+  validates :receipt_id, presence: true, uniqueness: {scope: :type}
   validates :total, presence: true, numericality: true
   validates :subtotal, presence: true, numericality: true
   validates :tax, presence: true, numericality: true
@@ -58,7 +58,7 @@ class Receipt < ActiveRecord::Base
   def pdf_path; file_path('pdf'); end
 
   def store_all_on_s3_async
-    InvoiceS3StoreWorker.perform_async(id)
+    ReceiptS3StoreWorker.perform_async(id)
   end
 
   def store_all_on_s3

@@ -46,7 +46,7 @@ class ReceiptWizard
       line_item.issue_id = issue_id
     end
 
-    line_item.entity_name = subscription.subscriber.to_s
+    line_item.entity_name = subscription.subscriber
     line_item.product = subscription.product(line_item.issue)
     line_item.quantity = subscription.quantity
     line_item.unit = subscription.plan.quantity_unit_abbr
@@ -98,7 +98,7 @@ class ReceiptWizard
 
     issues_left.times do |x|
       line_item = receipt.line_items.new
-      line_item.entity_name = subscription.subscriber.to_s
+      line_item.entity_name = subscription.subscriber
       line_item.product = "Revija Vzgojiteljica #{start_issue + x + 1}/#{Date.today.year}"
       line_item.price_per_item = plan.price
       line_item.price_per_item_with_discount = plan.price
@@ -114,6 +114,7 @@ class ReceiptWizard
     Receipt.transaction do
       receipt = build_receipt_for_subscription(subscription)
       receipt.save!
+      return receipt
     end
   end
 
@@ -129,6 +130,10 @@ class ReceiptWizard
         next unless s.plan
         receipt.line_items << build_line_item_for_subscription(s)
       end
+
+
+      # Associate receipt with first order form of subscriptions if any.
+      receipt.order_form = subscriptions.map(&:order_form).compact.first
 
       receipt.line_items.each(&:calculate)
       receipt.calculate_totals

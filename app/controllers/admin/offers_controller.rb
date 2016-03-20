@@ -16,7 +16,10 @@ class Admin::OffersController < Admin::ReceiptsController
 
   def wizard
     @wizard = ReceiptWizard.new(wizard_params)
-    @last = Offer.select(:reference_number).order(year: :desc, reference_number: :desc).first.try(:reference_number)
+    @last = Offer.select(:reference_number).
+            where(year: Date.today.year).
+            order(year: :desc, reference_number: :desc).
+            first.try(:reference_number) || 0
   end
 
   def print_wizard

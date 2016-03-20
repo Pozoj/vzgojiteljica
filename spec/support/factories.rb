@@ -18,6 +18,11 @@ FactoryGirl.define do
   factory :plan do
     billing_frequency 1
     name "Letna naročnina"
+    price_cents 500
+
+    trait :free do
+      price_cents 0
+    end
   end
 
   factory :subscriber do

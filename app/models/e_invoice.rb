@@ -84,8 +84,8 @@ class EInvoice
     {
       :@VrstaDokumenta => "ON", :content! => {
         StevilkaDokumenta: invoice.order_form,
+        DatumDokumenta: invoice.order_form_date
       }
-      #DatumDokumenta>2012-02-25T00:00:00</DatumDokumenta>
     }
   end
 

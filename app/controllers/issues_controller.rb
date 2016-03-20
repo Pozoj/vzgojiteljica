@@ -60,8 +60,7 @@ class IssuesController < ApplicationController
   private
 
   def resource
-    return unless params[:id]
-    @issue ||= Issue.find(params[:id])
+    @issue ||= Issue.find_by(id: params[:id])
   end
 
   def collection

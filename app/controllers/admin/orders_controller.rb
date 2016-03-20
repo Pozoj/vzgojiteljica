@@ -17,7 +17,7 @@ class Admin::OrdersController < Admin::AdminController
   private
 
   def resource
-    @order ||= Order.find(params[:id])
+    @order ||= Order.find_by(id: params[:id])
   end
 
   def set_page_title

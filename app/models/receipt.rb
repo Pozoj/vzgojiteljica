@@ -40,6 +40,22 @@ class Receipt < ActiveRecord::Base
     self.receipt_id ||= "#{reference_number}-#{year}"
   end
 
+  def order_form=(arg_order_form)
+    unless arg_order_form
+      write_attribute(:order_form, nil)
+      write_attribute(:order_form_date, nil)
+      return
+    end
+
+    if arg_order_form.is_a?(OrderForm)
+      write_attribute(:order_form, arg_order_form.to_s)
+      write_attribute(:order_form_date, arg_order_form.issued_at)
+      return order_form
+    end
+
+    super
+  end
+
   def file_path(extension, prefix = "")
     "#{type.downcase.pluralize}/#{year}/#{prefix}#{receipt_id}.#{extension}"
   end

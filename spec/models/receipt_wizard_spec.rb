@@ -57,6 +57,16 @@ RSpec.describe ReceiptWizard do
       expect(receipt.reference_number).to eq(1)
       expect(receipt.customer).to eq(customer)
     end
+
+    it 'should build a receipt for a subscription' do
+      subscription = build_stubbed(:subscription)
+      subscription.order_form = build_stubbed(:order_form, form_id: 'Narocilnica 1')
+
+      receipt = subject.build_receipt(subscription: subscription)
+      expect(receipt.reference_number).to eq(1)
+      expect(receipt.customer).to eq(subscription.subscriber.customer)
+      expect(receipt.order_form).to eq('Narocilnica 1')
+    end
   end
 
   describe 'build_line_item_for_subscription' do
@@ -70,6 +80,47 @@ RSpec.describe ReceiptWizard do
       expect(line_item.price_per_item).to eq(50)
       expect(line_item.discount_percent).to eq(5)
       expect(line_item.quantity).to eq(5)
+    end
+  end
+
+  describe 'create_receipt_for_customer' do
+    it 'should create for one subscription' do
+      customer = create(:customer, name: 'Vrtec Velenje')
+      subscriber = create(:subscriber, customer: customer, name: 'Podruzni Vrtec Velenje')
+      order_form = create(:order_form, form_id: 'Nar 2015/1')
+      plan = create(:plan, :free)
+      subscription = create(:subscription, subscriber: subscriber, order_form: order_form, plan: plan)
+
+      expect {
+        subject.create_receipt_for_customer(customer, [subscription])
+      }.to raise_error "Invoice should not be 0."
+
+      plan = create(:plan)
+      subscription.plan = plan
+      subscription.save!
+
+      invoice = subject.create_receipt_for_customer(customer, [subscription])
+      expect(invoice.reference_number).to eq(2)
+      expect(invoice.customer).to eq(customer)
+      expect(invoice.line_items.length).to eq(1)
+      expect(invoice.line_items.first.entity_name).to eq('Podruzni Vrtec Velenje')
+      expect(invoice.order_form).to eq('Nar 2015/1')
+    end
+  end
+
+  describe 'create_receipt_for_subscription' do
+    it 'should create for one subscription' do
+      customer = create(:customer, name: 'Vrtec Velenje')
+      subscriber = create(:subscriber, customer: customer, name: 'Podruzni Vrtec Velenje')
+      order_form = create(:order_form, form_id: 'Nar 2015/1')
+      subscription = create(:subscription, subscriber: subscriber, order_form: order_form)
+
+      invoice = subject.create_receipt_for_subscription(subscription)
+      expect(invoice.reference_number).to eq(1)
+      expect(invoice.customer).to eq(customer)
+      expect(invoice.line_items.length).to eq(1)
+      expect(invoice.line_items.first.entity_name).to eq('Podruzni Vrtec Velenje')
+      expect(invoice.order_form).to eq('Nar 2015/1')
     end
   end
 end

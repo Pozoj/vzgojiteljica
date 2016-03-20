@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314160349) do
+ActiveRecord::Schema.define(version: 20160320034527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -348,6 +348,7 @@ ActiveRecord::Schema.define(version: 20160314160349) do
     t.string   "reverse_reason"
     t.string   "order_form"
     t.string   "type",                                 null: false
+    t.date     "order_form_date"
   end
 
   add_index "receipts", ["bank_reference"], name: "index_receipts_on_bank_reference", unique: true, using: :btree

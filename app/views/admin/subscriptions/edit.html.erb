@@ -30,7 +30,7 @@
       </div>
       <%= f.association :plan %>
       <%= f.input :discount %>
-      <%= f.association :order_form %>
+      <%= f.association :order_form, label_method: :label_description %>
 
       <div class="form-actions">
         <hr>

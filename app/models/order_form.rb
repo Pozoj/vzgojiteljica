@@ -40,6 +40,24 @@ class OrderForm < ActiveRecord::Base
     form_id
   end
 
+  def label_description
+    parts = [form_id]
+    if issued_at
+      parts.push "(#{issued_at})"
+    end
+    if order
+      if order.title.present?
+        parts.push order.title
+      else
+        parts.push order.name
+      end
+    elsif customer
+      parts.push customer.to_s
+    end
+
+    parts.join(' - ')
+  end
+
   def self.years
     self.distinct(:year).order(year: :desc).pluck(:year).compact
   end

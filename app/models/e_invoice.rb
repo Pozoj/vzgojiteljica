@@ -81,11 +81,13 @@ class EInvoice
   def reference_documents_hash
     return [] unless invoice.order_form
 
+    order_form_hash = { StevilkaDokumenta: invoice.order_form }
+    if invoice.order_form_date
+      order_form_hash.merge({ DatumDokumenta: invoice.order_form_date.to_datetime.beginning_of_day })
+    end
+
     {
-      :@VrstaDokumenta => "ON", :content! => {
-        StevilkaDokumenta: invoice.order_form,
-        DatumDokumenta: invoice.order_form_date
-      }
+      :@VrstaDokumenta => "ON", :content! => order_form_hash
     }
   end
 

@@ -23,6 +23,8 @@ module Web3
 
     config.autoload_paths << Rails.root.join('lib')
 
+    config.middleware.use Rack::Attack
+
     config.action_controller.permit_all_parameters = true
 
     config.active_record.raise_in_transactional_callbacks = true

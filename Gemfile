@@ -22,6 +22,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'rack-attack'
 gem 'pg'
 gem 'pdfcrowd'
 gem 'devise'

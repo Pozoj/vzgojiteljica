@@ -23,8 +23,8 @@
         <%= render 'fields', order_form: @order_form %>
 
         <% unless @order_form.processed? %>
+          <hr>
           <% if @order_form.order %>
-            <hr>
             <p>
               <% unless @order_form.customer %>
                 <%= link_to new_from_order_admin_customers_path(order_id: @order_form.order.id), method: :post, class: 'btn btn-default' do %>
@@ -53,6 +53,13 @@
                     <i class="glyphicon glyphicon-envelope"></i>
                     Aktiviraj na prejemniku
                   <% end %>
+                <% end %>
+              </p>
+            <% else %>
+              <p>
+                <%= link_to mark_processed_admin_order_form_path(@order_form), method: :put, class: 'btn btn-default' do %>
+                  <i class="glyphicon glyphicon-check"></i>
+                  Označi kot obdelano
                 <% end %>
               </p>
             <% end %>

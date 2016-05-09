@@ -55,15 +55,12 @@
                   <% end %>
                 <% end %>
               </p>
-            <% else %>
-              <p>
-                <%= link_to mark_processed_admin_order_form_path(@order_form), method: :put, class: 'btn btn-default' do %>
-                  <i class="glyphicon glyphicon-check"></i>
-                  Označi kot obdelano
-                <% end %>
-              </p>
             <% end %>
           <% else %>
+            <%= link_to mark_processed_admin_order_form_path(@order_form), method: :put, class: 'btn btn-default' do %>
+              <i class="glyphicon glyphicon-check"></i>
+              Označi kot obdelano
+            <% end %>
             <% if @order_form.able_to_process_attach? %>
               <%= link_to process_it_admin_order_form_path(@order_form, kind: :attach), method: :put, class: 'btn btn-default' do %>
                   <i class="glyphicon glyphicon-asterisk"></i>

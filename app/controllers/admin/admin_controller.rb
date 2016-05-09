@@ -3,7 +3,7 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   def index
-    @invoices = Invoice.where(year: 2015)
+    @invoices = Invoice.where(year: Date.today.year)
   end
 
   def quantities

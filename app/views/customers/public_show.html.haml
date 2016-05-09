@@ -12,7 +12,7 @@
           %p
             %strong Za letošnje leto nam še niste posredovali številke naročilnice.
             %br
-            Od 1. januarja 2016 dalje ne smemo izdajati e-računov brez številke naročilnice.
+            Za izdajo e-računa potrebujemo vašo številko naročilnice.
           %hr
           = simple_form_for @order_form, url: ingest_order_form_path(@customer.token) do |f|
             %p Prosimo vpišite številko naročilnice in podpisnika:

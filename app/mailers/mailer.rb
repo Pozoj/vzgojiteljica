@@ -1,4 +1,6 @@
 class Mailer < ActionMailer::Base
+  helper :entities
+
   ADMIN_EMAIL =  ENV['DEFAULT_ADMIN_EMAIL']
   EDITOR_EMAIL = ENV['DEFAULT_EDITOR_EMAIL']
   default from: ENV['DEFAULT_EMAIL_FROM']
@@ -40,10 +42,11 @@ class Mailer < ActionMailer::Base
       invoice_file = open(@invoice.pdf_idempotent)
       attachments["#{@invoice.receipt_id}.pdf"] = invoice_file.read
 
-      @invoice.events.create!(event: 'invoice_sent', details: recipient)
-
       mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Račun #{@invoice.receipt_id} za revijo Vzgojiteljica")
+
+      @invoice.events.create!(event: 'invoice_sent', details: recipient)
     rescue StandardError => e
+      puts e.inspect
       @invoice.events.create!(event: 'invoice_send_error', details: e.inspect)
     end
   end
@@ -64,10 +67,11 @@ class Mailer < ActionMailer::Base
       invoice_file = open(@invoice.pdf_idempotent)
       attachments["#{@invoice.receipt_id}.pdf"] = invoice_file.read
 
-      @invoice.events.create!(event: 'invoice_due_sent', details: recipient)
-
       mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Opomin: Račun #{@invoice.receipt_id} za revijo Vzgojiteljica")
+
+      @invoice.events.create!(event: 'invoice_due_sent', details: recipient)
     rescue StandardError => e
+      puts e.inspect
       @invoice.events.create!(event: 'invoice_send_error', details: e.inspect)
     end
   end

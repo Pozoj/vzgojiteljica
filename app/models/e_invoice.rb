@@ -79,11 +79,18 @@ class EInvoice
   # <StevilkaDokumenta>NAR-2012-512</StevilkaDokumenta>
   # <DatumDokumenta>2012-02-25T00:00:00</DatumDokumenta>
   def reference_documents_hash
-    return [] unless invoice.order_form
+    if invoice.order_form
+      order_form_hash = { StevilkaDokumenta: invoice.order_form }
+      if invoice.order_form_date
+        order_form_hash.merge({ DatumDokumenta: invoice.order_form_date.to_datetime.beginning_of_day })
+      end
+    else
+      subscription = invoice.customer.subscriptions.active.last
+      unless subscription
+        return []
+      end
 
-    order_form_hash = { StevilkaDokumenta: invoice.order_form }
-    if invoice.order_form_date
-      order_form_hash.merge({ DatumDokumenta: invoice.order_form_date.to_datetime.beginning_of_day })
+      order_form_hash = { StevilkaDokumenta: "Naročnina #{subscription.created_at.year}-#{subscription.id}" }
     end
 
     {
@@ -404,7 +411,7 @@ class EInvoice
 
   def invoice_payment_shoutout_hash
     text_hash(
-      text_type: 'DODATNI_TEKST',
+      text_type: 'GLAVA_TEKST',
       text: "Račun plačajte na TRR: #{Entity.pozoj.account_number_formatted}, odprt pri #{Entity.pozoj.bank} Pri plačilu računa se sklicujte na: #{invoice.payment_id}. Po izteku roka za plačilo zaračunavamo zakonske zamudne obresti. Reklamacije upoštevamo, če so podane v 7 dneh od izstavitve računa."
     )
   end

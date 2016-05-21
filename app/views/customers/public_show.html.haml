@@ -1,6 +1,6 @@
 %h1= @customer
 
-- if @order_forms.empty?
+- if @subscriptions.any? && @order_forms.empty?
   .row
     .col-xs-8
       .panel.panel-danger

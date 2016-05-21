@@ -141,6 +141,9 @@
               - elsif invoice.due?
                 .label.label-danger
                   = number_to_currency invoice.total
+              - elsif invoice.reversed?
+                .label.label-primary
+                  = number_to_currency invoice.total
               - else
                 = number_to_currency invoice.total
 

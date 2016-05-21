@@ -6,7 +6,7 @@ class Invoice < Receipt
   before_validation :generate_payment_id, unless: :payment_id?
 
   scope :not_due, -> { where("receipts.due_at > '#{DateTime.now}'") }
-  scope :due, -> { where("receipts.due_at < '#{DateTime.now}'") }
+  scope :due, -> { where("receipts.due_at < '#{DateTime.now}'").where(reversed_at: nil) }
   scope :unpaid, -> { where(paid_at: nil) }
   scope :paid,   -> { where.not(paid_at: nil) }
   scope :unreversed, -> { where(reversed_at: nil) }
@@ -25,6 +25,7 @@ class Invoice < Receipt
   end
 
   def due?
+    return false if reversed?
     due_at <= DateTime.now
   end
 

@@ -68,7 +68,7 @@
 
 %h3 Računi
 - if @invoices.any?
-  - if @invoices.unpaid.any?
+  - if @invoices.unpaid.unreversed.any?
     %p
       Na vašem računu imate
       %strong= pluralize_unpaid_invoices(@invoices.unpaid.count)

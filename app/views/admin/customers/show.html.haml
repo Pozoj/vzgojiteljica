@@ -120,7 +120,7 @@
     %table.table.rowlinks
       %thead
         %tr
-          %th Ref. št.
+          %th ID
           %th Številka
           %th Izdan
           %th Rok
@@ -130,7 +130,7 @@
           %tr
             %td
               = link_to "", admin_invoice_path(invoice)
-              = invoice.reference_number
+              = invoice.receipt_id
             %td= invoice.issues.distinct.join(', ')
             %td= l invoice.created_at, format: :simple
             %td= l invoice.due_at, format: :simple

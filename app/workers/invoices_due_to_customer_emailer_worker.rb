@@ -3,7 +3,10 @@ class InvoicesDueToCustomerEmailerWorker
   sidekiq_options :retry => false
 
   def perform
-    return unless ENV["DUE_INVOICES_EMAILER_ENABLED"] == 'true'
+    unless ENV["DUE_INVOICES_EMAILER_ENABLED"] == 'true'
+      puts "Invoice emailer disabled"
+      return
+    end
 
     # Only send on Tuesday's, after we can process Monday's payments
     return unless Date.today.tuesday?

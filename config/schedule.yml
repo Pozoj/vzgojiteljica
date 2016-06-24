@@ -5,7 +5,7 @@ invoices_due:
   class: "InvoicesDueEmailerWorker"
   queue: default
 
-#invoices_due_to_customer:
-#  cron: "0 6 * * *"
-#  class: "InvoicesDueToCustomerEmailerWorker"
-#  queue: default
+invoices_due_to_customer:
+  cron: "0 6 * * *"
+  class: "InvoicesDueToCustomerEmailerWorker"
+  queue: default

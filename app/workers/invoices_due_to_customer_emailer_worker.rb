@@ -3,7 +3,10 @@ class InvoicesDueToCustomerEmailerWorker
   sidekiq_options :retry => false
 
   def perform
-    return if Date.today.saturday? || Date.today.sunday?
+    return unless ENV["DUE_INVOICES_EMAILER_ENABLED"] == 'true'
+
+    # Only send on Tuesday's, after we can process Monday's payments
+    return unless Date.today.tuesday?
 
     Invoice.unpaid.due.where(year: Date.today.year).order(receipt_id: :asc).each do |invoice|
       # Skip if invoice is not yet due for a week.

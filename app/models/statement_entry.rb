@@ -50,6 +50,7 @@ class StatementEntry < ActiveRecord::Base
       # Name and title match.
       name_title_matches.compact.each do |name_title_match|
         next unless name_title_match.present?
+        next unless customer
 
         if customer.name =~ Regexp.new(name_title_match.strip, 'gi')
           reject = false

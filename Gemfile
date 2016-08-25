@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.1'
 gem 'rails', '4.2.5.1'
 
 # Gems used only for assets and not required
@@ -39,7 +39,7 @@ gem 'iban-tools'
 gem 'email_validator'
 gem 'nokogiri'
 gem 'rubyzip'
-gem 'rollbar', '2.8.0'
+gem 'rollbar', '2.11.5'
 gem 'cmxl'
 gem 'sidekiq'
 gem 'sidekiq-cron'

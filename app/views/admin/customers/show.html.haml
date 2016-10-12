@@ -1,7 +1,7 @@
 %h1= @customer
 
 .admin_actions
-  = link_to admin_customer_path(@customer), class: 'btn btn-danger', method: :delete, data: { confirm: 'Ali ste popolnoma prepričani?' } do
+  = link_to admin_customer_path(@customer), class: 'btn btn-danger', method: :delete, data: { confirm: 'Ta gumb je samo za Miha! :) Če nisi Miha, prekliči operacijo.' } do
     %i.glyphicon.glyphicon-trash
     Izbriši
   = link_to edit_admin_customer_path(@customer), class: 'btn btn-default' do

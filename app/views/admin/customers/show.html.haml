@@ -47,6 +47,12 @@
                 Dodaj
           - if @customer.billing_person
             = render "admin/people/fields", resource: @customer.billing_person
+        - if @customer.flags.any?
+          %hr
+          %h4
+            Nastavitve
+          %p
+            %code= @customer.flags.to_sentence
 
         - if @customer.events.any?
           %hr

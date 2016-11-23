@@ -1,4 +1,6 @@
 class Entity < ActiveRecord::Base
+  ALLOWED_FLAGS = [:do_not_send_due_emails]
+
   ENTITY_COMPANY = 1
   ENTITY_PERSON  = 2
 
@@ -20,6 +22,7 @@ class Entity < ActiveRecord::Base
   validates :registration_number, uniqueness: {allow_nil: true}, numericality: {allow_nil: true, only_integer: true, greater_than: 0}
   validates :email, :email => true, if: :email?
 
+  serialize :flags, Array
 
   scope :person,      -> { where(entity_type: ENTITY_PERSON) }
   scope :not_person,  -> { where.not(entity_type: ENTITY_PERSON) }
@@ -43,6 +46,10 @@ class Entity < ActiveRecord::Base
 
   def pozoj?
     email == 'info@pozoj.si'
+  end
+
+  def flag?(flag)
+    flags.include?(flag)
   end
 
   def self.search filters

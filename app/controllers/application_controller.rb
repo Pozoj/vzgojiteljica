@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_section, :body_attrs, :body_id, :body_class, :admin?
+  before_filter :log_request
   before_filter :authenticate
   before_filter :build_filter
 
@@ -43,5 +44,36 @@ class ApplicationController < ActionController::Base
 
   def build_filter
     @filter ||= Filter.new params[:filter]
+  end
+
+  def log_request
+    Scrolls.log(request_data)
+  end
+
+  def request_data
+    {}.merge(public_request_data).merge(private_request_data).merge(custom_request_data)
+  end
+
+  def public_request_data
+    {
+      at: 'request',
+      request_id: request.headers['HTTP_X_REQUEST_ID'],
+      method: request.method,
+      host: request.host,
+      path: request.fullpath,
+      referer: request.referer,
+      user_agent: request.env['HTTP_USER_AGENT']
+    }
+  end
+
+  def private_request_data
+    return {} unless signed_in?
+    {
+      user_id: current_user.try(:id),
+    }
+  end
+
+  def custom_request_data
+    {}
   end
 end

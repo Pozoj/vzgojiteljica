@@ -417,6 +417,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    scrolls (0.3.8)
     shellany (0.0.1)
     sidekiq (4.1.0)
       concurrent-ruby (~> 1.0)
@@ -511,6 +512,7 @@ DEPENDENCIES
   rspec-rails
   rubyzip
   sass-rails (~> 5.0.1)
+  scrolls
   sidekiq
   sidekiq-cron
   simple_form

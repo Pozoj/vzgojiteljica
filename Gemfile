@@ -46,6 +46,7 @@ gem 'sidekiq-cron'
 gem 'sinatra', require: nil
 gem 'unicorn'
 gem 'newrelic_rpm'
+gem 'scrolls'
 
 group :development do
   gem 'web-console'

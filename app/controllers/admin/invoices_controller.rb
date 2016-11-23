@@ -101,7 +101,7 @@ class Admin::InvoicesController < Admin::ReceiptsController
     end
 
     Mailer.delay.invoice_due_to_customer(resource.id)
-    redirect_to admin_invoice_path, notice: "Opomin poslan na #{customer.billing_email}"
+    redirect_to :back, notice: "Opomin poslan na #{customer.billing_email}"
   end
 
   def build_for_subscription

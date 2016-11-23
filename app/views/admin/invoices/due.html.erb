@@ -22,6 +22,7 @@
       <th>Rok</th>
       <th>Plačan</th>
       <th>Znesek</th>
+      <th>Opomin</th>
     </tr>
   </thead>
   <tbody>
@@ -40,6 +41,7 @@
             <span class="label label-danger"><%= invoice.late_days %> dni</span>
           <% end %>
         <td><%= number_to_currency invoice.total %></td>
+        <td><%= button_to "Pošlji", email_due_admin_invoice_path(invoice), method: :post, class: 'btn btn-xs btn-default' %></td>
       </tr>
     <% end %>
   </tbody>

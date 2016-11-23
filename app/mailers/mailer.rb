@@ -75,4 +75,32 @@ class Mailer < ActionMailer::Base
       @invoice.events.create!(event: 'invoice_send_error', details: e.inspect)
     end
   end
+
+  def invoices_due_to_customer(customer_id, invoice_ids)
+    return unless @customer = Customer.find(customer_id)
+    return unless @invoices = invoice_ids.map { |invoice_id| Invoice.find(invoice_id) }.compact
+    @invoices = @invoices.find_all(&:due?)
+    return unless @invoices.any?
+
+    email = @customer.billing_email
+    return unless email.present?
+
+    # To.
+    recipient = "#{@customer.billing_name} <#{@customer.billing_email}>"
+
+    # Attach invoice PDFs.
+    begin
+      @invoices.each do |invoice|
+        invoice_file = open(invoice.pdf_idempotent)
+        attachments["#{invoice.receipt_id}.pdf"] = invoice_file.read
+      end
+
+      mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Opomin: Računi za revijo Vzgojiteljica")
+
+      @invoices.each { |invoice| invoice.events.create!(event: 'invoice_due_sent', details: recipient) }
+    rescue StandardError => e
+      puts e.inspect
+      @invoices.each { |invoice| invoice.events.create!(event: 'invoice_send_error', details: e.inspect) }
+    end
+  end
 end

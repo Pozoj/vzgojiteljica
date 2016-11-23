@@ -1,0 +1,17 @@
+Spoštovani,
+
+Pri pregledu obveznosti smo ugotovili, da so naslednji računi zapadli v plačilo.
+
+<% @invoices.each do |invoice| %>
+  - Račun <%= invoice.receipt_id %>, zapadel pred <%= pluralize_days(@invoice.late_days) %>, na <%= l @invoice.due_at.to_date, format: :simple %>
+<% end %>
+
+Prosimo, če lahko obveznosti poravnate v najkrajšem možnem času.
+
+Če ste obveznosti v vmesnem času že poravnali, smatrajte to obvestilo kot brezpredmetno.
+
+Kadarkoli lahko preverite stanje vaše naročnine na naslovu: <%= token_url(token: @customer.token) %>
+
+Lep pozdrav,
+
+- kolektiv revije Vzgojiteljica

@@ -26,7 +26,7 @@ class ReceiptWizardWorker
         next
       end
 
-      Mailer.delay.invoice_to_customer(receipt.id)
+      InvoiceEmailerWorker.perform_in(30.minutes, receipt.id)
     end
   end
 end

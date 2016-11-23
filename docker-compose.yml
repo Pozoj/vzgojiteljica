@@ -1,7 +1,9 @@
 db:
   image: postgres
-  net: host
+  ports:
+    - 5432:5432
 
 redis:
   image: redis
-  net: host
+  ports:
+    - 6379:6379

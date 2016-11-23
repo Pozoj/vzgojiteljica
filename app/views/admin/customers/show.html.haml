@@ -47,7 +47,7 @@
                 Dodaj
           - if @customer.billing_person
             = render "admin/people/fields", resource: @customer.billing_person
-        - if @customer.flags.any?
+        - if @customer.flags && @customer.flags.any?
           %hr
           %h4
             Nastavitve

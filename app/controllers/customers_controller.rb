@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CustomersController < Admin::AdminController
   skip_before_filter :authenticate, only: [:public_show, :ingest_order_form]
   layout 'public'
@@ -8,9 +9,7 @@ class CustomersController < Admin::AdminController
   def public_show
     token = params[:token].upcase
     @customer = Customer.find_by(token: token)
-    unless @customer
-      return redirect_to root_path
-    end
+    return redirect_to root_path unless @customer
 
     @invoices = @customer.invoices
     @last_paid_invoice = @invoices.paid.order(created_at: :desc).first
@@ -22,15 +21,11 @@ class CustomersController < Admin::AdminController
   end
 
   def ingest_order_form
-    unless params[:token].present?
-      return redirect_to root_path
-    end
+    return redirect_to root_path unless params[:token].present?
 
     token = params[:token].upcase
     @customer = Customer.find_by(token: token)
-    unless @customer
-      return redirect_to root_path
-    end
+    return redirect_to root_path unless @customer
 
     if !params[:order_form] || (params[:order_form] && !params[:order_form].any?)
       return redirect_to root_path
@@ -47,5 +42,4 @@ class CustomersController < Admin::AdminController
       render action: 'public_show'
     end
   end
-
 end

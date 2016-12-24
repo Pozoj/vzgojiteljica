@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PdfGenerator
   def initialize
     @client = Pdfcrowd::Client.new(ENV['PDFCROWD_USERNAME'], ENV['PDFCROWD_TOKEN'])

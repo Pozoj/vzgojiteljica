@@ -1,25 +1,26 @@
+# frozen_string_literal: true
 class OrderForm < ActiveRecord::Base
   has_attached_file :document,
-                    :whiny => false,
-                    :storage => :s3,
-                    :bucket => AWS_S3['bucket'],
-                    :s3_credentials => {
-                      :access_key_id => AWS_S3['access_key_id'],
-                      :secret_access_key => AWS_S3['secret_access_key']
+                    whiny: false,
+                    storage: :s3,
+                    bucket: AWS_S3['bucket'],
+                    s3_credentials: {
+                      access_key_id: AWS_S3['access_key_id'],
+                      secret_access_key: AWS_S3['secret_access_key']
                     },
-                    :s3_permissions => {
-                      :original => :private,
-                      :preview => :public_read
+                    s3_permissions: {
+                      original: :private,
+                      preview: :public_read
                     },
-                    :s3_storage_class => :reduced_redundancy,
-                    :path => "/order_forms/:year/:id_:basename_:style.:extension",
-                    :styles => { :preview => { :geometry => '150x150>',  :format => :jpg } }
+                    s3_storage_class: :reduced_redundancy,
+                    path: '/order_forms/:year/:id_:basename_:style.:extension',
+                    styles: { preview: { geometry: '150x150>', format: :jpg } }
 
   validates_attachment_content_type :document, content_type: [/\Aimage\/.*\Z/, 'application/pdf']
 
   validates_presence_of :form_id
 
-  Paperclip.interpolates :year do |attachment, style|
+  Paperclip.interpolates :year do |attachment, _style|
     # TODO: remove this after 2015 is done to remove ambiguity
     date = attachment.instance.issued_at || attachment.instance.created_at
     date.year.to_s
@@ -42,9 +43,7 @@ class OrderForm < ActiveRecord::Base
 
   def label_description
     parts = [form_id]
-    if issued_at
-      parts.push "(#{issued_at})"
-    end
+    parts.push "(#{issued_at})" if issued_at
     if order
       if order.title.present?
         parts.push order.title
@@ -59,7 +58,7 @@ class OrderForm < ActiveRecord::Base
   end
 
   def self.years
-    self.distinct(:year).order(year: :desc).pluck(:year).compact
+    distinct(:year).order(year: :desc).pluck(:year).compact
   end
 
   def able_to_process_attach?
@@ -67,8 +66,9 @@ class OrderForm < ActiveRecord::Base
     subs = customer.subscriptions.active.paid
     return unless subs.any?
 
-    subs.none? { |subscription| subscription.order_form }
+    subs.none?(&:order_form)
   end
+
   def process_attach!(user_id: nil)
     return unless able_to_process_attach?
 
@@ -89,8 +89,9 @@ class OrderForm < ActiveRecord::Base
     return unless subs.any?
 
     return unless subs.none? { |subscription| subscription.order_form === self }
-    subs.any? { |subscription| subscription.order_form }
+    subs.any?(&:order_form)
   end
+
   def process_renew!(user_id: nil)
     return unless able_to_process_renew?
 
@@ -102,21 +103,21 @@ class OrderForm < ActiveRecord::Base
         # End all existing subscriptions.
         subs.each do |subscription|
           subscription.end = 1.year.ago.end_of_year
-          subscription.events.create(event: :subscription_auto_canceled, details: self.id)
-          subscription.remarks.create(remark: "Naročnina avtomatsko prekinjena zaradi procesiranja naročilnice ID #{self.id} (#{form_id})")
+          subscription.events.create(event: :subscription_auto_canceled, details: id)
+          subscription.remarks.create(remark: "Naročnina avtomatsko prekinjena zaradi procesiranja naročilnice ID #{id} (#{form_id})")
           subscription.save!
         end
 
         # Create a new subscription with combined quantity.
         new_sub = subs.first.dup
-        new_sub.start = self.start || self.issued_at
-        new_sub.end = self.end if self.end?
+        new_sub.start = start || issued_at
+        new_sub.end = self.end if end?
         new_sub.quantity = total_quantity
         new_sub.order_form = self
         new_sub.save!
 
-        new_sub.events.create(event: :subscription_from_order_form, details: self.id)
-        new_sub.remarks.create(remark: "Nova naročnina avtomatsko ustvarjena zaradi procesiranja naročilnice ID #{self.id} (#{form_id})")
+        new_sub.events.create(event: :subscription_from_order_form, details: id)
+        new_sub.remarks.create(remark: "Nova naročnina avtomatsko ustvarjena zaradi procesiranja naročilnice ID #{id} (#{form_id})")
         processed!(user_id: user_id)
 
         return new_sub

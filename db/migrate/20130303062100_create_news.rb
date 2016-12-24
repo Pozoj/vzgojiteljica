@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateNews < ActiveRecord::Migration
   def change
     create_table :news do |t|

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Plan < ActiveRecord::Base
   include Invoicing
 
@@ -22,7 +23,7 @@ class Plan < ActiveRecord::Base
     billing_frequency == 1
   end
 
-  def self.latest frequency
+  def self.latest(frequency)
     Plan.where(billing_frequency: frequency).where('price_cents > 0').order(created_at: :desc).first
   end
 

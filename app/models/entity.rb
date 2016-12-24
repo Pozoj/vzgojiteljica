@@ -1,12 +1,13 @@
+# frozen_string_literal: true
 class Entity < ActiveRecord::Base
-  ALLOWED_FLAGS = [:do_not_send_due_emails]
+  ALLOWED_FLAGS = [:do_not_send_due_emails].freeze
 
   ENTITY_COMPANY = 1
   ENTITY_PERSON  = 2
 
-  GLOBAL_FILTERS  = [:title, :name, :address]
-  LITERAL_FILTERS = [:type, :einvoice, :entity_type, :vat_id]
-  PARTIAL_FILTERS = [:title, :name, :address]
+  GLOBAL_FILTERS  = [:title, :name, :address].freeze
+  LITERAL_FILTERS = [:type, :einvoice, :entity_type, :vat_id].freeze
+  PARTIAL_FILTERS = [:title, :name, :address].freeze
 
   belongs_to :post
   belongs_to :bank
@@ -15,12 +16,12 @@ class Entity < ActiveRecord::Base
 
   before_validation :format_account_number, if: :account_number?
   validates :vat_id, presence: true, if: :company?
-  validates :vat_id, uniqueness: {allow_nil: true}, numericality: {only_integer: true, allow_nil: true, greater_than: 0}
+  validates :vat_id, uniqueness: { allow_nil: true }, numericality: { only_integer: true, allow_nil: true, greater_than: 0 }
   validate :validate_vat_id, if: :vat_id?
   validate :validate_name_or_title
   validate :validate_account_number
-  validates :registration_number, uniqueness: {allow_nil: true}, numericality: {allow_nil: true, only_integer: true, greater_than: 0}
-  validates :email, :email => true, if: :email?
+  validates :registration_number, uniqueness: { allow_nil: true }, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }
+  validates :email, email: true, if: :email?
 
   serialize :flags, Array
 
@@ -31,14 +32,19 @@ class Entity < ActiveRecord::Base
 
   def to_s
     if name.present?
-      return name
+      name
     else
-      return title
+      title
     end
   end
 
-  def customer?; self.is_a? Customer; end
-  def subscriber?; self.is_a? Subscriber; end
+  def customer?
+    is_a? Customer
+  end
+
+  def subscriber?
+    is_a? Subscriber
+  end
 
   def self.pozoj
     where(email: 'info@pozoj.si').first
@@ -52,7 +58,7 @@ class Entity < ActiveRecord::Base
     flags.include?(flag)
   end
 
-  def self.search filters
+  def self.search(filters)
     filters ||= {}
     entities = all
     return entities if filters.empty?
@@ -91,7 +97,7 @@ class Entity < ActiveRecord::Base
 
   def customer
     if customer?
-      return self
+      self
     elsif subscriber?
       subscription.customer
     elsif respond_to? :entity
@@ -137,7 +143,7 @@ class Entity < ActiveRecord::Base
       'Slovenija',
       email,
       "Davčna št.: #{vat_id_formatted}",
-      "Matična št.: #{registration_number}",
+      "Matična št.: #{registration_number}"
     ].compact.map(&:to_s).join(', ')
   end
 
@@ -148,9 +154,7 @@ class Entity < ActiveRecord::Base
   end
 
   def validate_name_or_title
-    if !name? && !title?
-      errors.add :base, 'Mora imeti ime ali naziv ali oboje'
-    end
+    errors.add :base, 'Mora imeti ime ali naziv ali oboje' if !name? && !title?
   end
 
   # http://www.durs.gov.si/si/storitve/vpis_v_davcni_register_in_davcna_stevilka/vpis_v_davcni_register_in_davcna_stevilka_pojasnila/davcna_stevilka_splosno/
@@ -161,9 +165,9 @@ class Entity < ActiveRecord::Base
     sum = multipliers.each_with_index.inject(0) { |sum, (multiplier, index)| sum += multiplier * digits[index] }
 
     checksum = if sum % divider == 1
-      0
-    else
-      divider - (sum % divider)
+                 0
+               else
+                 divider - (sum % divider)
     end
 
     checksum == digits.last
@@ -181,9 +185,7 @@ class Entity < ActiveRecord::Base
   end
 
   def validate_account_number
-    if account_number.blank?
-      self.account_number = nil
-    end
+    self.account_number = nil if account_number.blank?
 
     return unless account_number?
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddIndexForSubscriber < ActiveRecord::Migration
   def change
     add_index :subscriptions, :subscriber_id

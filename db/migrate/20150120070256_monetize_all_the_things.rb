@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MonetizeAllTheThings < ActiveRecord::Migration
   def change
     # BATCHES
@@ -42,6 +43,6 @@ class MonetizeAllTheThings < ActiveRecord::Migration
     rename_column :plans, :price, :price_decimal
     add_monetize :plans, :price
     Plan.all.each { |b| b.price = b.price_decimal; b.save }
-    remove_column :plans, :price_decimal    
+    remove_column :plans, :price_decimal
   end
 end

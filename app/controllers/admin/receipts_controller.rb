@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::ReceiptsController < Admin::AdminController
   skip_before_filter :authenticate, only: [:print]
 

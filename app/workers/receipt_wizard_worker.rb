@@ -1,14 +1,15 @@
+# frozen_string_literal: true
 class ReceiptWizardWorker
   include Sidekiq::Worker
-  sidekiq_options :retry => false
+  sidekiq_options retry: false
 
   def perform(wizard_params)
     @receipt_wizard = ReceiptWizard.new(wizard_params)
-    @collection = if wizard_params[:include_yearly] == "1"
-      receipts = @receipt_wizard.create_receipts
-    else
-      receipts = @receipt_wizard.create_per_issue_receipts
-    end
+    @collection = receipts = if wizard_params[:include_yearly] == '1'
+                               @receipt_wizard.create_receipts
+                             else
+                               @receipt_wizard.create_per_issue_receipts
+               end
 
     receipts = receipts.compact.uniq
 
@@ -22,7 +23,7 @@ class ReceiptWizardWorker
       next if customer.einvoice?
 
       unless customer.billing_email.present?
-        Scrolls.log(message: "No customer billing email present!")
+        Scrolls.log(message: 'No customer billing email present!')
         next
       end
 

@@ -1,4 +1,5 @@
-require "application_responder"
+# frozen_string_literal: true
+require 'application_responder'
 
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
@@ -27,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def body_attrs
-    { :class => body_class, :id => body_id }
+    { class: body_class, id: body_id }
   end
 
   def authenticate
@@ -38,7 +39,7 @@ class ApplicationController < ActionController::Base
     redirect_to new_user_session_path
   end
 
-  def after_sign_in_path_for resource
+  def after_sign_in_path_for(_resource)
     session[:return_to] || root_path
   end
 
@@ -69,7 +70,7 @@ class ApplicationController < ActionController::Base
   def private_request_data
     return {} unless signed_in?
     {
-      user_id: current_user.try(:id),
+      user_id: current_user.try(:id)
     }
   end
 

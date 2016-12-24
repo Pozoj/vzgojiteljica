@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class InstitutionsController < ApplicationController
   def index
     respond_with collection

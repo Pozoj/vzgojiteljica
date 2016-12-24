@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Invoicing
   TAX_PERCENT = 0
 
@@ -5,11 +6,11 @@ module Invoicing
 
   def tax_multiplier
     tp = if defined? tax_percent
-      tax_percent
-    else
-      TAX_PERCENT
+           tax_percent
+         else
+           TAX_PERCENT
     end
-    
+
     (tp / 100) + 1
   end
 end

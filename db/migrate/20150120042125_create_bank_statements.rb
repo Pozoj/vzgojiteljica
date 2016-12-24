@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateBankStatements < ActiveRecord::Migration
   def change
     create_table :bank_statements do |t|

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Article < ActiveRecord::Base
   has_many :authorships
   has_many :authors, through: :authorships

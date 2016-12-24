@@ -1,21 +1,21 @@
+# frozen_string_literal: true
 class EEnvelope
   UJP_BIC = 'UJPLSI2DICL'
 
   attr_accessor :invoice
 
-  def initialize options = {}
+  def initialize(options = {})
     self.invoice = options[:invoice]
   end
 
   def generate
     Gyoku.xml(hash,
-      :key_converter => :none,
-      :attributes! => {
-        envelope: {
-          'xsi:noNamespaceSchemaLocation' => 'icl_eb_envelope_einvoice.xsd'
-        }
-      }
-    )
+              key_converter: :none,
+              attributes!: {
+                envelope: {
+                  'xsi:noNamespaceSchemaLocation' => 'icl_eb_envelope_einvoice.xsd'
+                }
+              })
   end
 
   def hash
@@ -26,7 +26,7 @@ class EEnvelope
         receiver: receiver_hash,
         doc_data: doc_data_hash,
         payment_data: payment_data_hash,
-        attachments: attachments_hashes,
+        attachments: attachments_hashes
       }
     }
   end

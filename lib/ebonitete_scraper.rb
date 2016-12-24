@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class EboniteteScraper
   ROOT = 'http://www.ebonitete.si/'
   SEARCH_URL = 'iskalnik.aspx?q='
@@ -30,7 +31,7 @@ class EboniteteScraper
     doc = open_url(search_url)
     trs = doc.css('#searchRezultati table.mGrid tr')
     unless trs.length == 2
-      puts "ERROR, entity mismatch"
+      puts 'ERROR, entity mismatch'
       return
     end
 
@@ -42,9 +43,9 @@ class EboniteteScraper
     map_node = doc.css('#ctl00_cphVsebina_lnkZemljevid').first
     bank_node = map_node.parent.previous.previous
     account_node = bank_node.css('.podatkiPodjetjaInfo')
-    accounts = account_node.children.reject do |child| 
-      !child.is_a?(Nokogiri::XML::Text) || 
-      ( child.is_a?(Nokogiri::XML::Text) && child.text.strip == "" )
+    accounts = account_node.children.reject do |child|
+      !child.is_a?(Nokogiri::XML::Text) ||
+        (child.is_a?(Nokogiri::XML::Text) && child.text.strip == '')
     end.map do |child|
       parts = child.text.split(' ')
       {
@@ -57,11 +58,11 @@ class EboniteteScraper
   end
 
   def parse
-    log "Parsing ..."
+    log 'Parsing ...'
     search
 
     return unless data_url
-    
+
     doc = open_url(data_url)
 
     {

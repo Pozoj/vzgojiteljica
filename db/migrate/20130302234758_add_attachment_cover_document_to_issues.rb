@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddAttachmentCoverDocumentToIssues < ActiveRecord::Migration
   def self.up
     change_table :issues do |t|

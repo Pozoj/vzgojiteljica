@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Receipt do
@@ -6,12 +7,12 @@ RSpec.describe Receipt do
   it { should be_valid }
 
   describe 'order_form=' do
-    let(:order_form) { build_stubbed(:order_form, form_id: 'Nar 2015/1', issued_at: Date.parse("1/1/2016"))}
+    let(:order_form) { build_stubbed(:order_form, form_id: 'Nar 2015/1', issued_at: Date.parse('1/1/2016')) }
 
     it 'should set the underlying string as well as date' do
       subject.order_form = order_form
       expect(subject.order_form).to eq('Nar 2015/1')
-      expect(subject.order_form_date).to eq(Date.parse("1/1/2016"))
+      expect(subject.order_form_date).to eq(Date.parse('1/1/2016'))
     end
 
     it 'should support just setting a string, thus leaving the date out' do

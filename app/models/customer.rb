@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Customer < Entity
   extend DuplicateFinder
   TOKEN_LENGTH = 6
@@ -15,7 +16,7 @@ class Customer < Entity
   scope :einvoiced, -> { where(einvoice: true) }
   scope :not_einvoiced, -> { where(einvoice: false) }
 
-  validates :token, presence: true, length: {is: TOKEN_LENGTH}, uniqueness: true
+  validates :token, presence: true, length: { is: TOKEN_LENGTH }, uniqueness: true
 
   def global_remarks
     tbl = Remark.arel_table
@@ -50,60 +51,56 @@ class Customer < Entity
   end
 
   def billing_email
-    if billing_person && billing_person.email?
-      return billing_person.try(:email)
-    end
+    return billing_person.try(:email) if billing_person && billing_person.email?
 
     email
   end
 
   def self.active
-    Subscriber.select(:customer_id).
-    joins(:subscriptions).
-    merge(Subscription.active).
-    includes(:customer).
-    group(:customer_id).
-    map(&:customer)
+    Subscriber.select(:customer_id)
+              .joins(:subscriptions)
+              .merge(Subscription.active)
+              .includes(:customer)
+              .group(:customer_id)
+              .map(&:customer)
   end
 
   def self.active_and_paid
-    Subscriber.select(:customer_id).
-    joins(:subscriptions).
-    merge(Subscription.active.paid).
-    includes(:customer).
-    group(:customer_id).
-    map(&:customer)
+    Subscriber.select(:customer_id)
+              .joins(:subscriptions)
+              .merge(Subscription.active.paid)
+              .includes(:customer)
+              .group(:customer_id)
+              .map(&:customer)
   end
 
   def self.active_count
-    Subscriber.select(:customer_id).
-    joins(:subscriptions).
-    merge(Subscription.active).
-    group(:customer_id).
-    to_a.count
+    Subscriber.select(:customer_id)
+              .joins(:subscriptions)
+              .merge(Subscription.active)
+              .group(:customer_id)
+              .to_a.size
   end
 
   def self.paid_count
-    Subscriber.select(:customer_id).
-    joins(:subscriptions).
-    merge(Subscription.paid).merge(Subscription.active).
-    group(:customer_id).
-    to_a.count
+    Subscriber.select(:customer_id)
+              .joins(:subscriptions)
+              .merge(Subscription.paid).merge(Subscription.active)
+              .group(:customer_id)
+              .to_a.size
   end
 
   def self.new_from_order(order:)
     Customer.transaction do
-      customer = self.new
+      customer = new
       customer.title = order.title
       customer.name = order.name
       customer.address = order.address
       customer.post_id = order.post_id
       customer.phone = order.phone
       customer.email = order.email
-      if order.vat_id?
-        customer.vat_id = order.vat_id.gsub(/[^0-9]/, '')
-      end
-      raise FromOrderError.new("Can't save customer: #{customer.errors.inspect}") unless customer.save
+      customer.vat_id = order.vat_id.gsub(/[^0-9]/, '') if order.vat_id?
+      raise FromOrderError, "Can't save customer: #{customer.errors.inspect}" unless customer.save
 
       customer.remarks.create remark: "Naročnik ustvarjen avtomatsko iz naročila ##{order.id} na spletni strani."
 
@@ -112,7 +109,7 @@ class Customer < Entity
       subscriber.name = order.name
       subscriber.address = order.address
       subscriber.post_id = order.post_id
-      raise FromOrderError.new("Can't save subscriber: #{subscriber.errors.inspect}") unless subscriber.save
+      raise FromOrderError, "Can't save subscriber: #{subscriber.errors.inspect}" unless subscriber.save
 
       if order.comments.present?
         subscriber.remarks.create remark: "Opomba naročnika: \"#{order.comments}\""
@@ -122,10 +119,8 @@ class Customer < Entity
       subscription.start = Date.today
       subscription.quantity = order.quantity
       subscription.order_form = order.order_form
-      if order.plan_type
-        subscription.plan = Plan.latest(order.plan_type)
-      end
-      raise FromOrderError.new("Can't save subscription: #{subscription.errors.inspect}") unless subscription.save
+      subscription.plan = Plan.latest(order.plan_type) if order.plan_type
+      raise FromOrderError, "Can't save subscription: #{subscription.errors.inspect}" unless subscription.save
 
       order.order_form.customer = customer
       order.order_form.save!
@@ -181,7 +176,7 @@ class Customer < Entity
 
     self.token = ''
     TOKEN_LENGTH.times do
-      self.token += fund[(SecureRandom.random_number(fund.length - 1))]
+      self.token += fund[SecureRandom.random_number(fund.length - 1)]
     end
   end
 

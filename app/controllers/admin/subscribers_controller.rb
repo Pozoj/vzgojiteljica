@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 class Admin::SubscribersController < Admin::AdminController
-  has_scope :page, :default => 1
+  has_scope :page, default: 1
 
   def show
     @remarks = resource.global_remarks

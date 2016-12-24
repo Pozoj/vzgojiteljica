@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Customer do
@@ -13,22 +14,21 @@ RSpec.describe Customer do
   describe '#new_from_order' do
     it 'creates a new one from an order' do
       order = create(:order,
-        title: 'Talibaum d.o.o.',
-        name: 'Salibassim Naranissim',
-        address: 'Tontoronto 16a',
-        post_id: 3320,
-        quantity: 2,
-        plan_type: 6
-      )
+                     title: 'Talibaum d.o.o.',
+                     name: 'Salibassim Naranissim',
+                     address: 'Tontoronto 16a',
+                     post_id: 3320,
+                     quantity: 2,
+                     plan_type: 6)
 
       customer = nil
-      expect {
-        expect {
-          expect {
+      expect do
+        expect do
+          expect do
             customer = Customer.new_from_order(order: order)
-          }.to change(Customer, :count).by(1)
-        }.to change(Subscriber, :count).by(1)
-      }.to change(Subscription, :count).by(1)
+          end.to change(Customer, :count).by(1)
+        end.to change(Subscriber, :count).by(1)
+      end.to change(Subscription, :count).by(1)
 
       expect(customer.name).to eq('Salibassim Naranissim')
       expect(customer.title).to eq('Talibaum d.o.o.')

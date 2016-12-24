@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::InvoicesController < Admin::ReceiptsController
   def index
     @years = Invoice.years
@@ -61,10 +62,10 @@ class Admin::InvoicesController < Admin::ReceiptsController
 
   def wizard
     @wizard = ReceiptWizard.new(wizard_params)
-    @last = Invoice.select(:reference_number).
-            where(year: Date.today.year).
-            order(year: :desc, reference_number: :desc).
-            first.try(:reference_number) || 0
+    @last = Invoice.select(:reference_number)
+                   .where(year: Date.today.year)
+                   .order(year: :desc, reference_number: :desc)
+                   .first.try(:reference_number) || 0
   end
 
   def print_wizard
@@ -75,14 +76,14 @@ class Admin::InvoicesController < Admin::ReceiptsController
   def create
     ReceiptWizardWorker.perform_async(wizard_params)
 
-    redirect_to admin_invoices_path, notice: "Ustvarjam račune"
+    redirect_to admin_invoices_path, notice: 'Ustvarjam račune'
   end
 
   def email
     customer = resource.customer
 
     unless customer.billing_email.present?
-      return redirect_to(admin_invoice_path, notice: "Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila")
+      return redirect_to(admin_invoice_path, notice: 'Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila')
     end
 
     Mailer.delay.invoice_to_customer(resource.id)
@@ -91,13 +92,13 @@ class Admin::InvoicesController < Admin::ReceiptsController
 
   def email_due
     unless resource.due?
-      return redirect_to(admin_invoice_path, notice: "Račun še ni zapadel, zato ne bomo poslali opomina.")
+      return redirect_to(admin_invoice_path, notice: 'Račun še ni zapadel, zato ne bomo poslali opomina.')
     end
 
     customer = resource.customer
 
     unless customer.billing_email.present?
-      return redirect_to(admin_invoice_path, notice: "Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila")
+      return redirect_to(admin_invoice_path, notice: 'Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila')
     end
 
     Mailer.delay.invoice_due_to_customer(resource.id)
@@ -113,9 +114,7 @@ class Admin::InvoicesController < Admin::ReceiptsController
     end
     @invoice = wizard.build_receipt_for_subscription subscription
 
-    unless @invoice.save
-      return render text: @invoice.errors.inspect
-    end
+    return render text: @invoice.errors.inspect unless @invoice.save
 
     redirect_to admin_invoice_path(@invoice)
   end
@@ -125,17 +124,15 @@ class Admin::InvoicesController < Admin::ReceiptsController
     issues_left = params[:issues_left]
 
     unless issues_left.present?
-      return redirect_to :back, notice: "Please provide issues left"
+      return redirect_to :back, notice: 'Please provide issues left'
     end
 
     wizard = ReceiptWizard.new(wizard_params)
     @invoice = wizard.build_partial_receipt_for_subscription(subscription, issues_left)
 
-    unless @invoice.save
-      return render text: @invoice.errors.inspect
-    end
+    return render text: @invoice.errors.inspect unless @invoice.save
 
-    render json: {receipt_id: @invoice.id, redirect: admin_invoice_path(@invoice)}
+    render json: { receipt_id: @invoice.id, redirect: admin_invoice_path(@invoice) }
   end
 
   def einvoice

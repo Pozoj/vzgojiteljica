@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Web3::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -28,5 +29,5 @@ Web3::Application.configure do
   # Use letter opener.
   config.action_mailer.delivery_method = :letter_opener
 
-  config.action_mailer.default_url_options = { host: "localhost:5000" }
+  config.action_mailer.default_url_options = { host: 'localhost:5000' }
 end

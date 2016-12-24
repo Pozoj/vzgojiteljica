@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::LabelsController < Admin::AdminController
   def print
     @labels = Subscriber.active

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 class InvoicesDueToCustomerEmailerWorker
   include Sidekiq::Worker
-  sidekiq_options :retry => false
+  sidekiq_options retry: false
 
   def perform
     # Only send on Tuesday's, after we can process Monday's payments
@@ -34,7 +35,7 @@ class InvoicesDueToCustomerEmailerWorker
 
       puts "Sending due email to #{customer} (#{customer.billing_email}) for #{invoice_ids.length} invoice(s)"
 
-      unless ENV["DUE_INVOICES_EMAILER_ENABLED"] == 'true' || Rails.env.development?
+      unless ENV['DUE_INVOICES_EMAILER_ENABLED'] == 'true' || Rails.env.development?
         next
       end
 

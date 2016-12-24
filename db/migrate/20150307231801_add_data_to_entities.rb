@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddDataToEntities < ActiveRecord::Migration
   def change
     add_column :entities, :bank_id, :integer

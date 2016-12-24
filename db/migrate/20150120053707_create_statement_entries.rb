@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateStatementEntries < ActiveRecord::Migration
   def change
     create_table :statement_entries do |t|

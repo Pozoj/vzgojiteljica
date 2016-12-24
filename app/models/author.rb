@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Author < ActiveRecord::Base
   has_many :authorships
   has_many :articles, through: :authorships
@@ -14,7 +15,7 @@ class Author < ActiveRecord::Base
 
   def unique_name
     uniq_name = "#{last_name}, #{first_name}"
-    uniq_name = "#{uniq_name} (#{institution})" if institution and institution.name.present?
+    uniq_name = "#{uniq_name} (#{institution})" if institution && institution.name.present?
     uniq_name
   end
 

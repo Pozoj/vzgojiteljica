@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'set'
 
 class Admin::DuplicatesController < Admin::AdminController
@@ -16,7 +17,7 @@ class Admin::DuplicatesController < Admin::AdminController
       @duplicates[customer.title].add(customer) if customer.title?
     end
 
-    @duplicates = @duplicates.reject { |k, v| v.length < 2 }
+    @duplicates = @duplicates.reject { |_k, v| v.length < 2 }
   end
 
   def merge
@@ -24,10 +25,10 @@ class Admin::DuplicatesController < Admin::AdminController
 
     root_duplicate = Customer.find(params[:id])
 
-    duplicates_query = Customer.arel_table[:name].eq(root_duplicate.to_s).
-    or(Customer.arel_table[:title].eq(root_duplicate.to_s).
-    or(Customer.arel_table[:name].eq(root_duplicate.to_s).
-    or(Customer.arel_table[:title].eq(root_duplicate.to_s))))
+    duplicates_query = Customer.arel_table[:name].eq(root_duplicate.to_s)
+                               .or(Customer.arel_table[:title].eq(root_duplicate.to_s)
+    .or(Customer.arel_table[:name].eq(root_duplicate.to_s)
+    .or(Customer.arel_table[:title].eq(root_duplicate.to_s))))
     duplicates = Customer.where(duplicates_query).order(:id)
 
     unless duplicates.any?

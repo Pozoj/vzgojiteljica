@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddFieldsForOrderForms < ActiveRecord::Migration
   def change
     add_column :invoices, :order_form, :string

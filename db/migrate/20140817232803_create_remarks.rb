@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateRemarks < ActiveRecord::Migration
   def change
     create_table :remarks do |t|

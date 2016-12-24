@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe OrderForm do
@@ -46,9 +47,9 @@ RSpec.describe OrderForm do
       subscription_3 = create(:subscription, plan: plan, order_form: nil, subscriber: subscriber, end: 1.month.ago)
       subject.customer = customer
 
-      expect {
+      expect do
         subject.process_attach!
-      }.to_not change(Subscription, :count)
+      end.to_not change(Subscription, :count)
 
       expect(subject).to be_processed
 
@@ -108,9 +109,9 @@ RSpec.describe OrderForm do
       subject.end = Date.parse('31/12/2016')
       subject.customer = customer
 
-      expect {
+      expect do
         subject.process_renew!
-      }.to change(Subscription, :count).by(1)
+      end.to change(Subscription, :count).by(1)
 
       expect(subject).to be_processed
       expect(subscription_1.reload.order_form).to eq(old_order_form)

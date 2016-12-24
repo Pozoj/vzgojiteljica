@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddPublishedToInquiries < ActiveRecord::Migration
   def change
     add_column :inquiries, :published, :boolean, default: false

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Receipt < ActiveRecord::Base
   include Invoicing
 
@@ -17,7 +18,7 @@ class Receipt < ActiveRecord::Base
   validates_presence_of :customer
   validates :year, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :reference_number, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :receipt_id, presence: true, uniqueness: {scope: :type}
+  validates :receipt_id, presence: true, uniqueness: { scope: :type }
   validates :total, presence: true, numericality: true
   validates :subtotal, presence: true, numericality: true
   validates :tax, presence: true, numericality: true
@@ -29,7 +30,7 @@ class Receipt < ActiveRecord::Base
   after_create :store_all_on_s3_async, unless: :skip_s3
 
   def self.years
-    self.distinct(:year).order(year: :desc).pluck(:year)
+    distinct(:year).order(year: :desc).pluck(:year)
   end
 
   def generate_year
@@ -56,7 +57,7 @@ class Receipt < ActiveRecord::Base
     super
   end
 
-  def file_path(extension, prefix = "")
+  def file_path(extension, prefix = '')
     "#{type.downcase.pluralize}/#{year}/#{prefix}#{receipt_id}.#{extension}"
   end
 
@@ -71,7 +72,9 @@ class Receipt < ActiveRecord::Base
     pdf_url
   end
 
-  def pdf_path; file_path('pdf'); end
+  def pdf_path
+    file_path('pdf')
+  end
 
   def store_all_on_s3_async
     ReceiptS3StoreWorker.perform_async(id)
@@ -82,36 +85,40 @@ class Receipt < ActiveRecord::Base
   end
 
   def store_to_s3(path, data)
-    s3_connection.directories.new(:key => AWS_S3['bucket']).files.create(
-      :key    => path,
-      :body   => data,
-      :public => false
+    s3_connection.directories.new(key: AWS_S3['bucket']).files.create(
+      key: path,
+      body: data,
+      public: false
     )
   end
 
   def exists_on_s3?(path)
-    !!s3_connection.directories.new(:key => AWS_S3['bucket']).files.head(path)
+    !!s3_connection.directories.new(key: AWS_S3['bucket']).files.head(path)
   end
-  def pdf_exists_on_s3?; exists_on_s3?(pdf_path); end
+
+  def pdf_exists_on_s3?
+    exists_on_s3?(pdf_path)
+  end
 
   def store_pdf
     store_to_s3(pdf_path, pdf)
     self.pdf_stored = true
-    self.save
+    save
     pdf_path
   end
 
   def s3_url(path)
-    s3_connection.directories.new(:key => AWS_S3['bucket']).files.new(:key => path).url(1.hour.from_now)
+    s3_connection.directories.new(key: AWS_S3['bucket']).files.new(key: path).url(1.hour.from_now)
   end
-  def pdf_url; s3_url(pdf_path); end
+
+  def pdf_url
+    s3_url(pdf_path)
+  end
 
   def s3_connection
-    @s3_connection ||= Fog::Storage.new({
-      :provider                 => 'AWS',
-      :aws_access_key_id        => AWS_S3['access_key_id'],
-      :aws_secret_access_key    => AWS_S3['secret_access_key']
-    })
+    @s3_connection ||= Fog::Storage.new(provider: 'AWS',
+                                        aws_access_key_id: AWS_S3['access_key_id'],
+                                        aws_secret_access_key: AWS_S3['secret_access_key'])
   end
 
   def calculate_totals

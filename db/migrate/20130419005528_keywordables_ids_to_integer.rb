@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class KeywordablesIdsToInteger < ActiveRecord::Migration
   def change
     if Rails.env.development?

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -5,6 +6,6 @@ class User < ActiveRecord::Base
   belongs_to :entity
 
   def to_s
-    name or email
+    name || email
   end
 end

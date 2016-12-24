@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 class Admin::CustomersController < Admin::AdminController
-  has_scope :page, :default => 1
+  has_scope :page, default: 1
 
   def show
     @subscribers = resource.subscribers
@@ -15,7 +16,7 @@ class Admin::CustomersController < Admin::AdminController
     else
       @subscribers = @subscribers.active
     end
-    @subscribers = @subscribers.to_a.sort_by { |s| s.id }
+    @subscribers = @subscribers.to_a.sort_by(&:id)
 
     @remarks = resource.global_remarks
 
@@ -34,9 +35,7 @@ class Admin::CustomersController < Admin::AdminController
     @customer = Customer.find(params[:id])
     other_customer = Customer.find(params[:other_customer_id])
 
-    if @customer && other_customer
-      @customer.merge_in(other_customer)
-    end
+    @customer.merge_in(other_customer) if @customer && other_customer
 
     redirect_to admin_customer_path(@customer), notice: "Pridružil #{other_customer.id} k #{@customer.id}"
   end
@@ -62,13 +61,13 @@ class Admin::CustomersController < Admin::AdminController
         @subscription.quantity = customer_params[:subscription][:quantity]
         # Type
         type = customer_params[:subscription][:free_type]
-        @subscription.end = if type == "1"
-          DateTime.now.end_of_month
-        elsif type == "2"
-          DateTime.now.end_of_year
-        elsif type == "3"
-          1.year.from_now.beginning_of_month
-        elsif type == "4"
+        @subscription.end = if type == '1'
+                              DateTime.now.end_of_month
+                            elsif type == '2'
+                              DateTime.now.end_of_year
+                            elsif type == '3'
+                              1.year.from_now.beginning_of_month
+                            elsif type == '4'
           # No end for now.
         end
 
@@ -83,14 +82,12 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def new_from_order
-    begin
-      order = Order.find(params[:order_id])
-      customer = Customer.new_from_order(order: order)
-      order.order_form.processed!(user_id: current_user.id)
-      redirect_to admin_customer_path(customer), notice: "Stranka uspešno ustvarjena iz naročila ##{order.id}"
-    rescue Customer::FromOrderError => e
-      redirect_to admin_order_path(order, error: e.inspect)
-    end
+    order = Order.find(params[:order_id])
+    customer = Customer.new_from_order(order: order)
+    order.order_form.processed!(user_id: current_user.id)
+    redirect_to admin_customer_path(customer), notice: "Stranka uspešno ustvarjena iz naročila ##{order.id}"
+  rescue Customer::FromOrderError => e
+    redirect_to admin_order_path(order, error: e.inspect)
   end
 
   def new
@@ -105,7 +102,7 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def edit
-    @all_customers = Customer.all.select(:id, :name, :title).where.not(id: resource.id).sort_by { |c| c.to_s }.map { |c| ["#{c.to_s} -- #{c.id}", c.id] }
+    @all_customers = Customer.all.select(:id, :name, :title).where.not(id: resource.id).sort_by(&:to_s).map { |c| ["#{c} -- #{c.id}", c.id] }
     respond_with resource, location: -> { admin_customer_path(resource) }
   end
 
@@ -127,10 +124,10 @@ class Admin::CustomersController < Admin::AdminController
 
   def add_person
     @entity = case params[:person]
-    when 'contact'
-      ContactPerson
-    when 'billing'
-      BillingPerson
+              when 'contact'
+                ContactPerson
+              when 'billing'
+                BillingPerson
     end.new
 
     @customer = resource

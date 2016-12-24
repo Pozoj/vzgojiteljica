@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class NewsController < ApplicationController
   skip_before_filter :authenticate, only: [:index]
 

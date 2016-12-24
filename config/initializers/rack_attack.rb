@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Rack::Attack
 end
 
@@ -25,6 +26,6 @@ end
 
 # Throttle login attempts for a given email parameter to 6 reqs/minute
 # Return the email as a discriminator on POST /login requests
-Rack::Attack.throttle('articles/search', :limit => 1, :period => 2.seconds) do |req|
+Rack::Attack.throttle('articles/search', limit: 1, period: 2.seconds) do |req|
   req.ip if req.path == '/clanki/isci'
 end

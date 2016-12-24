@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Invoice < Receipt
   has_many :statement_entries
 
@@ -38,8 +39,13 @@ class Invoice < Receipt
     self.payment_id ||= "#{customer_id}-#{receipt_id}"
   end
 
-  def einvoice_path; file_path('xml'); end
-  def eenvelope_path; file_path('xml', 'env_'); end
+  def einvoice_path
+    file_path('xml')
+  end
+
+  def eenvelope_path
+    file_path('xml', 'env_')
+  end
 
   def store_all_on_s3
     super
@@ -48,14 +54,31 @@ class Invoice < Receipt
     store_eenvelope
   end
 
-  def einvoice_exists_on_s3?; exists_on_s3?(einvoice_path); end
-  def eenvelope_exists_on_s3?; exists_on_s3?(eenvelope_path); end
+  def einvoice_exists_on_s3?
+    exists_on_s3?(einvoice_path)
+  end
 
-  def store_einvoice; store_to_s3(einvoice_path, einvoice_xml); einvoice_path; end
-  def store_eenvelope; store_to_s3(eenvelope_path, eenvelope_xml); eenvelope_path; end
+  def eenvelope_exists_on_s3?
+    exists_on_s3?(eenvelope_path)
+  end
 
-  def einvoice_url; s3_url(einvoice_path); end
-  def eenvelope_url; s3_url(eenvelope_path); end
+  def store_einvoice
+    store_to_s3(einvoice_path, einvoice_xml)
+    einvoice_path
+  end
+
+  def store_eenvelope
+    store_to_s3(eenvelope_path, eenvelope_xml)
+    eenvelope_path
+  end
+
+  def einvoice_url
+    s3_url(einvoice_path)
+  end
+
+  def eenvelope_url
+    s3_url(eenvelope_path)
+  end
 
   def einvoice
     EInvoice.new(invoice: self)
@@ -98,9 +121,9 @@ class Invoice < Receipt
   def to_s
     s = "Račun #{receipt_id} "
     if paid?
-      return s + "(plačan)"
+      return s + '(plačan)'
     else
-      return s + "(neplačan)"
+      return s + '(neplačan)'
     end
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Mailer < ActionMailer::Base
   helper :entities
 
@@ -95,7 +96,7 @@ class Mailer < ActionMailer::Base
         attachments["#{invoice.receipt_id}.pdf"] = invoice_file.read
       end
 
-      mail(to: recipient, bcc: ADMIN_EMAIL, subject: "Opomin: Računi za revijo Vzgojiteljica")
+      mail(to: recipient, bcc: ADMIN_EMAIL, subject: 'Opomin: Računi za revijo Vzgojiteljica')
 
       @invoices.each { |invoice| invoice.events.create!(event: 'invoice_due_sent', details: recipient) }
     rescue StandardError => e

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::RemarksController < Admin::AdminController
   def index
     @remarks = collection

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddIndexForRemarks < ActiveRecord::Migration
   def change
     add_index :remarks, :user_id

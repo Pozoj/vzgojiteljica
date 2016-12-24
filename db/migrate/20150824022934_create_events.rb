@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
@@ -16,4 +17,3 @@ class CreateEvents < ActiveRecord::Migration
     add_index :events, :event
   end
 end
-

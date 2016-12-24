@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::OrderFormsController < Admin::AdminController
   def index
     @years = OrderForm.years
@@ -29,7 +30,7 @@ class Admin::OrderFormsController < Admin::AdminController
   def mark_processed
     resource.processed!(user_id: current_user.id)
     if resource.reload.processed?
-      redirect_to admin_order_form_path(resource), notice: "Označeno kot obdelano"
+      redirect_to admin_order_form_path(resource), notice: 'Označeno kot obdelano'
     else
       redirect_to admin_order_form_path(resource)
     end
@@ -45,7 +46,7 @@ class Admin::OrderFormsController < Admin::AdminController
     @all_subscribers = customers.map do |c|
       [
         c.to_s,
-        c.subscribers.select(:id, :title, :name).order(:title, :name).map { |s| ["#{s}", s.id] }
+        c.subscribers.select(:id, :title, :name).order(:title, :name).map { |s| [s.to_s, s.id] }
       ]
     end
   end
@@ -81,7 +82,7 @@ class Admin::OrderFormsController < Admin::AdminController
   def destroy
     order_form = Order.find(params[:id])
     if order_form.destroy
-      redirect_to admin_order_forms_path, notice: "Naročilnica uspešno izbrisana"
+      redirect_to admin_order_forms_path, notice: 'Naročilnica uspešno izbrisana'
     end
   end
 

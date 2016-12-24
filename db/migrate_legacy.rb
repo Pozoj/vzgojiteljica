@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 vzgojiteljica_upload_root = 'http://new.vzgojiteljica.si/upload'
 
 Rails.logger = Logger.new(STDOUT)
@@ -8,7 +9,7 @@ class LegacyDb < ActiveRecord::Base
 end
 
 # Avtorji to Authors
-class LegacyAvtorji < LegacyDb; self.table_name = "avtorji"; end
+class LegacyAvtorji < LegacyDb; self.table_name = 'avtorji'; end
 puts
 puts
 puts '##### AVTORJI -> AUTHORS ' + LegacyAvtorji.count.to_s
@@ -71,7 +72,7 @@ end
 # end
 
 # Vsebina to Articles
-class LegacyVsebina < LegacyDb; self.table_name = "vsebina"; end
+class LegacyVsebina < LegacyDb; self.table_name = 'vsebina'; end
 puts
 puts
 puts '##### VSEBINA -> ARTICLE ' + LegacyVsebina.count.to_s

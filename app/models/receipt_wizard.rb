@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ReceiptWizard
   include ActiveModel::Model
 
@@ -42,9 +43,7 @@ class ReceiptWizard
     line_item = LineItem.new
 
     # Assign issue_id if we're not talking about a yearly subscription.
-    if issue_id && !subscription.plan.yearly?
-      line_item.issue_id = issue_id
-    end
+    line_item.issue_id = issue_id if issue_id && !subscription.plan.yearly?
 
     line_item.entity_name = subscription.subscriber
     line_item.product = subscription.product(line_item.issue)
@@ -54,13 +53,11 @@ class ReceiptWizard
     line_item.discount_percent = subscription.discount
     line_item.price_per_item_with_discount = subscription.price
 
-    return line_item
+    line_item
   end
 
   def build_receipt(options = {})
-    unless options[:customer] || options[:subscription]
-      raise ArgumentError
-    end
+    raise ArgumentError unless options[:customer] || options[:subscription]
 
     receipt = model.new
     receipt.skip_s3 = true
@@ -73,7 +70,7 @@ class ReceiptWizard
 
     receipt.due_at = due_at
 
-    return receipt
+    receipt
   end
 
   def build_receipt_for_subscription(subscription)
@@ -85,7 +82,7 @@ class ReceiptWizard
     receipt.line_items.each(&:calculate)
     receipt.calculate_totals
 
-    return receipt
+    receipt
   end
 
   def build_partial_receipt_for_subscription(subscription, issues_left)
@@ -107,7 +104,7 @@ class ReceiptWizard
       line_item.calculate
     end
 
-    return receipt
+    receipt
   end
 
   def create_receipt_for_subscription(subscription)
@@ -117,7 +114,6 @@ class ReceiptWizard
       return receipt
     end
   end
-
 
   def create_receipt_for_customer(customer, subscriptions = nil)
     Customer.transaction do
@@ -131,7 +127,6 @@ class ReceiptWizard
         receipt.line_items << build_line_item_for_subscription(s)
       end
 
-
       # Associate receipt with first order form of subscriptions if any.
       receipt.order_form = subscriptions.map(&:order_form).compact.first
 
@@ -139,9 +134,7 @@ class ReceiptWizard
       receipt.calculate_totals
 
       # Sanity check
-      if receipt.subtotal === 0.00
-        raise "Invoice should not be 0."
-      end
+      raise 'Invoice should not be 0.' if receipt.subtotal === 0.00
 
       # Save.
       receipt.save!
@@ -169,7 +162,7 @@ class ReceiptWizard
       end
     end
 
-    return receipts
+    receipts
   end
 
   def create_yearly_receipts

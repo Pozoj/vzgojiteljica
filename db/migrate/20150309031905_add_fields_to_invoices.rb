@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddFieldsToInvoices < ActiveRecord::Migration
   def change
     add_column :invoices, :payment_id, :string

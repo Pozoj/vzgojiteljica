@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 class ReceiptS3StoreWorker
   include Sidekiq::Worker
-  sidekiq_options :retry => false
+  sidekiq_options retry: false
 
   def perform(receipt_id)
     return if Rails.env.test?

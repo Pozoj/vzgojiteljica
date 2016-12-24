@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 
 ruby '2.3.1'
@@ -15,7 +16,7 @@ group :assets do
   gem 'jquery-ui-rails', '~> 5.0.3'
   gem 'jquery-fileupload-rails', '~> 0.4.3'
   gem 'sprockets', '2.11.0'
-  gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails', :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+  gem 'bootstrap-datepicker-rails', require: 'bootstrap-datepicker-rails', git: 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 end
 
 group :production do
@@ -54,6 +55,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'rubocop'
   gem 'dotenv-rails'
   gem 'pry'
   gem 'letter_opener'

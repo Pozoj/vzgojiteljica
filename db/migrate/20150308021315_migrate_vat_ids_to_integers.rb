@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MigrateVatIdsToIntegers < ActiveRecord::Migration
   def change
     entities = Entity.where.not(vat_id: nil).map { |e| [e.id, e.vat_id] }
@@ -15,14 +16,14 @@ class MigrateVatIdsToIntegers < ActiveRecord::Migration
       entity = Entity.find(e.first)
       vat_id = e.last
 
-      if vat_id.blank? || vat_id == "0"
+      if vat_id.blank? || vat_id == '0'
         print 's'
         next
       end
 
       entity.vat_id = vat_id
       entity.entity_type = Entity::ENTITY_COMPANY
-      
+
       unless entity.valid?
         puts
         puts "INVALID VAT ID #{entity.to_json} #{entity.errors.inspect}"
@@ -34,6 +35,6 @@ class MigrateVatIdsToIntegers < ActiveRecord::Migration
       print '.'
     end
 
-    puts "DONE"
+    puts 'DONE'
   end
 end

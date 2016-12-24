@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe ReceiptWizard do
@@ -91,9 +92,9 @@ RSpec.describe ReceiptWizard do
       plan = create(:plan, :free)
       subscription = create(:subscription, subscriber: subscriber, order_form: order_form, plan: plan)
 
-      expect {
+      expect do
         subject.create_receipt_for_customer(customer, [subscription])
-      }.to raise_error "Invoice should not be 0."
+      end.to raise_error 'Invoice should not be 0.'
 
       plan = create(:plan)
       subscription.plan = plan

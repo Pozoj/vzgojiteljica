@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateKeywords < ActiveRecord::Migration
   def change
     create_table :keywords do |t|

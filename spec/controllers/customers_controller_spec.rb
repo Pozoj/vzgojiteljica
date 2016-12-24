@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe CustomersController, type: :controller do
@@ -28,12 +29,12 @@ RSpec.describe CustomersController, type: :controller do
       end
 
       it 'renders template unless order form id is passed in' do
-        post :ingest_order_form, token: @customer.token, order_form: {authorizer: 'Lorem'}
+        post :ingest_order_form, token: @customer.token, order_form: { authorizer: 'Lorem' }
         expect(response).to render_template :public_show
       end
 
       it 'redirects back if proper information is passed' do
-        post :ingest_order_form, token: @customer.token, order_form: {form_id: 'Nar 1/2015', authorizer: 'Lorem'}
+        post :ingest_order_form, token: @customer.token, order_form: { form_id: 'Nar 1/2015', authorizer: 'Lorem' }
         expect(response).to redirect_to token_url(token: @customer.token)
       end
     end

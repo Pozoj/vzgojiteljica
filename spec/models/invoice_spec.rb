@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Invoice do
@@ -8,7 +9,7 @@ RSpec.describe Invoice do
   it 'should generate receipt_id' do
     invoice = build(:invoice)
     invoice.year = 2016
-    invoice.reference_number = 12312
+    invoice.reference_number = 12_312
     invoice.save
     expect(invoice.receipt_id).to eq('12312-2016')
   end

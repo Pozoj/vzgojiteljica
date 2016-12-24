@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class EInvoice
   ENTITY_TYPE_POZOJ = 'II'
   ENTITY_TYPE_CUSTOMER = 'BY'
@@ -5,12 +6,12 @@ class EInvoice
 
   attr_accessor :invoice
 
-  def initialize options = {}
+  def initialize(options = {})
     self.invoice = options[:invoice]
   end
 
   def generate
-    Gyoku.xml(hash, { :key_converter => :camelcase })
+    Gyoku.xml(hash, key_converter: :camelcase)
   end
 
   def hash
@@ -28,10 +29,10 @@ class EInvoice
           invoice_vat_exempt_hash,
           invoice_payment_shoutout_hash,
           invoice_invoicer_hash,
-          invoice_foot_hash,
+          invoice_foot_hash
         ],
         PovzetekZneskovRacuna: invoice_sum_hash,
-        ReferencniDokumenti: reference_documents_hash,
+        ReferencniDokumenti: reference_documents_hash
       }
     }
   end
@@ -64,7 +65,7 @@ class EInvoice
     bank_hash = entity_bank_hash(entity)
     hash.merge!(bank_hash) if bank_hash
 
-    hash.merge!(ReferencniPodatkiPodjetja: entity_reference_numbers_hash(entity))
+    hash[:ReferencniPodatkiPodjetja] = entity_reference_numbers_hash(entity)
 
     # Append contacts hash if this is POZOJ.
     if entity_type == ENTITY_TYPE_POZOJ
@@ -82,19 +83,17 @@ class EInvoice
     if invoice.order_form
       order_form_hash = { StevilkaDokumenta: invoice.order_form }
       if invoice.order_form_date
-        order_form_hash.merge({ DatumDokumenta: invoice.order_form_date.to_datetime.beginning_of_day })
+        order_form_hash.merge(DatumDokumenta: invoice.order_form_date.to_datetime.beginning_of_day)
       end
     else
       subscription = invoice.customer.subscriptions.active.last
-      unless subscription
-        return []
-      end
+      return [] unless subscription
 
       order_form_hash = { StevilkaDokumenta: "Naročnina #{subscription.created_at.year}-#{subscription.id}" }
     end
 
     {
-      :@VrstaDokumenta => "ON", :content! => order_form_hash
+      :@VrstaDokumenta => 'ON', :content! => order_form_hash
     }
   end
 
@@ -117,7 +116,6 @@ class EInvoice
       }
     end
 
-
     if entity.try(:contact_person)
       contacts[:KontaktnaOseba] = {
         ImeOsebe: entity.try(:contact_person).try(:name)
@@ -125,7 +123,7 @@ class EInvoice
     end
 
     return unless contacts.any?
-    {KontaktiPodjetja: contacts}
+    { KontaktiPodjetja: contacts }
   end
 
   def entity_reference_numbers_hash(entity)
@@ -180,7 +178,7 @@ class EInvoice
   def customer_hashes
     [
       customer_hash(ENTITY_TYPE_CUSTOMER),
-      customer_hash(ENTITY_TYPE_RECEIVER),
+      customer_hash(ENTITY_TYPE_RECEIVER)
     ]
   end
 
@@ -230,7 +228,7 @@ class EInvoice
       {
         VrstaDatuma: 263,
         DatumRacuna: invoice.created_at.to_datetime.beginning_of_day
-      },
+      }
     ]
   end
 
@@ -249,7 +247,7 @@ class EInvoice
   def invoice_line_item_hashes
     invoice.line_items.map do |li|
       {
-        :"Postavka/" => "",
+        "Postavka/": '',
         OpisiArtiklov: [
           {
             KodaOpisaArtikla: 'F',
@@ -260,12 +258,12 @@ class EInvoice
               OpisArtikla1: 'OZNAKA_POSTAVKE',
               OpisArtikla2: 'navadna'
             }
-          },
+          }
         ],
         KolicinaArtikla: {
           VrstaKolicine: 47,
           Kolicina: li.quantity,
-          EnotaMere: li.unit_eancom,
+          EnotaMere: li.unit_eancom
         },
         ZneskiPostavke: [
           # Koncni znesek
@@ -287,7 +285,7 @@ class EInvoice
           {
             VrstaZneskaPostavke: 203,
             ZnesekPostavke: li.subtotal.to_f
-          },
+          }
         ],
         CenaPostavke: {
           Cena: li.price_per_item_with_discount.to_f
@@ -295,7 +293,7 @@ class EInvoice
         DavkiPostavke: {
           # Stopnja DDV
           DavkiNaPostavki: {
-            VrstaDavkaPostavke: "VAT",
+            VrstaDavkaPostavke: 'VAT',
             OdstotekDavkaPostavke: li.tax_percent
           },
           ZneskiDavkovPostavke: [
@@ -308,7 +306,7 @@ class EInvoice
             {
               VrstaZneskaDavkaPostavke: 124,
               Znesek: li.tax.to_f
-            },
+            }
           ]
         },
         OdstotkiPostavk: {
@@ -316,7 +314,7 @@ class EInvoice
           VrstaOdstotkaPostavke: 1,
           OdstotekPostavke: li.discount_percent || 0,
           VrstaZneskaOdstotka: 204,
-          ZnesekOdstotka: 0,
+          ZnesekOdstotka: 0
         }
       }
     end
@@ -338,7 +336,7 @@ class EInvoice
         {
           VrstaZneskaDavka: 124,
           ZnesekDavka: invoice.tax.to_f
-        },
+        }
       ]
     }
   end
@@ -405,7 +403,7 @@ class EInvoice
           SklicPlacila: 'PQ',
           StevilkaSklica: invoice.payment_id_full
         }
-      },
+      }
     ]
   end
 
@@ -426,7 +424,7 @@ class EInvoice
   def invoice_invoicer_hash
     text_hash(
       text_type: 'FAKTURIST',
-      text: "Darja Slapničar"
+      text: 'Darja Slapničar'
     )
   end
 
@@ -439,9 +437,7 @@ class EInvoice
   end
 
   def text_hash(type: 'AAI', text_type: nil, text:, max_length: 280, segment_length: 70, key_name: 'Tekst')
-    if text.length > max_length
-      raise "Text too long."
-    end
+    raise 'Text too long.' if text.length > max_length
 
     {
       VrstaBesedila: type,
@@ -458,7 +454,7 @@ class EInvoice
       index = 2
     end
 
-    texts = text.chars.each_slice(segment_length).inject(texts) do |hash, segment|
+    texts = text.chars.each_slice(segment_length).each_with_object(texts) do |segment, hash|
       hash["#{key_name}#{index}"] = segment.join
       index += 1
       hash

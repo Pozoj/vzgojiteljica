@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class OrdersController < ApplicationController
   skip_before_filter :authenticate, only: [:new, :create, :successful]
 
@@ -9,7 +10,7 @@ class OrdersController < ApplicationController
   def create
     # Honeypotz
     if params[:order][:desire] && params[:order][:desire].present?
-      render :text => "Thank you for your order!"
+      render text: 'Thank you for your order!'
       return
     end
 

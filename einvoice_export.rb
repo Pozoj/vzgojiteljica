@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'fileutils'
 
 files = []
@@ -15,7 +16,7 @@ Invoice.where('id >= 1771').each do |invoice|
   pdf_filename = "#{invoice.receipt_id}.pdf"
   File.open("#{directory}/#{xml_filename}", 'w') { |f| f.write(invoice.pdf) }
   files << pdf_filename
-end;0
+end; 0
 
 p files
 
@@ -34,16 +35,14 @@ Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
 end
 
 require 'fog'
-connection = Fog::Storage.new({
-  :provider                 => 'AWS',
-  :aws_access_key_id        => ENV['AWS_ACCESS_KEY_ID'],
-  :aws_secret_access_key    => ENV['AWS_SECRET_ACCESS_KEY']
-})
+connection = Fog::Storage.new(provider: 'AWS',
+                              aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+                              aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
 
 directory = connection.directories.get(ENV['FOG_DIRECTORY'])
 
 file = directory.files.create(
-  :key    => zipfile_base,
-  :body   => File.open(zipfile_name),
-  :public => false
+  key: zipfile_base,
+  body: File.open(zipfile_name),
+  public: false
 )

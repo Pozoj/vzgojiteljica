@@ -1,14 +1,15 @@
+# frozen_string_literal: true
 # Article search.
 class Search
   attr_accessor :query, :tokens
 
-  def initialize _query
+  def initialize(_query)
     @query = _query
     @tokens = tokenize @query
   end
 
-  def tokenize query
-    query.strip.squish.gsub(/[^\wščćžđŠČĆŽĐ ]*/i, '').downcase.split " "
+  def tokenize(query)
+    query.strip.squish.gsub(/[^\wščćžđŠČĆŽĐ ]*/i, '').downcase.split ' '
   end
 
   def perform
@@ -41,8 +42,8 @@ class Search
 
       # Try authors.
       authors = Author.select(:id).where(
-        @tokens.map { |t| "lower(first_name) LIKE ? OR lower(last_name) LIKE ?" }.join(' OR '), 
-       *(@tokens.map { |t| ["%#{t}%", "%#{t}%"] } ).flatten 
+        @tokens.map { |_t| 'lower(first_name) LIKE ? OR lower(last_name) LIKE ?' }.join(' OR '),
+        *(@tokens.map { |t| ["%#{t}%", "%#{t}%"] }).flatten
       ).map(&:id)
       if authors.any?
         articles_table = articles_table.joins(:authorships)
@@ -51,20 +52,18 @@ class Search
 
       # Try section titles.
       sections = Section.select(:id).where(
-        @tokens.map { |t| "lower(name) LIKE ?" }.join(' OR '), 
-       *@tokens.map { |t| "%#{t}%" }
+        @tokens.map { |_t| 'lower(name) LIKE ?' }.join(' OR '),
+        *@tokens.map { |t| "%#{t}%" }
       ).map(&:id)
-      if sections.any?
-        conditions << articles[:section_id].in(sections)
-      end
+      conditions << articles[:section_id].in(sections) if sections.any?
     end
 
     # Build WHERE/OR query.
     where = if conditions.length == 1
-      conditions.first
-    else
-      last = conditions.pop
-      conditions.inject(last) { |query_buildup, condition| query_buildup.or condition }
+              conditions.first
+            else
+              last = conditions.pop
+              conditions.inject(last) { |query_buildup, condition| query_buildup.or condition }
     end
 
     # Return whole query.

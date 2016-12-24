@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class StatementEntry < ActiveRecord::Base
   belongs_to :bank_statement
   belongs_to :invoice
@@ -34,9 +35,7 @@ class StatementEntry < ActiveRecord::Base
       return [matched_invoice]
     end
 
-    if reference_match.any?
-      return reference_match
-    end
+    return reference_match if reference_match.any?
 
     name_title_matches = account_holder.split("\n")
     if name_title_matches.length == 1
@@ -76,10 +75,10 @@ class StatementEntry < ActiveRecord::Base
     self.invoice = matched_invoice
     self.matched = true
     matched_invoice.statement_entries << self
-    matched_invoice.paid_at = self.date
-    matched_invoice.paid_amount = self.amount
-    matched_invoice.bank_data = self.details
-    matched_invoice.bank_reference = self.bank_reference
+    matched_invoice.paid_at = date
+    matched_invoice.paid_amount = amount
+    matched_invoice.bank_data = details
+    matched_invoice.bank_reference = bank_reference
     matched_invoice.save
     save
   end

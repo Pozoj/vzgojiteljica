@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::BankStatementsController < Admin::AdminController
   def index
     @statement = BankStatement.new

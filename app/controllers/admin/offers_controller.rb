@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::OffersController < Admin::ReceiptsController
   def index
     @years = Offer.years
@@ -16,10 +17,10 @@ class Admin::OffersController < Admin::ReceiptsController
 
   def wizard
     @wizard = ReceiptWizard.new(wizard_params)
-    @last = Offer.select(:reference_number).
-            where(year: Date.today.year).
-            order(year: :desc, reference_number: :desc).
-            first.try(:reference_number) || 0
+    @last = Offer.select(:reference_number)
+                 .where(year: Date.today.year)
+                 .order(year: :desc, reference_number: :desc)
+                 .first.try(:reference_number) || 0
   end
 
   def print_wizard
@@ -29,14 +30,14 @@ class Admin::OffersController < Admin::ReceiptsController
 
   def create
     ReceiptWizardWorker.perform_async(wizard_params)
-    redirect_to admin_offers_path, notice: "Ustvarjam ponudbe"
+    redirect_to admin_offers_path, notice: 'Ustvarjam ponudbe'
   end
 
   def email
     customer = resource.customer
 
     unless customer.billing_email.present?
-      return redirect_to(admin_offer_path, notice: "Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila")
+      return redirect_to(admin_offer_path, notice: 'Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila')
     end
 
     Mailer.delay.offer_to_customer(resource.id)
@@ -45,13 +46,13 @@ class Admin::OffersController < Admin::ReceiptsController
 
   def email_due
     unless resource.due?
-      return redirect_to(admin_offer_path, notice: "Račun še ni zapadel, zato ne bomo poslali opomina.")
+      return redirect_to(admin_offer_path, notice: 'Račun še ni zapadel, zato ne bomo poslali opomina.')
     end
 
     customer = resource.customer
 
     unless customer.billing_email.present?
-      return redirect_to(admin_offer_path, notice: "Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila")
+      return redirect_to(admin_offer_path, notice: 'Ni plačilnega kontakta ali pa ta nima nastavljenega e-maila')
     end
 
     Mailer.delay.offer_due_to_customer(resource.id)
@@ -79,9 +80,7 @@ class Admin::OffersController < Admin::ReceiptsController
   def create_for_customer
     customer = Customer.find(params[:customer_id])
 
-    unless customer
-      redirect_to :back
-    end
+    redirect_to :back unless customer
 
     wizard = ReceiptWizard.new(type: :offer)
     offer = wizard.create_receipt_for_customer(customer)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AdminMailer < ActionMailer::Base
   ADMIN_EMAIL =  ENV['DEFAULT_ADMIN_EMAIL']
   EDITOR_EMAIL = ENV['DEFAULT_EDITOR_EMAIL']
@@ -16,6 +17,6 @@ class AdminMailer < ActionMailer::Base
   def invoices_due
     @invoices = Invoice.due.unpaid.unreversed
     return unless @invoices.any?
-    mail(to: ADMIN_EMAIL, subject: "Zapadli računi na dan #{Date.today.to_s} - #{@invoices.count} računov")
+    mail(to: ADMIN_EMAIL, subject: "Zapadli računi na dan #{Date.today} - #{@invoices.count} računov")
   end
 end

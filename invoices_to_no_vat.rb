@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Invoice.where('id >= 1772').each do |invoice|
   next if invoice.reference_number == 49 && invoice.year == 2015
 
@@ -23,4 +24,4 @@ Invoice.where('id >= 1772').each do |invoice|
   p invoice.line_items
   puts
   puts
-end;0
+end; 0

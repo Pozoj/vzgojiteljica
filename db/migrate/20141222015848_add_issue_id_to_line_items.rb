@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddIssueIdToLineItems < ActiveRecord::Migration
   def change
     add_column :line_items, :issue_id, :integer

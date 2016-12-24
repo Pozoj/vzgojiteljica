@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 class InvoicesDueEmailerWorker
   include Sidekiq::Worker
-  sidekiq_options :retry => false
+  sidekiq_options retry: false
 
   def perform
     return unless Date.today.sunday?

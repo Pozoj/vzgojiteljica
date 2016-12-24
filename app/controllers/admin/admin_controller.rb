@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 class Admin::AdminController < ApplicationController
   before_filter :authenticate, :try_set_page_title
-  layout "admin"
+  layout 'admin'
 
   def index
     @invoices = Invoice.where(year: Date.today.year)
@@ -13,18 +14,18 @@ class Admin::AdminController < ApplicationController
 
     @which = params[:which]
     klass = if @which == 'customers'
-      Customer
-    else
-      Subscriber
+              Customer
+            else
+              Subscriber
     end
 
     @quantities = klass.all.group_by do |entity|
       quantity = entity.subscriptions.active
       quantity = quantity.paid if @paid
       quantity = quantity.sum(:quantity)
-    end.reject do |quantity, entities|
+    end.reject do |quantity, _entities|
       quantity < 1
-    end.sort_by do |quantity, entities|
+    end.sort_by do |quantity, _entities|
       quantity
     end
   end
@@ -45,7 +46,7 @@ class Admin::AdminController < ApplicationController
 
     @regional = customers.group_by do |customer|
       customer.post.try(:master)
-    end.reject do |region, customers|
+    end.reject do |region, _customers|
       region.nil?
     end.map do |region, customers|
       customers_count = customers.count

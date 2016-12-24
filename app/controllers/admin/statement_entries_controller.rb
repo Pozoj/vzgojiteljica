@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::StatementEntriesController < Admin::AdminController
   def show
     @unpaid_invoices = Invoice.unpaid.select(:id, :receipt_id).order(year: :desc, reference_number: :desc).map { |i| [i.receipt_id, i.receipt_id] }

@@ -1,11 +1,12 @@
+# frozen_string_literal: true
 class PublicCustomersEmailerWorker
   include Sidekiq::Worker
-  sidekiq_options :retry => false
+  sidekiq_options retry: false
 
   def perform
     Customer.active_and_paid.each do |customer|
       unless customer.einvoice?
-        puts "Customer is not an e-invoice customer"
+        puts 'Customer is not an e-invoice customer'
         next
       end
 

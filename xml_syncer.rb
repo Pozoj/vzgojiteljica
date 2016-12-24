@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 DIR1 = '/Users/mihar/Downloads/einvoices-1427088532'
 DIR2 = '/Users/mihar/Downloads/einvoices-1427128192'
 

@@ -1,21 +1,22 @@
+# frozen_string_literal: true
 namespace :ebonitete do
-  task :scrape => :environment do
+  task scrape: :environment do
     customers = Customer.not_person.where(account_number: nil).to_a
     customers = customers.shuffle
     puts "Starting EBoniteteScraper for #{customers.count} customers without bank accounts"
 
     customers.each do |customer|
       unless customer.vat_id
-        puts "VAT ID MISSING ALERT ALERT #{customer.id} - #{customer.to_s}"
+        puts "VAT ID MISSING ALERT ALERT #{customer.id} - #{customer}"
         next
       end
-      puts "Starting to search data for #{customer.to_s} (#{customer.vat_id})"
+      puts "Starting to search data for #{customer} (#{customer.vat_id})"
 
       scraper = EboniteteScraper.new(customer.vat_id)
       data = scraper.parse
 
       unless data
-        puts "NOT FOUND ON EBONITETE"
+        puts 'NOT FOUND ON EBONITETE'
         next
       end
 
@@ -65,7 +66,7 @@ namespace :ebonitete do
   end
 
   def strip_bank(bank_string)
-    return "" unless bank_string
+    return '' unless bank_string
     bank_string.downcase.gsub('d.d.', '').gsub(/[^a-zA-Z]/, '')
   end
 
@@ -118,7 +119,7 @@ namespace :ebonitete do
       },
       {
         name: 'GORENJSKA BANKA D.D.',
-        aliases: ['GORENJSKA', 'GB'],
+        aliases: %w(GORENJSKA GB),
         bic: 'GORESI2X'
       },
       {

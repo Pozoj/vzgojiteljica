@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module EntitiesHelper
   def pluralize_days(days)
     case days

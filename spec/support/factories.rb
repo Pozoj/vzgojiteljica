@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 FactoryGirl.define do
   factory :subscription do
     plan
@@ -17,7 +18,7 @@ FactoryGirl.define do
 
   factory :plan do
     billing_frequency 1
-    name "Letna naročnina"
+    name 'Letna naročnina'
     price_cents 500
 
     trait :free do
@@ -27,26 +28,26 @@ FactoryGirl.define do
 
   factory :subscriber do
     customer
-    name "Loram Ipsam"
+    name 'Loram Ipsam'
   end
 
   factory :customer do
-    name "Customar Ipsam"
+    name 'Customar Ipsam'
   end
 
   factory :order do
     quantity 1
     plan_type 1
-    name "Loram Ipsam"
-    email "loram@ipsam.com"
-    address "8 Buchanan St"
+    name 'Loram Ipsam'
+    email 'loram@ipsam.com'
+    address '8 Buchanan St'
     post_id 1000
   end
 
   factory :order_form do
     order
     customer
-    form_id "Naročilnica #1000"
+    form_id 'Naročilnica #1000'
   end
 
   factory :receipt do

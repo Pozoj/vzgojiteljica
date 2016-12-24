@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Cmxl.config[:raise_line_format_errors] = false
 
 class MyFieldParser < Cmxl::Field
@@ -5,15 +6,15 @@ class MyFieldParser < Cmxl::Field
   self.parser = /\/(SIO|ROC)\/(?<transaction_codes>.*)\/(SIB|NRF)\/(?<reference>.*)\/ACC\/(?<iban>.*)\/PAR\/(?<entity>.*)(SEPA)?/ # the regex to parse the line. Use named regexp to access your match.
 
   def iban
-    self.data['iban']
+    data['iban']
   end
 
   def reference
-    self.data['reference'].try(:gsub, "00/", "")
+    data['reference'].try(:gsub, '00/', '')
   end
 
   def entity
-    self.data['entity']
+    data['entity']
   end
 
   def entity_parts

@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 class IssuesController < ApplicationController
   skip_before_filter :authenticate, only: [:index, :show]
-  respond_to :json, :only => [:cover, :document]
+  respond_to :json, only: [:cover, :document]
 
   def index
-    @issues_by_years = Issue.sorted.group_by { |issue| issue.year }
+    @issues_by_years = Issue.sorted.group_by(&:year)
     respond_with @issues_by_years
   end
 

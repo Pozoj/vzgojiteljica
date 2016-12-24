@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::SubscriptionsController < Admin::AdminController
   def show
     respond_with resource
@@ -46,7 +47,7 @@ class Admin::SubscriptionsController < Admin::AdminController
   def end_now
     resource.end = DateTime.now
     resource.save
-    resource.remarks.create user: current_user, remark: "Naročnina preklicana"
+    resource.remarks.create user: current_user, remark: 'Naročnina preklicana'
     redirect_to admin_subscription_path(resource)
   end
 
@@ -60,7 +61,7 @@ class Admin::SubscriptionsController < Admin::AdminController
   def reinstate
     resource.end = nil
     resource.save
-    resource.remarks.create user: current_user, remark: "Naročnina ponovno aktivirana"
+    resource.remarks.create user: current_user, remark: 'Naročnina ponovno aktivirana'
     redirect_to admin_subscription_path(resource)
   end
 

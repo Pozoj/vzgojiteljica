@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Subscription do
@@ -47,20 +48,19 @@ RSpec.describe Subscription do
   describe '#new_from_order' do
     it 'creates a new subscription from an order' do
       order = create(:order,
-        title: 'Talibaum d.o.o.',
-        name: 'Salibassim Naranissim',
-        address: 'Tontoronto 16a',
-        post_id: 3320,
-        quantity: 2,
-        plan_type: 6
-      )
+                     title: 'Talibaum d.o.o.',
+                     name: 'Salibassim Naranissim',
+                     address: 'Tontoronto 16a',
+                     post_id: 3320,
+                     quantity: 2,
+                     plan_type: 6)
 
       subscriber = subject.subscriber
 
       subscription = nil
-      expect {
+      expect do
         subscription = Subscription.new_from_order(subscriber: subscriber, order: order)
-      }.to change(Subscription, :count).by(1)
+      end.to change(Subscription, :count).by(1)
 
       expect(subscription).to be_active
       expect(subscription.plan.billing_frequency).to eq(6)

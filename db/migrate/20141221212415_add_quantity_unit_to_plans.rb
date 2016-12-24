@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddQuantityUnitToPlans < ActiveRecord::Migration
   def change
     add_column :plans, :quantity_unit, :string

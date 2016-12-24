@@ -1,15 +1,16 @@
+# frozen_string_literal: true
 class BankStatement < ActiveRecord::Base
   has_attached_file :statement,
-                    :whiny => false,
-                    :storage => :s3,
-                    :bucket => AWS_S3['bucket'],
-                    :s3_credentials => {
-                      :access_key_id => AWS_S3['access_key_id'],
-                      :secret_access_key => AWS_S3['secret_access_key']
+                    whiny: false,
+                    storage: :s3,
+                    bucket: AWS_S3['bucket'],
+                    s3_credentials: {
+                      access_key_id: AWS_S3['access_key_id'],
+                      secret_access_key: AWS_S3['secret_access_key']
                     },
-                    :s3_permissions => :private,
-                    :s3_storage_class => :reduced_redundancy,
-                    :path => "/bank_statements/:id/:style_:basename.:extension"
+                    s3_permissions: :private,
+                    s3_storage_class: :reduced_redundancy,
+                    path: '/bank_statements/:id/:style_:basename.:extension'
 
   validates_attachment_content_type :statement, content_type: 'text/plain'
 
@@ -40,9 +41,7 @@ class BankStatement < ActiveRecord::Base
         if statement_entry.valid?
           statement_entry.save!
         else
-          if return_problem
-            return [entry, statement_entry]
-          end
+          return [entry, statement_entry] if return_problem
 
           Rails.logger.info "ERROR saving statement entry: #{statement_entry.to_json}"
           events.create event: :statement_entry_invalid, details: "Entry: #{entry.to_json}, errors: #{statement_entry.errors.to_json}"

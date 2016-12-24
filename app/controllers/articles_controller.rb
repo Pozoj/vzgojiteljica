@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ArticlesController < ApplicationController
   skip_before_filter :authenticate, only: [:index, :show, :search]
 
@@ -16,7 +17,7 @@ class ArticlesController < ApplicationController
     end
 
     respond_with(collection) do |format|
-      format.html { render :action => :index }
+      format.html { render action: :index }
     end
   end
 

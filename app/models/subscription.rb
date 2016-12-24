@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Subscription < ActiveRecord::Base
   include Invoicing
 
@@ -12,10 +13,10 @@ class Subscription < ActiveRecord::Base
 
   scope :active, -> { where(arel_table[:start].lteq(Date.today).and(arel_table[:end].eq(nil).or(arel_table[:end].gteq(Date.today)))) }
   scope :inactive, -> { where(arel_table[:end].not_eq(nil).and(arel_table[:end].lteq(Date.today).or(arel_table[:start].gteq(Date.today)))) }
-  scope :yearly, -> { joins(:plan).where(plans: {billing_frequency: 1}) }
-  scope :per_issue, -> { joins(:plan).where.not(plans: {billing_frequency: 1}) }
-  scope :paid, -> { joins(:plan).where.not(plans: {price_cents: 0}) }
-  scope :free, -> { joins(:plan).where(plans: {price_cents: 0}) }
+  scope :yearly, -> { joins(:plan).where(plans: { billing_frequency: 1 }) }
+  scope :per_issue, -> { joins(:plan).where.not(plans: { billing_frequency: 1 }) }
+  scope :paid, -> { joins(:plan).where.not(plans: { price_cents: 0 }) }
+  scope :free, -> { joins(:plan).where(plans: { price_cents: 0 }) }
   scope :without_order_form, -> { where(order_form_id: nil) }
   scope :with_order_form, -> { where.not(order_form_id: nil) }
 
@@ -29,7 +30,7 @@ class Subscription < ActiveRecord::Base
     subscriber.customer
   end
 
-  def product issue = nil
+  def product(issue = nil)
     if plan.yearly?
       "Vzgojiteljica #{Time.now.year} - Letna naročnina"
     else
@@ -43,11 +44,11 @@ class Subscription < ActiveRecord::Base
 
   def price
     return price_without_discount unless discount
-    (1 - (discount/100)) * price_without_discount
+    (1 - (discount / 100)) * price_without_discount
   end
 
   def active?
-    (self.start <= Date.today) && (!self.end.present? || self.end >= Date.today)
+    (start <= Date.today) && (!self.end.present? || self.end >= Date.today)
   end
 
   def inactive?
@@ -65,11 +66,9 @@ class Subscription < ActiveRecord::Base
       subscription.quantity = order.quantity
       subscription.order_form = order.order_form
 
-      if order.plan_type
-        subscription.plan = Plan.latest(order.plan_type)
-      end
+      subscription.plan = Plan.latest(order.plan_type) if order.plan_type
 
-      raise FromOrderError.new("Can't save subscription: #{subscription.errors.inspect}") unless subscription.save
+      raise FromOrderError, "Can't save subscription: #{subscription.errors.inspect}" unless subscription.save
 
       if order.comments.present?
         subscription.remarks.create remark: "Opomba naročnika: \"#{order.comments}\""
@@ -85,8 +84,8 @@ class Subscription < ActiveRecord::Base
   private
 
   def validate_end_after_start
-    if self.end.present? && self.end <= self.start
-      errors.add :end, "mora biti kasneje od pričetka"
+    if self.end.present? && self.end <= start
+      errors.add :end, 'mora biti kasneje od pričetka'
     end
   end
 

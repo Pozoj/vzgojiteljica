@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Keyword < ActiveRecord::Base
   has_many :keywordables
   has_many :articles, through: :keywordables
@@ -8,6 +9,6 @@ class Keyword < ActiveRecord::Base
   validates_uniqueness_of :keyword
 
   def to_s
-  	keyword
+    keyword
   end
 end

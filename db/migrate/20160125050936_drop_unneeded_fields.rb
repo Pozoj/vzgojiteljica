@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class DropUnneededFields < ActiveRecord::Migration
   def change
     remove_column :subscriptions, :order_id

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddBatchIdToIssues < ActiveRecord::Migration
   def change
     add_column :issues, :batch_id, :integer

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class InquiriesController < ApplicationController
   skip_before_filter :authenticate, only: [:index, :show, :create]
 
@@ -16,8 +17,8 @@ class InquiriesController < ApplicationController
   end
 
   def create
-    if params[:inquiry][:helmet] and params[:inquiry][:helmet].present?
-      render :text => "Thank you!"
+    if params[:inquiry][:helmet] && params[:inquiry][:helmet].present?
+      render text: 'Thank you!'
       return
     end
 
@@ -27,7 +28,7 @@ class InquiriesController < ApplicationController
       Mailer.delay.inquiry_submitted(@inquiry.id)
       respond_with resource
     else
-      render action: :new, notice: "Napaka pri postavljanju vprašanja!"
+      render action: :new, notice: 'Napaka pri postavljanju vprašanja!'
     end
   end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Web3::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -23,7 +24,7 @@ Web3::Application.configure do
   config.serve_static_files = false
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor  = :uglifier
+  config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
   # Whether to fallback to assets pipeline if a precompiled asset is missed.
@@ -46,7 +47,7 @@ Web3::Application.configure do
   config.log_level = :warn
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :uuid ]
+  config.log_tags = [:uuid]
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
@@ -55,7 +56,7 @@ Web3::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "http://cdn.vzgojiteljica.si/"
+  config.action_controller.asset_host = 'http://cdn.vzgojiteljica.si/'
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -81,14 +82,15 @@ Web3::Application.configure do
     user_name:            'revija@vzgojiteljica.si',
     password:             ENV['GMAIL_PASSWORD'],
     authentication:       'plain',
-    enable_starttls_auto: true  }
+    enable_starttls_auto: true
+  }
 
-  config.action_mailer.default_url_options = { host: "www.vzgojiteljica.si" }
+  config.action_mailer.default_url_options = { host: 'www.vzgojiteljica.si' }
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)

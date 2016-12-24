@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddRegionalIdToPosts < ActiveRecord::Migration
   def change
     add_column :posts, :regional_master, :boolean
@@ -10,7 +11,7 @@ class AddRegionalIdToPosts < ActiveRecord::Migration
       id_first = id[0]
       id_last = id[1..3]
 
-      if id_last == "000"
+      if id_last == '000'
         post.regional_master = true
         post.master_id = post.id
         post.save
@@ -29,5 +30,4 @@ class AddRegionalIdToPosts < ActiveRecord::Migration
       p [post.id, post.name, master.name]
     end
   end
-
 end

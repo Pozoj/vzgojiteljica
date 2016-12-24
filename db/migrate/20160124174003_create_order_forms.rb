@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateOrderForms < ActiveRecord::Migration
   def change
     create_table :order_forms do |t|
@@ -40,9 +41,9 @@ class CreateOrderForms < ActiveRecord::Migration
 
     # Migrate all the rest subscriptions.
     Subscription
-    .where(order_id: nil)
-    .where('order_form IS NOT NULL AND order_form != \'\'')
-    .each do |subscription|
+      .where(order_id: nil)
+      .where('order_form IS NOT NULL AND order_form != \'\'')
+      .each do |subscription|
       order_form = subscription.build_order_form
       order_form.form_id = subscription[:order_form]
       order_form.customer = subscription.customer

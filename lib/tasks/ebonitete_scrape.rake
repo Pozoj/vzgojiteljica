@@ -21,7 +21,7 @@ namespace :ebonitete do
       end
 
       unless strip_bank(customer.title) == strip_bank(data[:title_long])
-        if Levenshtein.normalized_distance(strip_bank(customer.title), strip_bank(data[:title_long])) > 0.6
+        if Levenshtein.compute(strip_bank(customer.title), strip_bank(data[:title_long])) > 0.6
           customer.title = data[:title_long]
         else
           puts "Skipping name change #{customer.title} > #{data[:title_long]}"

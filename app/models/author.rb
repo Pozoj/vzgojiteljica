@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class Author < ActiveRecord::Base
+  extend DuplicateFinder
+  
   has_many :authorships
   has_many :articles, through: :authorships
   belongs_to :institution

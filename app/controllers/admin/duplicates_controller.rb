@@ -2,7 +2,7 @@
 require 'set'
 
 class Admin::DuplicatesController < Admin::AdminController
-  def index
+  def index_customers
     @duplicates = {}
     all_customers = Customer.all.order(:id)
     all_customers.each do |customer|
@@ -20,7 +20,31 @@ class Admin::DuplicatesController < Admin::AdminController
     @duplicates = @duplicates.reject { |_k, v| v.length < 2 }
   end
 
-  def merge
+  def index_authors
+    @duplicates = Author.find_author_duplicates
+  end
+
+  def merge_authors
+    author_ids = params[:duplicate_ids].split(',').map(&:to_i).sort
+
+    root_duplicate = Author.find(author_ids.shift)
+    duplicates = author_ids.map { |aid| Author.find(aid) }
+
+    duplicates.each do |duplicate|
+      duplicate.authorships.each do |authorship|
+        authorship.author = root_duplicate
+        authorship.save
+      end
+
+      next unless duplicate.reload.authorships.empty?
+
+      duplicate.destroy
+    end
+
+    render text: 'OK'
+  end
+
+  def merge_customers
     @report = []
 
     root_duplicate = Customer.find(params[:id])

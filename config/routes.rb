@@ -42,8 +42,11 @@ Web3::Application.routes.draw do
     get :quantities, to: 'admin#quantities'
     get :freeriders, to: 'admin#freeriders'
     get :regional, to: 'admin#regional'
-    resources :duplicates, only: [:index] do
-      post :merge, on: :member
+    resources :duplicates do
+      get :index_customers, on: :collection
+      get :index_authors, on: :collection
+      post :merge_customers, on: :member
+      post :merge_authors, on: :collection
     end
     resources :entities
     resources :postal_costs, only: :index do

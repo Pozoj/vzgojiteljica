@@ -1,0 +1,21 @@
+<h2>Podvojeni podatki o avtorjih</h2>
+
+<% @duplicates.each do |name, duplicates| %>
+<% duplicates = duplicates.sort_by { |d| d.id } %>
+<div class="duplicate col-xs-4">
+  <h4>
+    <%= name %>
+    <%= link_to "Združi", merge_authors_admin_duplicates_path(duplicate_ids: duplicates.map(&:id).join(',')), class: 'btn btn-success btn-xs pull-right', :"data-method" => "post" %>
+  </h4>
+  <p>
+    <ul>
+      <% duplicates.each do |dupe| %>
+        <li>
+          <%= link_to dupe.id, author_path(dupe) %>
+          <small class="muted"><%= dupe.created_at %></small>
+        </li>
+      <% end %>
+    </ul>
+  </p>
+</div>
+<% end %>

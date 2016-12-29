@@ -54,6 +54,9 @@ Web3::Application.routes.draw do
       post :merge, on: :member
     end
     resources :entities
+    resources :letters do
+      get :print, on: :member
+    end
     resources :customers do
       post :new_from_order, on: :collection
       get :new_freerider, on: :collection

@@ -1,0 +1,45 @@
+<div class="letter">
+  <div class="logo">
+    <p><%= image_tag "pozoj_logo-100w.png" %></p>
+    <p><strong><%= Entity.pozoj %></strong></p>
+    <p><%= Entity.pozoj.address %><br><%= Entity.pozoj.post %></p>
+    <p><%= Entity.pozoj.email %>
+  </div>
+  <div class="letter-recipient">
+    <p>
+      <strong><%= recipient %></strong>
+    </p>
+    <% if recipient.name.present? && recipient.title.present? %>
+      <p><%= recipient.title %></p>
+    <% end %>
+    <p><%= recipient.address %></p>
+    <p><%= recipient.post %></p>
+  </div>
+  <div class="letter-date">
+    <%= l Date.today, format: '%d. %B %Y' %>
+  </div>
+  <div class="letter-title">
+    <h3><%= letter.title %></h3>
+  </div>
+  <div class="letter-body">
+    <%= raw interpolate_letter(letter.body_html, recipient) %>
+  </div>
+  <div class="letter-footer">
+    <hr>
+    <p>
+      <strong>
+        Revija Vzgojiteljica
+      </strong>
+      |
+      <span>
+        <span>spletna stran:</span>
+        http://www.vzgojiteljica.si
+      </span>
+      |
+      <span>
+        <span>e-pošta:</span>
+        revija@vzgojiteljica.si
+      </span>
+    </p>
+  </div>
+</div>

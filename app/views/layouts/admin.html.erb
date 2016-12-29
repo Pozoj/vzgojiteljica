@@ -101,7 +101,13 @@
                 <li><a href="<%= admin_order_forms_path %>"><strong>Naročilnice</strong></a></li>
               </ul>
             </li>
-            <li><a href="<%= admin_labels_path %>">Nalepke</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tiskanje <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="<%= admin_labels_path %>">Nalepke</a></li>
+                <li><a href="<%= admin_letters_path %>">Dopisi</a></li>
+              </ul>
+            </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Poročila <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">

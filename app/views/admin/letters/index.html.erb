@@ -1,0 +1,25 @@
+<h2>Dopisi</h2>
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Naslov</th>
+      <th>Besedilo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @letters.each do |letter| %>
+      <tr>
+        <td>
+          <%= link_to "", admin_letter_path(letter) %>
+          <%= letter.id %></td>
+        <td><%= letter.title %></td>
+        <td><%= truncate(letter.body, length: 32) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="admin_actions">
+  <%= link_to "Dodaj predlogo", new_admin_letter_path, class: 'btn btn-default btn-xs' %>
+</div>

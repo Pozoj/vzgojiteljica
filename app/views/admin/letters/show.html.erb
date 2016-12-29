@@ -1,0 +1,57 @@
+<h1><%= @letter.title %></h1>
+
+<div class="admin_actions">
+  <%= link_to "Uredi dopis", edit_admin_letter_path(@letter), class: 'btn btn-xs btn-default' %>
+  <%= link_to "Izbriši dopis", admin_letter_path(@letter), class: 'btn btn-xs btn-danger', method: :delete, :"data-confirm" => 'Ste prepričani?' %>
+</div>
+
+<div class="row">
+  <div class="col-xs-6">
+      <%= raw @letter.body_html %>
+  </div>
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="glyphicon glyphicon-print"></i>
+          Tiskanje
+        </h3>
+      </div>
+      <div class="panel-body">
+        <%= form_tag print_admin_letter_path(@letter), method: :get, class: 'form' do %>
+          <div class="form-group">
+            <label>
+              <%= radio_button_tag :recipient_category, :all %>
+              Vsem prejemnikom
+            </label>
+            <br>
+            <label>
+              <%= radio_button_tag :recipient_category, :rewards %>
+              Prejemnikom nagrad
+            </label>
+            <br>
+            <label>
+              <%= radio_button_tag :recipient_category, :free %>
+              Brezplačnim prejemnikom
+            </label>
+            <br>
+            <label>
+              <%= radio_button_tag :recipient_category, :paid %>
+              Plačljivim prejemnikom
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              Prejemnikom z ID-ji
+              <br>
+              <%= text_area_tag :recipient_ids %>
+            </label>
+          </div>
+          <div class="form-group">
+            <%= submit_tag "Natisni", class: 'btn btn-primary', name: 'all' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

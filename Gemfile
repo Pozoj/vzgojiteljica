@@ -48,6 +48,7 @@ gem 'sinatra', require: nil
 gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'scrolls'
+gem 'redcarpet'
 
 group :development do
   gem 'web-console'

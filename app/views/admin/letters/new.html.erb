@@ -1,0 +1,17 @@
+<h1>Ustvari dopis</h1>
+
+<div class="row">
+  <div class="col-xs-8">
+    <%= simple_form_for [:admin, @letter] do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :title %>
+        <%= f.input :body %>
+      </div>
+      <div class="form-actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

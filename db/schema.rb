@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229105421) do
+ActiveRecord::Schema.define(version: 20161229153028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20161229105421) do
     t.integer  "entity_type"
     t.string   "token"
     t.text     "flags"
+    t.boolean  "manual_delivery",                 default: false
   end
 
   add_index "entities", ["account_number"], name: "index_entities_on_account_number", using: :btree
@@ -431,6 +432,7 @@ ActiveRecord::Schema.define(version: 20161229105421) do
     t.datetime "updated_at"
     t.integer  "quantity"
     t.integer  "order_form_id"
+    t.integer  "reward",        default: 0
   end
 
   add_index "subscriptions", ["end"], name: "index_subscriptions_on_end", using: :btree

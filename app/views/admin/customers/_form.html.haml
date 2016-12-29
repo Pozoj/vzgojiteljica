@@ -31,7 +31,10 @@
         .panel-body
           = f.input :registration_number
           = f.input :vat_id
-          = f.input :vat_exempt
+          .checkbox
+            %label
+              = f.check_box :vat_exempt
+              Niso zavezanec za DDV
 
     .panel.panel-default
       .panel-heading
@@ -41,12 +44,29 @@
           = f.label :entity_type
           = f.select :entity_type, [['', ''], ['Podjetje', Entity::ENTITY_COMPANY], ['Fizična oseba', Entity::ENTITY_PERSON]], {}, class: 'form-control'
         - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
-          = f.input :einvoice
+          .checkbox
+            %label
+              = f.check_box :einvoice
+              Sprejemajo e-račune
+        .checkbox
+          %label
+            = f.check_box :manual_delivery
+            Pozoj dostava
+
+    - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Banka
+        .panel-body
+          = f.association :bank
+          = f.input :account_number
 
     - if @all_customers && @all_customers.any? && @customer.persisted?
       .panel.panel-default
         .panel-heading
-          %h3.panel-title Pridruži
+          %h3.panel-title
+            Pridruži
+            .label.label-danger.pull-right Previdno!
         .panel-body
           .form-group.select.optional.customer_entity_type
             = select_tag :other_customer_id, options_for_select(@all_customers), {class: 'form-control', id: 'other_customer_id', placeholder: 'ID stranke', prompt: ""}
@@ -56,14 +76,6 @@
             %br
             %small
               = link_to "Poglej", "", id: 'merge_customers_preview', class: 'hide'
-
-    - if !@customer.persisted? || (@customer.persisted? && @customer.company?)
-      .panel.panel-default
-        .panel-heading
-          %h3.panel-title Banka
-        .panel-body
-          = f.association :bank
-          = f.input :account_number
 
 .form-actions
   %hr

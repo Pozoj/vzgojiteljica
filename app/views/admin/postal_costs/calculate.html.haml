@@ -34,11 +34,12 @@
         %tr
           %td
             %small.muted
-              == #{postal_cost[:postal_cost].weight_from}g
+              == #{postal_cost[:postal_cost].weight_from} g
               &dash;
-              == #{postal_cost[:postal_cost].weight_to}g
+              == #{postal_cost[:postal_cost].weight_to} g
           %td
-            == #{number_with_delimiter(postal_cost[:package_weight].to_i)}g
+            == #{number_with_delimiter(postal_cost[:package_weight].to_i)} g
+            %small.muted== (#{postal_cost[:quantity]} kom.)
           %td= postal_cost[:packages]
           %td= number_to_currency postal_cost[:package_price]
           %td= number_to_currency postal_cost[:price]

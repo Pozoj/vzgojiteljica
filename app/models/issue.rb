@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class Issue < ActiveRecord::Base
-  WEIGHT_PER_PAGE = 4.25
+  WEIGHT_PER_PAGE = 2.84
 
   has_many :articles
   has_many :keywords, through: :articles

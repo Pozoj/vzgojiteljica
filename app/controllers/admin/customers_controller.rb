@@ -59,6 +59,7 @@ class Admin::CustomersController < Admin::AdminController
         @subscription.plan = Plan.free
         @subscription.start = DateTime.now
         @subscription.quantity = customer_params[:subscription][:quantity]
+        @subscription.reward = customer_params[:subscription][:reward]
         # Type
         type = customer_params[:subscription][:free_type]
         @subscription.end = if type == '1'

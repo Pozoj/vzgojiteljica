@@ -11,6 +11,7 @@
       %th Pričetek prejemanja
       %th Konec prejemanja
       %th Količina
+      %th Nagradno
   %tbody
     - @freeriders.each do |subscription|
       %tr
@@ -26,10 +27,16 @@
           - else
             &mdash;
         %td= subscription.quantity
+        %td
+          - if subscription.is_reward?
+            = subscription.reward_tier
+          - else
+            &mdash;
   %tfoot
     %tr
       %th
       %th
       %th
-      %th
+      %th Skupaj
       %th= @freeriders.sum(:quantity)
+      %th

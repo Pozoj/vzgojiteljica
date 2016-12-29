@@ -108,6 +108,9 @@
                   %small.label.label-success= l subscription.start
                 - if subscription.end?
                   %small.label.label-danger= l subscription.end
+                - if subscription.is_reward?
+                  %small.label.label-warning
+                    %i.glyphicon.glyphicon-gift
     - if @subscribers.count < @subscribers_total_count
       %tfoot
         %tr

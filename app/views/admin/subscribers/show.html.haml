@@ -52,6 +52,10 @@
               %small.label.label-success Aktivna
             - else
               %small.label.label-danger Neaktivna
+
+            - if s.is_reward?
+              %small.label.label-warning
+                %i.glyphicon.glyphicon-gift
           %td
             = link_to "", admin_subscription_path(s)
             = s.id

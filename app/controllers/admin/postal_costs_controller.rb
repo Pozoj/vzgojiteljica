@@ -19,10 +19,13 @@ class Admin::PostalCostsController < Admin::AdminController
       subscribers = subscribers.free
     end
 
-    @quantities = subscribers.reject do |subscriber|
+    # Skip manual delivery customers
+    subscribers = subscribers.reject do |subscriber|
       subscriber.customer.manual_delivery?
-    end.group_by do |subscriber|
-      subscriber.subscriptions.active.sum(:quantity)
+    end
+
+    @quantities = subscribers.group_by do |subscriber|
+      subscriber.subscriptions.active.without_rewards.sum(:quantity)
     end.reject do |quantity, _entities|
       quantity < 1
     end.sort_by do |quantity, _entities|

@@ -158,6 +158,8 @@ sl:
       entity:
         title: Naziv
         name: Ime in priimek
+      subscription:
+        reward: Nagradni prejemnik
       article:
         abstract: Povzetek
         abstract_html: Povzetek

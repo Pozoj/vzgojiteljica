@@ -5,6 +5,9 @@
   <% else %>
     <small class="label label-danger">Neaktivna</small>
   <% end %>
+  <% if @subscription.is_reward? %>
+    <small class="label label-warning"><i class="glyphicon glyphicon-gift"></i></small>
+  <% end %>
   <br>
   <small class="muted">
     Naročnik
@@ -47,6 +50,13 @@
         <p>
           <%= @subscription.plan %>
         </p>
+        <% if @subscription.is_reward? %>
+          <strong>Nagradna naročnina:</strong>
+          <p>
+            <i class="glyphicon glyphicon-gift"></i>
+            <%= @subscription.reward_tier %>
+          </p>
+        <% end %>
         <hr>
         <strong>Kreiran:</strong>
         <p>

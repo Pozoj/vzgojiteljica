@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 class Subscription < ActiveRecord::Base
+  REWARD_TIERS = [
+    'Ni nagrade',         # 0
+    'Nagrada za risbico', # 1
+    'Nagrada za članek'   # 2
+  ].freeze
+
   include Invoicing
 
   attr_accessor :free_type
@@ -20,11 +26,13 @@ class Subscription < ActiveRecord::Base
   scope :without_order_form, -> { where(order_form_id: nil) }
   scope :with_order_form, -> { where.not(order_form_id: nil) }
   scope :rewards, -> { where.not(reward: 0) }
+  scope :without_rewards, -> { where(arel_table[:reward].eq(0).or(arel_table[:reward].eq(nil))) }
 
   validates_presence_of :quantity
   validates_presence_of :plan
   validates_presence_of :subscriber
   validates_numericality_of :quantity, greater_than: 0, only_integer: true
+  validates_inclusion_of :reward, in: (0..(REWARD_TIERS.length - 1))
   validate :validate_end_after_start
 
   def customer
@@ -80,6 +88,14 @@ class Subscription < ActiveRecord::Base
 
       subscription
     end
+  end
+
+  def is_reward?
+    reward && reward > 0
+  end
+
+  def reward_tier
+    is_reward? && REWARD_TIERS[reward]
   end
 
   private

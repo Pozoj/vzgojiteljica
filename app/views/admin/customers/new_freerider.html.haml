@@ -22,10 +22,12 @@
     .form-inputs.col-xs-4
       = f.fields_for :subscription, Subscription.new do |fs|
         .panel.panel-default
-          .panel-heading 
+          .panel-heading
             %h3.panel-title Naročnina
           .panel-body
             = fs.input :quantity
+            %hr
+            = fs.input :reward, collection: Subscription::REWARD_TIERS.each_with_index.map { |i, tier| [i, tier] }, selected: 0
             %hr
             = f.label "Brezplačno prejemanje velja"
             %label.control-label

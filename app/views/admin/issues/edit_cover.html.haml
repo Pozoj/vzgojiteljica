@@ -1,0 +1,28 @@
+= javascript_include_tag "upload"
+
+%h1
+  Uredi naslovnico
+  %small= @issue
+
+.row
+  .form-inputs.col-xs-8
+    = simple_form_for [:admin, @issue] do |f|
+      .form-input.input.file
+        = f.input :cover, input_html: {:"data-url" => "cover"}
+      #cover
+        - if @issue.cover.file?
+          = image_tag @issue.cover.url(:medium)
+      #progress
+        .bar
+        .percent 0%
+
+      #status{:"data-redirect" => admin_issue_path(@issue), style: 'margin-top: 50px;'}
+        %strong Prosimo počakajte ...
+
+:javascript
+  var FileUploadDOMId = '#issue_cover'
+  function FileUploadVzgojiteljica(e, data) {
+    if ( data && data.result && data.result.url_medium ) {
+      $('#cover img').attr('src', data.result.url_medium);
+    }
+  }

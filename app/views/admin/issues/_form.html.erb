@@ -1,0 +1,29 @@
+<%= simple_form_for [:admin, @issue] do |f| %>
+  <div class="row">
+    <div class="form-inputs col-xs-8">
+
+    <p class='input select'>
+      <%= f.label :year %>
+      <br>
+      <%= f.collection_select :year, 2004..Date.today.year, :to_s, :to_s %>
+    </p>
+    <p class='input'>
+      <%= f.label :issue %>
+      <br>
+      <label style='margin-right: 10px;'><%= f.radio_button :issue, 1 %> 1</label>&nbsp;
+      <label style='margin-right: 10px;'><%= f.radio_button :issue, 2 %> 2</label>&nbsp;
+      <label style='margin-right: 10px;'><%= f.radio_button :issue, 3 %> 3</label>&nbsp;
+      <label style='margin-right: 10px;'><%= f.radio_button :issue, 4 %> 4</label>&nbsp;
+      <label style='margin-right: 10px;'><%= f.radio_button :issue, 5 %> 5</label>&nbsp;
+      <label style='margin-right: 10px;'><%= f.radio_button :issue, 6 %> 6</label>&nbsp;
+      <label style='margin-right: 10px;'><%= f.radio_button :issue, 7 %> 7</label>&nbsp;
+    </p>
+    <p class='input text'>
+      <%= f.input :num_pages %>
+    </p>
+    <%= render 'shared/datepicker_field', f: f, label: :published_at, field: :published_at %>
+    <div class="form-actions">
+      <hr>
+      <%= f.button :submit %>
+    </div>
+<% end %>

@@ -145,6 +145,7 @@ sl:
         published_at: Datum izdaje
         cover: Naslovnica
         document: Revija
+        num_pages: Št. strani
       order:
         title: 'Naziv podjetja / ustanove'
         name: 'Ime in priimek'

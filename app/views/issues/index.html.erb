@@ -1,10 +1,5 @@
 <%= title "Številke" %>
 
-<%= admin_section do %>
-  <%= link_to "Pregled", all_issues_path %>
-  <%= link_to "Dodaj številko", new_issue_path %>
-<% end %>
-
 <% @issues_by_years.each do |year, issues| %>
   <div class='year'>
   	<h3>Letnik <%= year %></h3>
@@ -12,4 +7,3 @@
   </div>
 <% end %>
 <br class="clear">
-

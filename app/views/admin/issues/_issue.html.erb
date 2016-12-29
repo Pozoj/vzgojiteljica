@@ -1,0 +1,6 @@
+<div class="issue">
+  <%= link_to issue do %>
+    <p class='cover'><%= image_tag issue.cover.url(:medium) %></p>
+    <p class='title'>Številka <%= issue.issue %></p>
+  <% end %>
+</div>

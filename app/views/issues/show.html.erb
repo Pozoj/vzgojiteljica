@@ -1,10 +1,4 @@
 <%= title "Vzgojiteljica št. #{@issue.issue}, letnik #{@issue.year}" %>
-<%= admin_section do %>
-  <%= link_to "Uredi", edit_issue_path(@issue) %>
-  <%= link_to "Uredi naslovnico", edit_cover_issue_path(@issue) %>
-  <%= link_to "Uredi dokument", edit_document_issue_path(@issue) %>
-  <%= link_to "Odstrani", @issue, method: :delete %>
-<% end %>
 
 <div class='cover'>
   <%= image_tag @issue.cover.url %>

@@ -34,6 +34,16 @@ body.entities #container {
   margin-right: 25px;
 }
 
+#progress {
+  width: 400px;
+  margin-top: 25px;
+}
+#progress .bar {
+  background: #3c3a5b;
+  border-radius: 3px;
+  height: 20px;
+}
+
 .muted {
   color: #999;
 }

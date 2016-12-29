@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class Issue < ActiveRecord::Base
+  WEIGHT_PER_PAGE = 9
+
   has_many :articles
   has_many :keywords, through: :articles
   belongs_to :batch
@@ -7,6 +9,8 @@ class Issue < ActiveRecord::Base
   validates :issue, numericality: { only_integer: true, greater_than: 0, less_than: 8 }
 
   scope :sorted, -> { order(year: :desc, issue: :asc) }
+  scope :published, -> { where('published_at <= ?', Date.today) }
+  scope :not_published, -> { where('published_at > ?', Date.today) }
 
   has_attached_file :document,
                     whiny: false,
@@ -61,6 +65,14 @@ class Issue < ActiveRecord::Base
 
   def self.last
     Issue.order(year: :desc, issue: :desc).first
+  end
+
+  def published?
+    published_at <= Date.today
+  end
+
+  def weight
+    num_pages * WEIGHT_PER_PAGE
   end
 
   def to_s

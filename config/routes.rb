@@ -25,15 +25,7 @@ Web3::Application.routes.draw do
       end
     end
     resources :sections, path: 'sekcije'
-    resources :issues, path: 'revije' do
-      get :all, on: :collection
-      member do
-        get :edit_cover
-        get :edit_document
-        patch :cover
-        patch :document
-      end
-    end
+    resources :issues, path: 'revije', only: [:index, :show]
     resources :orders, path: 'narocila', only: [:new, :create] do
       get :successful, on: :collection, path: 'uspesno'
     end
@@ -54,6 +46,14 @@ Web3::Application.routes.draw do
       post :merge, on: :member
     end
     resources :entities
+    resources :issues do
+      member do
+        get :edit_cover
+        get :edit_document
+        patch :cover
+        patch :document
+      end
+    end
     resources :letters do
       get :print, on: :member
     end

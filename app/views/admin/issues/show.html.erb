@@ -1,0 +1,68 @@
+<%= title "Vzgojiteljica št. #{@issue.issue}, letnik #{@issue.year}" %>
+
+<div class="admin_actions">
+  <%= link_to "Uredi", edit_admin_issue_path(@issue), class: 'btn btn-default' %>
+  <%= link_to "Uredi naslovnico", edit_cover_admin_issue_path(@issue), class: 'btn btn-default' %>
+  <%= link_to "Uredi dokument", edit_document_admin_issue_path(@issue), class: 'btn btn-default' %>
+  <%= link_to "Odstrani", [:admin, @issue], method: :delete, :"data-confirm" => "Ste prepričani?", class: 'btn btn-danger' %>
+</div>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong>Letnik</strong>
+        <p>
+          <%= @issue.year %>
+        </p>
+        <strong>Številka</strong>
+        <p>
+          <%= @issue.issue %>
+        </p>
+        <% if @issue.published_at %>
+          <% if @issue.published? %>
+            <strong>Izšla</strong>
+            <p><%= l @issue.published_at %></p>
+          <% else %>
+            <strong>Izide</strong>
+            <p><%= l @issue.published_at %></p>
+          <% end %>
+        <% else %>
+          <strong>Neznan datum izzida</strong>
+        <% end %>
+        <strong>Naslovnica</strong>
+        <% if @issue.cover.file? %>
+          <p><%= image_tag @issue.cover.url(:medium) %></p>
+        <% else %>
+          <p>&mdash;</p>
+        <% end %>
+        <strong>PDF</strong>
+        <% if @issue.document.file? %>
+          <p><%= link_to @issue.document_file_name, @issue.document.url, class: 'btn btn-xs btn-default' %></p>
+        <% else %>
+          <p>&mdash;</p>
+        <% end %>
+        <strong>Število strani</strong>
+        <p><%= @issue.num_pages %></p>
+        <strong>Teža</strong>
+        <p><%= @issue.weight %>g</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% @issue.articles_grouped_by_sections.each do |section, articles| %>
+  <div class='section'>
+    <h2><%= section %></h2>
+    <ol class='articles'>
+      <% articles.each do |article| %>
+        <li>
+          <%= link_to article.title, article %>
+          <span class="author">
+            (<%= raw article.authors.map { |a| link_to a, a }.join(", ") %>)
+          </span>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+<% end %>

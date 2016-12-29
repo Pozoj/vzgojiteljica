@@ -1,0 +1,23 @@
+%br
+%table.table.rowlinks
+  %thead
+    %tr
+      %th ID
+      %th Letnik
+      %th Številka
+      %th Datum izdaje
+      %th Št. strani
+  %tbody
+    - @issues.each do |issue|
+      %tr
+        %td
+          = link_to "", admin_issue_path(issue)
+          = issue.id
+        %td= issue.year
+        %td= issue.issue
+        %td
+          - if issue.published_at
+            = l issue.published_at
+          - else
+            &mdash;
+        %td= issue.num_pages

@@ -1,0 +1,21 @@
+%br
+%table.table.rowlinks
+  %thead
+    %tr
+      %th Teža od
+      %th Teža do
+      %th Cena
+      %th Tip
+  %tbody
+    - @postal_costs.each do |pc|
+      %tr
+        %td
+          = pc.weight_from
+          g
+        %td
+          = pc.weight_to
+          g
+        %td
+          = pc.price
+          EUR
+        %td= pc.service_type

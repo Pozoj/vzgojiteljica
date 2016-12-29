@@ -46,6 +46,9 @@ Web3::Application.routes.draw do
       post :merge, on: :member
     end
     resources :entities
+    resources :postal_costs, only: :index do
+      get :calculate, on: :collection
+    end
     resources :issues do
       member do
         get :edit_cover

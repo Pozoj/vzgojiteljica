@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229080117) do
+ActiveRecord::Schema.define(version: 20161229105421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -318,6 +318,15 @@ ActiveRecord::Schema.define(version: 20161229080117) do
     t.integer  "price_cents",                    default: 0,     null: false
     t.string   "price_currency",                 default: "EUR", null: false
   end
+
+  create_table "postal_costs", force: :cascade do |t|
+    t.integer "weight_from"
+    t.integer "weight_to"
+    t.decimal "price",        default: 0.0
+    t.string  "service_type"
+  end
+
+  add_index "postal_costs", ["service_type"], name: "index_postal_costs_on_service_type", using: :btree
 
   create_table "posts", id: false, force: :cascade do |t|
     t.integer  "id"

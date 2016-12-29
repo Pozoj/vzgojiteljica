@@ -1,0 +1,43 @@
+%h1
+  Poštnina
+  %small
+    za
+    št.
+    = @issue
+    teža
+    == #{@issue.weight.to_i}g
+    za
+    = @issue.num_pages
+    strani
+
+%table.table
+  %thead
+    %tr
+      %th Vrsta poštne storitve
+      %th Teža pošiljke
+      %th Št. pošiljk
+      %th Cena pošiljke
+      %th Skupaj
+  %tbody
+    - @postal_costs.each do |service_type, postal_costs|
+      %tr
+        %th{colspan: 5}= service_type
+      - postal_costs.each do |postal_cost|
+        %tr
+          %td
+            %small.muted
+              == #{postal_cost[:postal_cost].weight_from}g
+              &dash;
+              == #{postal_cost[:postal_cost].weight_to}g
+          %td
+            == #{number_with_delimiter(postal_cost[:package_weight].to_i)}g
+          %td= postal_cost[:packages]
+          %td= number_to_currency postal_cost[:package_price]
+          %td= number_to_currency postal_cost[:price]
+  %tfoot
+    %tr
+      %th
+      %th
+      %th= @postal_costs.sum { |service_type, postal_costs| postal_costs.sum { |pc| pc[:packages] } }
+      %th
+      %th= number_to_currency @postal_costs.sum { |service_type, postal_costs| postal_costs.sum { |pc| pc[:price] } }

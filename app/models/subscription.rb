@@ -25,7 +25,7 @@ class Subscription < ActiveRecord::Base
   scope :free, -> { joins(:plan).where(plans: { price_cents: 0 }) }
   scope :without_order_form, -> { where(order_form_id: nil) }
   scope :with_order_form, -> { where.not(order_form_id: nil) }
-  scope :rewards, -> { where.not(reward: 0) }
+  scope :rewards, -> { where(arel_table[:reward].not_eq(0).and(arel_table[:reward].not_eq(nil))) }
   scope :without_rewards, -> { where(arel_table[:reward].eq(0).or(arel_table[:reward].eq(nil))) }
 
   validates_presence_of :quantity

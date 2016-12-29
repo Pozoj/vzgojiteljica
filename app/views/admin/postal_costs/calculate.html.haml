@@ -11,12 +11,10 @@
     strani
 
 .admin_actions
-  - if @paid || @free
-    = link_to "Prikaži vse", calculate_admin_postal_costs_path, class: 'btn btn-primary btn-xs'
-  - unless @free
-    = link_to "Prikaži samo brezplačne", calculate_admin_postal_costs_path(only_free: true), class: 'btn btn-default btn-xs'
-  - unless @paid
-    = link_to "Prikaži samo plačljive", calculate_admin_postal_costs_path(only_paid: true), class: 'btn btn-default btn-xs'
+  - if @rewards
+    = link_to "Prikaži vse razen nagradnih prejemnikov", calculate_admin_postal_costs_path, class: 'btn btn-primary btn-xs'
+  - else
+    = link_to "Prikaži samo nagradne prejemnike", calculate_admin_postal_costs_path(only_rewards: true), class: 'btn btn-default btn-xs'
 
 %table.table
   %thead

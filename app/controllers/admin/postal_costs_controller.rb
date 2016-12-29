@@ -11,12 +11,11 @@ class Admin::PostalCostsController < Admin::AdminController
     subscribers = Subscriber.active
     weight = @issue.weight
 
-    if params[:only_paid]
-      @paid = true
-      subscribers = subscribers.paid
-    elsif params[:only_free]
-      @free = true
-      subscribers = subscribers.free
+    if params[:only_rewards]
+      @rewards = true
+      subscribers = subscribers.free.find_all do |subscriber|
+        subscriber.subscriptions.rewards.any?
+      end
     end
 
     # Skip manual delivery customers
@@ -25,7 +24,15 @@ class Admin::PostalCostsController < Admin::AdminController
     end
 
     @quantities = subscribers.group_by do |subscriber|
-      subscriber.subscriptions.active.without_rewards.sum(:quantity)
+      subscriptions = subscriber.subscriptions.active
+
+      if @rewards
+        subscriptions = subscriptions.rewards
+      else
+        subscriptions = subscriptions.without_rewards
+      end
+
+      subscriptions.sum(:quantity)
     end.reject do |quantity, _entities|
       quantity < 1
     end.sort_by do |quantity, _entities|

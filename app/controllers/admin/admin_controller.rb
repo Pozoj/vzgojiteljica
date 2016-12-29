@@ -33,7 +33,7 @@ class Admin::AdminController < ApplicationController
 
   def freeriders
     @page_title = 'Brezplačniki'
-    @freeriders = Subscription.free.active.order(start: :desc)
+    @freeriders = Subscription.free.active.order(start: :desc, id: :asc)
   end
 
   def regional

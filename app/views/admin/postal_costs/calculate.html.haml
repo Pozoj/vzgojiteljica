@@ -10,6 +10,14 @@
     = @issue.num_pages
     strani
 
+.admin_actions
+  - if @paid || @free
+    = link_to "Prikaži vse", calculate_admin_postal_costs_path, class: 'btn btn-primary btn-xs'
+  - unless @free
+    = link_to "Prikaži samo brezplačne", calculate_admin_postal_costs_path(only_free: true), class: 'btn btn-default btn-xs'
+  - unless @paid
+    = link_to "Prikaži samo plačljive", calculate_admin_postal_costs_path(only_paid: true), class: 'btn btn-default btn-xs'
+
 %table.table
   %thead
     %tr
@@ -36,7 +44,7 @@
           %td= number_to_currency postal_cost[:price]
   %tfoot
     %tr
-      %th
+      %th Skupaj
       %th
       %th= @postal_costs.sum { |service_type, postal_costs| postal_costs.sum { |pc| pc[:packages] } }
       %th

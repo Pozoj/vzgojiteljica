@@ -11,6 +11,14 @@ class Admin::PostalCostsController < Admin::AdminController
     subscribers = Subscriber.active
     weight = @issue.weight
 
+    if params[:only_paid]
+      @paid = true
+      subscribers = subscribers.paid
+    elsif params[:only_free]
+      @free = true
+      subscribers = subscribers.free
+    end
+
     @quantities = subscribers.group_by do |subscriber|
       subscriber.subscriptions.active.sum(:quantity)
     end.reject do |quantity, _entities|

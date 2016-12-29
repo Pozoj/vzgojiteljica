@@ -40,7 +40,9 @@
     </small>
   <% end %>
 
-  <small><%= conditional_filtering_link "Vsa leta", param: :filter_year_all %></small>
+  <small><%= conditional_filtering_link "Vsa leta", param: :filter_year_all %> | </small>
+  <small><%= conditional_filtering_link "Neobdelane", param: :unprocessed %></small>
+
 
   <%= link_to "Vnesi novo", new_admin_order_form_path, class: 'btn btn-primary btn-xs' %>
 </h2>

@@ -5,6 +5,7 @@ class Admin::AdminController < ApplicationController
 
   def index
     @invoices = Invoice.where(year: Date.today.year)
+    @order_forms = OrderForm.not_processed.count
   end
 
   def quantities

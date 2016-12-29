@@ -9,6 +9,9 @@ class Admin::OrderFormsController < Admin::AdminController
     if params[:filter_year]
       @order_forms = @order_forms.where(year: params[:filter_year])
     elsif params[:filter_year_all]
+    elsif params[:unprocessed]
+      @order_forms = @order_forms.not_processed
+      @year_now = nil
     else
       @order_forms = @order_forms.where(year: @year_now)
     end

@@ -12,9 +12,12 @@
     %h3
       = Customer.paid_count
       %small plačljivih naročnikov
-    %h3
-      = OrderForm.not_processed.count
-      %small neobdelanih naročilnic
+    - if @order_forms > 0
+      .order_forms_counter
+        %h3
+          = link_to admin_order_forms_path(unprocessed: true) do
+            = @order_forms
+            %small neobdelanih naročilnic
     %hr
     %h2
       = Subscription.active.sum(:quantity)

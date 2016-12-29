@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161228123045) do
+ActiveRecord::Schema.define(version: 20161229080117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(version: 20161228123045) do
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
     t.integer  "batch_id"
+    t.integer  "num_pages",                         default: 28
   end
 
   add_index "issues", ["batch_id"], name: "index_issues_on_batch_id", using: :btree

@@ -1,8 +1,8 @@
 <h1><%= @letter.title %></h1>
 
 <div class="admin_actions">
-  <%= link_to "Uredi dopis", edit_admin_letter_path(@letter), class: 'btn btn-xs btn-default' %>
-  <%= link_to "Izbriši dopis", admin_letter_path(@letter), class: 'btn btn-xs btn-danger', method: :delete, :"data-confirm" => 'Ste prepričani?' %>
+  <%= link_to "Uredi dopis", edit_admin_letter_path(@letter), class: 'btn btn-default' %>
+  <%= link_to "Izbriši dopis", admin_letter_path(@letter), class: 'btn btn-danger', method: :delete, :"data-confirm" => 'Ste prepričani?' %>
 </div>
 
 <div class="row">

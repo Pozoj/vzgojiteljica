@@ -1,29 +1,32 @@
 <%= title @author %>
 
-<div class="collage">
-  <% @author.articles.each do |article| %>
-    <%= link_to issue_path(article.issue) do %>
-      <%= image_tag article.issue.cover.url(:medium) %>
-    <% end %>
-  <% end %>
-</div>
-
 <h2>Članki</h2>
 
 <ul>
-  <% @author.articles.order(issue_id: :desc).each do |article| %>
-    <li class="article">
-      <strong><%= link_to article.title, article %></strong>
-      <br>
-      <% if article.issue %>
-        Izšlo <%= l(article.issue.published_at, format: :simple) if article.issue.published_at %>
-        v reviji
-        <%= link_to article.issue do %>
-          <%= article.issue.year %>, št. <%= article.issue.issue %>
-        <% end %>
+  <% @author.articles.joins(:issue).order('issues.year DESC').group_by { |article| article.issue }.each do |issue, articles| %>
+    <li class="issue">
+      <%= link_to issue, class: 'cover' do %>
+        <%= image_tag issue.cover.url(:medium) %>
+        <div class="issue_number">
+          <strong><%= issue.year %>, št. <%= issue.issue %></strong>
+        </div>
+        <div class="published">
+          <%= l(issue.published_at, format: :simple) if issue.published_at %>
+        </div>
       <% end %>
 
-      <span class="author">(<%= @author.institution_for_article(article) %>)</span>
+      <div class="articles">
+        <% articles.each do |article| %>
+          <div class="article">
+            <strong><%= link_to article.title, article %></strong> <span class="section">(<%= article.section %>)</span>
+            <br>
+            <% if @author.institution_for_article(article) %>
+              <%= @author.institution_for_article(article) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <br class="clear">
     </li>
   <% end %>
 </ul>

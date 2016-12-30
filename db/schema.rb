@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230080142) do
+ActiveRecord::Schema.define(version: 20161230081725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,23 +33,21 @@ ActiveRecord::Schema.define(version: 20161230080142) do
   add_index "articles", ["section_id"], name: "index_articles_on_section_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
-    t.string   "first_name",     limit: 255
-    t.string   "last_name",      limit: 255
-    t.string   "address",        limit: 255
+    t.string   "first_name", limit: 255
+    t.string   "last_name",  limit: 255
+    t.string   "address",    limit: 255
     t.integer  "post_id"
-    t.string   "email",          limit: 255
+    t.string   "email",      limit: 255
     t.text     "notes"
-    t.integer  "institution_id"
-    t.string   "phone",          limit: 255
-    t.string   "title",          limit: 255
-    t.string   "education",      limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "title",      limit: 255
+    t.string   "education",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "entity_id"
   end
 
   add_index "authors", ["entity_id"], name: "index_authors_on_entity_id", using: :btree
-  add_index "authors", ["institution_id"], name: "index_authors_on_institution_id", using: :btree
   add_index "authors", ["post_id"], name: "index_authors_on_post_id", using: :btree
 
   create_table "authorships", force: :cascade do |t|

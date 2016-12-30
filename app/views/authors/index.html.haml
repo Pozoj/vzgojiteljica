@@ -1,13 +1,10 @@
 = title "Avtorji"
 
-= admin_section do
-  = link_to "Dodaj avtorja", new_author_path
-
 .pagination_top
   = paginate @authors, window: 3
   %br.clear
 
-- generate_table @authors, [:last_name, :first_name, :institution_id], [:show, :edit, :destroy]
+- generate_table @authors, [:last_name, :first_name]
 
 .pagination_bottom
   = paginate @authors, window: 3

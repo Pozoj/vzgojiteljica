@@ -19,10 +19,8 @@ Web3::Application.routes.draw do
         patch :answer
       end
     end
-    resources :articles, path: 'clanki' do
-      collection do
-        get :all, :search
-      end
+    resources :articles, path: 'clanki', only: [:index, :show] do
+      get :search, on: :collection
     end
     resources :sections, path: 'sekcije'
     resources :issues, path: 'revije', only: [:index, :show]
@@ -30,7 +28,7 @@ Web3::Application.routes.draw do
       get :successful, on: :collection, path: 'uspesno'
     end
     resources :copies, path: 'besedila'
-    resources :authors, path: 'avtorji'
+    resources :authors, path: 'avtorji', only: [:show]
     resources :news, path: 'pd-vzgojiteljica'
   end
 
@@ -51,6 +49,10 @@ Web3::Application.routes.draw do
     resources :entities
     resources :postal_costs, only: :index do
       get :calculate, on: :collection
+    end
+    resource :articles do
+    end
+    resource :authors do
     end
     resources :issues do
       member do

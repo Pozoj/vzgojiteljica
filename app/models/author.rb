@@ -4,7 +4,6 @@ class Author < ActiveRecord::Base
 
   has_many :authorships
   has_many :articles, through: :authorships
-  belongs_to :institution
   belongs_to :post
   belongs_to :subscriber, foreign_key: :entity_id
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229180604) do
+ActiveRecord::Schema.define(version: 20161230080142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,14 +55,16 @@ ActiveRecord::Schema.define(version: 20161229180604) do
   create_table "authorships", force: :cascade do |t|
     t.integer  "article_id"
     t.integer  "author_id"
-    t.integer  "position",   default: 1
+    t.integer  "position",       default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "institution_id"
   end
 
   add_index "authorships", ["article_id"], name: "index_authorships_on_article_id", using: :btree
   add_index "authorships", ["author_id", "article_id"], name: "index_authorships_on_author_id_and_article_id", unique: true, using: :btree
   add_index "authorships", ["author_id"], name: "index_authorships_on_author_id", using: :btree
+  add_index "authorships", ["institution_id"], name: "index_authorships_on_institution_id", using: :btree
 
   create_table "bank_statements", force: :cascade do |t|
     t.datetime "created_at",             null: false

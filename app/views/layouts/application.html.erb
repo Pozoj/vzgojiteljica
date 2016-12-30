@@ -77,14 +77,6 @@
           <%= link_to 'Naročila', new_order_path %> |
           <%= link_to 'Avtorji', '/avtorji-spletne-aplikacije' %>
         </p>
-        <% if signed_in? %>
-          <p>
-            <%= link_to 'Rubrike', sections_path %>  |
-            <%= link_to 'Avtorji', authors_path %>  |
-            <%= link_to 'Institucije', institutions_path %>  |
-            <%= link_to 'Ključne besede', keywords_path %>
-          </p>
-        <% end %>
         <div id="login">
           <% if signed_in? %>
             Prijavljeni kot

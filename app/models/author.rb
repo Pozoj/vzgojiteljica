@@ -7,7 +7,7 @@ class Author < ActiveRecord::Base
   belongs_to :post
   belongs_to :subscriber, foreign_key: :entity_id
 
-  default_scope { order('last_name, first_name, institution_id') }
+  default_scope { order('last_name, first_name') }
 
   validates_presence_of :last_name
 
@@ -23,6 +23,10 @@ class Author < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  def institution_for_article(article)
+    authorships.find_by(article_id: article.id).try(:institution)
   end
 
   def to_param

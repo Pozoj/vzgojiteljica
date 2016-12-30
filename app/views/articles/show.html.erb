@@ -1,10 +1,5 @@
 <%= title @article.title %>
 
-<%= admin_section do %>
-  <%= link_to "Uredi", edit_article_path(@article) %>
-  <%= link_to "Odstrani", @article, method: :delete, data: { confirm: 'Ste prepričani?' } %>
-<% end %>
-
 <div id='abstract'>
 	<%= raw @article.abstract_html %>
 

@@ -4,6 +4,7 @@ class Subscriber < Entity
   has_many :subscriptions, dependent: :destroy
   has_one :contact_person, foreign_key: :entity_id
   has_one :billing_person, foreign_key: :entity_id
+  has_one :author, foreign_key: :entity_id
 
   scope :active, -> { joins(:subscriptions).merge(Subscription.active).group('entities.id') }
   scope :paid,   -> { joins(:subscriptions).merge(Subscription.paid).group('entities.id') }
@@ -14,7 +15,7 @@ class Subscriber < Entity
     query = tbl[:remarkable_id].eq(id).and(tbl[:remarkable_type].eq('Entity'))
     query = query.or(tbl[:remarkable_id].in(subscription_ids).and(tbl[:remarkable_type].eq('Subscription')))
     Remark.where(query)
-end
+  end
 
   def self.inactive
     Subscriber.all - Subscriber.active

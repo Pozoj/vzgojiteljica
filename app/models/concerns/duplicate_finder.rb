@@ -51,9 +51,9 @@ module DuplicateFinder
           duplicates[author_key].add(author)
         end
 
-        if Levenshtein.compute(author_key, author.name) < 3
-          duplicates[author_key].add(author)
-        end
+        # if Levenshtein.compute(author_key, author.name) < 3
+        #   duplicates[author_key].add(author)
+        # end
       end
     end
 

@@ -12,7 +12,7 @@
       <% duplicates.each do |dupe| %>
         <li>
           <%= link_to dupe.id, author_path(dupe) %>
-          <small class="muted"><%= dupe.created_at %></small>
+          <small class="muted"><%= dupe.created_at %><br><%= dupe.institution %></small>
         </li>
       <% end %>
     </ul>

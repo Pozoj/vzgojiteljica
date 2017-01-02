@@ -50,6 +50,8 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Številke <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<%= admin_issues_path %>">Številke</a></li>
+                <li role="presentation" class="divider"></li>
+                <li><a href="<%= admin_authors_path %>">Avtorji</a></li>
               </ul>
             </li>
             <li><a href="<%= admin_remarks_path %>">Opombe</a></li>
@@ -152,6 +154,14 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<%= admin_bank_statements_path %>">Bančni izpiski</a></li>
                 <li><a href="<%= admin_postal_costs_path %>">Poštni cenik</a></li>
+                <li class="dropdown-submenu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    Ostali podatki
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="<%= admin_institutions_path %>">Institucije</a></li>
+                  </ul>
+                </li>
                 <li class="dropdown-submenu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     Podvojeni

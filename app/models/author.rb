@@ -13,7 +13,6 @@ class Author < ActiveRecord::Base
 
   def unique_name
     uniq_name = "#{last_name}, #{first_name}"
-    uniq_name = "#{uniq_name} (#{institution})" if institution && institution.name.present?
     uniq_name
   end
 

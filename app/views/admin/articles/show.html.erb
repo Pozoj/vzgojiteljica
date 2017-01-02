@@ -1,0 +1,34 @@
+<%= title @article.title %>
+
+<div id='abstract'>
+	<%= raw @article.abstract_html %>
+
+  <div class="data">
+    <% if @article.keywords.any? %>
+    	<p>
+        <strong>Ključne besede:</strong>
+        <%= raw @article.keywords.map { |k| link_to k, search_articles_path(:query => k.keyword) }.join(", ") %>
+      </p>
+    <% end %>
+  	<p>
+      <strong>Avtor:</strong> <%= raw @article.authors.map { |a| link_to a, a }.join(", ") %>
+    </p>
+    <% if @article.issue %>
+    	<p>
+        <strong>Letnik:</strong>
+        <%= link_to @article.issue do %>
+          <%= @article.issue.year %>, št. <%= @article.issue.issue %>
+        <% end %>
+      </p>
+    <% end %>
+  	<p>
+      <strong>Rubrika:</strong> <%= @article.section %>
+    </p>
+  </div>
+</div>
+<% if @article.issue && @article.issue.cover %>
+  <div class='cover'>
+    <%= image_tag @article.issue.cover.url %>
+  </div>
+<% end %>
+<br class="clear">

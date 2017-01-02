@@ -1,0 +1,7 @@
+= title "Institucije"
+
+= paginate @institutions, window: 3
+
+- generate_table @institutions, [:id, :name], false
+
+= paginate @institutions, window: 3

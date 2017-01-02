@@ -1,20 +1,9 @@
 # frozen_string_literal: true
-class KeywordsController < ApplicationController
+class Admin::KeywordsController < Admin::AdminController
+  respond_to :html, :json
+
   def index
     respond_with collection
-  end
-
-  def all
-    respond_with collection
-  end
-
-  def show
-    respond_with resource
-  end
-
-  def new
-    @keyword = Keyword.new
-    respond_with resource
   end
 
   def create
@@ -22,13 +11,13 @@ class KeywordsController < ApplicationController
     respond_with resource, location: -> { keywords_path }
   end
 
-  def edit
-    respond_with resource
-  end
+  def create_simple
+    @keyword = Keyword.create resource_params
 
-  def update
-    resource.update_attributes resource_params
-    respond_with resource, location: -> { keywords_path }
+    render json: {
+      id: @keyword.id,
+      keyword: @keyword.keyword
+    }
   end
 
   def destroy

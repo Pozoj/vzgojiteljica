@@ -9,9 +9,6 @@ Web3::Application.routes.draw do
   devise_for :users
 
   scope path_names: { new: 'novo', edit: 'uredi', all: 'vse', search: 'isci' } do
-    resources :keywords, path: 'kljucne_besede'
-    resources :posts, path: 'poste'
-    resources :institutions, path: 'institucije'
     resources :inquiries, path: 'vprasanja' do
       get :all, on: :collection
       member do
@@ -22,7 +19,6 @@ Web3::Application.routes.draw do
     resources :articles, path: 'clanki', only: [:index, :show] do
       get :search, on: :collection
     end
-    resources :sections, path: 'sekcije'
     resources :issues, path: 'revije', only: [:index, :show]
     resources :orders, path: 'narocila', only: [:new, :create] do
       get :successful, on: :collection, path: 'uspesno'
@@ -52,9 +48,15 @@ Web3::Application.routes.draw do
       get :calculate, on: :collection
       get :calculate_reward, on: :collection
     end
-    resource :articles do
+    resources :institutions, only: :index
+    resources :posts
+    resources :keywords do
+      post :create_simple, on: :collection
     end
-    resource :authors do
+    resources :sections
+    resources :articles
+    resources :authors do
+      post :create_simple, on: :collection
     end
     resources :issues do
       member do

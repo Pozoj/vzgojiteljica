@@ -1,13 +1,10 @@
 = title "Ključne besede"
 
-= admin_section do
-  = link_to "Dodaj besedo", new_keyword_path
-
 .pagination_top
   = paginate @keywords, window: 3
   %br.clear
 
-- generate_table @keywords, [:keyword], [:edit, :destroy]
+- generate_table @keywords, [:keyword], nil
 
 .pagination_bottom
   = paginate @keywords, window: 3

@@ -9,8 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require admin.scss
- *= require chosen
  *= require bootstrap-datepicker3
+ *= require chosen
  */
 
 #container {
@@ -193,4 +193,8 @@ td.subscriptions .subscription:last-child {
 
 .order_forms_counter * {
   color: #dd0000 !important;
+}
+
+#article_author_ids_chosen, #article_keyword_ids_chosen {
+  width: 360px !important;
 }

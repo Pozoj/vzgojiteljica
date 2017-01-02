@@ -117,8 +117,31 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Poročila <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
+                <li class="dropdown-submenu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                    &nbsp;
+                    Poštnina
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <a href="<%= calculate_admin_postal_costs_path %>">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                        &nbsp;
+                        Poštnina
+                      </a>
+                    </li>
+                    <li>
+                      <a href="<%= calculate_reward_admin_postal_costs_path %>">
+                        <i class="glyphicon glyphicon-gift"></i>
+                        &nbsp;
+                        Poštnina za nagradne
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li role="presentation" class="divider"></li>
                 <li><a href="<%= admin_quantities_path %>">Količine</a></li>
-                <li><a href="<%= calculate_admin_postal_costs_path %>">Poštnina</a></li>
                 <li><a href="<%= admin_freeriders_path %>">Brezplačniki</a></li>
                 <li><a href="<%= admin_regional_path %>">Po regijah</a></li>
               </ul>

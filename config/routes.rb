@@ -49,6 +49,7 @@ Web3::Application.routes.draw do
     resources :entities
     resources :postal_costs, only: :index do
       get :calculate, on: :collection
+      get :calculate_reward, on: :collection
     end
     resource :articles do
     end

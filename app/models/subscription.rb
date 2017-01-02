@@ -33,6 +33,7 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :subscriber
   validates_numericality_of :quantity, greater_than: 0, only_integer: true
   validates_inclusion_of :reward, in: (0..(REWARD_TIERS.length - 1))
+  validate :validate_reward_is_free
   validate :validate_end_after_start
 
   def customer
@@ -103,6 +104,12 @@ class Subscription < ActiveRecord::Base
   def validate_end_after_start
     if self.end.present? && self.end <= start
       errors.add :end, 'mora biti kasneje od pričetka'
+    end
+  end
+
+  def validate_reward_is_free
+    if reward? && !plan.free?
+      errors.add :reward, 'nagradna naročnina mora biti brezplačna'
     end
   end
 

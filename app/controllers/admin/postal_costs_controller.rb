@@ -7,39 +7,22 @@ class Admin::PostalCostsController < Admin::AdminController
 
   def calculate
     @issue = Issue.last
-
-    subscribers = Subscriber.active
     weight = @issue.weight
 
-    if params[:only_rewards]
-      @rewards = true
-      subscribers = subscribers.free.find_all do |subscriber|
-        subscriber.subscriptions.rewards.any?
-      end
-    end
-
     # Skip manual delivery customers
-    subscribers = subscribers.reject do |subscriber|
+    @postal_costs = Subscriber.active.reject do |subscriber|
       subscriber.customer.manual_delivery?
-    end
-
-    @quantities = subscribers.group_by do |subscriber|
-      subscriptions = subscriber.subscriptions.active
-
-      if @rewards
-        subscriptions = subscriptions.rewards
-      else
-        subscriptions = subscriptions.without_rewards
-      end
-
-      subscriptions.sum(:quantity)
+    end.group_by do |subscriber|
+      subscriber
+        .subscriptions
+        .active
+        .without_rewards
+        .sum(:quantity)
     end.reject do |quantity, _entities|
       quantity < 1
     end.sort_by do |quantity, _entities|
       quantity
-    end
-
-    @postal_costs = @quantities.map do |quantity, entities|
+    end.map do |quantity, entities|
       package_weight = quantity * weight
       postal_cost = PostalCost.calculate_for_weight(package_weight)
       packages = entities.length
@@ -55,6 +38,52 @@ class Admin::PostalCostsController < Admin::AdminController
         package_price: postal_cost.price,
         price: postal_cost.price * packages
       }
+    end.group_by do |cost_bracket|
+      cost_bracket[:postal_cost].service_type
+    end
+  end
+
+  def calculate_reward
+    @issue = Issue.last
+    weight = @issue.weight
+
+    @postal_costs = Subscription.active.free.rewards.map do |subscription|
+      next unless subscription.quantity > 0
+
+      issue_weight = weight
+      issue_weight += Issue::WEIGHT_PER_REWARD if subscription.reward == 1 # 1 is drawing reward
+
+      {
+        issue_weight: issue_weight,
+        subscription: subscription
+      }
+    end.group_by do |subscription|
+      subscription[:subscription].subscriber
+    end.map do |subscriber, subscriptions|
+      {
+        subscriber: subscriber,
+        subscriptions: subscriptions,
+        quantity: subscriptions.sum { |subscription| subscription[:subscription].quantity }
+      }
+    end.sort_by do |subscriber|
+      subscriber[:quantity]
+    end.map do |subscriber|
+      package_weight = subscriber[:subscriptions].sum { |subscription| subscription[:issue_weight] }
+      postal_cost = PostalCost.calculate_for_weight(package_weight)
+      packages = 1
+
+      raise "Could not calculate postal cost for #{package_weight}" unless postal_cost
+
+      {
+        quantity: subscriber[:quantity],
+        package_weight: package_weight,
+        packages: packages,
+        postal_cost: postal_cost,
+        package_price: postal_cost.price,
+        price: postal_cost.price
+      }
+    end.sort_by do |cost_bracket|
+      cost_bracket[:package_weight]
     end.group_by do |cost_bracket|
       cost_bracket[:postal_cost].service_type
     end

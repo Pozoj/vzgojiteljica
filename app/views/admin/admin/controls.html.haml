@@ -1,0 +1,48 @@
+%h1
+  Kontrola pakiranja
+  %small
+    %br
+    - if @paid
+      Prikazani so samo plačljivi
+    - if @free
+      Prikazani so samo brezplačni
+    - if @rewards
+      Prikazani so samo nagradni
+    - if @except_rewards
+      Prikazani so vsi razen nagradni
+
+.admin_actions
+  %strong.muted
+    Prikaži:
+    &nbsp;
+  - if @paid || @free || @rewards
+    = link_to "Vse", admin_controls_path(which: @which), class: 'btn btn-primary btn-xs'
+  - unless @paid
+    = link_to "Samo plačljive", admin_controls_path(only_paid: true, which: @which), class: 'btn btn-default btn-xs'
+  - unless @free
+    = link_to "Samo brezplačne", admin_controls_path(only_free: true, which: @which), class: 'btn btn-default btn-xs'
+  - unless @rewards
+    = link_to "Samo nagradne", admin_controls_path(only_rewards: true, which: @which), class: 'btn btn-default btn-xs'
+  - unless @except_rewards
+    = link_to "Razen nagradne", admin_controls_path(except_rewards: true, which: @which), class: 'btn btn-default btn-xs'
+
+%table.table
+  %thead
+    %tr
+      %th{colspan: 2} Prejemnik
+      %th Izvodov
+  %tbody
+    - @subscribers.each do |subscriber|
+      %tr
+        %td
+          %strong= subscriber[:subscriber]
+          - if subscriber[:subscriber].name.present? && subscriber[:subscriber].title.present?
+            %small.muted= subscriber[:subscriber].title
+        %td
+          == #{subscriber[:subscriber].address},
+          = subscriber[:subscriber].post
+        %td= subscriber[:quantity]
+  %tfoot
+    %tr
+      %th{colspan: 2}
+      %th= @subscribers.sum { |subscriber| subscriber[:quantity] }

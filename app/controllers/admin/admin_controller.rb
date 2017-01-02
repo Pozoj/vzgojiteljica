@@ -14,6 +14,7 @@ class Admin::AdminController < ApplicationController
     @paid = params[:only_paid] == 'true'
     @free = params[:only_free] == 'true'
     @rewards = params[:only_rewards] == 'true'
+    @except_rewards = params[:except_rewards] == 'true'
 
     @which = params[:which]
     klass = if @which == 'customers'
@@ -31,6 +32,8 @@ class Admin::AdminController < ApplicationController
         quantity = quantity.free
       elsif @rewards
         quantity = quantity.free.rewards
+      elsif @except_rewards
+        quantity = quantity.without_rewards
       end
 
       quantity = quantity.sum(:quantity)
@@ -38,6 +41,37 @@ class Admin::AdminController < ApplicationController
       quantity < 1
     end.sort_by do |quantity, _entities|
       quantity
+    end
+  end
+
+  def controls
+    @page_title = 'Kontrola pakiranja'
+
+    @paid = params[:only_paid] == 'true'
+    @free = params[:only_free] == 'true'
+    @rewards = params[:only_rewards] == 'true'
+    @except_rewards = params[:except_rewards] == 'true'
+
+    subscriptions = Subscription.active
+    if @paid
+      subscriptions = subscriptions.paid
+    elsif @free
+      subscriptions = subscriptions.free
+    elsif @rewards
+      subscriptions = subscriptions.free.rewards
+    elsif @except_rewards
+      subscriptions = subscriptions.without_rewards
+    end
+
+    @subscribers = subscriptions.group_by do |subscription|
+      subscription.subscriber
+    end.sort_by do |subscriber, subs|
+      -subs.sum(&:quantity)
+    end.map do |subscriber, subs|
+      {
+        subscriber: subscriber,
+        quantity: subs.sum(&:quantity)
+      }
     end
   end
 

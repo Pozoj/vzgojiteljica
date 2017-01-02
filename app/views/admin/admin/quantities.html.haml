@@ -12,16 +12,23 @@
       Prikazani so samo brezplačni
     - if @rewards
       Prikazani so samo nagradni
+    - if @except_rewards
+      Prikazani so vsi razen nagradni
 
 .admin_actions
+  %strong.muted
+    Prikaži:
+    &nbsp;
   - if @paid || @free || @rewards
-    = link_to "Prikaži vse", admin_quantities_path(which: @which), class: 'btn btn-primary btn-xs'
+    = link_to "Vse", admin_quantities_path(which: @which), class: 'btn btn-primary btn-xs'
   - unless @paid
-    = link_to "Prikaži samo plačljive", admin_quantities_path(only_paid: true, which: @which), class: 'btn btn-default btn-xs'
+    = link_to "Samo plačljive", admin_quantities_path(only_paid: true, which: @which), class: 'btn btn-default btn-xs'
   - unless @free
-    = link_to "Prikaži samo brezplačne", admin_quantities_path(only_free: true, which: @which), class: 'btn btn-default btn-xs'
+    = link_to "Samo brezplačne", admin_quantities_path(only_free: true, which: @which), class: 'btn btn-default btn-xs'
   - unless @rewards
-    = link_to "Prikaži samo nagradne", admin_quantities_path(only_rewards: true, which: @which), class: 'btn btn-default btn-xs'
+    = link_to "Samo nagradne", admin_quantities_path(only_rewards: true, which: @which), class: 'btn btn-default btn-xs'
+  - unless @except_rewards
+    = link_to "Razen nagradne", admin_quantities_path(except_rewards: true, which: @which), class: 'btn btn-default btn-xs'
   &nbsp;
   - if params[:which] == 'customers'
     = link_to "Prikaži prejemnike za pošto", admin_quantities_path(only_paid: params[:only_paid], which: 'subscribers'), class: 'btn btn-warning btn-xs'

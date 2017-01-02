@@ -38,6 +38,7 @@ Web3::Application.routes.draw do
   namespace :admin do
     root to: 'admin#index'
     get :quantities, to: 'admin#quantities'
+    get :controls, to: 'admin#controls'
     get :freeriders, to: 'admin#freeriders'
     get :regional, to: 'admin#regional'
     resources :duplicates do

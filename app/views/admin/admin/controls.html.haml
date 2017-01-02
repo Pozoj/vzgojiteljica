@@ -15,7 +15,7 @@
   %strong.muted
     Prikaži:
     &nbsp;
-  - if @paid || @free || @rewards
+  - if @paid || @free || @rewards || @except_rewards
     = link_to "Vse", admin_controls_path(which: @which), class: 'btn btn-primary btn-xs'
   - unless @paid
     = link_to "Samo plačljive", admin_controls_path(only_paid: true, which: @which), class: 'btn btn-default btn-xs'

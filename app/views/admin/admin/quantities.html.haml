@@ -1,23 +1,32 @@
 %h1
   Količine
+  - if params[:which] == 'customers'
+    po naročnikih
+  - else
+    po prejemnikih
   %small
-    - if params[:which] == 'customers'
-      po naročnikih
-    - else
-      po prejemnikih
+    %br
     - if @paid
-      brez brezplačnih prejemnikov
+      Prikazani so samo plačljivi
+    - if @free
+      Prikazani so samo brezplačni
+    - if @rewards
+      Prikazani so samo nagradni
 
 .admin_actions
-  - if @paid
+  - if @paid || @free || @rewards
     = link_to "Prikaži vse", admin_quantities_path(which: @which), class: 'btn btn-primary btn-xs'
-  - else
+  - unless @paid
     = link_to "Prikaži samo plačljive", admin_quantities_path(only_paid: true, which: @which), class: 'btn btn-default btn-xs'
-
+  - unless @free
+    = link_to "Prikaži samo brezplačne", admin_quantities_path(only_free: true, which: @which), class: 'btn btn-default btn-xs'
+  - unless @rewards
+    = link_to "Prikaži samo nagradne", admin_quantities_path(only_rewards: true, which: @which), class: 'btn btn-default btn-xs'
+  &nbsp;
   - if params[:which] == 'customers'
-    = link_to "Prikaži prejemnike za pošto", admin_quantities_path(only_paid: params[:only_paid], which: 'subscribers'), class: 'btn btn-default btn-xs'
+    = link_to "Prikaži prejemnike za pošto", admin_quantities_path(only_paid: params[:only_paid], which: 'subscribers'), class: 'btn btn-warning btn-xs'
   - else
-    = link_to "Prikaži naročnike", admin_quantities_path(only_paid: params[:only_paid], which: 'customers'), class: 'btn btn-default btn-xs'
+    = link_to "Prikaži naročnike", admin_quantities_path(only_paid: params[:only_paid], which: 'customers'), class: 'btn btn-warning btn-xs'
 
 %table.table
   %thead

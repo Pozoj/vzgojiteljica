@@ -12,6 +12,8 @@ class Admin::AdminController < ApplicationController
     @page_title = 'Količine po prejemnikih'
 
     @paid = params[:only_paid] == 'true'
+    @free = params[:only_free] == 'true'
+    @rewards = params[:only_rewards] == 'true'
 
     @which = params[:which]
     klass = if @which == 'customers'
@@ -22,7 +24,15 @@ class Admin::AdminController < ApplicationController
 
     @quantities = klass.all.group_by do |entity|
       quantity = entity.subscriptions.active
-      quantity = quantity.paid if @paid
+
+      if @paid
+        quantity = quantity.paid
+      elsif @free
+        quantity = quantity.free
+      elsif @rewards
+        quantity = quantity.free.rewards
+      end
+
       quantity = quantity.sum(:quantity)
     end.reject do |quantity, _entities|
       quantity < 1

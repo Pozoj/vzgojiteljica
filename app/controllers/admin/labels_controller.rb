@@ -1,19 +1,25 @@
 # frozen_string_literal: true
 class Admin::LabelsController < Admin::AdminController
   def print
-    @labels = Subscriber.active
+    @labels = Subscription.active
 
     if params[:paid].present?
       @labels = @labels.paid
     elsif params[:freeriders].present?
       @labels = @labels.free
+    elsif params[:rewards].present?
+      @labels = @labels.rewards
+    elsif params[:except_rewards].present?
+      @labels = @labels.without_rewards
     elsif params[:all].present?
     end
 
-    @labels = @labels.map do |subscriber|
+    @labels = @labels.group_by do |subscription|
+      subscription.subscriber
+    end.map do |subscriber, subscriptions|
       label = Label.new
       label.subscriber = subscriber
-      label.quantity = subscriber.subscriptions.active.sum(:quantity)
+      label.quantity = subscriptions.sum(&:quantity)
       next unless label.quantity > 0
 
       label

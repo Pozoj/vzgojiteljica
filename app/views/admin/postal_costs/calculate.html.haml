@@ -45,6 +45,9 @@
     %tr
       %th Skupaj
       %th
+        = number_with_delimiter @postal_costs.sum { |service_type, postal_costs| postal_costs.sum { |pc| pc[:package_weight] * pc[:packages] } }.to_i
+        g
+        %small.muted== (#{@postal_costs.sum { |service_type, postal_costs| postal_costs.sum { |pc| pc[:quantity] * pc[:packages] } } } kom.)
       %th= @postal_costs.sum { |service_type, postal_costs| postal_costs.sum { |pc| pc[:packages] } }
       %th
       %th= number_to_currency @postal_costs.sum { |service_type, postal_costs| postal_costs.sum { |pc| pc[:price] } }

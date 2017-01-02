@@ -2,8 +2,8 @@ class PostalCost < ActiveRecord::Base
   validate :validate_weight
 
   WEIGHT_TYPES = [
-    [0, 700, 'NDP'],
-    [700, 2000, 'Navadno pismo'],
+    [0, 600, 'NDP'],
+    [600, 2000, 'Navadno pismo'],
     [2000, 20000, 'Navadni paket']
   ].freeze
 

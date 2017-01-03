@@ -1,4 +1,4 @@
 = title "Rubrike"
-= admin_section do
-  = link_to 'Dodaj rubriko', new_section_path
-- generate_table @sections, [:name, :position], [:edit, :destroy]
+.admin_actions
+  = link_to 'Dodaj rubriko', new_admin_section_path, class: 'btn btn-default'
+- generate_table @sections, [:name, :position], [:edit, :destroy], :admin

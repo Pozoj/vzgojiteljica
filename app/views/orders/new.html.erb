@@ -1,15 +1,12 @@
 <%= title "Naročite revijo Vzgojiteljica" %>
-<%= admin_section do %>
-  <%= link_to "Pregled naročil", orders_path %>
-<% end %>
 
 <p class="notice">
-  Pri POZOJ, Darja Slapničar s.p., <strong>naročamo</strong> revijo Vzgojiteljica. 
+  Pri POZOJ, Darja Slapničar s.p., <strong>naročamo</strong> revijo Vzgojiteljica.
   <br>
   Letno izide 6 številk. Revija izhaja vsak drugi mesec.
-  Cena posamezne številke je 
-  <%= number_to_currency Plan.latest_per_issue.price_with_tax %>, 
-  znesek letne naročnine je 
+  Cena posamezne številke je
+  <%= number_to_currency Plan.latest_per_issue.price_with_tax %>,
+  znesek letne naročnine je
   <%= number_to_currency Plan.latest_yearly.price_with_tax %>.
 </p>
 

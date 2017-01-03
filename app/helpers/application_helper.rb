@@ -95,7 +95,7 @@ module ApplicationHelper
             end
             haml_tag :td, class: :admin do
               if crud_fields && crud_fields.include?(:destroy)
-                concat link_to 'Odstrani', polymorphic_url([path_prefix, record]), method: :delete, confirm: 'Ste prepričani?'
+                concat link_to 'Odstrani', polymorphic_url([path_prefix, record]), method: :delete, 'data-confirm' => 'Ste prepričani?'
               end
               if crud_fields && crud_fields.include?(:edit)
                 concat link_to 'Uredi', polymorphic_url([path_prefix, record], action: :edit)

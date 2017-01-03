@@ -1,10 +1,6 @@
 # frozen_string_literal: true
-class SectionsController < ApplicationController
+class Admin::SectionsController < Admin::AdminController
   def index
-    respond_with collection
-  end
-
-  def all
     respond_with collection
   end
 
@@ -19,7 +15,7 @@ class SectionsController < ApplicationController
 
   def create
     @section = Section.create resource_params
-    respond_with resource, location: -> { sections_path }
+    respond_with resource, location: -> { admin_sections_path }
   end
 
   def edit
@@ -28,12 +24,12 @@ class SectionsController < ApplicationController
 
   def update
     resource.update_attributes resource_params
-    respond_with resource, location: -> { sections_path }
+    respond_with resource, location: -> { admin_sections_path }
   end
 
   def destroy
     resource.destroy
-    respond_with resource
+    respond_with resource, location: -> { admin_sections_path }
   end
 
   private

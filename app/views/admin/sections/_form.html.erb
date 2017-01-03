@@ -1,7 +1,12 @@
-<%= simple_form_for @section do |f| %>
-  <%= f.input :name %>
-  <%= f.input :position %>
-  <div class='submit'>
-    <%= f.submit %>
+<div class="row">
+  <div class="form-inputs col-xs-8">
+    <%= simple_form_for [:admin, @section] do |f| %>
+      <%= f.input :name %>
+      <%= f.input :position %>
+      <div class="form-actions">
+        <hr>
+        <%= f.button :submit %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>  

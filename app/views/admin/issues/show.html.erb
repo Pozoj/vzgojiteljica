@@ -59,21 +59,20 @@
       <div class="panel-body">
         <% @issue.articles_grouped_by_sections.each do |section, articles| %>
           <div class='section'>
-            <h2><%= section %></h2>
+            <h4><%= section %></h4>
             <ol class='articles'>
               <% articles.each do |article| %>
                 <li>
                   <%= link_to article.title, article %>
-                  <span class="author">
-                    (<%= raw article.authors.map { |a| link_to a, a }.join(", ") %>)
-                  </span>
+                  &mdash;
+                  <span class="author"><%= raw article.authors.map { |a| link_to a, a }.join(", ") %></span>
                 </li>
               <% end %>
             </ol>
           </div>
         <% end %>
         <hr>
-        <%= link_to "Dodaj članek", new_admin_articles_path(issue_id: @issue.id), class: 'btn btn-default pull-right' %>
+        <%= link_to "Dodaj članek", new_admin_article_path(issue_id: @issue.id), class: 'btn btn-default pull-right' %>
       </div>
     </div>
   </div>

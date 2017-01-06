@@ -1,0 +1,49 @@
+<%= title "Članki" %>
+
+<%= link_to "Iskanje in filtriranje člankov", search_articles_path, id: :search_toggle %>
+
+<div id="search">
+  <h3>Iskanje</h3>
+  <div id="instructions">
+    <p>
+      V iskalno polje vpišite ključne besede, ime avtorja ali letnik revije.
+    </p>
+    <p>
+      Primeri:
+    </p>
+    <ul>
+      <li>Če želite poiskati članke iz leta 2007, vpišite <em>"2007"</em>.</li>
+      <li>Če želite poiskati članke, ki jih je napisala oseba z imenom Alenka, vpišite <em>"Alenka"</em>.</li>
+      <li>Če želite poiskat članke iz leta 2013, ki vsebujejo ključno besedo voda, vpišite <em>"voda 2013"</em>.</li>
+    </ul>
+  </div>
+  <%= form_tag search_articles_path, method: :get do %>
+    <%= text_field_tag :query, params[:query], autofocus: :autofocus %>
+    <%= submit_tag "Išči", class: :submit %>
+    <br class='clear'>
+  <% end %>
+</div>
+
+<div class="pagination_top"><%= paginate @articles, window: 3 %><br class='clear'></div>
+<table id="articles">
+  <thead>
+    <tr>
+      <th>Naziv</th>
+      <th>Avtor</th>
+      <th>Revija</th>
+      <th>Izšel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td class="article_title"><%= link_to article.title, article %></td>
+        <td class="article_author"><%= raw article.authors.map { |a| link_to a, a }.join(", ") %></td>
+        <td class="article_issue"><%= link_to article.issue, article.issue %></td>
+        <td><% if article.issue && article.issue.published_at %> <%= l article.issue.published_at %> <% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="pagination_bottom"><%= paginate @articles, window: 3 %><br class='clear'></div>

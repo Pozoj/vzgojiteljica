@@ -1,0 +1,58 @@
+<script type="text/javascript">
+  $(function() {
+    $('#article_author_ids').chosen({
+      create_option: function(term) {
+        var chosen = this;
+        $.post('<%= create_simple_admin_authors_path %>', { author: { author: term } }, function(data) {
+          chosen.append_option({
+            value: data.id,
+            text: data.name
+          });
+        }, 'json');
+      },
+      persistent_create_option: true,
+    });
+    $('#article_keyword_ids').chosen({
+      create_option: function(term) {
+        var chosen = this;
+        $.post('<%= create_simple_admin_keywords_path %>', { keyword: { keyword: term } }, function(data) {
+          console.log(data)
+          chosen.append_option({
+            value: data.id,
+            text: data.keyword
+          });
+        }, 'json');
+      },
+      persistent_create_option: true,
+    });
+  });
+</script>
+
+<%= simple_form_for [:admin, @article] do |f| %>
+  <div class="row">
+    <div class="form-inputs col-xs-4">
+      <%= f.association :section %>
+      <%= f.association :issue, collection: Issue.sorted %>
+      <%= f.input :title, as: :string %>
+      <div class='form-group input select'>
+        <label class='select' for='article_author_ids'>Avtorji</label>
+        <%= f.collection_select :author_ids, Author.all, :id, :name, {}, {multiple: true, class: 'select'} %>
+      </div>
+      <div class='form-group input select'>
+        <label class='select' for='article_keyword_ids'>Ključne besede</label>
+        <%= f.collection_select :keyword_ids, Keyword.all, :id, :keyword, {}, {multiple: true, class: 'select'} %>
+      </div>
+    </div>
+    <div class="form-inputs col-xs-8">
+      <%= f.input :abstract_html, input_html: {rows: 15, cols: 120} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-inputs col-xs-12">
+      <div class="form-actions">
+        <hr>
+        <%= f.button :submit %>
+      </div>
+    </div>
+  </div>
+<% end %>

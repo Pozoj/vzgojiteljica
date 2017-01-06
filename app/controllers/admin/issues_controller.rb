@@ -10,7 +10,7 @@ class Admin::IssuesController < Admin::AdminController
   end
 
   def new
-    @issue = Issue.new
+    @issue = Issue.new year: Date.today.year
     respond_with resource
   end
 

@@ -9,8 +9,8 @@ end
 #   '127.0.0.1' == req.ip || '::1' == req.ip
 # end
 
-Rack::Attack.blacklist('block 158.69.200.205') do |req|
-  '158.69.200.205' == req.ip
+Rack::Attack.blacklist('block blacklisted') do |req|
+  (ENV['BLACKLISTED_IPS'] || '').split(',').include?(req.ip)
 end
 
 # Throttle requests to 5 requests per second per ip
@@ -24,8 +24,7 @@ end
 #   req.ip
 # end
 
-# Throttle login attempts for a given email parameter to 6 reqs/minute
-# Return the email as a discriminator on POST /login requests
+# Throttle search attempts to 1 request every 2 seconds
 Rack::Attack.throttle('articles/search', limit: 1, period: 2.seconds) do |req|
   req.ip if req.path == '/clanki/isci'
 end

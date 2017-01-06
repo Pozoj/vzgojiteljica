@@ -5,6 +5,7 @@ class Issue < ActiveRecord::Base
 
   has_many :articles
   has_many :keywords, through: :articles
+  has_many :authors, through: :articles
   belongs_to :batch
 
   validates :issue, numericality: { only_integer: true, greater_than: 0, less_than: 8 }

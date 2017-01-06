@@ -10,12 +10,13 @@ class Admin::ArticlesController < Admin::AdminController
 
   def new
     @article = Article.new
+    @article.issue = Issue.find_by(id: params[:issue_id])
     respond_with resource
   end
 
   def create
-    @article = Article.create resource_params
-    respond_with resource
+    @article = Article.create(resource_params)
+    respond_with resource, location: -> { admin_issue_path(@article.issue) }
   end
 
   def edit
@@ -24,7 +25,7 @@ class Admin::ArticlesController < Admin::AdminController
 
   def update
     resource.update_attributes resource_params
-    respond_with resource
+    respond_with resource, location: -> { admin_issue_path(resource.issue) }
   end
 
   def destroy

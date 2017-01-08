@@ -1,0 +1,17 @@
+%h1 Avtorji
+%table.table
+  %thead
+    %tr
+      %th ID
+      %th Ime
+      %th Priimek
+  %tbody
+    - @authors.each do |author|
+      %tr
+        %td
+          = link_to "", admin_author_path(author)
+          = author.id
+        %td= author.first_name
+        %td= author.last_name
+
+= paginate @authors

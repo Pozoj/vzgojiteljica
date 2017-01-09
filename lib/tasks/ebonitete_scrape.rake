@@ -12,7 +12,7 @@ namespace :ebonitete do
       end
       puts "Starting to search data for #{customer} (#{customer.vat_id})"
 
-      scraper = EboniteteScraper.new(customer.vat_id)
+      scraper = Scrapers::EboniteteScraper.new(customer.vat_id)
       data = scraper.parse
 
       unless data

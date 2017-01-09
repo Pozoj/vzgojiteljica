@@ -14,7 +14,7 @@ namespace :ministrstvo do
     not_found = 0
 
     # VCR.use_cassette("ministrstvo") do
-    data = MinistrstvoScraper.new.parse
+    data = Scrapers::MinistrstvoScraper.new.parse
     # end
 
     log "[MinistrstvoScraper] Processing #{data.length} records"

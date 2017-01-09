@@ -11,6 +11,7 @@ class Customer < Entity
   has_one :contact_person, foreign_key: :entity_id, dependent: :destroy
   has_one :billing_person, foreign_key: :entity_id, dependent: :destroy
 
+  before_save :set_einvoice_status
   before_validation :generate_token, on: :create
 
   scope :einvoiced, -> { where(einvoice: true) }
@@ -171,6 +172,12 @@ class Customer < Entity
   end
 
   private
+
+  def set_einvoice_status
+    return unless bank
+
+    self.einvoice = bank.einvoice?
+  end
 
   def generate_token
     fund = ('A'..'Z').to_a

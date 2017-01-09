@@ -95,7 +95,7 @@ module Scrapers
       entity.title           = details_el.text.strip
       entity.address         = cols.shift.text.strip # NASLOV
       entity.post_id         = only_numbers(cols.shift.text.strip).to_i # POSTNA STEVILKA
-      cols.shift                              # POSTA
+      cols.shift # POSTA
       entity.phone           = cols.shift.text.strip # TEL
       entity.fax             = cols.shift.text.strip # FAX
       entity.email           = cols.shift.text.strip # E-NASLOV

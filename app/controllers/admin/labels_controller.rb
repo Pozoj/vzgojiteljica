@@ -14,9 +14,7 @@ class Admin::LabelsController < Admin::AdminController
     elsif params[:all].present?
     end
 
-    @labels = @labels.group_by do |subscription|
-      subscription.subscriber
-    end.map do |subscriber, subscriptions|
+    @labels = @labels.group_by(&:subscriber).map do |subscriber, subscriptions|
       label = Label.new
       label.subscriber = subscriber
       label.quantity = subscriptions.sum(&:quantity)

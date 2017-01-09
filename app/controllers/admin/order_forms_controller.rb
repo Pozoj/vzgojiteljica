@@ -46,7 +46,7 @@ class Admin::OrderFormsController < Admin::AdminController
     if resource.order && resource.order.post_id
       subscribers = subscribers.where(post_id: resource.order.post_id)
     end
-    @all_subscribers = subscribers.group_by { |subscriber| subscriber.customer }.map do |customer, subscribers|
+    @all_subscribers = subscribers.group_by(&:customer).map do |customer, subscribers|
       [
         customer.to_s,
         subscribers.map { |s| [s.to_s, s.id] }

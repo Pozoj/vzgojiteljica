@@ -60,7 +60,5 @@ module DuplicateFinder
     duplicates = duplicates.reject { |_k, v| v.length < 2 }
   end
 
-  def merge_duplicates
-
-  end
+  def merge_duplicates; end
 end

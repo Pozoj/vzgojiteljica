@@ -3,7 +3,7 @@ class Admin::InstitutionsController < Admin::AdminController
   def index
     respond_with collection
   end
-  
+
   private
 
   def collection

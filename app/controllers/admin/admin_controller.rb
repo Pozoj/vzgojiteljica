@@ -63,9 +63,7 @@ class Admin::AdminController < ApplicationController
       subscriptions = subscriptions.without_rewards
     end
 
-    @subscribers = subscriptions.group_by do |subscription|
-      subscription.subscriber
-    end.sort_by do |subscriber, subs|
+    @subscribers = subscriptions.group_by(&:subscriber).sort_by do |subscriber, subs|
       -subs.sum(&:quantity)
     end.map do |subscriber, subs|
       {

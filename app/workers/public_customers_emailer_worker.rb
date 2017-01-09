@@ -15,7 +15,7 @@ class PublicCustomersEmailerWorker
         next
       end
 
-      if customer.events.where(event: 'customer_order_form_email_sent').any?
+      if customer.events.where(event: 'customer_order_form_email_sent').where('created_at > ?', 6.months.ago).any?
         puts "Skipping customer #{customer.id}, already sent"
         next
       end

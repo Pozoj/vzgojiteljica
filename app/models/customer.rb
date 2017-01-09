@@ -44,6 +44,7 @@ class Customer < Entity
     return if id == other_customer.id
 
     other_customer.subscribers.update_all(customer_id: id)
+    other_customer.events.update_all(eventable_id: id)
     other_customer.invoices.update_all(customer_id: id)
     other_customer.remarks.update_all(remarkable_id: id)
     other_customer.reload # Reload to not destroy cached relations, which now belong to other entities.

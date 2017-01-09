@@ -42,14 +42,14 @@ class Admin::OrderFormsController < Admin::AdminController
   def show
     @order_form = resource
 
-    customers = Customer.all.order(:title, :name)
+    subscribers = Subscriber.all.order(:title, :name)
     if resource.order && resource.order.post_id
-      customers = customers.where(post_id: resource.order.post_id)
+      subscribers = subscribers.where(post_id: resource.order.post_id)
     end
-    @all_subscribers = customers.map do |c|
+    @all_subscribers = subscribers.group_by { |subscriber| subscriber.customer }.map do |customer, subscribers|
       [
-        c.to_s,
-        c.subscribers.select(:id, :title, :name).order(:title, :name).map { |s| [s.to_s, s.id] }
+        customer.to_s,
+        subscribers.map { |s| [s.to_s, s.id] }
       ]
     end
   end

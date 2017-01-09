@@ -65,7 +65,8 @@
                 <li>
                   <%= link_to article.title, article %>
                   &mdash;
-                  <span class="author"><%= raw article.authors.map { |a| link_to a, a }.join(", ") %></span>
+                  <span class="author"><%= article.authors.to_sentence %></span>
+                  <small>(<%= link_to "uredi", edit_admin_article_path(article) %>)</small>
                 </li>
               <% end %>
             </ol>

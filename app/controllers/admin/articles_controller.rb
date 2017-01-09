@@ -45,6 +45,6 @@ class Admin::ArticlesController < Admin::AdminController
   end
 
   def resource_params
-    params.require(:article).permit(:section_id, :issue_id, :title, :abstract_html, :abstract_english_html, author_ids: [], keyword_ids: [])
+    params.require(:article).permit(:section_id, :issue_id, :title, :abstract, author_ids: [], keyword_ids: [])
   end
 end

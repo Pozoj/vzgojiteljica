@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 class Article < ActiveRecord::Base
+  RENDERER = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
+
+  before_save :render_markdown, if: :abstract?
+
   has_many :authorships
   has_many :authors, through: :authorships
 
@@ -12,5 +16,13 @@ class Article < ActiveRecord::Base
 
   def to_param
     "#{id}-#{title.parameterize}"
+  end
+
+  private
+
+  def render_markdown
+    return unless abstract.present?
+
+    self.abstract_html = RENDERER.render(abstract)
   end
 end

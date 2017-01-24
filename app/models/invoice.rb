@@ -5,6 +5,7 @@ class Invoice < Receipt
   validates :payment_id, presence: true, uniqueness: true
 
   before_validation :generate_payment_id, unless: :payment_id?
+  before_save :fill_period, on: :create
 
   scope :not_due, -> { where("receipts.due_at > '#{DateTime.now}'") }
   scope :due, -> { where("receipts.due_at < '#{DateTime.now}'").where(reversed_at: nil) }
@@ -125,5 +126,12 @@ class Invoice < Receipt
     else
       return s + '(neplačan)'
     end
+  end
+
+  def fill_period
+    return if period_from || period_to
+    
+    self.period_from = Date.today
+    self.period_to = Date.today
   end
 end

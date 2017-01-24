@@ -44,6 +44,15 @@
       <br>
       <br>
       Račun izdan: <strong><%= l invoice.created_at.to_date, format: :simple %></strong> v Velenju
+      <% if invoice.period_to %>
+        <br>
+        Datum storitve: <strong>
+          <% if invoice.period_from && invoice.period_from != invoice.period_to %>
+            <%= l invoice.period_from, format: :simple %> &mdash;
+          <% end %>
+          <%= l invoice.period_to, format: :simple %>
+        </strong>
+      <% end %>
       <br>
       Rok plačila: <strong><%= l invoice.due_at, format: :simple %></strong>
       <% if invoice.order_form %>

@@ -220,14 +220,13 @@ class EInvoice
         VrstaDatuma: 35,
         DatumRacuna: invoice.created_at.to_datetime.beginning_of_day
       },
-      # NEED TO IMPLEMENT FROM TO for INVOICES
       {
         VrstaDatuma: 263,
-        DatumRacuna: invoice.created_at.to_datetime.beginning_of_day
+        DatumRacuna: invoice.period_from || invoice.created_at.to_datetime.beginning_of_day
       },
       {
         VrstaDatuma: 263,
-        DatumRacuna: invoice.created_at.to_datetime.beginning_of_day
+        DatumRacuna: invoice.period_to || invoice.created_at.to_datetime.beginning_of_day
       }
     ]
   end

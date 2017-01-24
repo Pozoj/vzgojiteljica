@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230081725) do
+ActiveRecord::Schema.define(version: 20170124061025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -371,6 +371,8 @@ ActiveRecord::Schema.define(version: 20161230081725) do
     t.string   "order_form"
     t.string   "type",                                 null: false
     t.date     "order_form_date"
+    t.date     "period_from"
+    t.date     "period_to"
   end
 
   add_index "receipts", ["bank_reference"], name: "index_receipts_on_bank_reference", unique: true, using: :btree

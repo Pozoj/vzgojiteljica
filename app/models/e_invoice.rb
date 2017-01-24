@@ -222,11 +222,11 @@ class EInvoice
       },
       {
         VrstaDatuma: 263,
-        DatumRacuna: invoice.period_from || invoice.created_at.to_datetime.beginning_of_day
+        DatumRacuna: invoice.period_from.to_datetime || invoice.created_at.to_datetime.beginning_of_day
       },
       {
         VrstaDatuma: 263,
-        DatumRacuna: invoice.period_to || invoice.created_at.to_datetime.beginning_of_day
+        DatumRacuna: invoice.period_to.to_datetime || invoice.created_at.to_datetime.beginning_of_day
       }
     ]
   end

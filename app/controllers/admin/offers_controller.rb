@@ -83,7 +83,7 @@ class Admin::OffersController < Admin::ReceiptsController
     redirect_to :back unless customer
 
     wizard = ReceiptWizard.new(type: :offer)
-    offer = wizard.create_receipt_for_customer(customer)
+    offer = wizard.create_offer_for_customer(customer)
     if offer
       redirect_to admin_offer_path(offer)
     else

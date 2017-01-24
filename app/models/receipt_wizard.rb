@@ -56,6 +56,19 @@ class ReceiptWizard
     line_item
   end
 
+  def build_line_item_for_plan(subscription)
+    line_item = LineItem.new
+
+    line_item.entity_name = subscription.subscriber
+    line_item.product = 'Revija Vzgojiteljica'
+    line_item.quantity = subscription.quantity
+    line_item.unit = subscription.plan.quantity_unit_abbr
+    line_item.price_per_item = Plan.latest_yearly.price
+    line_item.price_per_item_with_discount = line_item.price_per_item
+
+    line_item
+  end
+
   def build_receipt(options = {})
     raise ArgumentError unless options[:customer] || options[:subscription]
 
@@ -129,6 +142,31 @@ class ReceiptWizard
 
       # Associate receipt with first order form of subscriptions if any.
       receipt.order_form = subscriptions.map(&:order_form).compact.first
+
+      receipt.line_items.each(&:calculate)
+      receipt.calculate_totals
+
+      # Sanity check
+      raise 'Invoice should not be 0.' if receipt.subtotal === 0.00
+
+      # Save.
+      receipt.save!
+
+      return receipt
+    end
+  end
+
+  def create_offer_for_customer(customer)
+    Customer.transaction do
+      subscriptions = customer.subscriptions.paid.active
+      return unless subscriptions.any?
+
+      receipt = build_receipt(customer: customer)
+
+      subscriptions.each do |s|
+        next unless s.plan
+        receipt.line_items << build_line_item_for_plan(s)
+      end
 
       receipt.line_items.each(&:calculate)
       receipt.calculate_totals

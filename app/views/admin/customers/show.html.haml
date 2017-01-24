@@ -156,16 +156,16 @@
               - else
                 = number_to_currency invoice.total
 
-- if @customer.offers.any?
-  .panel.panel-default
-    .panel-heading
-      %h3.panel-title
-        Izdane ponudbe
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      Izdane ponudbe
 
-        = link_to create_for_customer_admin_offers_path(customer_id: @customer.id), class: 'btn btn-default btn-xs pull-right', :"data-method" => :post do
-          %i.glyphicon.glyphicon-plus
-          Ustvari
+      = link_to create_for_customer_admin_offers_path(customer_id: @customer.id), class: 'btn btn-default btn-xs pull-right', :"data-method" => :post do
+        %i.glyphicon.glyphicon-plus
+        Ustvari
 
+  - if @customer.offers.any?
     %table.table.rowlinks
       %thead
         %tr

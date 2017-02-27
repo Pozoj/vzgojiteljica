@@ -110,7 +110,7 @@ pozoj = Entity.create(
   vat_id: 78_459_575,
   vat_exempt: true,
   registration_number: 6_782_990_000,
-  bank_id: Bank.where(bic: 'HAABSI22XXX').first.id,
+  bank_id: Bank.where(bic: 'HAABSI22').first.id,
   account_number: 'SI56330000006887185'
 )
 

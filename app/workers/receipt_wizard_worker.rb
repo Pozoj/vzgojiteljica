@@ -5,10 +5,11 @@ class ReceiptWizardWorker
 
   def perform(wizard_params)
     @receipt_wizard = ReceiptWizard.new(wizard_params)
-    @collection = receipts = if wizard_params[:include_yearly] == '1'
-                               @receipt_wizard.create_receipts
-                             else
-                               @receipt_wizard.create_per_issue_receipts
+
+    receipts = if wizard_params["include_yearly"] == '1'
+                 @receipt_wizard.create_receipts
+               else
+                 @receipt_wizard.create_per_issue_receipts
                end
 
     receipts = receipts.compact.uniq

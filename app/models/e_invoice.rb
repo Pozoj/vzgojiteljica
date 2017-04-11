@@ -299,7 +299,8 @@ class EInvoice
             # Osnova za DDV
             {
               VrstaZneskaDavkaPostavke: 125,
-              Znesek: li.subtotal.to_f
+              Znesek: li.tax > 0 ? li.subtotal.to_f : 0
+
             },
             # Znesek DDV
             {
@@ -329,7 +330,7 @@ class EInvoice
         # Osnova za DDV
         {
           VrstaZneskaDavka: 125,
-          ZnesekDavka: invoice.subtotal.to_f
+          ZnesekDavka: invoice.tax > 0 ? invoice.subtotal.to_f : 0
         },
         # Znesek DDV
         {
@@ -341,7 +342,7 @@ class EInvoice
   end
 
   def invoice_sum_hash
-    sum_hash = [
+    [
       {
         # Vsota vrednosti postavk brez popustov
         ZneskiRacuna: {
@@ -357,6 +358,16 @@ class EInvoice
         ZneskiRacuna: {
           VrstaZneska: 53,
           ZnesekRacuna: 0
+        },
+        SklicZaPlacilo: {
+          SklicPlacila: 'PQ'
+        }
+      },
+      {
+        # Vsota osnov za DDV
+        ZneskiRacuna: {
+          VrstaZneska: 125,
+          ZnesekRacuna: invoice.tax > 0 ? invoice.subtotal.to_f : 0
         },
         SklicZaPlacilo: {
           SklicPlacila: 'PQ'
@@ -394,23 +405,6 @@ class EInvoice
         }
       }
     ]
-
-    if invoice.tax > 0
-      sum_hash.push(
-        {
-          # Vsota osnov za DDV
-          ZneskiRacuna: {
-            VrstaZneska: 125,
-            ZnesekRacuna: invoice.subtotal.to_f
-          },
-          SklicZaPlacilo: {
-            SklicPlacila: 'PQ'
-          }
-        }
-      )
-    end
-
-    sum_hash
   end
 
   def invoice_payment_shoutout_hash

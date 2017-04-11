@@ -341,7 +341,7 @@ class EInvoice
   end
 
   def invoice_sum_hash
-    [
+    sum_hash = [
       {
         # Vsota vrednosti postavk brez popustov
         ZneskiRacuna: {
@@ -357,16 +357,6 @@ class EInvoice
         ZneskiRacuna: {
           VrstaZneska: 53,
           ZnesekRacuna: 0
-        },
-        SklicZaPlacilo: {
-          SklicPlacila: 'PQ'
-        }
-      },
-      {
-        # Vsota osnov za DDV
-        ZneskiRacuna: {
-          VrstaZneska: 125,
-          ZnesekRacuna: invoice.subtotal.to_f
         },
         SklicZaPlacilo: {
           SklicPlacila: 'PQ'
@@ -404,6 +394,23 @@ class EInvoice
         }
       }
     ]
+
+    if invoice.tax > 0
+      sum_hash.push(
+        {
+          # Vsota osnov za DDV
+          ZneskiRacuna: {
+            VrstaZneska: 125,
+            ZnesekRacuna: invoice.subtotal.to_f
+          },
+          SklicZaPlacilo: {
+            SklicPlacila: 'PQ'
+          }
+        }
+      )
+    end
+
+    sum_hash
   end
 
   def invoice_payment_shoutout_hash

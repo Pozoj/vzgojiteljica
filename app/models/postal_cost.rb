@@ -9,7 +9,7 @@ class PostalCost < ActiveRecord::Base
 
   def self.type_for_weight(weight)
     WEIGHT_TYPES.find do |wt|
-      weight > wt[0] && weight <= wt[1]
+      weight >= wt[0] && weight < wt[1]
     end.try(:last)
   end
 

@@ -51,7 +51,12 @@ class Admin::PostalCostsController < Admin::AdminController
       next unless subscription.quantity > 0
 
       issue_weight = weight
-      issue_weight += Issue::WEIGHT_PER_REWARD if subscription.reward == 1 # 1 is drawing reward
+
+      # 1 is drawing reward, they get 2 copies AND a reward
+      if subscription.reward == 1
+        issue_weight *= 2
+        issue_weight += Issue::WEIGHT_PER_REWARD
+      end
 
       {
         issue_weight: issue_weight,

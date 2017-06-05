@@ -20,7 +20,7 @@ module Web3
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :sl
 
-    config.assets.precompile += ['print.css', 'admin.css', 'upload.js', 'admin.js']
+    config.assets.precompile += ['print.css', 'admin.css', 'admin_print.css', 'upload.js', 'admin.js']
 
     config.autoload_paths << Rails.root.join('lib')
 

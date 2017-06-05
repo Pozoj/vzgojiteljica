@@ -10,6 +10,19 @@
     = @issue.num_pages
     strani
 
+.topright_info
+  %p
+    %strong Naročnik
+    %br
+    = Entity.pozoj 
+    %br
+    == #{Entity.pozoj.address}, #{Entity.pozoj.post}, #{Entity.pozoj.email}
+    %br
+    D. Št.: #{Entity.pozoj.vat_id_formatted}, M. Št.: #{Entity.pozoj.registration_number}
+
+  %br
+  %br
+
 %table.table
   %thead
     %tr

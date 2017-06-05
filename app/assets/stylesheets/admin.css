@@ -198,3 +198,7 @@ td.subscriptions .subscription:last-child {
 #article_author_ids_chosen, #article_keyword_ids_chosen {
   width: 360px !important;
 }
+
+.topright_info {
+  display: none;
+}

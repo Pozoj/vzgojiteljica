@@ -15,3 +15,14 @@
 .admin_actions {
   display: none;
 }
+
+.topright_info {
+  display: block;
+}
+.topright_info p {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  border: 2px solid #eee;
+  padding: 10px;
+}

@@ -2,7 +2,7 @@ require './config/environment'
 
 COSTS = [
   {
-    type: 'NDP',
+    type: 'Naslovljena publikacija',
     costs: [
       [0, 10, 0.1850, 0.1516],
       [10, 20, 0.2000, 0.1639],

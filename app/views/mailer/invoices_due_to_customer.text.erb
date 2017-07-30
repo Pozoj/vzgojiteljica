@@ -3,7 +3,7 @@ Spoštovani,
 Pri pregledu obveznosti smo ugotovili, da so naslednji računi zapadli v plačilo.
 
 <% @invoices.each do |invoice| %>
-  - Račun <%= invoice.receipt_id %>, zapadel pred <%= pluralize_days(@invoice.late_days) %>, na <%= l @invoice.due_at.to_date, format: :simple %>
+  - Račun <%= invoice.receipt_id %>, zapadel pred <%= pluralize_days(invoice.late_days) %>, na <%= l invoice.due_at.to_date, format: :simple %>
 <% end %>
 
 Prosimo, če lahko obveznosti poravnate v najkrajšem možnem času.

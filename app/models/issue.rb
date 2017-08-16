@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class Issue < ActiveRecord::Base
-  WEIGHT_PER_PAGE = 2.84
+  WEIGHT_PER_PAGE = 2.81
   WEIGHT_PER_REWARD = 55 # grams for the booklet
 
   has_many :articles
@@ -74,7 +74,7 @@ class Issue < ActiveRecord::Base
   end
 
   def weight
-    num_pages * WEIGHT_PER_PAGE
+    (num_pages * WEIGHT_PER_PAGE).ceil
   end
 
   def to_s

@@ -98,8 +98,12 @@ class Admin::CustomersController < Admin::AdminController
   end
 
   def create
-    @customer = Customer.create resource_params
-    respond_with resource, location: -> { admin_customer_path(@customer) }
+    @customer = Customer.create(resource_params)
+    if @customer.valid?
+      respond_with resource, location: -> { admin_customer_path(@customer) }
+    else
+      render action: 'new'
+    end
   end
 
   def edit

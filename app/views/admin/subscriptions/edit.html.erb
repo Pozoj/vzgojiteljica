@@ -4,6 +4,15 @@
       no_results_text: '<%= I18n.t('chosen.no_results_text') %>',
       placeholder_text_single: '<%= I18n.t('chosen.placeholder_text_single') %>'
     });
+
+    $('#subscription_no_ending').on('change', function() {
+      if ($(this).is(':checked')) {
+        $('#subscription_end').val('');
+      }
+      else {
+        $('#subscription_end').focus();
+      }
+    });
   });
 </script>
 
@@ -27,6 +36,12 @@
           <span class="input-group-addon">do</span>
           <%= f.text_field :end, class: 'form-control input-sm', placeholder: 'Konec' %>
         </div>
+      </div>
+      <div class="form-group boolean">
+        <%= f.label :no_ending do %>
+          <%= f.check_box :no_ending %>
+          Brez konca
+        <% end %>
       </div>
       <%= f.association :plan %>
       <%= f.input :discount %>

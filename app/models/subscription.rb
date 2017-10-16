@@ -65,6 +65,16 @@ class Subscription < ActiveRecord::Base
     !active?
   end
 
+  def no_ending
+    !self.end
+  end
+
+  def no_ending=(_no_ending)
+    if _no_ending == "1"
+      self.end = nil
+    end
+  end
+
   def to_s
     "#{plan} za #{subscriber}"
   end

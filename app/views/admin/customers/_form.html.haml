@@ -15,6 +15,9 @@
   });
 
 .row
+  - if @customer.errors.any?
+    = @customer.errors.inspect
+
   .form-inputs.col-xs-8
     = f.input :name
     = f.input :title

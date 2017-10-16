@@ -160,6 +160,7 @@ sl:
         name: Ime in priimek
       subscription:
         reward: Nagradni prejemnik
+        no_ending: Brez konca
       article:
         abstract: Povzetek
         abstract_html: Povzetek

@@ -15,8 +15,10 @@
                     - if r.created_at > 1.day.ago
                       pred
                       = distance_of_time_in_words_to_now r.created_at
-                    - else
+                    - elsif r.created_at > 1.year.ago
                       = l r.created_at, format: :short
+                    - else
+                      = l r.created_at, format: :long
 
                     = link_to "x", [:admin, r], class: 'delete', method: :delete, :"data-confirm" => "Ste prepričani?"
 

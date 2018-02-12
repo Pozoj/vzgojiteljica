@@ -15,6 +15,7 @@ namespace :emailer do
       next unless real
 
       Mailer.customer_order_form_needed(customer.id)
+      sleep 2
     end
   end
 end

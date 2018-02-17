@@ -41,8 +41,8 @@
   <% end %>
 
   <small><%= conditional_filtering_link "Vsa leta", param: :filter_year_all %> | </small>
+  <small><%= conditional_filtering_link "Veljavne", param: :active %> | </small>
   <small><%= conditional_filtering_link "Neobdelane", param: :unprocessed %></small>
-
 
   <%= link_to "Vnesi novo", new_admin_order_form_path, class: 'btn btn-primary btn-xs' %>
 </h2>
@@ -54,6 +54,8 @@
       <th>Št. nar.</th>
       <th>Stranka</th>
       <th>Izdana</th>
+      <th>Pričetek</th>
+      <th>Konec</th>
       <th>Procesirana</th>
     </tr>
   </thead>
@@ -74,6 +76,22 @@
         <td>
           <% if order_form.issued_at %>
             <%= l order_form.issued_at, format: :simple %>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+        <td>
+          <% if order_form.start %>
+            <%= l order_form.start, format: :simple %>
+          <% else %>
+            &mdash;
+          <% end %>
+        </td>
+        <td>
+          <% if order_form.end %>
+            <%= l order_form.end, format: :simple %>
+          <% else %>
+            &mdash;
           <% end %>
         </td>
         <td>

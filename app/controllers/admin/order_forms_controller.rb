@@ -12,6 +12,9 @@ class Admin::OrderFormsController < Admin::AdminController
     elsif params[:unprocessed]
       @order_forms = @order_forms.not_processed
       @year_now = nil
+    elsif params[:active]
+      @order_forms = @order_forms.active
+      @year_now = nil
     else
       @order_forms = @order_forms.where(year: @year_now)
     end

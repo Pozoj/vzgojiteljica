@@ -34,6 +34,8 @@ class OrderForm < ActiveRecord::Base
   has_many :events, as: :eventable, dependent: :destroy
 
   scope :not_processed, -> { where(processed_at: nil) }
+  scope :active, -> { where(arel_table[:start].lteq(Date.today).and(arel_table[:end].eq(nil).or(arel_table[:end].gteq(Date.today)))) }
+  scope :inactive, -> { where(arel_table[:end].not_eq(nil).and(arel_table[:end].lteq(Date.today).or(arel_table[:start].gteq(Date.today)))) }
 
   before_save :set_year, if: :issued_at?
 
@@ -100,6 +102,8 @@ class OrderForm < ActiveRecord::Base
         subs = subscriber.subscriptions.active.paid
         total_quantity = subs.sum(:quantity)
 
+        next unless subs.any?
+
         # End all existing subscriptions.
         subs.each do |subscription|
           subscription.end = 1.year.ago.end_of_year
@@ -141,6 +145,10 @@ class OrderForm < ActiveRecord::Base
 
   def processed?
     processed_at && processed_at <= DateTime.now
+  end
+
+  def active?
+    start && start >= DateTime.now && (!self.end || (self.end && self.end <= DateTime.now))
   end
 
   private

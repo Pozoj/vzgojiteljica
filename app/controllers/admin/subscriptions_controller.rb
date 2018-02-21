@@ -1,5 +1,29 @@
 # frozen_string_literal: true
+
 class Admin::SubscriptionsController < Admin::AdminController
+  def index
+    @subscriptions = Subscription.all
+    if params[:active]
+      @subscriptions = @subscriptions.active
+    elsif params[:inactive]
+      @subscriptions = @subscriptions.inactive
+    elsif params[:yearly]
+      @subscriptions = @subscriptions.active.yearly
+    elsif params[:per_issue]
+      @subscriptions = @subscriptions.active.per_issue
+    elsif params[:free]
+      @subscriptions = @subscriptions.free
+    elsif params[:without_order_form]
+      @subscriptions = @subscriptions.active.without_order_form
+    elsif params[:rewards]
+      @subscriptions = @subscriptions.active.rewards
+    elsif params[:ending_last_year]
+      @subscriptions = @subscriptions.where(Subscription.arel_table[:end].not_eq(nil).and(Subscription.arel_table[:end].lt(Date.today.beginning_of_year)).and(Subscription.arel_table[:end].gteq(1.year.ago.beginning_of_year)))
+    end
+
+    @subscriptions = @subscriptions.order(end: :desc, quantity: :desc).page(params[:page])
+  end
+
   def show
     respond_with resource
   end

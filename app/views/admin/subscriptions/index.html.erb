@@ -1,0 +1,63 @@
+<h2>
+  Naročnine
+  <small><%= conditional_filtering_link "Aktivne", param: :active %> | </small>
+  <small><%= conditional_filtering_link "Potekle", param: :inactive %> | </small>
+  <small><%= conditional_filtering_link "Potekle v #{1.year.ago.year}", param: :ending_last_year %> | </small>
+  <small><%= conditional_filtering_link "Brezplačne", param: :free %> | </small>
+  <small><%= conditional_filtering_link "Nagradne", param: :rewards %> | </small>
+  <small><%= conditional_filtering_link "Brez naročilnice", param: :without_order_form %></small>
+</h2>
+
+<table class="table rowlinks">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Naročnik</th>
+      <th>Pričetek</th>
+      <th>Konec</th>
+      <th>Darilo?</th>
+      <th>Kol.</th>
+      <th>Plan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subscriptions.each do |subscription| %>
+      <tr>
+        <td>
+          <%= link_to "", admin_subscription_path(subscription) %>
+          <%= subscription.id %>
+        </td>
+        <td>
+          <%= subscription.customer %>
+        </td>
+        <td>
+          <span class="label label-success">
+            <%=l subscription.start %>
+          </span>
+        </td>
+        <td>
+          <% if subscription.end? %>
+            <span class="label label-danger">
+              <%=l subscription.end %>
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <% if subscription.is_reward? %>
+            <span class="label label-warning">
+              <i class="glyphicon glyphicon-gift"></i>
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <%= subscription.quantity %>
+        </td>
+        <td>
+          <%= subscription.plan %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @subscriptions %>

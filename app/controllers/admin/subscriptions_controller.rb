@@ -21,7 +21,7 @@ class Admin::SubscriptionsController < Admin::AdminController
       @subscriptions = @subscriptions.where(Subscription.arel_table[:end].not_eq(nil).and(Subscription.arel_table[:end].lt(Date.today.beginning_of_year)).and(Subscription.arel_table[:end].gteq(1.year.ago.beginning_of_year)))
     end
 
-    @subscriptions = @subscriptions.order(end: :desc, quantity: :desc).page(params[:page])
+    @subscriptions = @subscriptions.order(end: :desc, quantity: :desc, id: :desc).page(params[:page])
   end
 
   def show

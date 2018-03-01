@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.3.6'
 gem 'rails', '4.2.5.1'
 
 # Gems used only for assets and not required

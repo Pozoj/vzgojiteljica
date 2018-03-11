@@ -24,6 +24,16 @@ class Admin::SubscriptionsController < Admin::AdminController
     @subscriptions = @subscriptions.order(end: :desc, quantity: :desc, id: :desc).page(params[:page])
   end
 
+  def patricija
+    @subscriptions = Subscription
+                     .paid
+                     .inactive
+                     .order(end: :desc, quantity: :desc, id: :desc)
+                     .reject do |subscription|
+                       subscription.customer.active?
+                     end
+  end
+
   def show
     respond_with resource
   end

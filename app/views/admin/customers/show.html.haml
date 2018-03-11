@@ -1,4 +1,8 @@
-%h1= @customer
+%h1
+  = @customer
+  %small.label.label-danger
+    Odpoved
+    =l @customer.unsubscribed_at, format: '%d.%m.%Y'
 
 .admin_actions
   = link_to admin_customer_path(@customer), class: 'btn btn-danger', method: :delete, data: { confirm: 'Ta gumb je samo za Miha! :) Če nisi Miha, prekliči operacijo.' } do
@@ -58,7 +62,18 @@
           %hr
           = render 'events/events', events: @customer.events
 
-  .col-xs-6= render "admin/remarks/form", resource: @customer, remarks: @remarks
+  .col-xs-6
+    = render "admin/remarks/form", resource: @customer, remarks: @remarks
+
+    - unless @customer.unsubscribed?
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title
+            Odpoved naročnine
+        .panel-body
+          = form_tag unsubscribe_admin_customer_path(@customer), method: :patch do
+            = date_select :customer, :unsubscribed_at
+            = submit_tag
 
 .panel.panel-default
   .panel-heading

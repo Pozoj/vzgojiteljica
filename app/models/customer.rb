@@ -16,6 +16,7 @@ class Customer < Entity
 
   scope :einvoiced, -> { where(einvoice: true) }
   scope :not_einvoiced, -> { where(einvoice: false) }
+  scope :unsubscribed, -> { where.not(unsubscribed_at: nil) }
 
   validates :token, presence: true, length: { is: TOKEN_LENGTH }, uniqueness: true
 
@@ -56,6 +57,14 @@ class Customer < Entity
     return billing_person.try(:email) if billing_person && billing_person.email?
 
     email
+  end
+
+  def unsubscribed?
+    unsubscribed_at.present?
+  end
+
+  def active?
+    subscriptions.active.any?
   end
 
   def self.active

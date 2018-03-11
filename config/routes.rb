@@ -77,6 +77,7 @@ Web3::Application.routes.draw do
       get :edit_person, on: :member
       post :create_person, on: :member
       patch :update_person, on: :member
+      patch :unsubscribe, on: :member
       post :merge_in, on: :member
       get :email_ingestion, on: :collection
       get :email_ingestion_next, on: :collection
@@ -87,6 +88,7 @@ Web3::Application.routes.draw do
     resources :subscribers
     resources :posts
     resources :subscriptions do
+      get :patricija, on: :collection
       put :end_now, on: :member
       put :end_by_end_of_year, on: :member
       put :reinstate, on: :member

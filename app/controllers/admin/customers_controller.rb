@@ -40,6 +40,17 @@ class Admin::CustomersController < Admin::AdminController
     redirect_to admin_customer_path(@customer), notice: "Pridružil #{other_customer.id} k #{@customer.id}"
   end
 
+  def unsubscribe
+    customer = Customer.find(params[:id])
+    customer.unsubscribed_at = Date.civil(
+      params[:customer]["unsubscribed_at(1i)"].to_i,
+      params[:customer]["unsubscribed_at(2i)"].to_i,
+      params[:customer]["unsubscribed_at(3i)"].to_i
+    )
+    customer.save!
+    redirect_to admin_customer_path(customer)
+  end
+
   def create_freerider
     Customer.transaction do
       @customer = Customer.new

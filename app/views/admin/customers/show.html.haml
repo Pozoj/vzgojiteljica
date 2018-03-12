@@ -1,8 +1,9 @@
 %h1
   = @customer
-  %small.label.label-danger
-    Odpoved
-    =l @customer.unsubscribed_at, format: '%d.%m.%Y'
+  - if @customer.unsubscribed_at
+    %small.label.label-danger
+      Odpoved
+      =l @customer.unsubscribed_at, format: '%d.%m.%Y'
 
 .admin_actions
   = link_to admin_customer_path(@customer), class: 'btn btn-danger', method: :delete, data: { confirm: 'Ta gumb je samo za Miha! :) Če nisi Miha, prekliči operacijo.' } do

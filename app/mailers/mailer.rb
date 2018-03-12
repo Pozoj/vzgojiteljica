@@ -12,6 +12,12 @@ class Mailer < ActionMailer::Base
     mail(to: @customer.billing_email, subject: "Naročilnica za revijo Vzgojiteljica - #{@customer}")
   end
 
+  def customer_order_form_needed_2(customer_id)
+    return unless @customer = Customer.find(customer_id)
+    return unless @customer.billing_email
+    mail(to: @customer.billing_email, subject: "Naročilnica za revijo Vzgojiteljica - #{@customer}")
+  end
+
   def customer_marketing(customer_id)
     return unless @customer = Customer.find(customer_id)
     return unless @customer.billing_email

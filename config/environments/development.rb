@@ -26,8 +26,8 @@ Web3::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
 
-  # Use letter opener.
-  config.action_mailer.delivery_method = :letter_opener
-
+  # Use mailcatcher.
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
   config.action_mailer.default_url_options = { host: 'localhost:5000' }
 end

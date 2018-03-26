@@ -8,6 +8,7 @@ class ReceiptWizard
                 :last_receipt_number,
                 :due_at_date,
                 :include_yearly,
+                :include_without_order_forms,
                 :type
 
   def model
@@ -192,6 +193,15 @@ class ReceiptWizard
           subscriptions = subscriptions.yearly
         elsif only == :per_issue
           subscriptions = subscriptions.per_issue
+        end
+
+        # By default, unless `include_without_order_forms`, exclude
+        # subscription for einvoice customers that don't have an active
+        # order form attached.
+        if customer.einvoice? && include_without_order_forms != '1'
+          subscriptions = subscriptions.reject do |subscription|
+            !subscription.order_form
+          end
         end
 
         next unless subscriptions.any?

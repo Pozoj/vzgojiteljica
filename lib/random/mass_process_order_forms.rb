@@ -1,4 +1,4 @@
-OrderForm.not_processed.where(year: 2017).each do |of|
+OrderForm.not_processed.where(year: 2018).each do |of|
   next if of.order # Skip web orders
 
   customer = of.customer
@@ -13,7 +13,7 @@ OrderForm.not_processed.where(year: 2017).each do |of|
       quantity = subscriptions.sum(:quantity)
 
       subscriptions.each do |subscription|
-        subscription.end = Date.today
+        subscription.end = Date.today.beginning_of_year
         subscription.remarks.create!(remark: "Naročnina je potekla, vnesli smo novo po naročilnici #{of.form_id}", user_id: User.first.id)
         unless subscription.valid?
           puts subscription.inspect
@@ -26,7 +26,7 @@ OrderForm.not_processed.where(year: 2017).each do |of|
       new_subscription.quantity = quantity
       new_subscription.order_form = of
       new_subscription.start = Date.today
-      new_subscription.end = nil
+      new_subscription.end = Date.today.end_of_year
       unless new_subscription.valid?
         puts new_subscription.inspect
         puts new_subscription.errors.inspect

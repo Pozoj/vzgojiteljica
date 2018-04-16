@@ -1,0 +1,15 @@
+Naročnik: <%= @customer.to_s %>
+Št. izvodov: <%= @customer.quantity %>
+
+Spoštovani!
+
+Prva številka letošnje Vzgojiteljice bi že morala biti pri vas, za podaljšanje naročnine in izdajo računa pa potrebujemo vašo naročilnico.
+
+Da bi vam ta postopek čim bolj olajšali, vam omogočamo, da številko obstoječe naročilnice le vpišete v spletni obrazec, ki se najaha na spodnji povezavi:
+<%= token_url(token: @customer.token) %>
+
+Če imate kakršno koli vprašanje, preprosto odpišite na ta e-mail.
+
+Hvala in lep pozdrav!
+
+- kolektiv revije Vzgojiteljica

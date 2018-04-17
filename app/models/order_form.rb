@@ -148,7 +148,7 @@ class OrderForm < ActiveRecord::Base
   end
 
   def active?
-    start && start >= DateTime.now && (!self.end || (self.end && self.end <= DateTime.now))
+    start && start <= DateTime.now && (!self.end || (self.end && self.end >= DateTime.now))
   end
 
   private

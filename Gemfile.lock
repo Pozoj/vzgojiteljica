@@ -1,21 +1,21 @@
 GIT
-  remote: git://github.com/Compass/compass-rails.git
-  revision: 49619269de49beb4e0c8ca3cc925a370cbbc9e04
+  remote: https://github.com/Compass/compass-rails.git
+  revision: be1f7516a8e781bedc6bd3cc34d5395c7c72b3f3
   specs:
-    compass-rails (3.0.1)
+    compass-rails (3.1.0)
       compass (~> 1.0.0)
       sass-rails (< 5.1)
       sprockets (< 4.0)
 
 GIT
-  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
-  revision: ec4b9e9e41c828c9e5549e8071e426f43f105cc5
+  remote: https://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: 981ad1d67e5725494e8a569136f0fd730baaedc5
   specs:
-    bootstrap-datepicker-rails (1.6.0.pre.alpha)
+    bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
 
 GIT
-  remote: git://github.com/RubyMoney/money-rails.git
+  remote: https://github.com/RubyMoney/money-rails.git
   revision: 46660b70e5e25e02a0e67f30a4a46b0139aff1a7
   ref: 46660b70e5e25e02a0e67f30a4a46b0139aff1a7
   specs:
@@ -81,7 +81,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    chunky_png (1.3.5)
+    chunky_png (1.3.10)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cmxl (0.1.3)

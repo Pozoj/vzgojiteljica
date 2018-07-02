@@ -10,12 +10,12 @@ group :assets do
   gem 'sass-rails',   '~> 5.0.1'
   gem 'coffee-rails', '~> 4.1.0'
   gem 'uglifier', '>= 2.7.0'
-  gem 'compass-rails', github: 'Compass/compass-rails'
+  gem 'compass-rails', git: 'https://github.com/Compass/compass-rails.git'
   gem 'jquery-rails', '~> 4.0.3'
   gem 'jquery-ui-rails', '~> 5.0.3'
   gem 'jquery-fileupload-rails', '~> 0.4.3'
   gem 'sprockets', '2.11.0'
-  gem 'bootstrap-datepicker-rails', require: 'bootstrap-datepicker-rails', git: 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+  gem 'bootstrap-datepicker-rails', require: 'bootstrap-datepicker-rails', git: 'https://github.com/Nerian/bootstrap-datepicker-rails.git'
 end
 
 group :production do
@@ -33,7 +33,7 @@ gem 'haml'
 gem 'kaminari'
 gem 'has_scope'
 gem 'paperclip'
-gem 'money-rails', github: 'RubyMoney/money-rails', ref: '46660b70e5e25e02a0e67f30a4a46b0139aff1a7'
+gem 'money-rails', git: 'https://github.com/RubyMoney/money-rails.git', ref: '46660b70e5e25e02a0e67f30a4a46b0139aff1a7'
 gem 'gyoku', '~> 1.0'
 gem 'iban-tools'
 gem 'email_validator'

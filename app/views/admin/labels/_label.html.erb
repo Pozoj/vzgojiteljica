@@ -21,7 +21,12 @@
     <p>
       Poštnina plačana pri
       <br>
-      pošti 3102 Celje
+      pošti
+      <% if params[:rewards] %>
+        3320 Velenje
+      <% else %>
+        3102 Celje
+      <% end %>
     </p>
   </div>
   <div class="classification"></div>

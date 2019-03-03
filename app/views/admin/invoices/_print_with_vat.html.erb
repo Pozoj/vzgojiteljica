@@ -3,21 +3,21 @@
   <header>
     <%= image_tag "pozoj_logo-100w.png" %>
     <p>
-      <strong><%= Entity.pozoj %></strong>
+      <strong><%= Entity.supra %></strong>
     </p>
     <p>
-      <%= Entity.pozoj.address %>
+      <%= Entity.supra.address %>
       <br>
-      <%= Entity.pozoj.post %>
+      <%= Entity.supra.post %>
       <br>
-      <%= Entity.pozoj.email %>
+      <%= Entity.supra.email %>
     </p>
     <p>
-      D. Št.: <%= Entity.pozoj.vat_id_formatted %>
+      D. Št.: <%= Entity.supra.vat_id_formatted %>
       <br>
-      Matična št.: <%= Entity.pozoj.registration_number %>
+      Matična št.: <%= Entity.supra.registration_number %>
       <br>
-      TRR: <%= Entity.pozoj.iban.prettify %>
+      TRR: <%= Entity.supra.iban.prettify %>
     </p>
   </header>
 
@@ -118,7 +118,7 @@
   </div>
 
   <div class="instructions">
-    <p>Račun plačajte na TRR: <strong><%= Entity.pozoj.iban.prettify %></strong>, odprt pri <%= Entity.pozoj.bank.name %></p>
+    <p>Račun plačajte na TRR: <strong><%= Entity.supra.iban.prettify %></strong>, odprt pri <%= Entity.supra.bank.name %></p>
     <p>Pri plačilu računa se sklicujta na: <strong><%= invoice.payment_id_full %></strong>.</p>
     <p>Po izteku roka za plačilo zaračunavamo z zakonom določene zamudne obresti.</p>
     <p>Reklamacije upoštevamo, če so podane v 7 dneh od izstavitve računa.</p>

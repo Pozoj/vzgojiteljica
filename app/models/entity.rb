@@ -46,12 +46,12 @@ class Entity < ActiveRecord::Base
     is_a? Subscriber
   end
 
-  def self.pozoj
-    where(email: 'info@pozoj.si').first
+  def self.supra
+    where(email: 'supra@supra.si').first
   end
 
-  def pozoj?
-    email == 'info@pozoj.si'
+  def supra?
+    email == 'supra@supra.si'
   end
 
   def flag?(flag)

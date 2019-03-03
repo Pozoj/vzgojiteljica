@@ -44,7 +44,7 @@ class EEnvelope
     #   </sender_eddress>
     #   <phone />
     # </sender>
-    pozoj = Entity.pozoj
+    pozoj = Entity.supra
 
     {
       name: pozoj.to_s,
@@ -137,7 +137,7 @@ class EEnvelope
     #   </remittance_information>
     #   <purpose>SUBS</purpose>
     # </payment_data>
-    pozoj = Entity.pozoj
+    pozoj = Entity.supra
     entity = invoice.customer
 
     {

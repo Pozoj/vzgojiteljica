@@ -143,7 +143,7 @@ class EInvoice
     end
 
     # Append internal customer ID unless this is POZOJ.
-    unless entity.pozoj?
+    unless entity.supra?
       reference_numbers << {
         VrstaPodatkaPodjetja: 'IT',
         PodatekPodjetja: entity.id
@@ -172,7 +172,7 @@ class EInvoice
   end
 
   def pozoj_hash
-    entity_hash(Entity.pozoj, ENTITY_TYPE_POZOJ)
+    entity_hash(Entity.supra, ENTITY_TYPE_POZOJ)
   end
 
   def customer_hashes
@@ -410,14 +410,14 @@ class EInvoice
   def invoice_payment_shoutout_hash
     text_hash(
       text_type: 'GLAVA_TEKST',
-      text: "Račun plačajte na TRR: #{Entity.pozoj.account_number_formatted}, odprt pri #{Entity.pozoj.bank} Pri plačilu računa se sklicujte na: #{invoice.payment_id}. Po izteku roka za plačilo zaračunavamo zakonske zamudne obresti. Reklamacije upoštevamo, če so podane v 7 dneh od izstavitve računa."
+      text: "Račun plačajte na TRR: #{Entity.supra.account_number_formatted}, odprt pri #{Entity.supra.bank} Pri plačilu računa se sklicujte na: #{invoice.payment_id}. Po izteku roka za plačilo zaračunavamo zakonske zamudne obresti. Reklamacije upoštevamo, če so podane v 7 dneh od izstavitve računa."
     )
   end
 
   def invoice_foot_hash
     text_hash(
       text_type: 'NOGA_TEKST',
-      text: Entity.pozoj.string_description
+      text: Entity.supra.string_description
     )
   end
 

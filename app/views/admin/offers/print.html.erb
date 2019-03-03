@@ -4,21 +4,21 @@
   <header>
     <%= image_tag "pozoj_logo-100w.png" %>
     <p>
-      <strong><%= Entity.pozoj %></strong>
+      <strong><%= Entity.supra %></strong>
     </p>
     <p>
-      <%= Entity.pozoj.address %>
+      <%= Entity.supra.address %>
       <br>
-      <%= Entity.pozoj.post %>
+      <%= Entity.supra.post %>
       <br>
-      <%= Entity.pozoj.email %>
+      <%= Entity.supra.email %>
     </p>
     <p>
-      D. Št.: <%= Entity.pozoj.vat_id_formatted %>
+      D. Št.: <%= Entity.supra.vat_id_formatted %>
       <br>
-      Matična št.: <%= Entity.pozoj.registration_number %>
+      Matična št.: <%= Entity.supra.registration_number %>
       <br>
-      TRR: <%= Entity.pozoj.iban.prettify %>
+      TRR: <%= Entity.supra.iban.prettify %>
       <br>
       Nismo zavezanec za DDV
     </p>

@@ -65,7 +65,7 @@
       <div id="pozoj">
         <p><strong><%= Entity.supra %></strong></p>
         <p>E: <%= link_to Entity.supra.email, "mailto:#{Entity.supra.email}" %></p>
-        <p>W: <%= link_to "http://pozoj.si", "http://pozoj.si" %></p>
+        <p>W: <%= link_to "http://supra.si", "http://supra.si" %></p>
       </div>
       <div id="lower_menu">
         <p>
@@ -75,7 +75,6 @@
           <%= link_to 'Vprašanja', inquiries_path %>  |
           <%= link_to 'PD Vzgojiteljica', news_index_path %> |
           <%= link_to 'Naročila', new_order_path %> |
-          <%= link_to 'Avtorji', '/avtorji-spletne-aplikacije' %>
         </p>
         <div id="login">
           <% if signed_in? %>
